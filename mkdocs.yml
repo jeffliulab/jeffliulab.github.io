@@ -12,6 +12,9 @@ nav:
   # - Page: page.md
   - User Guide: 
       - MKDocs Guidance: 01guidance/index.md
+  - 哲学:
+      - 哲学家:
+          - 康德: 02phi/kd/kd.md
 
 # 插件列表（如果有使用插件）
 plugins:
