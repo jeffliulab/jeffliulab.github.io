@@ -1,1 +1,19 @@
 site_name: My Docs
+#site_url: https://example.com/ # 可选，你的站点URL
+
+# 配置Material主题
+theme:
+  name: 'material'
+
+# 导航配置
+nav:
+  - Home: index.md
+  # 添加更多的页面到你的导航结构中
+  # - Page: page.md
+
+# 插件列表（如果有使用插件）
+plugins:
+  - search # MkDocs内置搜索插件
+
+# 如果你想扩展Material主题的配色方案等，可以在这里配置
+# 更多配置选项请查阅 Material for MkDocs 官方文档
