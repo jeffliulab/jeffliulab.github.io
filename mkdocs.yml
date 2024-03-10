@@ -10,6 +10,8 @@ nav:
   - Home: index.md
   # 添加更多的页面到你的导航结构中
   # - Page: page.md
+  - User Guide: 
+      - MKDocs Guidance: 01guidance/index.md
 
 # 插件列表（如果有使用插件）
 plugins:
