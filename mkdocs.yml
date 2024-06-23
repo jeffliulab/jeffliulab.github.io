@@ -1,82 +1,9 @@
 site_name: Jeff Liu Lab's wiki
-#site_url: https://example.com/ # 可选，你的站点URL
 
 # 配置Material主题
 theme:
   name: 'material'
 
-# 导航配置
-nav:
-  - Home: index.md
-  # 添加更多的页面到你的导航结构中
-  # - Page: page.md
-  - 计算机科学基础:
-      - 数学基础:
-          - 微积分: math/calculus.md
-          - 线性代数: math/linear.md
-          - 离散数学: math/discrete.md
-      - Principle 组成原理:
-          - 计算机组成原理: cs/principle/principle.md
-      - Hardware 硬件:
-          - 电路: cs/hardware/circuit.md
-  - 算法与数据结构:
-      - 基础算法与数据结构: cs/algorithmn/normal_algorithmn.md
-  - 机器人与人工智能:
-      - 机器人:
-          - ROS: robotics/ros.md
-  - Social Science:
-      - Philosophy:
-          - 哲学史: ss/phi/phi_history.md
-          - 康德: ss/phi/kd.md
-      - Economics:
-          - 微观经济学: ss/econ/micro.md
-          - 宏观经济学: ss/econ/macro.md
-      - Psychology:
-          - 普通心理学: ss/psy/normal_psy.md
-      - Political:
-          - 政治学基础: ss/political/political.md
-      - Other Social Science:
-          - Sosiology: ss/sosiology/ss.md
-  - Business:
-      - Entrepreneurship:
-          - 创业: business/entrepreneur/entrepreneur.md
-      - Finance:
-          - 金融基础: business/finance/finance.md
-      - Investment:
-          - 投资基础: business/investment/investment.md
-  - Education:
-      - Pedagogy 教育学:
-          - 教育学理论: pedagogy/pedagogy.md
-      - Computer Science:
-          - AP CSA:
-              - INTRO: logicwiki/CS/APCSA/apcsa.md
-          - IG CS:
-              - INTRO: logicwiki/CS/IGCS/igcs.md
-          - ALEVEL CS:
-              - INTRO: logicwiki/CS/ALEVEL/alevel.md
-          - IB CS:
-              - INTRO: logicwiki/CS/IB/ib.md
-      - Economics:
-          - AP MicroEconomics:
-              - INTRO: logicwiki/ECON/APMICRO/apmicro.md
-          - AP MacroEconomics:
-              - INTRO: logicwiki/ECON/APMACRO/apmacro.md
-      - Psychology:
-          - AP Psychology:
-              - INTRO: logicwiki/PSYCHOLOGY/appsy.md
-  - Guidance: #这里记录一些常见的操作，比如如何使用mkdocs等等
-      - Mkdocs Guidance: guide/mkdocs.md
-      - Github用法: guide/github.md
-  - 体验学派:
-      - 体验学派框架理论: experimental_theory/theory.md
-      - 社会真理: experimental_theory/social_truth.md
-      - 生命真理: experimental_theory/life_truth.md
-
-
-# 插件列表（如果有使用插件）
 plugins:
   - search # MkDocs内置搜索插件
-
-# 如果你想扩展Material主题的配色方案等，可以在这里配置
-# 更多配置选项请查阅 Material for MkDocs 官方文档
-
+  - awesome-pages 
