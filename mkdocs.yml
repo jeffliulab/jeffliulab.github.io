@@ -1,9 +1,0 @@
-site_name: Jeff Liu Lab's wiki
-
-# 配置Material主题
-theme:
-  name: 'material'
-
-plugins:
-  - search # MkDocs内置搜索插件
-  - awesome-pages 
