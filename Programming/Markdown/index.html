@@ -7,11 +7,11 @@
         
         
         
-        <link rel="shortcut icon" href="/img/favicon.ico">
-        <title>My Docs</title>
-        <link href="/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/css/font-awesome.min.css" rel="stylesheet">
-        <link href="/css/base.css" rel="stylesheet">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Markdown - My Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script>hljs.highlightAll();</script> 
@@ -20,7 +20,7 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="/.">My Docs</a>
+                <a class="navbar-brand" href="../..">My Docs</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -31,22 +31,22 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li class="navitem">
-                                <a href="/." class="nav-link">Welcome to MkDocs</a>
+                                <a href="../.." class="nav-link">Welcome to MkDocs</a>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Programming <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="/Programming/IDE_VSCode/" class="dropdown-item">IDE VSCode</a>
+    <a href="../IDE_VSCode/" class="dropdown-item">IDE VSCode</a>
 </li>
                                     
 <li>
-    <a href="/Programming/Java_1_%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="dropdown-item">java基础语法</a>
+    <a href="../Java_1_%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="dropdown-item">java基础语法</a>
 </li>
                                     
 <li>
-    <a href="/Programming/Markdown/" class="dropdown-item">Markdown</a>
+    <a href="./" class="dropdown-item active">Markdown</a>
 </li>
                                 </ul>
                             </li>
@@ -55,11 +55,11 @@
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="/Website/github/" class="dropdown-item">Github</a>
+    <a href="../../Website/github/" class="dropdown-item">Github</a>
 </li>
                                     
 <li>
-    <a href="/Website/mkdocs%20and%20github/" class="dropdown-item">Mkdocs and github</a>
+    <a href="../../Website/mkdocs%20and%20github/" class="dropdown-item">Mkdocs and github</a>
 </li>
                                 </ul>
                             </li>
@@ -71,6 +71,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../Java_1_%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../Website/github/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -78,15 +88,70 @@
 
         <div class="container">
             <div class="row">
-
-    <div class="row-fluid">
-      <div id="main-content" class="span12">
-        <h1 id="404-page-not-found" style="text-align: center">404</h1>
-        <p style="text-align: center"><strong>Page not found</strong></p>
-      </div>
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
     </div>
 
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#_1" class="nav-link">一级标题</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">二级标题</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
 
+<p>vscode中插件预览：cmd+k, v</p>
+<h1 id="_1">一级标题</h1>
+<h2 id="_2">二级标题</h2>
+<h3 id="_3">三级标题</h3>
+<h4 id="_4">四级标题</h4>
+<h5 id="_5">五级标题</h5>
+<p>段落或普通的内容</p>
+<p><strong>加粗</strong></p>
+<blockquote>
+<p>引用</p>
+</blockquote>
+<ol>
+<li>有序列表</li>
+<li>有序列表</li>
+<li>有序列表<ol>
+<li>有序列表<ol>
+<li>有序列表</li>
+<li>有序列表</li>
+</ol>
+</li>
+<li>有序列表</li>
+</ol>
+</li>
+<li>有序列表</li>
+</ol>
+<p><code>代码</code> (`符号在tab键上面)</p>
+<p>代码块1</p>
+<pre><code>代码块至少需要1个tab或4个空格，上面空一行
+</code></pre>
+<p>代码块2</p>
+<pre><code class="language-java">public class void main()....
+</code></pre>
+<p>python, c++, ruby, sql, bash, </p>
+<p>分隔线：（推荐用三个破折号，并在前后加空白行）</p>
+<hr />
+<p>这是一个链接 <a href="https://markdown.com.cn">Markdown语法</a>。
+这是一个链接 <a href="https://markdown.com.cn" title="最好的markdown教程，这个是title">Markdown语法</a>。</p>
+<p><a href="https://markdown.com.cn">https://markdown.com.cn</a>
+<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#102;&#97;&#107;&#101;&#64;&#101;&#120;&#97;&#109;&#112;&#108;&#101;&#46;&#99;&#111;&#109;">&#102;&#97;&#107;&#101;&#64;&#101;&#120;&#97;&#109;&#112;&#108;&#101;&#46;&#99;&#111;&#109;</a></p>
+<p>\（转移符号）</p></div>
             </div>
         </div>
 
@@ -94,14 +159,14 @@
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script src="/js/jquery-3.6.0.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
+        <script src="../../js/jquery-3.6.0.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
         <script>
-            var base_url = "/",
+            var base_url = "../..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="/js/base.js"></script>
-        <script src="/search/main.js"></script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">

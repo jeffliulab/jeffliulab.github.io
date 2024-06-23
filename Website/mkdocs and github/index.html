@@ -7,11 +7,11 @@
         
         
         
-        <link rel="shortcut icon" href="/img/favicon.ico">
-        <title>My Docs</title>
-        <link href="/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/css/font-awesome.min.css" rel="stylesheet">
-        <link href="/css/base.css" rel="stylesheet">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Mkdocs and github - My Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script>hljs.highlightAll();</script> 
@@ -20,7 +20,7 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="/.">My Docs</a>
+                <a class="navbar-brand" href="../..">My Docs</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -31,35 +31,35 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li class="navitem">
-                                <a href="/." class="nav-link">Welcome to MkDocs</a>
+                                <a href="../.." class="nav-link">Welcome to MkDocs</a>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Programming <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="/Programming/IDE_VSCode/" class="dropdown-item">IDE VSCode</a>
+    <a href="../../Programming/IDE_VSCode/" class="dropdown-item">IDE VSCode</a>
 </li>
                                     
 <li>
-    <a href="/Programming/Java_1_%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="dropdown-item">java基础语法</a>
+    <a href="../../Programming/Java_1_%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="dropdown-item">java基础语法</a>
 </li>
                                     
 <li>
-    <a href="/Programming/Markdown/" class="dropdown-item">Markdown</a>
+    <a href="../../Programming/Markdown/" class="dropdown-item">Markdown</a>
 </li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Website <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="/Website/github/" class="dropdown-item">Github</a>
+    <a href="../github/" class="dropdown-item">Github</a>
 </li>
                                     
 <li>
-    <a href="/Website/mkdocs%20and%20github/" class="dropdown-item">Mkdocs and github</a>
+    <a href="./" class="dropdown-item active">Mkdocs and github</a>
 </li>
                                 </ul>
                             </li>
@@ -71,6 +71,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../github/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -78,15 +88,100 @@
 
         <div class="container">
             <div class="row">
-
-    <div class="row-fluid">
-      <div id="main-content" class="span12">
-        <h1 id="404-page-not-found" style="text-align: center">404</h1>
-        <p style="text-align: center"><strong>Page not found</strong></p>
-      </div>
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
     </div>
 
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            
+            
+            
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
 
+<h4 id="_1">主要内容</h4>
+<p>md文件：记录、备忘录等
+mkdocs：把md文件生成为静态网页
+material for mkdocs：mkdocs的一个主题
+github：代码托管网站
+github page：免费的静态网页，可以存放mkdocs</p>
+<h4 id="_2">常规流程：生成静态网页</h4>
+<ol>
+<li>创建一个用来生成静态网页的项目
+<code>cd ....</code> 目录转移到临时的文件夹
+<code>mkdocs new my-project</code>
+<code>cd my-project</code></li>
+<li>打开生成的mkdocs.yml文件，修改内容为自动生成目录，例如：</li>
+</ol>
+<pre><code class="language-yml">site_name: Jeff Liu Lab's wiki
+
+# 配置Material主题
+theme:
+  name: 'material'
+
+plugins:
+  - search # MkDocs内置搜索插件
+  - awesome-pages 
+</code></pre>
+<ol>
+<li>将md文件和文件夹复制到目录内</li>
+<li>使用mkdocs生成静态网页
+<code>mkdocs build</code>
+生成好的静态文件在site文件夹下</li>
+<li>使用本地服务器检查
+<code>mkdocs serve</code>
+这将启动一个本地开发服务器，通常会在 <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a> 提供实时预览。每当修改文档时，页面将自动刷新。</li>
+<li>将静态网页同步到github page
+将site文件夹内的文件同步到github page相应的项目中
+(如果忘掉github如何同步，参见github相关文档)</li>
+</ol>
+<h4 id="mkdocs">安装mkdocs</h4>
+<ol>
+<li>安装mkdocs：<code>pip install mkdocs</code></li>
+<li>使用 mkdocs new 命令创建一个新的 MkDocs 项目：
+<code>mkdocs new my-project</code>
+<code>cd my-project</code>
+这将在当前目录下创建一个名为 my-project 的文件夹，并在其中生成一些初始文件和文件夹。</li>
+<li>项目目录结构大致如下：
+my-project/
+    docs/
+        index.md
+    mkdocs.yml
+docs/ 目录：存放所有的 Markdown 文件，即项目文档内容。
+index.md 文件：默认的主页文档。
+mkdocs.yml 文件：项目的配置文件。</li>
+<li>在项目目录中，运行以下命令启动 MkDocs 开发服务器：
+<code>mkdocs serve</code>
+这将启动一个本地开发服务器，通常会在 <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a> 提供实时预览。每当修改文档时，页面将自动刷新。</li>
+<li>配置项目
+配置文件 mkdocs.yml 用于自定义站点的行为和外观。</li>
+<li>构建站点
+当你完成了所有的文档编写，可以运行以下命令生成静态网站文件：
+<code>mkdocs build</code>
+生成的静态文件将位于 site 目录中。</li>
+</ol>
+<h4 id="_3">自动生成目录插件</h4>
+<ol>
+<li>安装mkdocs-awesome-pages-plugin：
+<code>pip install mkdocs-awesome-pages-plugin</code></li>
+<li>使用方法
+在 mkdocs.yml 文件中，添加 mkdocs-awesome-pages-plugin 插件配置：</li>
+</ol>
+<pre><code class="language-markdown">site_name: My Project
+theme: readthedocs
+
+plugins:
+  - search
+  - awesome-pages
+</code></pre></div>
             </div>
         </div>
 
@@ -94,14 +189,14 @@
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script src="/js/jquery-3.6.0.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
+        <script src="../../js/jquery-3.6.0.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
         <script>
-            var base_url = "/",
+            var base_url = "../..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="/js/base.js"></script>
-        <script src="/search/main.js"></script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
