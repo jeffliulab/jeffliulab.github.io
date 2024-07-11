@@ -3,11 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starry Sky</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>My Personal Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        header {
+            text-align: center;
+        }
+        h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 20px 0;
+        }
+        .skills {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .skills ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .skills li {
+            display: inline;
+            margin: 0 10px;
+            font-size: 1.1em;
+            background-color: #e4e4e7;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <div class="starry-sky"></div>
-    <script src="js/script.js"></script>
+    <header>
+        <h1>Jeff Pang Liu</h1>
+        <p>Welcome to my profile!
+            I am a student with a passion for computer science and I am pursuing a master's degree in computer science.
+            I am particularly interested in artificial intelligence, robotics, and backend development.</p>
+    </header>
+    <section class="skills">
+        <h2>SKILLS</h2>
+        <ul>
+            <li>Backend Development</li>
+            <li>Artificial Intelligence</li>
+            <li>Robotics</li>
+            <li>Database</li>
+            <li>Fronted Development</li>
+        </ul>
+    </section>
 </body>
 </html>
