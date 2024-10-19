@@ -62,11 +62,6 @@
 
 ===========================================================================
 
-
-
-
-
-
 -->
 
 
@@ -89,7 +84,7 @@
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<a href="#" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>
+					<a href="index.html" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>
 
 					<h1>
 
@@ -133,68 +128,143 @@
 
 
 							<ul class="actions">
-							<li><a href="#" class="button">Resume</a></li>
+							<li><a href="page_resume.html" class="button">Resume</a></li>
 
 						</ul>
 					</section>
 
 
-				<!-- Two -->
+				<!-- Two: Software Development Projects-->
 					<section id="two">
 						<header class="major">
-							<h2>Projects</h2>
+							<h2>Software Development Projects</h2>
 						</header>
 						<div class="row">
+							<!--*********--> 
+							<!--Project 1--> 
+							<!--*********--> 
+
+
+							<!--
+							说明：
+							article class = "col-6 col-12-xsmall work-item" 是用来定义每个项目的样式
+							其中 work-item 对应 main.js 中对应lightbox gallery's selector
+							image fit thumb 是用来定义图片的样式
+							here i don't want to use lightbox gallery, so i comment it out
 							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/autonomous_robotics_brandeis.jpg" class="image fit thumb"><img src="images/thumbs/autonomous_robot_brandeis.png" alt="" /></a>
-								<h3>Autonomous Robot Design - Brandeis Robotics Lab </h3>
-								<p>Brandeis Robotics Lab</p>
-								<div>&nbsp;</div>
+							-->
+							<article class="col-6 col-12-xsmall">
+
+								<a href="project_pages/brandeis_follow_wall.html" class="image fit thumb">
+									<img src="images/thumbs/autonomous_robot_brandeis.png" alt="" />
+								</a>
+
+								<h3>Escape the Maze with turtlebot3</h3>
+								<p>Autonomous Robot Design at Brandeis Robotics Lab.&nbsp;
+									This project is to escape the maze with left wall following algorithm.
+								</p>
 								<code><font color="Brown">ROS</font></code>
 								<code><font color="Brown">Linux</font></code>
 								<code><font color="Brown">LiDAR</font></code>
+								<!-- 
 								<code><font color="Brown">PID Control</font></code>
 								<code><font color="Brown">SLAM</font></code>
+								-->
 							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/tianyuan.jpg" class="image fit thumb"><img src="images/thumbs/ichiban_lottery.png" alt="" /></a>
-								<h3>Ichiban Lottery - A WeChat Mini Program</h3>
-								<p>Tianyuan Ichiban Lottery program.</p>
-								<div>&nbsp;</div>
-								<code><font color="Brown">Project Management</font></code>
+						
+	
 							
-							<!--
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/03.jpg" class="image fit thumb"><img src="images/thumbs/03.jpg" alt="" /></a>
-								<h3>Tortor metus commodo</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/04.jpg" class="image fit thumb"><img src="images/thumbs/04.jpg" alt="" /></a>
-								<h3>Quam neque phasellus</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/05.jpg" class="image fit thumb"><img src="images/thumbs/05.jpg" alt="" /></a>
-								<h3>Nunc enim commodo aliquet</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/06.jpg" class="image fit thumb"><img src="images/thumbs/06.jpg" alt="" /></a>
-								<h3>Risus ornare lacinia</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							-->
 
+
+
+
+							
+							
+
+
+						<!-- 这个是预留的按钮，如果需要展开一个功能或者别的功能，可以用这个按钮
 						</div>
+						<div>&nbsp;</div>
 						<ul class="actions">
 							<li><a href="#" class="button">Full Portfolio</a></li>
 						</ul>
+						-->
+
+
 					</section>
 
-				<!-- Three-->
-				 <section>
+				<!-- Three: Project Mangement Projects-->
+				<section id="three">
+					<header class="major">
+						<h2>Project Management Projects</h2>
+					</header>
+					<div class="row">
+						<article class="col-6 col-12-xsmall">
+							<a href="project_pages/tianyuan_ichiban.html" class="image fit thumb"><img src="images/thumbs/ichiban_lottery.png" alt="" /></a>
+							<h3>Ichiban Lottery - A WeChat Mini Program</h3>
+							<p>Tianyuan Ichiban Lottery program.</p>
+							<div>&nbsp;</div>
+							<code><font color="Brown">Project Management</font></code>
+						</article>
+
+
+
+
+					</div>
+					<ul class="actions">
+						<li><a href="#" class="button">Full Portfolio</a></li>
+					</ul>
+				</section>
+
+
+
+				<!-- 预留: 如果项目继续增加，这里可以添加一个新的板块-->
+				 <!-- 注意： 这里的点击打开浮窗效果必须要同步在main.js中修改相关内容！
+				  在main.js中相关的地方我已经预先添加好了效果代码
+				 -->
+				<!--
+				 <section id="plus_project">
+					<header class="major">
+						<h2>Project Management Projects</h2>
+					</header>
+					<div class="row">
+
+						</article>
+						<article class="col-6 col-12-xsmall work-item">
+							<a href="images/fulls/03.jpg" class="image fit thumb"><img src="images/thumbs/03.jpg" alt="" /></a>
+							<h3>Tortor metus commodo</h3>
+							<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+						</article>
+						<article class="col-6 col-12-xsmall work-item">
+							<a href="images/fulls/04.jpg" class="image fit thumb"><img src="images/thumbs/04.jpg" alt="" /></a>
+							<h3>Quam neque phasellus</h3>
+							<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+						</article>
+						<article class="col-6 col-12-xsmall work-item">
+							<a href="images/fulls/05.jpg" class="image fit thumb"><img src="images/thumbs/05.jpg" alt="" /></a>
+							<h3>Nunc enim commodo aliquet</h3>
+							<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+						</article>
+						<article class="col-6 col-12-xsmall work-item">
+							<a href="images/fulls/06.jpg" class="image fit thumb"><img src="images/thumbs/06.jpg" alt="" /></a>
+							<h3>Risus ornare lacinia</h3>
+							<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+						</article>
+						
+					</div>
+					<ul class="actions">
+						<li><a href="#" class="button">Full Portfolio</a></li>
+					</ul>
+				</section>
+				-->
+
+
+
+
+				
+
+				<!-- Hobby-->
+				 <section id="four">
 					<h2>Hobbies</h2>
 					<p>
 						<div>
@@ -204,8 +274,8 @@
 					</p>
 				</section>
 
-				<!-- Four -->
-					<section id="three">
+				<!-- Contact -->
+					<section id="five">
 						<h2>Contact</h2>
 						<p>
 							<div>
