@@ -15,25 +15,20 @@
 	</head>
 	<body class="is-preload">
 
-		<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<a href="../index.html" class="image avatar"><img src="../images/avatar.jpg" alt="" /></a>
-
-					<h1>
-
-						<div><strong>Jeff Pang Liu</strong></div>
-
-						<div>Software Developer</div>
-						<div>Project Manager</div>
-						<div>&nbsp;</div>
-						<div><strong>M.S. Computer Science</strong></div>
-						<div><em>Brandeis University</em></div>
-						
-
-					</h1>
-					
-				</div>
+		<!-- Header (Reference from bar_header) -->
+		<header id="header">
+			<div id="header-placeholder"></div>
+	
+			<script>
+				document.addEventListener("DOMContentLoaded", function () {
+					fetch("/bar_header.html")
+						.then(response => response.text())
+						.then(data => {
+							document.getElementById("header-placeholder").innerHTML = data;
+						})
+						.catch(error => console.error("Error loading header:", error));
+				});
+			</script>
 			</header>
 
 		<!-- Main -->
@@ -88,58 +83,41 @@
 
 
 
-				<!-- Contact -->
-					<section id="five">
-						<h2>Contact</h2>
-						<p>
-							<div>
-						Feel free to contact me!
-					</div>
-					<div>
-						You can also click the buttons on the left side bar to open my LinkedIn, GitHub, etc.
-					</div>
-						</p>
-						<div class="row">
+			<!-- Contact Reference from bar_contact -->
+			<section id="five">
+	
+				<div id="contact-placeholder"></div>
 
-							<div class="col-4 col-12-small">
-								<ul class="labeled-icons">
-									<li>
-										<h3 class="icon solid fa-home"><span class="label">Address</span></h3>
-										Boston Area, MA, USA
-									</li>
-									<li>
-										<h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
-										<a href="#">jeff.pang.liu@gmail.com</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</section>
-
-			</div>
-
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="inner">
-					<ul class="icons">
-						<li><a href="https://www.linkedin.com/in/liupang" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-						<li><a href="https://github.com/jeffliulab" class="icon brands fa-github"><span class="label">Github</span></a></li>
-						<li><a href="mailto:liupang@bu.edu" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-
-						<!--
-						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-						-->
+				<script>
+					document.addEventListener("DOMContentLoaded", function () {
+						fetch("/bar_contact.html")
+							.then(response => response.text())
+							.then(data => {
+								document.getElementById("contact-placeholder").innerHTML = data;
+							})
+							.catch(error => console.error("Error loading contact:", error));
+					});
+				</script>
 
 
+			</section>
 
-					</ul>
-					<ul class="copyright">
-						<li>&copy; (Jeff) Pang Liu</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</div>
-			</footer>
+		</div>
+
+		<!-- Footer Reference from /bar_footer.html -->
+		<footer id="footer">
+			<div id="footer-placeholder"></div>
+			<script>
+				document.addEventListener("DOMContentLoaded", function () {
+					fetch("/bar_footer.html")
+						.then(response => response.text())
+						.then(data => {
+							document.getElementById("footer-placeholder").innerHTML = data;
+						})
+						.catch(error => console.error("Error loading header:", error));
+				});
+			</script>
+		</footer>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>

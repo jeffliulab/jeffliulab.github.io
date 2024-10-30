@@ -81,26 +81,22 @@
 	</head>
 	<body class="is-preload">
 
-		<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<a href="index.html" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>
+		<!-- Header (Reference from bar_header) -->
+		<header id="header">
+		<div id="header-placeholder"></div>
 
-					<h1>
-
-						<div><strong>Jeff Pang Liu</strong></div>
-
-						<div>Software Developer</div>
-						<div>Project Manager</div>
-						<div>&nbsp;</div>
-						<div><strong>M.S. Computer Science</strong></div>
-						<div><em>Brandeis University</em></div>
-						
-
-					</h1>
-					
-				</div>
-			</header>
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				fetch("/bar_header.html")
+					.then(response => response.text())
+					.then(data => {
+						document.getElementById("header-placeholder").innerHTML = data;
+					})
+					.catch(error => console.error("Error loading header:", error));
+			});
+		</script>
+		</header>
+		
 
 		<!-- Main -->
 			<div id="main">
@@ -268,45 +264,23 @@
 					</p>
 				</section>
 
-				<!-- Contact -->
+				<!-- Contact Reference from bar_contact -->
 					<section id="five">
-						<h2>Contact</h2>
-						<p>
-							<div>
-						Feel free to contact me!
-					</div>
-					<div>
-						You can also click the buttons on the left side bar to open my LinkedIn, GitHub, etc.
-					</div>
-						</p>
-						<div class="row">
-							<!--
-							<div class="col-8 col-12-small">
-								<form method="post" action="#">
-									<div class="row gtr-uniform gtr-50">
-										<div class="col-6 col-12-xsmall"><input type="text" name="name" id="name" placeholder="Name" /></div>
-										<div class="col-6 col-12-xsmall"><input type="email" name="email" id="email" placeholder="Email" /></div>
-										<div class="col-12"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
-									</div>
-								</form>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</div>
-							-->
-							<div class="col-4 col-12-small">
-								<ul class="labeled-icons">
-									<li>
-										<h3 class="icon solid fa-home"><span class="label">Address</span></h3>
-										Boston Area, MA, USA
-									</li>
-									<li>
-										<h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
-										<a href="#">jeff.pang.liu@gmail.com</a>
-									</li>
-								</ul>
-							</div>
-						</div>
+						
+						<div id="contact-placeholder"></div>
+
+						<script>
+							document.addEventListener("DOMContentLoaded", function () {
+								fetch("/bar_contact.html")
+									.then(response => response.text())
+									.then(data => {
+										document.getElementById("contact-placeholder").innerHTML = data;
+									})
+									.catch(error => console.error("Error loading contact:", error));
+							});
+						</script>
+
+
 					</section>
 
 				<!-- Four -->
@@ -629,27 +603,19 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 			</div>
 
-		<!-- Footer -->
+		<!-- Footer Reference from /bar_footer.html -->
 			<footer id="footer">
-				<div class="inner">
-					<ul class="icons">
-						<li><a href="https://www.linkedin.com/in/liupang" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-						<li><a href="https://github.com/jeffliulab" class="icon brands fa-github"><span class="label">Github</span></a></li>
-						<li><a href="mailto:liupang@bu.edu" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-
-						<!--
-						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-						-->
-
-
-
-					</ul>
-					<ul class="copyright">
-						<li>&copy; (Jeff) Pang Liu</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</div>
+				<div id="footer-placeholder"></div>
+				<script>
+					document.addEventListener("DOMContentLoaded", function () {
+						fetch("/bar_footer.html")
+							.then(response => response.text())
+							.then(data => {
+								document.getElementById("footer-placeholder").innerHTML = data;
+							})
+							.catch(error => console.error("Error loading header:", error));
+					});
+				</script>
 			</footer>
 
 		<!-- Scripts -->
