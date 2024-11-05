@@ -4,73 +4,6 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<!--
-备注：
-===========================================================================
-1、修改页面标题和描述
-
-在 <head> 部分中，修改 <title> 标签的内容可以更改浏览器标签上的页面标题。
-你可以修改 meta 标签中的描述信息，以便在搜索引擎中更好地显示：
-
-<title>我的个人主页</title>
-<meta name="description" content="这是我的个人网站，展示我的项目和作品。">
-
-===========================================================================
-2、修改头像和简介
-
-找到 header 部分，修改其中的图片和文本
-
-===========================================================================
-3、修改作品展示
-
-在 section id="two" 中，你可以修改最近作品的标题、描述和图片。每个作品使用一个 article 标签包裹：
-
-<article class="col-6 col-12-xsmall work-item">
-    <a href="images/fulls/01.jpg" class="image fit thumb"><img src="images/thumbs/01.jpg" alt="" /></a>
-    <h3>我的第一个项目</h3>
-    <p>这是我完成的第一个前端开发项目，使用了HTML、CSS和JavaScript。</p>
-</article>
-
-===========================================================================
-4、更改联系信息：
-
-在 section id="three" 中，你可以修改联系表单和联系方式：
-
-<li>
-    <h3 class="icon solid fa-home"><span class="label">地址</span></h3>
-    上海市，浦东新区<br />
-    中国
-</li>
-<li>
-    <h3 class="icon solid fa-mobile-alt"><span class="label">电话</span></h3>
-    123-456-7890
-</li>
-<li>
-    <h3 class="icon solid fa-envelope"><span class="label">电子邮件</span></h3>
-    <a href="mailto:me@example.com">me@example.com</a>
-</li>
-
-
-===========================================================================
-5、修改按钮链接：
-
-如果想修改按钮的链接，如“Learn More”按钮的链接，可以在 a 标签的 href 属性中更改：
-
-<li><a href="https://my-portfolio.com" class="button">了解更多</a></li>
-
-===========================================================================
-
-===========================================================================
-
--->
-
-
-
-
-
-
-
-
 
 <html>
 	<head>
@@ -130,70 +63,174 @@
 					</section>
 
 
-				<!-- Two: Robot Projects-->
-					<section id="two">
-						<header class="major">
-							<h2>Robot Projects</h2>
-						</header>
-						<div class="row">
-							<!--*********--> 
-							<!--Project 1--> 
-							<!--*********--> 
+				<!-- Section Two: Projects-->
+				<section id="two">
+					<header class="major">
+						<h2>Projects</h2>
+					</header>
+					<div class="row">
 
+						<!-- Project: [TEMPLATE] -->
+						<!--
+						<article class="col-6 col-12-xsmall">
 
-							<!--
-							说明：
-							article class = "col-6 col-12-xsmall work-item" 是用来定义每个项目的样式
-							其中 work-item 对应 main.js 中对应lightbox gallery's selector
-							image fit thumb 是用来定义图片的样式
-							here i don't want to use lightbox gallery, so i comment it out
-							<article class="col-6 col-12-xsmall work-item">
-							-->
-							<article class="col-6 col-12-xsmall">
+							<a href="project_pages/0_template.html" class="image fit thumb">
+								<img src="images/thumbs/template.jpg" alt="" />
+							</a>
 
-								<a href="project_pages/brandeis_follow_wall.html" class="image fit thumb">
-									<img src="images/thumbs/autonomous_robot_brandeis.png" alt="" />
-								</a>
+							<h3>[THE NAME OF THE PROJECT]</h3>
+							<div>Intro Line1.&nbsp;
+								Intro Line2.
+							</div>
+							<code><font color="Brown">SKILL1</font></code>
+							<code><font color="Brown">SKILL2</font></code>
+							<code><font color="Brown">SKILL3</font></code>
 
-								<h3>Escape the Maze with turtlebot3</h3>
-								<p>Autonomous Robot Design at Brandeis Robotics Lab.&nbsp;
-									This project is to escape the maze with left wall following algorithm.
-								</p>
-								<code><font color="Brown">ROS</font></code>
-								<code><font color="Brown">Linux</font></code>
-								<code><font color="Brown">LiDAR</font></code>
-								<!-- 
-								<code><font color="Brown">PID Control</font></code>
-								<code><font color="Brown">SLAM</font></code>
-								-->
-							</article>
-						
-	
-					
+							<div>&nbsp;</div>
 
-						<!-- 这个是预留的按钮，如果首页只展示部分内容，可以用这个按钮转移到全部作品
-						</div>
-						<div>&nbsp;</div>
-						<ul class="actions">
-							<li><a href="#" class="button">Full Portfolio</a></li>
-						</ul>
+						</article>
 						-->
 
 
-					</section>
+						<!-- Project: Follow the Line -->
+						<article class="col-6 col-12-xsmall">
 
-				<!-- Three: Product Projects-->
+							<a href="/project_pages/line_follower/line_follower.html" class="image fit thumb">
+								<img src="/images/gif_images/line_follower.gif" alt="" />
+							</a>
+
+							<h3>Following Line with Color-based Centroid Detection</h3>
+							<div>This project implement a line following function,&nbsp;
+								based on color detection, centroid detection, and PID control algorithm.&nbsp;
+								The following program can also avoid the obstacle and plan movement based on line situations.
+							</div>
+							<code><font color="Brown">ROS1</font></code>
+							<code><font color="Brown">OpenCV</font></code>
+							<code><font color="Brown">PID Control</font></code>
+
+							<div>&nbsp;</div>
+
+						</article>
+
+						<!-- Project: Escape the Maze with Left Wall Following -->
+						<article class="col-6 col-12-xsmall">
+
+							<a href="project_pages/brandeis_follow_wall.html" class="image fit thumb">
+								<img src="images/thumbs/autonomous_robot_brandeis.png" alt="" />
+							</a>
+
+							<h3>Escape the Maze with Left Wall Following</h3>
+							<div>Autonomous Robot Design at Brandeis Robotics Lab.&nbsp;
+								This project is to escape the maze with left wall following algorithm.
+							</div>
+					
+							<code><font color="Brown">ROS1</font></code>
+							<code><font color="Brown">Linux</font></code>
+							<code><font color="Brown">LiDAR</font></code>
+							<!-- 
+							<code><font color="Brown">PID Control</font></code>
+							<code><font color="Brown">SLAM</font></code>
+							-->
+							<div>&nbsp;</div>
+						</article>
+
+			
+					</div>
+
+					
+
+					<!--
+					<div>&nbsp;</div>
+					<ul class="actions">
+						<li><a href="#" class="button">Full Portfolio</a></li>
+					</ul>
+					-->
+
+				</section>
+				<!-- Section Two Ends Here-->
+				<!-------------------------->
+
+
+
+
+
+				<!-- Section Three: Ongoing Projects-->
 				<section id="three">
 					<header class="major">
-						<h2>Product Projects</h2>
+						<h2>Ongoing Projects</h2>
 					</header>
 					<div class="row">
+						<!--*********--> 
+						<!--Project 1--> 
+						<!--*********--> 
+
+
+						<!--
+						说明：
+						article class = "col-6 col-12-xsmall work-item" 是用来定义每个项目的样式
+						其中 work-item 对应 main.js 中对应lightbox gallery's selector
+						image fit thumb 是用来定义图片的样式
+						here i don't want to use lightbox gallery, so i comment it out
+						<article class="col-6 col-12-xsmall work-item">
+						-->
+
+
+						<!-- Project: Smart Cleaning Robot -->
+						<article class="col-6 col-12-xsmall">
+							<!-- 备注： 该效果图是网图，有版权风险，项目进行到中后期可以做一张图 -->
+							<a href="/multi_project_pages/smart_cleaning_robot/smart_cleaning_robot.html" class="image fit thumb">
+								<img src="/images/cover_images/clean_robot.png" alt="" />
+							</a>
+
+							<h3>Smart Cleaning Robot</h3>
+							<div>This is an ongoing project.&nbsp;
+								We are developing a smart cleaning robot with frontier-based exploration, complete coverage path planning, and voice control.
+							</div>
+							<!--
+							<code><font color="Brown">Frontier Based Explore</font></code>
+							<br>
+							<code><font color="Brown">Complete Coverage Path Planning</font></code>
+							<br>
+							<code><font color="Brown">Voice Control</font></code>
+							-->
+
+						</article>
+
+
+					<!-- 这个是预留的按钮，如果首页只展示部分内容，可以用这个按钮转移到全部作品
+					</div>
+					<div>&nbsp;</div>
+					<ul class="actions">
+						<li><a href="#" class="button">Full Portfolio</a></li>
+					</ul>
+					-->
+
+
+				</section>
+				<!--!!!!!!!!!! Section Three Ends Here !!!!!!!!!!!!!-->
+				
+		
+
+
+				<!-- Four: Products -->
+				<section id="four">
+					<header class="major">
+						<h2>Products</h2>
+					</header>
+					<div class="row">
+
+						<!-- Project: Ichiban Lottery -->
 						<article class="col-6 col-12-xsmall">
 							<a href="project_pages/tianyuan_ichiban.html" class="image fit thumb"><img src="images/thumbs/ichiban_lottery.png" alt="" /></a>
 							<h3>Ichiban Lottery - A WeChat Mini Program</h3>
 							<p>Tianyuan Ichiban Lottery program.</p>
-							<code><font color="Brown">Practical product</font></code>
+							<!--
+							<code><font color="Brown">Practical Product</font></code>
+							<br>
+							<code><font color="Brown">Requirement Analysis</font></code>
+							-->
 						</article>
+					
 					</div>
 
 					<div>&nbsp;</div>
@@ -205,6 +242,139 @@
 					-->
 
 				</section>
+				<!-- Section Two Ends Here-->
+
+				
+				<!-- THIS IS NOT A REFERANCE -->
+				<!-- Hobby-->
+				 <section id="hobby">
+					<h2>Hobbies</h2>
+					<p>
+						<div>
+							<i class="fas fa-hiking"></i> Hiking
+						</div>
+
+					</p>
+				</section>
+
+
+<!------------------------------------------------------------------------
+备注：
+===========================================================================
+1、修改页面标题和描述
+
+在 <head> 部分中，修改 <title> 标签的内容可以更改浏览器标签上的页面标题。
+你可以修改 meta 标签中的描述信息，以便在搜索引擎中更好地显示：
+
+<title>我的个人主页</title>
+<meta name="description" content="这是我的个人网站，展示我的项目和作品。">
+
+===========================================================================
+2、修改头像和简介
+
+找到 header 部分，修改其中的图片和文本
+
+===========================================================================
+3、修改作品展示
+
+在 section id="two" 中，你可以修改最近作品的标题、描述和图片。每个作品使用一个 article 标签包裹：
+
+<article class="col-6 col-12-xsmall work-item">
+    <a href="images/fulls/01.jpg" class="image fit thumb"><img src="images/thumbs/01.jpg" alt="" /></a>
+    <h3>我的第一个项目</h3>
+    <p>这是我完成的第一个前端开发项目，使用了HTML、CSS和JavaScript。</p>
+</article>
+
+===========================================================================
+4、更改联系信息：
+
+在 section id="three" 中，你可以修改联系表单和联系方式：
+
+<li>
+    <h3 class="icon solid fa-home"><span class="label">地址</span></h3>
+    上海市，浦东新区<br />
+    中国
+</li>
+<li>
+    <h3 class="icon solid fa-mobile-alt"><span class="label">电话</span></h3>
+    123-456-7890
+</li>
+<li>
+    <h3 class="icon solid fa-envelope"><span class="label">电子邮件</span></h3>
+    <a href="mailto:me@example.com">me@example.com</a>
+</li>
+
+
+===========================================================================
+5、修改按钮链接：
+
+如果想修改按钮的链接，如“Learn More”按钮的链接，可以在 a 标签的 href 属性中更改：
+
+<li><a href="https://my-portfolio.com" class="button">了解更多</a></li>
+
+===========================================================================
+
+===========================================================================
+
+--------------------------------------------------------------------------->
+
+
+<!----------------------------------------------------------------------------------------------->
+
+<!----------------------------------------------------------------------------------------------->
+
+<!----------------------------------------------------------------------------------------------->
+
+<!----------------------------------------------------------------------------------------------->
+
+<!----------------------------------------------------------------------------------------------->
+
+<!----------------------------------------------------------------------------------------------->
+
+<!----------------------------------------------------------------------------------------------->
+
+<!----------------------------------------------------------------------------------------------->
+
+<!----------------------------------------------------------------------------------------------->
+
+<!----------------------------------------------------------------------------------------------->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<!-- Contact Reference from bar_contact -->
+					<section id="contact">
+						
+						<div id="contact-placeholder"></div>
+
+						<script>
+							document.addEventListener("DOMContentLoaded", function () {
+								fetch("/bar_contact.html")
+									.then(response => response.text())
+									.then(data => {
+										document.getElementById("contact-placeholder").innerHTML = data;
+									})
+									.catch(error => console.error("Error loading contact:", error));
+							});
+						</script>
+
+
+					</section>
+
+
 
 
 
@@ -251,37 +421,7 @@
 
 
 
-				
 
-				<!-- Hobby-->
-				 <section id="four">
-					<h2>Hobbies</h2>
-					<p>
-						<div>
-							<i class="fas fa-hiking"></i> Hiking
-						</div>
-
-					</p>
-				</section>
-
-				<!-- Contact Reference from bar_contact -->
-					<section id="five">
-						
-						<div id="contact-placeholder"></div>
-
-						<script>
-							document.addEventListener("DOMContentLoaded", function () {
-								fetch("/bar_contact.html")
-									.then(response => response.text())
-									.then(data => {
-										document.getElementById("contact-placeholder").innerHTML = data;
-									})
-									.catch(error => console.error("Error loading contact:", error));
-							});
-						</script>
-
-
-					</section>
 
 				<!-- Four -->
 				<!--
