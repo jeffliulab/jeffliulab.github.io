@@ -60,7 +60,7 @@
 							<ul class="actions">
 							<li><a href="resume.html" class="button">Resume</a></li>
 
-							<li><a href="https://www.linkedin.com/in/liupang/details/experience/" class="button">Full Experience</a></li>
+							<li><a href="https://www.linkedin.com/in/liupang/details/experience/" class="button">Linkedin Page</a></li>
 
 							<li><a href="pages/My_Journey.html" class="button">My Journey</a></li>
 							
@@ -71,10 +71,10 @@
 					</section>
 
 
-				<!-- Section Two: Projects-->
+				<!-- Section Two: Large Integrated Projects-->
 				<section id="two">
 					<header class="major">
-						<h2>Projects</h2>
+						<h2>Integrated Projects</h2>
 					</header>
 					<div class="row">
 
@@ -100,15 +100,16 @@
 						-->
 
 
-						<!-- Project: Smart Cleaning Robot -->
+						<!-- Project: COSI119 - Cleaning Robot -->
 						<article class="col-6 col-12-xsmall">
 							<a href="/multi_project_pages/smart_cleaning_robot/smart_cleaning_robot.html" class="image fit thumb">
-								<img src="/multi_project_pages/smart_cleaning_robot/clean_robot.png" alt="" />
+								<img src="/multi_project_pages/smart_cleaning_robot/Screenshot_2.png" alt="" />
 							</a>
 
-							<h3>Smart Cleaning Robot</h3>
-							<div>This is an ongoing project.&nbsp;
-								I am developing a smart cleaning robot with frontier-based exploration, complete coverage path planning, and voice control.
+							<h3>Cleaning Robot</h3>
+							<div>This project has launched both in software and hardware fronts.&nbsp;
+								I build a turtlebot3 robot, with functions
+								I am developing a smart cleaning robot with frontier-based exploration, path planning, route following and voice control.
 							</div>
 							
 							<code><font color="Brown">Map Processing</font></code>
@@ -126,47 +127,6 @@
 						</article>
 
 
-						<!-- Project: Follow the Line -->
-						<article class="col-6 col-12-xsmall">
-
-							<a href="/project_pages/line_follower/line_follower.html" class="image fit thumb">
-								<img src="/images/gif_images/line_follower.gif" alt="" />
-							</a>
-
-							<h3>Following Line with Color-based Centroid Detection</h3>
-							<div>This project implement a line following function,&nbsp;
-								based on color detection, centroid detection, and PID control algorithm.&nbsp;
-								The following program can also avoid the obstacle and plan movement based on line situations.
-							</div>
-							<code><font color="Brown">ROS1</font></code>
-							<code><font color="Brown">OpenCV</font></code>
-							<code><font color="Brown">PID Control</font></code>
-
-							<div>&nbsp;</div>
-
-						</article>
-
-						<!-- Project: Escape the Maze with Left Wall Following -->
-						<article class="col-6 col-12-xsmall">
-
-							<a href="project_pages/brandeis_follow_wall.html" class="image fit thumb">
-								<img src="images/thumbs/autonomous_robot_brandeis.png" alt="" />
-							</a>
-
-							<h3>Escape the Maze with Left Wall Following</h3>
-							<div>Autonomous Robot Design at Brandeis Robotics Lab.&nbsp;
-								This project is to escape the maze with left wall following algorithm.
-							</div>
-					
-							<code><font color="Brown">ROS1</font></code>
-							<code><font color="Brown">Linux</font></code>
-							<code><font color="Brown">LiDAR</font></code>
-							<!-- 
-							<code><font color="Brown">PID Control</font></code>
-							<code><font color="Brown">SLAM</font></code>
-							-->
-							<div>&nbsp;</div>
-						</article>
 
 			
 					</div>
@@ -188,34 +148,44 @@
 
 
 
-				<!-- Section Three: Ongoing Projects-->
+				<!-- Section Three: Small Functional Projects-->
 				<section id="three">
 					<header class="major">
-						<h2>Ongoing Projects</h2>
+						<h2>Functional Projects</h2>
 					</header>
 					<div class="row">
-						<!--*********--> 
-						<!--Project 1--> 
-						<!--*********--> 
 
-
+						<!-- Project: [TEMPLATE] -->
 						<!--
-						说明：
-						article class = "col-6 col-12-xsmall work-item" 是用来定义每个项目的样式
-						其中 work-item 对应 main.js 中对应lightbox gallery's selector
-						image fit thumb 是用来定义图片的样式
-						here i don't want to use lightbox gallery, so i comment it out
-						<article class="col-6 col-12-xsmall work-item">
+						<article class="col-6 col-12-xsmall">
+
+							<a href="project_pages/0_template.html" class="image fit thumb">
+								<img src="images/thumbs/template.jpg" alt="" />
+							</a>
+
+							<h3>[THE NAME OF THE PROJECT]</h3>
+							<div>Intro Line1.&nbsp;
+								Intro Line2.
+							</div>
+							<code><font color="Brown">SKILL1</font></code>
+							<code><font color="Brown">SKILL2</font></code>
+							<code><font color="Brown">SKILL3</font></code>
+
+							<div>&nbsp;</div>
+
+						</article>
 						-->
 
-						<!-- Project: Brick -->
+
+
+						<!-- Project: Reinforcement Learning Brick -->
 						<article class="col-6 col-12-xsmall">
-							<a href="/project_pages/rl_brick/rl_brick.html" class="image fit thumb">
+							<a href="/project_pages/rl_brick/brick.html" class="image fit thumb">
 								<img src="/project_pages/rl_brick/brick.gif" alt="" />
 							</a>
 
 							<h3>Reinforcement Learning for Breakout Game with DQN</h3>
-							<div>This is an ongoing project.&nbsp;
+							<div>
 								Trained a DQN model to play the Breakout game, leveraging CUDA acceleration on GTX1660 Ti GPU.
 							</div>
 							
@@ -231,8 +201,57 @@
 						</article>
 
 						
+						<!-- Project: Follow the Line -->
+						<article class="col-6 col-12-xsmall">
 
+							<a href="/project_pages/line_follower/line_follower.html" class="image fit thumb">
+								<img src="/images/gif_images/line_follower.gif" alt="" />
+							</a>
 
+							<h3>Following Line with Color-based Centroid Detection</h3>
+							<div>This program can allow robot following a line and avoid obstacles.&nbsp;
+								 The following logic is based on color and centroid detection.
+							</div>
+							<code><font color="Brown">ROS1</font></code>
+							<code><font color="Brown">OpenCV</font></code>
+							<code><font color="Brown">PID Control</font></code>
+
+							<div>&nbsp;</div>
+
+						</article>
+
+						<!-- Project: Escape the Maze with Left Wall Following -->
+						<article class="col-6 col-12-xsmall">
+
+							<a href="project_pages/brandeis_follow_wall.html" class="image fit thumb">
+								<img src="images/thumbs/autonomous_robot_brandeis.png" alt="" />
+							</a>
+
+							<h3>Escape the Maze with Left Wall Following</h3>
+							<div>
+								This is my first project and designed at Brandeis Robotics lab.&nbsp;
+								This project is to escape the maze with left wall following algorithm.
+							</div>
+					
+							<code><font color="Brown">ROS1</font></code>
+							<code><font color="Brown">Linux</font></code>
+							<code><font color="Brown">LiDAR</font></code>
+							<!-- 
+							<code><font color="Brown">PID Control</font></code>
+							<code><font color="Brown">SLAM</font></code>
+							-->
+							<div>&nbsp;</div>
+						</article>
+						
+
+						<!--
+						说明：
+						article class = "col-6 col-12-xsmall work-item" 是用来定义每个项目的样式
+						其中 work-item 对应 main.js 中对应lightbox gallery's selector
+						image fit thumb 是用来定义图片的样式
+						here i don't want to use lightbox gallery, so i comment it out
+						<article class="col-6 col-12-xsmall work-item">
+						-->
 
 
 					<!-- 这个是预留的按钮，如果首页只展示部分内容，可以用这个按钮转移到全部作品
@@ -250,7 +269,7 @@
 		
 
 
-				<!-- Four: Products -->
+				<!-- Section Four: Products -->
 				<section id="four">
 					<header class="major">
 						<h2>Products</h2>
@@ -280,7 +299,8 @@
 					-->
 
 				</section>
-				<!-- Section Two Ends Here-->
+				<!-- Section Four Ends Here-->
+				<!--------------------------->
 
 				
 				<!-- THIS IS NOT A REFERANCE -->
