@@ -11,6 +11,19 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+
+		<!-- 在这里添加新的样式 -->
+		<style>
+			.hover-dim {
+				opacity: 1;
+				transition: opacity 0.2s ease-in-out;
+			}
+	
+			.hover-dim:hover {
+				opacity: 0.65;
+			}
+		</style>
+
 	</head>
 	<body class="is-preload">
 
@@ -148,6 +161,7 @@
 
 
 
+
 				<!-- Section Three: Small Functional Projects-->
 				<section id="three">
 					<header class="major">
@@ -175,7 +189,30 @@
 
 						</article>
 						-->
+						
 
+						<!-- Project: Fiducials --> <!-- style悬停特效 + 弹出窗口特效 -->
+						<article class="col-6 col-12-xsmall">
+							<a href="#" class="image fit thumb" onclick="openVideoModal('AX3A4H8DhF4'); return false;" 
+						style="position: relative; display: block; padding-bottom: 56.25%; overflow: hidden; background: #000;">
+							<img src="/project_pages/small_projects/fiducials/Fiducial.png" 
+								alt="Fiducials Detection Demo" 
+								style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s ease-in-out;" 
+								class="hover-dim" />
+							</a>
+
+							<h3>Fiducials Detection</h3>
+							<div>
+								Implemented a real-time ArUco fiducial marker detection system using computer vision techniques. 
+							</div>
+							
+							<code><font color="Brown">Computer Vision</font></code>
+							<code><font color="Brown">ArUco Markers</font></code>
+							<code><font color="Brown">Fiducials</font></code>
+
+							
+							<div>&nbsp;</div>
+						</article>
 
 
 						<!-- Project: Reinforcement Learning Brick -->
@@ -190,14 +227,11 @@
 							</div>
 							
 							<code><font color="Brown">DQN</font></code>
-							
 							<code><font color="Brown">RL</font></code>
-							
 							<code><font color="Brown">CUDA</font></code>
 							
 							<!--Just to make a gap between different projects parts-->
 							<div>&nbsp;</div>
-
 						</article>
 
 						
@@ -216,15 +250,24 @@
 							<code><font color="Brown">OpenCV</font></code>
 							<code><font color="Brown">PID Control</font></code>
 
+
 							<div>&nbsp;</div>
 
 						</article>
 
+
+
+
+
 						<!-- Project: Escape the Maze with Left Wall Following -->
 						<article class="col-6 col-12-xsmall">
 
-							<a href="project_pages/brandeis_follow_wall.html" class="image fit thumb">
-								<img src="images/thumbs/autonomous_robot_brandeis.png" alt="" />
+							<a href="project_pages/brandeis_follow_wall.html" class="image fit thumb"
+								style="position: relative; display: block; padding-bottom: 56.25%; overflow: hidden; background: #000;">
+								<img src="images/thumbs/autonomous_robot_brandeis.png" 
+									alt="Escape the Maze with Left Wall Following" 
+									style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s ease-in-out;" 
+									class="hover-dim" />
 							</a>
 
 							<h3>Escape the Maze with Left Wall Following</h3>
@@ -232,17 +275,24 @@
 								This is my first project and designed at Brandeis Robotics lab.&nbsp;
 								This project is to escape the maze with left wall following algorithm.
 							</div>
-					
+
 							<code><font color="Brown">ROS1</font></code>
 							<code><font color="Brown">Linux</font></code>
 							<code><font color="Brown">LiDAR</font></code>
+
 							<!-- 
 							<code><font color="Brown">PID Control</font></code>
 							<code><font color="Brown">SLAM</font></code>
 							-->
 							<div>&nbsp;</div>
 						</article>
-						
+
+
+
+
+
+
+
 
 						<!--
 						说明：
@@ -314,6 +364,85 @@
 
 					</p>
 				</section>
+
+
+
+
+
+
+
+<!--------------------------------------------------------------------->
+<!--------------------------------------------------------------------->
+<!--------------------------------------------------------------------->
+<!-- 弹窗效果 --><!-- 弹窗效果 --><!-- 弹窗效果 --><!-- 弹窗效果 --><!-- 弹窗效果 -->
+<!-- Custom Modal -->
+<div id="customVideoModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000;">
+    <div style="position: relative; width: 90%; max-width: 800px; margin: 40px auto;">
+        <!-- Close button -->
+        <button onclick="closeVideoModal()" style="position: absolute; top: -30px; right: -30px; background: none; border: none; color: white; font-size: 24px; cursor: pointer; padding: 5px;">×</button>
+        
+        <!-- Video container with 16:9 aspect ratio -->
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+            <iframe id="youtubeIframe"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                    src=""
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+function openVideoModal(videoId) {  // 修改这里，接收 videoId 参数
+    const modal = document.getElementById('customVideoModal');
+    const iframe = document.getElementById('youtubeIframe');
+    
+    // Set YouTube video URL with autoplay
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;  // 使用传入的 videoId
+    
+    // Show modal
+    modal.style.display = 'block';
+    
+    // Add escape key listener
+    document.addEventListener('keydown', handleEscKey);
+    
+    // Add click outside listener
+    modal.addEventListener('click', handleOutsideClick);
+}
+
+// 其他函数保持不变
+function closeVideoModal() {
+    const modal = document.getElementById('customVideoModal');
+    const iframe = document.getElementById('youtubeIframe');
+    iframe.src = '';
+    modal.style.display = 'none';
+    document.removeEventListener('keydown', handleEscKey);
+    modal.removeEventListener('click', handleOutsideClick);
+}
+
+function handleEscKey(e) {
+    if (e.key === 'Escape') {
+        closeVideoModal();
+    }
+}
+
+function handleOutsideClick(e) {
+    if (e.target === document.getElementById('customVideoModal')) {
+        closeVideoModal();
+    }
+}
+</script>
+<!-- 弹窗效果 --><!-- 弹窗效果 --><!-- 弹窗效果 --><!-- 弹窗效果 --><!-- 弹窗效果 -->
+<!--------------------------------------------------------------------->
+<!--------------------------------------------------------------------->
+<!--------------------------------------------------------------------->
+
+
+
+
+
 
 
 <!------------------------------------------------------------------------
