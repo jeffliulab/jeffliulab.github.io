@@ -51,11 +51,11 @@ $$
 Using the calculated moments, we can obtain the **centroid coordinates** \( (c_x, c_y) \) of the yellow area:
 
 $$
-c_x = rac{M_{10}}{M_{00}}
+c_x = \frac{M_{10}}{M_{00}}
 $$
 
 $$
-c_y = rac{M_{01}}{M_{00}}
+c_y = \frac{M_{01}}{M_{00}}
 $$
 
 ![Centroid Detection](4.png)
@@ -70,27 +70,26 @@ $$
 To ensure accurate line following, calculate the error between the centroid and image center:
 
 $$
-error = c_x - rac{width}{2}
+error = c_x - \frac{width}{2}
 $$
 
 Where:
-- \( c_x \) : detected centroid x-coordinate.
-- \( width \) : image width.
-- \( error \) : deviation from center.
+- $ c_x $ : detected centroid x-coordinate.
+- $ width $ : image width.
+- $ error $ : deviation from center.
 
 ![Error Calculation](6.png)
 
 ### 4.2 P Controller
 Based on practical testing, using only a **P controller** achieves good control results:
 
-$$
-angular\_speed = - K_p \cdot error
-$$
+$$ \text{angular}_{\text{speed}} = - K_p \cdot \text{error} $$
+
 
 #### Notes:
 - Simple **P control** is used instead of full **PID control**.
 - Testing showed **P control alone works better** in this scenario.
-- Robot response sensitivity can be adjusted through \( K_p \) value.
+- Robot response sensitivity can be adjusted through $ K_p $ value.
 
 ---
 
@@ -141,5 +140,3 @@ else:
 - Develop **more reliable line detection and following algorithms**.
 
 ---
-
-This implementation provides a stable **line-following system** while highlighting areas for **future enhancement** through advanced **AI techniques**.

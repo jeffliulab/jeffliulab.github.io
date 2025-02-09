@@ -77,3 +77,5 @@ The **Left Wall Follower Algorithm** is an effective solution for **autonomous r
 ✅ **PID-based control** for smoother motion.  
 ✅ **SLAM integration** for dynamic mapping.  
 ✅ **Machine learning enhancements** for improved adaptability.  
+
+---
