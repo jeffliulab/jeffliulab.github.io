@@ -32,8 +32,8 @@ This is a simple solution for line following tasks.
 In the yellow area, calculate the following:
 
 #### Formula:
-- **Zero-order moment** \( M_{00} \): Represents the total area.
-- **First-order moments** \( M_{10}, M_{01} \): Weighted sums along x and y axes.
+- **Zero-order moment** $ M_{00} $: Represents the total area.
+- **First-order moments** $ M_{10}, M_{01} $: Weighted sums along x and y axes.
 
 $$
 M_{00} = \sum \sum I(x,y)
@@ -48,7 +48,7 @@ M_{01} = \sum \sum y \cdot I(x,y)
 $$
 
 ### 3.3 Centroid Coordinate Calculation
-Using the calculated moments, we can obtain the **centroid coordinates** \( (c_x, c_y) \) of the yellow area:
+Using the calculated moments, we can obtain the **centroid coordinates** $ (c_x, c_y) $ of the yellow area:
 
 $$
 c_x = \frac{M_{10}}{M_{00}}
