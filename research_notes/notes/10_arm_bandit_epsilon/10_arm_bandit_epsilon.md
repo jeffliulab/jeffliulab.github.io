@@ -1,4 +1,4 @@
-# 10-Armed Bandit Experiment
+# 10-Armed Bandit Experiment for finding the best episilon
 
 ## Bandit Testbed
 
