@@ -9,10 +9,17 @@ API_URL = "http://35.196.45.78:8000/predict/"
 true_rgb = (235, 189, 190)  # 2001-4B
 
 # 读取测试图片
-image_path = "2001-4B_6.JPG"
+import os
+
+script_dir = os.path.dirname(os.path.abspath(__file__))  # 获取当前脚本所在目录
+image_path = os.path.join(script_dir, "test.jpg")  # 生成绝对路径
+
+print("Using Image Path:", image_path)
+
 with open(image_path, "rb") as img_file:
     files = {"file": img_file}
     response = requests.post(API_URL, files=files)
+
 
 # 解析 API 响应
 if response.status_code == 200:

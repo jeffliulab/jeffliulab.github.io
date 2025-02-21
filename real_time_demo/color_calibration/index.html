@@ -171,9 +171,12 @@
                 headers: { "Accept": "application/json" } 
             })
             .then(response => {
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
                 return response.json();
             })
+
             .then(data => {
                 let capturedColor = data.captured_color;
                 let predictedColor = data.predicted_color;
