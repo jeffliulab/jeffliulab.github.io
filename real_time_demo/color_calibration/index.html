@@ -147,6 +147,17 @@
 
 
         // 设置真实颜色
+        // function setTrueColor() {
+        //     let input = document.getElementById("true-rgb").value;
+        //     let rgbArray = input.split(",").map(num => parseInt(num.trim(), 10));
+        //     if (rgbArray.length === 3 && rgbArray.every(num => num >= 0 && num <= 255)) {
+        //         trueRgb = rgbArray;
+        //         trueRgbSet = true;
+        //         setColorBox("true-color", trueRgb);
+        //     } else {
+        //         alert("Invalid RGB format. Use: R, G, B (e.g., 238, 194, 187)");
+        //     }
+        // }
         function setTrueColor() {
             let input = document.getElementById("true-rgb").value;
             let rgbArray = input.split(",").map(num => parseInt(num.trim(), 10));
@@ -154,10 +165,14 @@
                 trueRgb = rgbArray;
                 trueRgbSet = true;
                 setColorBox("true-color", trueRgb);
+
+                // 关键修改：清空 file input 确保 change 事件能触发
+                fileInput.value = "";
             } else {
                 alert("Invalid RGB format. Use: R, G, B (e.g., 238, 194, 187)");
             }
         }
+
 
         // 上传图片到 API
         function uploadImage(file) {
