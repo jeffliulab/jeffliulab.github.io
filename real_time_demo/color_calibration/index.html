@@ -135,11 +135,16 @@
             if (file) uploadImage(file);
         });
 
-        dropZone.addEventListener("click", () => fileInput.click());
+        dropZone.addEventListener("click", () => {
+            fileInput.value = ""; // 清空 input，确保 change 事件触发
+            fileInput.click();    // 触发文件选择窗口
+        });
+
         fileInput.addEventListener("change", (event) => {
             let file = event.target.files[0];
             if (file) uploadImage(file);
         });
+
 
         // 设置真实颜色
         function setTrueColor() {
