@@ -57,13 +57,13 @@
 <body>
     <h2>Drag and Drop an Image to Predict Colors</h2>
     <div>
-        <em>Note: Due to cloud maintenance costs, the API will not always be open.</em>
+        <em>Running on Google Cloud Run. Version: Random Forest model_v1.</em>
     </div>
-    <div>
+    <!-- <div>
         <em>
             <a href="https://www.youtube.com/your-demo-link" target="_blank">=> YouTube Demo Link</a>
         </em>
-    </div>
+    </div> -->
     <div>
         <em>
             <a href="https://github.com/jeffliulab/Color_Calibration" target="_blank">=> GitHub Repository</a>
@@ -106,7 +106,8 @@
     <div id="loading-overlay">Calculating...</div>
 
     <script>
-        const API_URL = "http://35.196.45.78:8000/predict/";
+        // const API_URL = "http://35.196.45.78:8000/predict/";
+        const API_URL = "https://color-prediction-492048110470.us-central1.run.app/predict/";
         let trueRgb = [238, 194, 187]; // Default true color
         let trueRgbSet = false; // 变量控制是否已设置 trueRgb
 

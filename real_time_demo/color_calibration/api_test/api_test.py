@@ -3,7 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # API 服务器地址
-API_URL = "http://35.196.45.78:8000/predict/"
+# API_URL = "http://35.196.45.78:8000/predict/"
+
+API_URL = "https://color-prediction-492048110470.us-central1.run.app/predict/"
+
 
 # 真实测试颜色（手动设置的 ground truth）
 true_rgb = (235, 189, 190)  # 2001-4B
