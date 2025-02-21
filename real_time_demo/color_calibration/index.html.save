@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Prediction System</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        h2 { font-weight: bold; }
+        #drop-zone { 
+            width: 300px; height: 150px; line-height: 150px; border: 2px dashed #ccc; 
+            margin: 20px auto; text-align: center; cursor: pointer; 
+        }
+        .color-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px; /* 调整颜色框间距 */
+            margin-top: 20px;
+        }
+        .color-box { 
+            width: 150px; height: 150px; display: flex; 
+            justify-content: center; align-items: center;
+            border: 3px solid #000; font-size: 18px; font-weight: bold; 
+            color: #fff; text-align: center;
+        }
+        .label { font-weight: bold; margin-top: 5px; }
+        .input-box { margin: 10px; }
+        .delta-e-box {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #000;
+            width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #f8f8f8;
+            text-align: center;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <h2>Drag and Drop an Image to Predict Colors</h2>
+
+    <div id="drop-zone">Drop your image here</div>
+    <input type="file" id="file-input" style="display: none;" accept="image/*">
+
+    <div class="input-box">
+        <label>Enter True RGB Color: </label>
+        <input type="text" id="true-rgb" value="238, 194, 187">
+        <button onclick="setTrueColor()">Set</button>
+    </div>
+
+    <!-- 并排显示颜色框 -->
+    <div class="color-container">
+        <div>
+            <div class="color-box" id="captured">Captured</div>
+            <div class="label">Captured Color</div>
+        </div>
+        <div>
+            <div class="color-box" id="predicted">Predicted</div>
+            <div class="label">Predicted Color</div>
+        </div>
+        <div>
+            <div class="color-box" id="true-color">Real</div>
+            <div class="label">Real Color</div>
+        </div>
+    </div>
+
+    <div class="delta-e-box" id="delta-e">
+        <div id="delta-e-captured">ΔE Captured vs Real: --</div>
+        <div id="delta-e-predicted">ΔE Predicted vs Real: --</div>
+    </div>
+
+    <script>
+        const API_URL = "http://35.196.45.78:8000/predict/";
+        let trueRgb = [238, 194, 187]; // Default true color
+
+        const dropZone = document.getElementById("drop-zone");
+        const fileInput = document.getElementById("file-input");
+
+        // Drag & Drop events
+        dropZone.addEventListener("dragover", (event) => {
+            event.preventDefault();
+            dropZone.style.borderColor = "blue";
+        });
+
+        dropZone.addEventListener("dragleave", () => {
+            dropZone.style.borderColor = "#ccc";
+        });
+
+        dropZone.addEventListener("drop", (event) => {
+            event.preventDefault();
+            dropZone.style.borderColor = "#ccc";
+            let file = event.dataTransfer.files[0];
+            if (file) uploadImage(file);
+        });
+
+        dropZone.addEventListener("click", () => fileInput.click());
+        fileInput.addEventListener("change", (event) => {
+            let file = event.target.files[0];
+            if (file) uploadImage(file);
+        });
+
+        // Set user-defined true color
+        function setTrueColor() {
+            let input = document.getElementById("true-rgb").value;
+            let rgbArray = input.split(",").map(num => parseInt(num.trim(), 10));
+            if (rgbArray.length === 3 && rgbArray.every(num => num >= 0 && num <= 255)) {
+                trueRgb = rgbArray;
+                setColorBox("true-color", trueRgb);
+            } else {
+                alert("Invalid RGB format. Use: R, G, B (e.g., 238, 194, 187)");
+            }
+        }
+
+        // Upload image to API
+        function uploadImage(file) {
+            let formData = new FormData();
+            formData.append("file", file);
+
+            fetch(API_URL, { 
+                method: "POST", 
+                body: formData, 
+                headers: { "Accept": "application/json" } 
+            })
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                return response.json();
+            })
+            .then(data => {
+                let capturedColor = data.captured_color;
+                let predictedColor = data.predicted_color;
+
+                setColorBox("captured", capturedColor);
+                setColorBox("predicted", predictedColor);
+                setColorBox("true-color", trueRgb);
+
+                // Compute Delta E
+                let deltaECaptured = computeDeltaE(capturedColor, trueRgb);
+                let deltaEPredicted = computeDeltaE(predictedColor, trueRgb);
+
+                // Calculate accuracy improvement percentage
+                let improvement = ((deltaECaptured - deltaEPredicted) / deltaECaptured) * 100;
+
+                // Update Delta E display
+                document.getElementById("delta-e-captured").textContent = 
+                    `ΔE Captured vs Real: ${deltaECaptured.toFixed(2)}`;
+                document.getElementById("delta-e-predicted").textContent = 
+                    `ΔE Predicted vs Real: ${deltaEPredicted.toFixed(2)}`;
+
+                // Append accuracy improvement message
+                document.getElementById("delta-e").innerHTML += `
+                    <div style="margin-top: 10px; font-size: 16px; font-weight: normal;">
+                        <em>After model correction, prediction accuracy improved by ${improvement.toFixed(2)}%!</em>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                console.error("Image upload failed:", error);
+                alert("Image upload failed. Please check if the API is running.");
+            });
+        }
+
+        // Update color display
+        function setColorBox(id, rgb) {
+            let element = document.getElementById(id);
+            element.style.backgroundColor = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+            element.textContent = `${rgb[0]}, ${rgb[1]}, ${rgb[2]}`;
+        }
+
+        // Compute Delta E (Euclidean Distance in RGB Space)
+        function computeDeltaE(color1, color2) {
+            return Math.sqrt(
+                Math.pow(color1[0] - color2[0], 2) +
+                Math.pow(color1[1] - color2[1], 2) +
+                Math.pow(color1[2] - color2[2], 2)
+            );
+        }
+    </script>
+</body>
+</html>
