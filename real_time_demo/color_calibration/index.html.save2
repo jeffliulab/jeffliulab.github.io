@@ -14,7 +14,7 @@
         .color-container {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 30px; /* 调整颜色框间距 */
             margin-top: 20px;
         }
         .color-box { 
@@ -38,6 +38,7 @@
             text-align: center;
             line-height: 1.5;
         }
+        /* "Calculating..." 遮罩层 */
         #loading-overlay {
             display: none;
             position: fixed;
@@ -58,11 +59,17 @@
     <div>
         <em>Running on Google Cloud Run. Version: Random Forest model_v1.</em>
     </div>
+    <!-- <div>
+        <em>
+            <a href="https://www.youtube.com/your-demo-link" target="_blank">=> YouTube Demo Link</a>
+        </em>
+    </div> -->
     <div>
         <em>
             <a href="https://github.com/jeffliulab/Color_Calibration" target="_blank">=> GitHub Repository</a>
         </em>
     </div>
+    
 
     <div id="drop-zone">Drop your image here</div>
     <input type="file" id="file-input" style="display: none;" accept="image/*">
@@ -73,6 +80,7 @@
         <button onclick="setTrueColor()">Set</button>
     </div>
 
+    <!-- 并排显示颜色框 -->
     <div class="color-container">
         <div>
             <div class="color-box" id="captured">Captured</div>
@@ -94,12 +102,14 @@
         <div id="accuracy-improvement" style="margin-top: 10px; font-size: 16px; font-weight: normal;"></div>
     </div>
 
+    <!-- 计算中遮罩层 -->
     <div id="loading-overlay">Calculating...</div>
 
     <script>
+        // const API_URL = "http://35.196.45.78:8000/predict/";
         const API_URL = "https://color-prediction-492048110470.us-central1.run.app/predict/";
         let trueRgb = [238, 194, 187]; // Default true color
-        let trueRgbSet = false;
+        let trueRgbSet = false; // 变量控制是否已设置 trueRgb
 
         window.onload = function() {
             showLoadingMessage(false);
@@ -108,7 +118,7 @@
         const dropZone = document.getElementById("drop-zone");
         const fileInput = document.getElementById("file-input");
 
-        // 拖拽上传
+        // Drag & Drop events
         dropZone.addEventListener("dragover", (event) => {
             event.preventDefault();
             dropZone.style.borderColor = "blue";
@@ -125,20 +135,29 @@
             if (file) uploadImage(file);
         });
 
-        // 点击上传
         dropZone.addEventListener("click", () => {
-            fileInput.click();
+            fileInput.value = ""; // 清空 input，确保 change 事件触发
+            fileInput.click();    // 触发文件选择窗口
         });
 
         fileInput.addEventListener("change", (event) => {
             let file = event.target.files[0];
-            if (file) {
-                fileInput.value = ""; // 清空 input 确保可以重新选择相同文件
-                uploadImage(file);
-            }
+            if (file) uploadImage(file);
         });
 
+
         // 设置真实颜色
+        // function setTrueColor() {
+        //     let input = document.getElementById("true-rgb").value;
+        //     let rgbArray = input.split(",").map(num => parseInt(num.trim(), 10));
+        //     if (rgbArray.length === 3 && rgbArray.every(num => num >= 0 && num <= 255)) {
+        //         trueRgb = rgbArray;
+        //         trueRgbSet = true;
+        //         setColorBox("true-color", trueRgb);
+        //     } else {
+        //         alert("Invalid RGB format. Use: R, G, B (e.g., 238, 194, 187)");
+        //     }
+        // }
         function setTrueColor() {
             let input = document.getElementById("true-rgb").value;
             let rgbArray = input.split(",").map(num => parseInt(num.trim(), 10));
@@ -146,10 +165,14 @@
                 trueRgb = rgbArray;
                 trueRgbSet = true;
                 setColorBox("true-color", trueRgb);
+
+                // 关键修改：清空 file input 确保 change 事件能触发
+                fileInput.value = "";
             } else {
                 alert("Invalid RGB format. Use: R, G, B (e.g., 238, 194, 187)");
             }
         }
+
 
         // 上传图片到 API
         function uploadImage(file) {
@@ -168,7 +191,13 @@
                 body: formData, 
                 headers: { "Accept": "application/json" } 
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+
             .then(data => {
                 let capturedColor = data.captured_color;
                 let predictedColor = data.predicted_color;
@@ -185,9 +214,9 @@
                     `ΔE Captured vs Real: ${deltaECaptured.toFixed(2)}`;
                 document.getElementById("delta-e-predicted").textContent = 
                     `ΔE Predicted vs Real: ${deltaEPredicted.toFixed(2)}`;
-                
-                document.getElementById("accuracy-improvement").innerHTML = 
-                    `<em>After model correction, prediction accuracy improved by ${improvement.toFixed(2)}%!</em>`;
+
+                let improvementMessage = document.getElementById("accuracy-improvement");
+                improvementMessage.innerHTML = `<em>After model correction, prediction accuracy improved by ${improvement.toFixed(2)}%!</em>`;
 
                 showLoadingMessage(false);
             })
@@ -198,16 +227,26 @@
             });
         }
 
+        // 控制 "Calculating..." 的显示与隐藏
         function showLoadingMessage(isLoading) {
             document.getElementById("loading-overlay").style.display = isLoading ? "flex" : "none";
+            document.body.style.pointerEvents = isLoading ? "none" : "auto";
         }
 
+        // 更新颜色框
         function setColorBox(id, rgb) {
-            document.getElementById(id).style.backgroundColor = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+            let element = document.getElementById(id);
+            element.style.backgroundColor = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+            element.textContent = `${rgb[0]}, ${rgb[1]}, ${rgb[2]}`;
         }
 
+        // 计算 Delta E (Euclidean Distance)
         function computeDeltaE(color1, color2) {
-            return Math.sqrt(color1.reduce((sum, val, i) => sum + Math.pow(val - color2[i], 2), 0));
+            return Math.sqrt(
+                Math.pow(color1[0] - color2[0], 2) +
+                Math.pow(color1[1] - color2[1], 2) +
+                Math.pow(color1[2] - color2[2], 2)
+            );
         }
     </script>
 </body>
