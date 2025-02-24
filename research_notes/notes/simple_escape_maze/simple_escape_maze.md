@@ -73,9 +73,8 @@ Two **fault cases** were observed:
 ## Conclusion
 
 The **Left Wall Follower Algorithm** is an effective solution for **autonomous robotic navigation**. Future enhancements could include:
-
-✅ **PID-based control** for smoother motion.  
-✅ **SLAM integration** for dynamic mapping.  
-✅ **Machine learning enhancements** for improved adaptability.  
+- **PID-based control** for smoother motion.  
+- **SLAM integration** for dynamic mapping.  
+- **Machine learning enhancements** for improved adaptability.  
 
 ---
