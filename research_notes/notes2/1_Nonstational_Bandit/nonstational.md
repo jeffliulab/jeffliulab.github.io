@@ -91,11 +91,11 @@ Based on theoretical reasoning, constant step-size is expected to adapt faster t
 
 According to the above experimental setup, the result implemented by the codes is shown in Figure 2.
 
-![Raw results of the nonstationary bandit experiment](figure2.png)
+![Raw results of the nonstationary bandit experiment](Figure2.png)
 
 Since the raw lines are difficult to distinguish, I employed a **smoothed (moving average) approach** to highlight overall trends, shown in Figure 3.
 
-![Smoothed results: (Left) Average Reward vs. Steps, (Right) Optimal Action Selection vs. Steps](figure3.png)
+![Smoothed results: (Left) Average Reward vs. Steps, (Right) Optimal Action Selection vs. Steps](Figure3.png)
 
 ### Observations:
 
@@ -126,7 +126,7 @@ $$
 
 However, in nonstationary environments, if $ \frac{1}{t} $ becomes too small, it can slow adaptation. Empirical results (Figure 4) show that this strategy might perform worse than the pure sample-average method.
 
-![Results of an adaptive step-size approach](figure4.png)
+![Results of an adaptive step-size approach](Figure4.png)
 
 ### Sliding Window Average
 
@@ -144,13 +144,13 @@ $$
 
 Experiments (Figure 5) show that the sliding window average improves upon the pure sample-average but still underperforms compared to a properly chosen constant step-size.
 
-![Results of the sliding window average](figure5.png)
+![Results of the sliding window average](Figure5.png)
 
 ### Choosing the Best $ \alpha $
 
 Exploring different $ \alpha $ values (e.g., 0.05, 0.2, 0.5) to see how different step-sizes affect performance. Figure 6 shows the performance of different $ \alpha $ values: $ [0.01, 0.05, 0.1, 0.2, 0.5] $.
 
-![Comparison of different constant step-size values <span class=](figure6.png) \alpha  \alpha " />
+![Comparison of different constant step-size values <span class=](Figure6.png) \alpha  \alpha " />
 
 Indeed, $ \alpha = 0.1 $ strikes a good balance between adaptation and noise smoothing in our testbed.
 
