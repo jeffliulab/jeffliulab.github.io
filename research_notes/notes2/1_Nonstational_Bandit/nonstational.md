@@ -6,7 +6,7 @@ In this research, it is aimed to design and conduct an experiment that demonstra
 
 Previously, in the 10-arm bandit experiment, the true action values $ q_*(a) $ were sampled once from a $ \mathcal{N}(0, 1) $ distribution and kept fixed. I replicate the experiment to explore the performance of the $ \epsilon $-greedy strategy under three different $ \epsilon $ values for 1000 steps. After replicating the experiment (`Source Code: Experiment2-2`), I obtained a result consistent with the textbook, as shown in Figure 1.
 
-![Replication of the 10-arm bandit experiment in the textbook](figure1.png)
+![Replication of the 10-arm bandit experiment in the textbook](Figure1.png)
 
 This experiment indicated that $ \epsilon = 0.1 $ is optimal among the three settings. Building on this, I am interested in investigating a new question:
 **If the environment is nonstationary, how do different $ Q $-estimation methods perform?**
