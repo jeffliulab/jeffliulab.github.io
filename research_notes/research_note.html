@@ -74,7 +74,20 @@
             let script = document.createElement("script");
 
             if (mathjaxVersion === "v3") {
-                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                // 即使选择v3也使用v2配置
+                script.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML";
+                let config = document.createElement("script");
+                config.type = "text/x-mathjax-config";
+                config.textContent = `
+                    MathJax.Hub.Config({
+                        tex2jax: {
+                            inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+                            displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']],
+                            processEscapes: true
+                        }
+                    });
+                `;
+                document.head.appendChild(config);
             } else {
                 script.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML";
                 let config = document.createElement("script");
