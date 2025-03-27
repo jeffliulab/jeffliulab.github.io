@@ -1,4 +1,4 @@
-# Adaptive Q-Learning in Nonstationary Bandit Problems: A Comparative Study
+# Evaluating Q-Estimates in Nonstationary Bandit Environments
 
 ## Introduction
 
