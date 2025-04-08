@@ -5,20 +5,29 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 
-
 <html>
 	<head>
 		<title>Jeff Pang Liu - Portfolio</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!-- 新增：统一控制主要区块标题的线与样式 -->
+		<style>
+			/* 只为 #main 下的一级 section 的 h3 设置下划线、深色、加粗 */
+			#main section > h3 {
+				border-bottom: 2px solid #aaa; /* 浅灰色下划线 */
+				padding-bottom: 10px;
+				margin: 20px 0;
+				color: #111;               /* 更深的文字颜色 */
+				font-weight: bold;         /* 加粗 */
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 
 		<!-- Header (Reference from bar_header) -->
 		<header id="header">
 			<div id="header-placeholder"></div>
-	
 			<script>
 				document.addEventListener("DOMContentLoaded", function () {
 					fetch("/bar_header.html")
@@ -29,161 +38,215 @@
 						.catch(error => console.error("Error loading header:", error));
 				});
 			</script>
-			</header>
+		</header>
 
-<!-- Main -->
-<div id="main">
+		<!-- Main -->
+		<div id="main">
 
-<!-- One -->
-<section id="one">
+			<!-- One -->
+			<section id="one">
+				<header class="major">
+					<h2>Resume/CV</h2>
+				</header>
 
+				<!-- Profile -->
+				<section>
+					<h3>Profile</h3>
+					<div style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #333;">
+						<p>
+							M.S. AI candidate with 1 year of industry experience in data engineering, 1 year of MSCS studies, and 2 years as a CS lecturer.<br>
+							Skilled in project design, software development, and ML/DL/RL model deployment.
+						</p>
+					</div>
+				</section>
 
-<!-------------------------MODIFY BELOW--------------------------------->
-<!--------------------------MODIFY BELOW---------------------------------->
-<!----------------------------MODIFY BELOW---------------------------------->
+				<!-- Skills -->
+				<section>
+					<h3>Skills</h3>
+					<div style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #333;">
+						<ul>
+							<li><strong>Programming Languages:</strong> Python, Java, C++, SQL, R, HTML</li>
+							<li><strong>Development Tools:</strong> Git/GitHub, Linux/Ubuntu, Bash, Shell, Unity, ROS, Gazebo</li>
+							<li><strong>Data Processing:</strong> OpenCV, Pandas, NumPy, Matplotlib</li>
+							<li><strong>Data Storage:</strong> DVC, PostgreSQL, MySQL, MariaDB, MongoDB</li>
+							<li><strong>ML/AI:</strong> PyTorch, Scikit-Learn, YOLOv8, Gymnasium, Stable Baselines3, OpenAI/Gemini API</li>
+							<li><strong>Cloud/Ops:</strong> MLflow, Kubernetes, FastAPI, Docker, Kubeflow, GCP, AWS, GitHub Actions</li>
+						</ul>
+					</div>
+				</section>
 
-<header class="major">
-    <h2>Resume/CV</h2>
-</header>
+				<!-- Education -->
+				<section id="education">
+					<style>
+						/* Education 区域通用样式 */
+						#education {
+							font-family: Arial, sans-serif;
+							color: #333;
+						}
+						/* 去掉内部各学位项的底部分隔线 */
+						.education-item {
+							display: flex;
+							justify-content: space-between;
+							align-items: flex-start;
+							padding-bottom: 10px;
+							margin-bottom: 20px;
+							border-bottom: none;
+						}
+						.education-details {
+							flex: 1;
+						}
+						.education-details strong {
+							font-size: 1.1em;
+						}
+						.education-details span {
+							color: #555;
+						}
+						.education-details ul {
+							margin: 10px 0 0 20px;
+							padding: 0;
+							list-style-type: disc;
+						}
+						.education-date {
+							white-space: nowrap;
+							margin-left: 20px;
+							font-style: italic;
+							color: #555;
+						}
+					</style>
+					
+					<h3>Education</h3>
+					
+					<div class="education-item">
+						<div class="education-details">
+							<strong>M.S. in Artificial Intelligence</strong><br>
+							<span>Boston University</span>
+							<ul>
+								<li>Tufts University, Cross-Registration for Reinforcement Learning</li>
+								<li>Brandeis University, Partial MSCS coursework, transfer to BU</li>
 
-<!-- Profile -->
-<section>
-    <h3>Profile</h3>
-    <div style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #333;">
-        <p>
-            M.S. CS candidate with 1 year of industry experience in data engineering and 2 years as a CS lecturer.<br>
-            Skilled in project design, software development, and ML/DL/RL model deployment.
-        </p>
-    </div>
-</section>
-
-<!-- Skills -->
-<section>
-    <h3>Skills</h3>
-    <div style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #333;">
-        <ul>
-            <li><strong>Programming Languages:</strong> Python, Java, C++, SQL, R, HTML</li>
-			<li><strong>Development Tools:</strong> Git/GitHub, Linux/Ubuntu, Bash, Shell, Unity, ROS, Gazebo</li>
-            <li><strong>Data Processing:</strong> OpenCV, Pandas, NumPy, Matplotlib</li>
-			<li><strong>Data Storage:</strong> DVC, PostgreSQL, MySQL, MariaDB, MongoDB</li>
-			<li><strong>ML/AI:</strong> PyTorch, Scikit-Learn, YOLOv8, Gymnasium, Stable Baselines3, OpenAI/Gemini API</li>
-            <li><strong>Cloud/Ops:</strong> MLflow, Kubernetes, FastAPI, Docker, Kubeflow, GCP, AWS, GitHub Actions</li>
-        </ul>
-    </div>
-</section>
-
-<!-- Education -->
-<section>
-    <h3>Education</h3>
-    <div style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #333;">
-        <ul>
-            <li>M.S. in Computer Science, Brandeis University, MA (Expected May 2026)</li>
-            <li>M.A. in Economics (Quantitative Economics), Boston University, MA (Jan 2021)</li>
-            <li>B.B.A. in Human Resources, Jilin University, China (June 2018)</li>
-        </ul>
-    </div>
-</section>
+							</ul>
+						</div>
+						<div class="education-date">Expected May 2026</div>
+					</div>
+					
+					<div class="education-item">
+						<div class="education-details">
+							<strong>M.A. in Quantitative Economics</strong><br>
+							<span>Boston University</span>
+						</div>
+						<div class="education-date">Jan 2021</div>
+					</div>
+					
+					<div class="education-item">
+						<div class="education-details">
+							<strong>B.B.A in Human Resources</strong><br>
+							<span>Jilin University</span>
+						</div>
+						<div class="education-date">June 2018</div>
+					</div>
+				</section>
 
 <!-- Industrial Experience -->
 <section>
     <h3>Experience</h3>
-	<article>
-        <h4>Computer Science Lecturer - Shanghai Jian Qiao University</h4>
-        <p><em>July 2022 – June 2023 | Shanghai, China</em></p>
+    <style>
+        .experience-item {
+            margin-bottom: 30px; /* 每个经历之间留些距离 */
+        }
+        .experience-title {
+            font-weight: bold;
+            font-size: 1.05em;
+            margin: 0;
+            color: #333;
+        }
+        .experience-company {
+            font-size: 1em;
+            color: #555;
+            margin: 5px 0;  /* 与标题和时间间隔 */
+        }
+        .experience-time {
+            color: #777;
+            font-style: italic;
+            margin: 5px 0;
+        }
+    </style>
+
+    <!-- 第一个工作经历 -->
+    <div class="experience-item">
+        <h4 class="experience-title">Computer Science Lecturer</h4>
+        <div class="experience-company">Shanghai Jian Qiao University</div>
+        <div class="experience-time">July 2022 – June 2023 | Shanghai, China</div>
         <div style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #333;">
             <ul>
-				<li>Instructed at International Curriculum Center, Continuing Education College. </li>
-				<li>Computer Science courses including Computer Principles, Java programming, Basic Algorithms. Textbooks used were Computer Science Illuminated and Big Java. The course mainly focused on practical applications in industry.</li>
+                <li>Instructed at International Curriculum Center, Continuing Education College.</li>
+                <li>Courses: Computer Principles, Java Programming, Basic Algorithms. (Textbooks: Computer Science Illuminated, Big Java)</li>
             </ul>
         </div>
-    </article>
+    </div>
 
-    <article>
-        <h4>Data Engineer - Ping An International Financial Leasing Co., Ltd</h4>
-        <p><em>Sep 2021 – May 2022 | Shanghai, China</em></p>
+    <!-- 第二个工作经历 -->
+    <div class="experience-item">
+        <h4 class="experience-title">Data Engineer</h4>
+        <div class="experience-company">Ping An International Financial Leasing Co., Ltd</div>
+        <div class="experience-time">Sep 2021 – May 2022 | Shanghai, China</div>
         <div style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #333;">
             <ul>
-				<li>Led the development of a PostgreSQL-based Data Platform to streamline cross-departmental workflows and enhance data accessibility, enabling real-time visualization and automated reporting with Superset and Airflow.</li>
-				<li>Optimized the wide table by reducing JOIN operations, adding precomputed features, enabling business analysts to retrieve and utilize data efficiently, supporting data analytics and model optimization.</li>
-				<li>Implemented an automated ETL pipeline using Pandas and Airflow, integrating loan data from the company’s data center into the Data Platform for both historical and incremental data processing.</li>
-				<li>Deployed a REST API with FastAPI, allowing the Risk Management department to access the wide table for risk model testing and batch processing of the XGBoost-based loan risk control model.</li>
-			</ul>
+                <li>Led development of a PostgreSQL-based Data Platform for real-time visualization and automated reporting with Superset and Airflow.</li>
+                <li>Optimized JOIN operations and added precomputed features to support business analysts.</li>
+                <li>Implemented an automated ETL pipeline using Pandas and Airflow for historical and incremental data processing.</li>
+                <li>Deployed a REST API with FastAPI for risk model testing and batch processing in an XGBoost-based loan risk control model.</li>
+            </ul>
         </div>
-    </article>
+    </div>
 
-    <article>
-        <h4>Data Engineer - Shanghai Lianwei Data Technology LLC</h4>
-        <p><em>June 2021 – Sep 2021 | Shanghai, China</em></p>
+    <!-- 第三个工作经历 -->
+    <div class="experience-item">
+        <h4 class="experience-title">Data Engineer</h4>
+        <div class="experience-company">Shanghai Lianwei Data Technology LLC</div>
+        <div class="experience-time">June 2021 – Sep 2021 | Shanghai, China</div>
         <div style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #333;">
             <ul>
-				<li>Client: P&G Gillette Division</li>
-				<li>Built an ETL pipeline with Python to process and analyze weekly sales and advertising data from Alibaba Brand Databank, delivering daily and weekly ROI and multi-channel attribution reports for Gillette brand team.</li>
-				<li>Integrated an XGBoost-based forecasting module into the ETL pipeline, dynamically predicting 11.11 Campaign GMV trends, enabling the Gillette team to make data-driven budget planning and optimize ad spend allocation.</li>  
-			</ul>
+                <li>Client: P&amp;G Gillette Division</li>
+                <li>Built an ETL pipeline with Python to process and analyze weekly sales and advertising data from Alibaba Brand Databank.</li>
+                <li>Integrated an XGBoost-based forecasting module to dynamically predict 11.11 Campaign GMV trends.</li>
+            </ul>
         </div>
-    </article>
+    </div>
 </section>
 
 
-
-<section>
-    <h3>Awards</h3>
-        <div style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #333;">
-            <ul>
-				<li>2013 VEX Robotics World Championship Design Reward at California</li>
-				<li>2012 VEX Robotics National Competition Gold Medal at China</li>
-            </ul>
-        </div>
-</section>
-	
-
-<!-------------------------MODIFY ABOVE--------------------------------->
-<!--------------------------MODIFY ABOVE---------------------------------->
-<!----------------------------MODIFY ABOVE---------------------------------->
-                            
-                            
-                            <!-- Back to Homepage Button -->
-                            <div>
-                                <div>&nbsp;</div>
-                                <div>&nbsp;</div>
-
-                                <a href="/index.html" class="button">Back to Homepage</a>
-                            
-                            </div>
-
-					
-
+				<!-- Awards -->
+				<section>
+					<h3>Awards</h3>
+					<div style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #333;">
+						<ul>
+							<li>2013 VEX Robotics World Championship Design Reward at California</li>
+							<li>2012 VEX Robotics National Competition Gold Medal at China</li>
 						</ul>
-					</section>
-
-			
-
-
-
-
-
-
-
-				<!-- Contact Reference from bar_contact -->
-				<section id="five">
-						
-					<div id="contact-placeholder"></div>
-
-					<script>
-						document.addEventListener("DOMContentLoaded", function () {
-							fetch("/bar_contact.html")
-								.then(response => response.text())
-								.then(data => {
-									document.getElementById("contact-placeholder").innerHTML = data;
-								})
-								.catch(error => console.error("Error loading contact:", error));
-						});
-					</script>
-
-
+					</div>
 				</section>
+				
+				<!-- Back to Homepage Button -->
+				<div style="margin-top: 30px;">
+					<a href="/index.html" class="button">Back to Homepage</a>
+				</div>
+			</section>
 
-			</div>
+			<!-- Contact Reference from bar_contact -->
+			<section id="five">
+				<div id="contact-placeholder"></div>
+				<script>
+					document.addEventListener("DOMContentLoaded", function () {
+						fetch("/bar_contact.html")
+							.then(response => response.text())
+							.then(data => {
+								document.getElementById("contact-placeholder").innerHTML = data;
+							})
+							.catch(error => console.error("Error loading contact:", error));
+					});
+				</script>
+			</section>
+		</div>
 
 		<!-- Footer Reference from /bar_footer.html -->
 		<footer id="footer">
@@ -195,18 +258,18 @@
 						.then(data => {
 							document.getElementById("footer-placeholder").innerHTML = data;
 						})
-						.catch(error => console.error("Error loading header:", error));
+						.catch(error => console.error("Error loading footer:", error));
 				});
 			</script>
 		</footer>
 
 		<!-- Scripts -->
-			<script src="/assets/js/jquery.min.js"></script>
-			<script src="/assets/js/jquery.poptrox.min.js"></script>
-			<script src="/assets/js/browser.min.js"></script>
-			<script src="/assets/js/breakpoints.min.js"></script>
-			<script src="/assets/js/util.js"></script>
-			<script src="/assets/js/main.js"></script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.poptrox.min.js"></script>
+		<script src="/assets/js/browser.min.js"></script>
+		<script src="/assets/js/breakpoints.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
 
 	</body>
 </html>

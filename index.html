@@ -637,6 +637,7 @@ style="position: relative; display: block; padding-bottom: 56.25%; overflow: hid
 	// 【容器修改区域】：只需在此处修改进度条数据即可更新全部内容
 	// label: "learning" 表示采用学习进度样式，"project" 表示项目进度样式
 	var progressConfig = {
+	  // WenCFO Project
 	  "WenCFO Project": {
 		label: "project",
 		completed: [
@@ -656,57 +657,92 @@ style="position: relative; display: block; padding-bottom: 56.25%; overflow: hid
 			"Modelization"
 		]
 	  },
-	  "Machine Learning": {
+	  // ML - Machine Learning
+	  // DS - Data Science
+	  // DC - Data Centric
+	  // MLOps
+	  "Machine Learning and Data Science": {
 		label: "learning",
 		completed: [
 			"Supervised Learning",
-			"Scikit Learn",
 			"Linear Regression",
 			"Classification Problem",
 			"Logistic Regression",
+			"DS - Scikit Learn",
+			"DS - Data Visualization",
+			"DS - Data Analysis with Pandas",
+			"MLOps - DVC",
+			"MLOps - Model Deployment, FastAPI",
+			"MLOps - Version Control, Git/DVC",
+		],
+		pending: [
 			"K-Nearest Neighbors, KNN",
-			//这里是分割线
 			"Support Vector Machine, SVM",
 			"Decision Tree",
 			"Random Forest",
 			"Gradient Boosting Machine, GBM",
 			"XGBoost",
-		],
-		pending: [
-
 			"Unsupervised Learning",
 			"K-means",
-			"Self-supervised Learning"
+			"Self-supervised Learning",
+			"Feature Engineering",
+			"DS - Data Wrangling",
+			"DS - Feature Engineering",
+			"DS - Data Mining",
+			"D.Centric - Data Governance",
+			"D.Centric - Data Modeling",
+			"D.Centric - Spark, Dask",
+			"D.Centric - Auto ETL, Apache Airflow",
+			"D.Centric - Data Lake",
+			"MLOps - Model Monitoring",
+			"MLOps - CI/CD for Machine Learning",
+			"MLOps - Kubernetes, Infrastructure as Code"
 		]
 	  },
-	  "Deep Learning": {
+	  // DL - Deep Learning Foundations
+	  // CNN - Convolutional Neural Networks
+	  // RNN - Recurrent Neural Networks
+	  // GAN - Generative Adversarial Networks
+	  // Trans - Transformers
+	  // LLMs - Large Language Models
+	  "Deep Learning and Transformers/LLMs": {
 		label: "learning",
 		completed: [
 			"PyTorch",
-			//这里是分割线
-			"Linear Algebra Foundations",
-			"Probability and Information Theory",
-			"Numerical Computation",
-			"Deep Feedforward Networks",
-			"Regularization",
-			"Optimization for Training Deep Models",
-			"Convolutional Networks",
-			"Sequence Modeling",
-			"Practical Methodology",
-			"Autoencoders",
-			"Representation Learning",
-			"Structured Probabilistic Models for DL",
-			"Monte Carlo Methods",
-			"Confronting the Partition Function",
-			"Approximate Inference",
+			"LLMs - ChatGPT API",
+			"LLMs - AI Agent"		
 		],
 		pending: [
-			"Deep Generative Models",
-			"Transformer",
-			"LLMs"
+			"DL - Linear Algebra Foundations",
+			"DL - Probability and Information Theory",
+			"DL - Numerical Computation",
+			"DL - Deep Feedforward Networks",
+			"DL - Regularization",
+			"DL - Optimization for Training Deep Models",
+			"DL - Convolutional Networks",
+			"DL - Sequence Modeling",
+			"DL - Practical Methodology",
+			"DL - Autoencoders",
+			"DL - Representation Learning",
+			"DL - Structured Probabilistic Models for DL",
+			"DL - Monte Carlo Methods",
+			"DL - Confronting the Partition Function",
+			"DL - Approximate Inference",
+			"DL - Deep Generative Models",
+			"Trans - NLP Foundations",
+			"Trans - Seq2Seq",
+			"Trans - Attention Mechanism",
+			"Trans - Encoder-Decoder",
+			"Trans - Self Attention",
+			"Trans - BERT",
+			"Trans - GPT",
+			"LLMs - Fine Tune",
+			"LLMs - MoE",
 		]
 	  },
-	  "Reinforcement Learning": {
+	  // RL - Reinforcement Learning
+	  // DRL - Deep Reinforcement Learning
+	  "Reinforcement Learning and DRL": {
 		label: "learning",
 		completed: [
 			"K-armed Bandit Problem",
@@ -714,9 +750,10 @@ style="position: relative; display: block; padding-bottom: 56.25%; overflow: hid
 			"Dynamic Programming",
 			"Monte Carlo Methods",
 			"Temporal-Difference Learning",
-			//这里是分割线
 			"Q-learning",
-			"Sarsa",
+			"Sarsa"
+		],
+		pending: [
 			"n-step Bootstrapping",
 			"Tabular Methods",
 			"On-policy Prediction with Approximation",
@@ -727,21 +764,13 @@ style="position: relative; display: block; padding-bottom: 56.25%; overflow: hid
 			"Policy Gradient Methods",
 			"REINFORCE",
 			"Actor-Critic Methods",
-			"Psychology Concepts"
-		],
-		pending: [
+			"Psychology Concepts",
 			"Neuroscience Concepts",
 			"Deep Reinforcement Learning",
 			"DQN",
 			"PPO",
 			"HFRL",
-			"Isaac Sim and Simulation Trainings"
-		]
-	  },
-	  // DRL
-	  "Deep Reinforcement Learning": {
-		label: "learning",
-		completed: [
+			"Isaac Sim and Simulation Trainings",
 			"DQN",
 			"PPO",
 			"A3C",
@@ -749,8 +778,6 @@ style="position: relative; display: block; padding-bottom: 56.25%; overflow: hid
 			"Double DQN",
 			"Rainbow DQN",
 			"Meta-RL",
-		],
-		pending: [
 			"MADDPG",
 			"Q-Mix",
 			"COMA",
@@ -758,53 +785,65 @@ style="position: relative; display: block; padding-bottom: 56.25%; overflow: hid
 			"AlphaGo"
 		]
 	  },
-	  // NLP & Transformers
-	  "NLP & Transformers": {
+	  // Algorithms and Data Structures (LeetCode)
+	  // Computer Science Foundations
+	  // Software Development Engineering
+	  "CS Foundations and SDE": {
 		label: "learning",
 		completed: [
-			// 分隔线
-			"NLP",
-			"Tokenization",
-			"Word Embeddings",
-			"GRU",
-			"Seq2Seq",
-			"Attention Mechanism",
-			"Encoder-Decoder",
-			"Self-Attention",
-			"BERT",
-			"GPT"
+			"A&DS - Arrays",
+			"A&DS - Hashing",
+			"A&DS - Two Pointers",
+			"A&DS - Stack",
+			"A&DS - Binary Search",
+			"A&DS - Sliding Window",
+			"A&DS - Linked List",
+			"A&DS - Trees",			
 		],
 		pending: [
-			"Longformer",
-			"MoE"
+			"A&DS - Tries",
+			"A&DS - Heap",
+			"A&DS - Priority Queue",
+			"A&DS - Intervals",
+			"A&DS - Greedy",
+			"A&DS - Backtracking",
+			"A&DS - Graphs",
+			"A&DS - 1D DP",
+			"A&DS - 2D DP",
+			"A&DS - Bit Manipulation",
+			"A&DS - Math & Geometry",
+			"Foundations - Network",
+			"Foundations - Database",
+			"Foundations - Operating System",
+			"Foundations - Discrete Math",
+			"Foundations - Logic",
+			"SDE - Full Stack Development",
+			"SDE - Test",
+			"SDE - Security",
+			"SDE - Distributed System",
+			"SDE - DevOps",
+			"SDE - NoSQL Database MongoDB",
+			"SDE - Concurrency Control",
 		]
 	  },
-	  // Algorithms and Data Structures (LeetCode)
-	  "Algorithms and Data Structures": {
-		label: "learning",
+	  // Keep Fit
+	  "Keep Fit": {
+		label: "keepfit",
 		completed: [
-			"Arrays",
-			"Hashing",
-			"Two Pointers",
-			"Stack",
-			"Binary Search",
-			"Sliding Window",
-			"Linked List",
-			"Trees",
-			// 这里是分隔线
-			"Tries",
-			"Heap",
-			"Priority Queue",
-			"Intervals",
-			"Greedy",
-			"Backtracking",
-			"Graphs",
-			"1-D DP",
-			"2-D DP"
+			"BMI - 26",
 		],
 		pending: [
-			"Bit Manipulation",
-			"Math & Geometry"
+			"BMI - 25",
+			"BMI - 24",
+			"Pull-Ups - 5",
+			"Pull-Ups - 10",
+			"Pull-Ups - 15",
+			"Pull-Ups - 20",
+			"Resting Heart Rate - 80 bpm",
+			"Resting Heart Rate - 75 bpm",
+			"Resting Heart Rate - 70 bpm",
+			"Resting Heart Rate - 65 bpm",
+			"Resting Heart Rate - 60 bpm"
 		]
 	  },
 	};
@@ -817,6 +856,8 @@ style="position: relative; display: block; padding-bottom: 56.25%; overflow: hid
 	  // 根据 label 添加不同的 class
 	  if (progressConfig[category].label === "project") {
 		container.classList.add("progress-project");
+	  } else if (progressConfig[category].label === "keepfit") {
+		container.classList.add("progress-keepfit");
 	  } else {
 		container.classList.add("progress-learning");
 	  }
@@ -870,6 +911,8 @@ style="position: relative; display: block; padding-bottom: 56.25%; overflow: hid
 		} else if (data.label === "project") {
 		  // 对于 project，JS 只设置基础宽度，动态动画效果由 CSS 伪元素实现
 		  fill.style.background = "linear-gradient(90deg, #748DA6, #8A9CAC)";
+		} else if (data.label === "keepfit") {
+			fill.style.background = "linear-gradient(90deg, #4CAF50, #81C784)";
 		}
 	  }
 	}
@@ -970,15 +1013,21 @@ style="position: relative; display: block; padding-bottom: 56.25%; overflow: hid
 	
 	/* 学习进度条样式（动态颜色由JS设置） */
 	.progress-learning {
-	  background: #fff;
+	  background: #eae1e2;
 	  color: #333;
 	}
-	
 	/* 项目进度条样式 */
 	.progress-project {
-	  background: #fafafa;
+	  background: #d0daeb;
 	  color: #2a2a2a;
 	}
+	.progress-keepfit {
+	/* 设置背景色（可选） */
+	background: #c7dec6; /* 或你想要的背景色 */
+	/* 明确设置文本颜色 */
+	color: #2a2a2a;
+	}
+
 	
 	/* 为 project 类型的进度条的填充添加斜着的平行四边形效果 */
 	.progress-project .progress-fill {
@@ -1011,6 +1060,37 @@ style="position: relative; display: block; padding-bottom: 56.25%; overflow: hid
 		transform: translateX(0);
 	  }
 	}
+	/* 为 keepfit 类型的进度条添加绿色运动健康效果及动画 */
+	.progress-keepfit .progress-fill {
+	background: linear-gradient(90deg, #4CAF50, #81C784);
+	position: relative;
+	overflow: hidden;
+	}
+	.progress-keepfit .progress-fill::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 200%;
+	height: 100%;
+	background: repeating-linear-gradient(
+		45deg,
+		rgba(255,255,255,0.3),
+		rgba(255,255,255,0.3) 10px,
+		transparent 10px,
+		transparent 20px
+	);
+	animation: wave 5s linear infinite;/* 修改这里可以更改进度条滚动速度，越大越慢 */
+	}
+	@keyframes wave {
+	0% {
+		transform: translateX(-50%);
+	}
+	100% {
+		transform: translateX(0);
+	}
+	}
+
 	
 	/* 弹窗整体 */
 	.modal {
