@@ -1,0 +1,371 @@
+<!--
+
+需要用CLAUDE继续修改：
+1、现在有几种标签，比如project、learning之类的，可以改成统一的一种样式
+
+保持现有的进度条样式，只是修改一下颜色：
+
+0 - 10%：深红色
+10 - 20%： 介于深红色和浅红色之间的红色
+20 - 30%： 浅红色
+30 - 45%： 深橙色
+45 - 60%： 浅橙色
+60 - 70%： 浅绿色
+70 - 80%： 介于浅绿色和深绿色之间的绿色
+80 - 90%： 深绿色
+
+到了90%以上，在进度条上会出现字体，并且进度条上面加一层类似半透明的模板；进度条本身的进度和上面一样，只是颜色有变化
+
+90 - 95%： 和80-90%的深绿色一样，只是上面加上字体： “NEARLY WIN”
+95 - 99%: 变成金色的背景色，然后字体： “ALMOST WIN”
+100%: 背景变成没有滚动效果的金色，然后上面写着：“🏆WIN”
+
+
+
+
+
+
+
+
+
+-->
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>学习与项目进度跟踪（模块化＋磁吸布局）</title>
+  <style>
+    :root {
+      --primary-color: #3a7bd5;
+      --secondary-color: #2d6ab1;
+      --dark-color: #2c3e50;
+      --light-color: #f5f7fa;
+      --accent-color: #00c6ff;
+      --success-color: #4CAF50;
+      --warning-color: #ff9800;
+      --danger-color: #e74c3c;
+      --text-color: #333;
+      --light-text: #f8f9fa;
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      --transition-speed: 0.3s;
+    }
+
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--light-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* 头部 */
+    .header {
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: var(--light-text);
+      text-align: center;
+      padding: 2em 0;
+      box-shadow: var(--box-shadow);
+    }
+    .header h1 { font-size: 2.5em; font-weight: 300; letter-spacing: 1px; }
+    .header p { margin-top: 0.5em; opacity: 0.9; font-size: 1.1em; }
+
+    /* —— 瀑布流“磁吸”布局 —— */
+    .container {
+      /* 理想列宽 300px，自动根据容器宽度生成多少列 */
+      column-width: 300px;
+      column-gap: 1.5rem;
+
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2em 1em;
+      flex: 1;
+    }
+    /* 单片卡片在多列布局中需用 inline-block */
+    .topic-section {
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 1.5rem;
+
+      /* 防止跨列断裂 */
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      -moz-column-break-inside: avoid;
+
+      /* 卡片样式 */
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.5em;
+      box-shadow: var(--box-shadow);
+      transition: transform var(--transition-speed);
+    }
+    .topic-section:hover { transform: translateY(-5px); }
+
+    .topic-header { margin-bottom: 1em; border-bottom: 2px solid var(--light-color); padding-bottom: 0.5em; }
+    .topic-title { font-size: 1.5em; color: var(--dark-color); font-weight: 600; }
+    .topic-description { color: #666; margin-bottom: 1em; font-size: 1em; }
+
+    /* 进度条容器 */
+    .progress-container { display: flex; flex-direction: column; gap: 1em; }
+
+    .progress-item {
+      display: flex; align-items: center;
+      padding: 0.8em; border-radius: 8px;
+      background: rgba(255,255,255,0.7);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      cursor: pointer; transition: all var(--transition-speed);
+    }
+    .progress-item:hover { transform: scale(1.01); box-shadow: 0 4px 8px rgba(0,0,0,0.12); }
+    .progress-title { flex: 1; font-size: 0.95em; font-weight: 500; }
+    .progress-bar {
+      flex: 3; height: 10px; border-radius: 8px;
+      margin: 0 8px; background: #eaecef;
+      overflow: hidden; position: relative;
+    }
+    .progress-fill {
+      height: 100%; width: 0;
+      border-radius: 8px; transition: width 0.5s ease;
+      position: relative;
+    }
+    .progress-fill::after {
+      content: "";
+      position: absolute; top: 0; left: 0;
+      width: 200%; height: 100%;
+      background: repeating-linear-gradient(
+        45deg, rgba(255,255,255,0.15), rgba(255,255,255,0.15) 10px,
+        transparent 10px, transparent 20px
+      );
+      animation: wave 3s linear infinite;
+    }
+    @keyframes wave {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+    .progress-percent { width: 40px; text-align: right; font-weight: 600; }
+
+    /* 弹窗 */
+    .modal {
+      display: none; position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5); backdrop-filter: blur(3px);
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #fff; margin: 5% auto;
+      width: 90%; max-width: 650px;
+      border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: modalIn 0.3s forwards;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .modal-header {
+      padding: 1.5em; border-bottom: 1px solid #eee;
+      position: relative;
+    }
+    .modal-header h3 { margin: 0; font-size: 1.5em; text-align: center; }
+    .modal-header .close {
+      position: absolute; top: 1.5em; right: 1.5em;
+      font-size: 1.5em; cursor: pointer;
+    }
+    .modal-body { padding: 1.5em; max-height: 60vh; overflow-y: auto; }
+    .task-section h4 {
+      margin-bottom: 0.5em; display: flex; align-items: center; font-weight: 600;
+    }
+    .task-section h4 span {
+      margin-left: 0.5em; padding: 0.2em 0.6em; border-radius: 10px; font-size: 0.75em;
+    }
+    .completed-list li { border-left: 3px solid var(--success-color); }
+    .pending-list li   { border-left: 3px solid var(--warning-color); }
+    .task-list li {
+      margin-bottom: 0.5em; padding: 0.8em 1em; background: #f9f9f9; border-radius: 6px; list-style: none;
+    }
+
+    /* 超窄屏：一列，并稍收紧内边距 */
+    @media (max-width: 300px) {
+      .container     { column-width: 100%; padding: 1.5em 0.5em; }
+    }
+
+    /* 底部 */
+    .footer {
+      text-align: center; padding: 1.5em 0;
+      background: var(--dark-color); color: rgba(255,255,255,0.8);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>学习与项目进度跟踪</h1>
+    <p>个人进度管理工具（模块化＋磁吸布局）</p>
+  </header>
+
+  <main class="container" id="tracker-container"></main>
+
+  <div id="progressModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">进度详情</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <section class="task-section">
+          <h4>已完成 <span class="completed-count" id="completedCount">0</span></h4>
+          <ul class="task-list completed-list" id="completedList"></ul>
+        </section>
+        <section class="task-section">
+          <h4>待完成 <span class="pending-count" id="pendingCount">0</span></h4>
+          <ul class="task-list pending-list" id="pendingList"></ul>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 Jeff Pang Liu - 模块化进度跟踪工具</p>
+  </footer>
+
+  <script>
+    /* —— 数据配置 —— */
+    const topics = [
+      { id: 'project', title: '项目开发', description: '记录当前正在进行的项目开发进度。',
+        bars: [
+          { name: 'WenCFO Project', label: 'project',
+            completed: ['Project Proposal','wencfo.com registered','Agent using LLM API'],
+            pending:   ['OpenManus Integration','Langchain Integration','MCP Integration','Product MVP','User Test','Commercial Plan and Pitch','Find users','Marketing','Modelization']
+          }
+        ]
+      },
+      { id: 'ml', title: '机器学习与数据科学', description: '记录机器学习和数据科学相关技能学习进度。',
+        bars: [
+          { name: 'Machine Learning & DS', label: 'learning',
+            completed: ['Supervised Learning','Linear Regression','Classification','Logistic Regression','Scikit-Learn','Data Visualization','Pandas','DVC','FastAPI','Git/DVC'],
+            pending:   ['KNN','SVM','Decision Tree','Random Forest','GBM','XGBoost','Unsupervised Learning','K-means','Feature Engineering','Data Wrangling','Spark','Airflow','CI/CD']
+          }
+        ]
+      },
+      { id: 'dl', title: '深度学习与LLMs', description: '记录深度学习、神经网络和大语言模型相关技能学习进度。',
+        bars: [
+          { name: 'DL & LLMs', label: 'learning',
+            completed: ['PyTorch','ChatGPT API','AI Agent'],
+            pending:   ['Linear Algebra','Info Theory','Feedforward Nets','CNN','RNN','Attention','Transformers','BERT','GPT','Fine-tune','MoE']
+          }
+        ]
+      },
+      { id: 'rl', title: '强化学习', description: '记录强化学习理论和实践相关技能学习进度。',
+        bars: [
+          { name: 'Foundations',   label: 'learning', completed: ['K-armed Bandit','MDP','Dynamic Programming'], pending: ['Monte Carlo','TD Learning','Q-learning'] },
+          { name: 'Value-based',   label: 'learning', completed: ['Sarsa'], pending: ['DQN','Double DQN','Rainbow DQN'] },
+          { name: 'Policy-based',  label: 'learning', completed: ['Policy Gradients'], pending: ['REINFORCE','Actor-Critic','PPO'] }
+        ]
+      },
+      { id: 'cs', title: '计算机科学基础', description: '记录计算机科学基础和软件开发技能学习进度。',
+        bars: [
+          { name: 'CS Foundations', label: 'learning',
+            completed: ['Arrays','Hashing','Two Pointers','Stack','Binary Search','Trees'],
+            pending:   ['Tries','Heap','Graphs','1D DP','2D DP','Backtracking','Greedy','Databases','OS','Networks']
+          }
+        ]
+      },
+      { id: 'fitness', title: '健康与健身', description: '记录健康和健身相关目标的达成进度。',
+        bars: [
+          { name: 'Keep Fit', label: 'keepfit',
+            completed: ['BMI - 26'],
+            pending:   ['BMI - 25','Pull-Ups 5','Pull-Ups 10','Resting HR 70','Resting HR 60']
+          }
+        ]
+      }
+    ];
+
+    /* —— DOM 操作 —— */
+    function createTopicSection(t) {
+      const s = document.createElement('section');
+      s.className = `topic-section topic-${t.id}`;
+      s.innerHTML = `
+        <div class="topic-header">
+          <h2 class="topic-title">${t.title}</h2>
+        </div>
+        <p class="topic-description">${t.description}</p>
+        <div class="progress-container" id="${t.id}-progress"></div>`;
+      return s;
+    }
+
+    function createProgressItem(topicId, cfg) {
+      const c = document.createElement('div');
+      c.className = 'progress-item';
+      c.dataset.topic = topicId;
+      const title = document.createElement('span');
+      title.className = 'progress-title';
+      title.textContent = cfg.name;
+      c.appendChild(title);
+      const bar = document.createElement('div');
+      bar.className = 'progress-bar';
+      const fill = document.createElement('div');
+      fill.className = 'progress-fill';
+      bar.appendChild(fill);
+      c.appendChild(bar);
+      const pct = document.createElement('span');
+      pct.className = 'progress-percent';
+      pct.textContent = '0%';
+      c.appendChild(pct);
+      c.addEventListener('click', () => openModal(cfg));
+      return c;
+    }
+
+    function updateProgress(item, cfg) {
+      const total = cfg.completed.length + cfg.pending.length;
+      const percent = Math.round(cfg.completed.length / total * 100);
+      const fill = item.querySelector('.progress-fill');
+      item.querySelector('.progress-percent').textContent = percent + '%';
+      fill.style.width = percent + '%';
+      if (cfg.label === 'learning') {
+        if (percent < 30)      fill.style.background = 'linear-gradient(90deg,#e74c3c,#c0392b)';
+        else if (percent < 60) fill.style.background = 'linear-gradient(90deg,#ff7e5f,#feb47b)';
+        else if (percent < 80) fill.style.background = 'linear-gradient(90deg,#7ed56f,#5cb85c)';
+        else                   fill.style.background = 'linear-gradient(90deg,#3f9c35,#2c7a21)';
+      }
+      else if (cfg.label === 'project') fill.style.background = 'linear-gradient(90deg,#3a7bd5,#00c6ff)';
+      else if (cfg.label === 'keepfit') fill.style.background = 'linear-gradient(90deg,#56ab2f,#a8e063)';
+    }
+
+    function openModal(cfg) {
+      const m = document.getElementById('progressModal');
+      document.getElementById('modalTitle').textContent     = `${cfg.name} 进度详情`;
+      document.getElementById('completedCount').textContent = cfg.completed.length;
+      document.getElementById('pendingCount').textContent   = cfg.pending.length;
+      const cl = document.getElementById('completedList'),
+            pl = document.getElementById('pendingList');
+      cl.innerHTML = ''; pl.innerHTML = '';
+      cfg.completed.forEach(t => { const li = document.createElement('li'); li.textContent = t; cl.appendChild(li); });
+      cfg.pending  .forEach(t => { const li = document.createElement('li'); li.textContent = t; pl.appendChild(li); });
+      m.style.display = 'block';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('tracker-container');
+      document.querySelector('.modal .close').onclick = () => document.getElementById('progressModal').style.display = 'none';
+      window.onclick = e => { if (e.target.id === 'progressModal') e.target.style.display = 'none'; };
+
+      topics.forEach(t => {
+        const sec = createTopicSection(t);
+        container.appendChild(sec);
+        const prog = document.getElementById(`${t.id}-progress`);
+        t.bars.forEach(bar => {
+          const item = createProgressItem(t.id, bar);
+          prog.appendChild(item);
+          updateProgress(item, bar);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
