@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱情评估问卷</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1rem;
+      max-width: 600px;
+      margin: auto;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+    }
+    .question {
+      margin-bottom: 1rem;
+    }
+    .option-label {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+    .option-label input[type="radio"] {
+      margin-right: 0.75rem;
+      transform: scale(1.5);
+    }
+    .result {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #e0f7fa;
+      border-radius: 8px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>爱情评估问卷</h1>
+  <p style="text-align:center; font-size: 0.95rem; color: #666; margin-bottom: 1.5rem;">
+    请根据你的真实感受，为每道题打分（1 = 完全不同意，5 = 非常同意）。
+  </p>
+  <form id="quizForm">
+    <div id="questions"></div>
+    <button type="submit">提交并查看结果</button>
+  </form>
+  <div id="result" class="result" style="display: none;"></div>
+
+  <script>
+    const categories = ['激情', '亲密', '承诺'];
+    const questions = [
+      '我仍然渴望与对方亲密接触。',
+      '和对方在一起时，我会感到心动或兴奋。',
+      '我很在意对方的外貌或魅力。',
+      '和对方亲吻、拥抱或发生关系时，我感到满足和愉悦。',
+      '想到对方与别人亲密，我会感到吃醋或难过。',
+      '我觉得可以完全信任对方。',
+      '我和对方可以毫无保留地交谈心事。',
+      '我和对方之间有很深的情感联系。',
+      '即使不说话，和对方在一起我也会感到安心。',
+      '对方懂我，我也懂他/她。',
+      '我愿意为维持这段关系付出努力。',
+      '即使遇到困难，我也不会轻易放弃这段感情。',
+      '我已经决定与对方长期在一起。',
+      '我把未来的计划中包含了对方。',
+      '我和对方有共同的责任感和承诺感。'
+    ];
+
+    const questionContainer = document.getElementById('questions');
+    questions.forEach((q, i) => {
+      const div = document.createElement('div');
+      div.className = 'question';
+      let example = '';
+      switch(i) {
+        case 0: example = '例如：当你下班回家看到对方，会本能地想亲近、依偎或拥抱。'; break;
+        case 1: example = '例如：一起旅行、共度晚餐时，会有一种兴奋、期待和愉快的情绪波动。'; break;
+        case 2: example = '例如：你会注意对方是否有精神、衣着是否得体，并为其吸引力而感到欣赏。'; break;
+        case 3: example = '例如：一次深情的亲吻或拥抱，会让你感到安心、被爱和满足。'; break;
+        case 4: example = '例如：看到对方和异性朋友过于亲密时，你会有些不安，甚至感到焦虑或吃醋。'; break;
+        case 5: example = '例如：你愿意告诉对方你的脆弱、失败、甚至童年不堪的经历，因为你相信他/她不会嘲笑或伤害你。'; break;
+        case 6: example = '例如：情绪低落时，你第一个想找的人就是对方，希望获得安慰或建议。'; break;
+        case 7: example = '例如：你们一起经历过艰难时期，比如失业、生病或家庭冲突，彼此之间建立了很深的依赖与理解。'; break;
+        case 8: example = '例如：哪怕你们坐在公园长椅上一言不发，也不会觉得尴尬或无聊。'; break;
+        case 9: example = '例如：你一个眼神、一个小动作，对方就能察觉到你的情绪变化，并给予回应。'; break;
+        case 10: example = '例如：当关系遇到问题时，你愿意去看书、看心理节目、甚至寻求咨询来改善彼此关系。'; break;
+        case 11: example = '例如：就算吵架，你也不愿冷战太久，总会找机会重建对话，避免伤害加深。'; break;
+        case 12: example = '例如：你思考未来生活时，会自然地将对方纳入你的规划，比如搬家、换工作或定居城市。'; break;
+        case 13: example = '例如：你会主动谈论你们五年后在哪里、有没有孩子、是否一起旅行或买房。'; break;
+        case 14: example = '例如：面对工作变动或家庭大事时，你们会一起坐下来分析情况，分担压力，作出决定。'; break;
+      }
+      div.innerHTML = `<label><strong>${i + 1}. ${q}</strong></label><div style="font-size: 0.9rem; color: #555; margin-bottom: 0.5rem;">${example}</div>`;
+      for (let j = 1; j <= 5; j++) {
+        const optionId = `q${i}_${j}`;
+        div.innerHTML += `
+          <label class="option-label" for="${optionId}">
+            <input type="radio" name="q${i}" id="${optionId}" value="${j}" required>
+            ${j}
+          </label>`;
+      }
+      questionContainer.appendChild(div);
+    });
+
+    document.getElementById('quizForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      function getTips(p, i, c) {
+        const tips = [];
+        if (p < 11) tips.push('尝试恢复一些浪漫与身体接触，比如约会、拥抱和表达欣赏。');
+        if (i < 11) tips.push('多交流、多倾听，重建你们的情感链接。');
+        if (c < 11) tips.push('共同讨论未来计划，重申彼此的承诺和信任。');
+        if (tips.length === 0) return '继续保持这段关系的良好状态，注意维持平衡和沟通。';
+        tips.forEach((tip, index) => {
+          if (tip.includes('浪漫')) tips[index] += ' 比如安排一次意外的小旅行，或者写一封情书。';
+          if (tip.includes('交流')) tips[index] += ' 尝试每天花15分钟互相说说心里话，不被打断。';
+          if (tip.includes('未来计划')) tips[index] += ' 比如一起制定下个月的目标或做一次愿望清单。';
+        });
+        return tips.join(' ');
+      }
+      e.preventDefault();
+      const formData = new FormData(this);
+      let passion = 0, intimacy = 0, commitment = 0;
+
+      for (let i = 0; i < 15; i++) {
+        const val = parseInt(formData.get(`q${i}`), 10);
+        if (i < 5) passion += val;
+        else if (i < 10) intimacy += val;
+        else commitment += val;
+      }
+
+      const interpret = (score) => {
+        if (score >= 21) return '非常强烈';
+        if (score >= 16) return '较强';
+        if (score >= 11) return '一般';
+        if (score >= 6) return '较弱';
+        return '几乎不存在';
+      };
+
+      const resultText = `
+        <strong>评分结果：</strong><br>
+        激情：${passion} (${interpret(passion)})<br>
+        亲密：${intimacy} (${interpret(intimacy)})<br>
+        承诺：${commitment} (${interpret(commitment)})<br><br>
+      `;
+
+      let conclusion = '';$1
+      let conclusionDetail = '';
+      if (passion >= 16 && intimacy >= 16 && commitment >= 16) {
+        conclusion = '你们的爱情基础非常牢固。';
+        conclusionDetail = '如同斯滕伯格所说，爱情的三角形中如果三边均衡且充实，关系便能够稳定而幸福。你们在激情、亲密与承诺三个维度上都表现良好，代表你们不仅情感深厚，还有身体吸引力与长期规划。';
+      } else if (commitment >= 16 && passion < 11 && intimacy < 11) {
+        conclusion = '你们可能只是“习惯性维持”，感情逐渐淡化。';
+        conclusionDetail = '根据心理学家约翰·戈特曼的研究，若日常交流缺乏积极情绪，关系可能沦为“功能性关系”而非真正的爱情。高承诺分说明你们有责任感，但缺乏激情和亲密可能会让关系缺乏活力。';
+      } else if (intimacy >= 16 && passion < 11 && commitment < 11) {
+        conclusion = '你们更像亲人或朋友，缺乏激情与承诺。';
+        conclusionDetail = '这种关系常见于“柏拉图式”爱情或长时间未沟通的情侣之间。虽能互相理解，但若缺乏情感表达和共同目标，也容易造成疏远。';
+      } else if (passion >= 16 && intimacy < 11 && commitment < 11) {
+        conclusion = '可能只是短暂的迷恋或身体吸引。';
+        conclusionDetail = '如心理学家赫伦·费舍尔所指出，迷恋阶段通常伴随高多巴胺分泌，会使我们忽略对方缺点，但若没有建立深层链接，关系难以持久。';
+      } else if (passion < 6 && intimacy < 6 && commitment < 6) {
+        conclusion = '这段关系中的爱情可能已经消失。';
+        conclusionDetail = '可能源于长期的忽视、冲突未处理，或是生活重心的转移。需要认真对话，决定是修复还是放手。';
+      } else {
+        conclusion = '这段关系中有值得挽回和提升的空间。';
+        conclusionDetail = '存在某些维度的不足，但同时也说明并非毫无基础。积极沟通和改变，有望修复关系。';
+      }
+      document.getElementById('result').innerHTML = resultText + `<strong>结论：</strong> ${conclusion}<br>${conclusionDetail}<br><br><em>建议：</em> ${getTips(passion, intimacy, commitment)}`;
+    });
+  </script>
+</body>
+</html>
