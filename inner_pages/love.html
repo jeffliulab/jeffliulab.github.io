@@ -181,6 +181,7 @@
         conclusionDetail = '存在某些维度的不足，但同时也说明并非毫无基础。积极沟通和改变，有望修复关系。';
       }
       document.getElementById('result').innerHTML = resultText + `<strong>结论：</strong> ${conclusion}<br>${conclusionDetail}<br><br><em>建议：</em> ${getTips(passion, intimacy, commitment)}`;
+      document.getElementById('result').style.display = 'block';
     });
   </script>
 </body>
