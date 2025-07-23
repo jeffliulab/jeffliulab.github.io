@@ -1,0 +1,962 @@
+<!DOCTYPE HTML>
+<!--
+	Strata by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+
+<html>
+	<head>
+		<title>Jeff Liu - Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/notebook.css">
+
+
+		<!-- 在这里添加新的样式 -->
+		<style>
+			.hover-dim {
+				opacity: 1;
+				transition: opacity 0.2s ease-in-out;
+			}
+	
+			.hover-dim:hover {
+				opacity: 0.65;
+			}
+		</style>
+
+		<!-- PDF弹窗效果1/2：Modal PDF Viewer 样式 -->
+		<style>
+			.modal-overlay {
+			display: none;
+			position: fixed; top:0; left:0;
+			width:100%; height:100%;
+			background: rgba(0,0,0,0.7);
+			justify-content:center; align-items:center;
+			z-index:10000;
+			}
+			.modal-content {
+			position: relative;
+			width:90%; height:90%;
+			background:#fff;
+			border-radius:4px;
+			box-shadow:0 4px 15px rgba(0,0,0,0.3);
+			overflow:hidden;
+			}
+			.modal-content.fullscreen {
+			width:100%; height:100%; border-radius:0;
+			}
+			.modal-content iframe {
+			width:100%; height:100%; border:none;
+			}
+			.modal-close, .modal-fullscreen {
+			position:absolute; top:10px;
+			background:#fff; border:none;
+			padding:4px 8px; cursor:pointer;
+			box-shadow:0 1px 3px rgba(0,0,0,0.4);
+			}
+			.modal-close { right:10px; }
+			.modal-fullscreen { right:50px; }
+		</style>
+		<!-- PDF弹窗效果1/2：Modal PDF Viewer 样式 END-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Header (Reference from bar_header) -->
+		<header id="header">
+		<div id="header-placeholder"></div>
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				fetch("/bar_header.html")
+					.then(response => response.text())
+					.then(data => {
+						document.getElementById("header-placeholder").innerHTML = data;
+					})
+					.catch(error => console.error("Error loading header:", error));
+			});
+		</script>
+		</header>
+
+
+
+
+		
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- One -->
+					<section id="one">
+
+
+
+
+
+
+
+						<header class="major">
+							<h2>About Me</h2>
+						</header>
+						<p>
+
+
+			<!-- ABOUT ME部分的介绍内容  -->
+			<div style="font-family: Arial, sans-serif; font-size: 1em; line-height: 1.6; color: #666666;">
+				Hi there! I'm Jeff Liu. After 3 years of work, I decided go back to school and embrace my passion on Computer Science.
+				Now I am pursuing Master's degree in CS at Tufts, a very nice school. 
+
+				<br><br>I have a dream that one day, automated robots will handle all repetitive tasks, 
+				making the work much easier and allowing people have more time to relax!
+				And I can't wait to see the digimon came alive in this fantastic era! 
+				<br><br>
+				
+				My interests include:
+				<br>&bull;&nbsp;&nbsp; Theory Topics: Machine Learning, Reinforcement Learning, Quantitative Economics
+				<br>&bull;&nbsp;&nbsp; Applications: AI Applications and Model Deployment
+				<br>&bull;&nbsp;&nbsp; Social Justice: AI Ethics, Income Equality in AI Era
+				<br><br>
+
+				Currently focus on two projects:
+				<br>&bull;&nbsp;&nbsp; <a href="https://github.com/LogicGate-AI-Lab/AI_Financial_Advisor" target="_blank">AI Financial Agent</a>
+				<br>&bull;&nbsp;&nbsp; <a href="https://github.com/jeffliulab/ALICE_PROJECT" target="_blank">A.L.I.C.E. Project</a>
+
+			</div>
+							
+
+							<br>
+							
+							
+			<!-- <div>
+				<ul class="actions">
+				<li><a href="resume.html" class="button">FULL PROJECTS</a></li>
+				<li><a href="pages/My_Journey.html" class="button">FULL RESEARCH NOTES</a></li>
+				</ul>
+			</div> -->
+		<div>
+				<ul class="actions">
+					<li><a href="#projects" class="button">View Projects</a></li>
+					<li><a href="#research-notes" class="button">Research Notes</a></li>
+					<li><a href="#skills" class="button">Study Notes</a></li>
+				</ul>
+			</div>
+						
+	
+
+					</section>
+
+
+
+					
+<!-- Section: Projects-->
+<section id="projects">
+	<header class="major">
+		<h2>Projects</h2>
+		<!--<h3>Note: Click thumb to see the demo. Click [->Github] to see the source codes.</h3>-->
+	</header>
+	<div class="row">
+
+
+
+
+
+
+
+<!-- Project: Color Calibration -->
+<article class="col-6 col-12-xsmall">
+	<!-- <a href="/project_pages/color_calibration/color_calibration.html" class="image fit thumb">
+		<img src="/project_pages/color_calibration/thumb2.png" alt="" />
+	</a> -->
+	<a href="https://github.com/jeffliulab/Color_Calibration" class="image fit thumb">
+		<img src="/project_pages/color_calibration/pipeline.png" alt="" />
+	</a>
+	<h3>Color Calibration</h3>
+	<div> 
+		A light condition adaptive color calibration project with full MLOps process.		
+		<a href="https://jeffliulab.github.io/real_time_demo/color_calibration/index.html" target="_blank">&nbsp;[->Deployed Model Link]</a>
+		The system is designed to recognize the color in any light conditions, with a high robust.
+		Use different models to evaluate validation.
+		<br>
+		<a href="https://github.com/jeffliulab/Color_Calibration" target="_blank">&nbsp;[->GitHub: Codes and MLOps Pipeline]</a>
+	</div>
+	<code><font color="Brown">MLOps</font></code>
+	<code><font color="Brown">ML</font></code>
+	<code><font color="Brown">ETL</font></code>
+	<code><font color="Brown">ETV</font></code>
+	<code><font color="Brown">MTL</font></code>
+	<code><font color="Brown">MRD</font></code>
+	<code><font color="Brown">RandomForest</font></code>
+	<code><font color="Brown">GBT</font></code><br>
+	<code><font color="Brown">small neural network</font></code>
+	<div>&nbsp;</div>
+</article>
+
+
+<!-- Open Cleaning Robot / Clean Robot -->
+<article class="col-6 col-12-xsmall">
+	<a href="/project_pages/smart_cleaning_robot/smart_cleaning_robot.html" class="image fit thumb">
+		<img src="/project_pages/smart_cleaning_robot/thumb.png" alt="" />
+	</a>
+	<h3>Multi-Functional Cleaning Robot</h3>
+	<div>This project has launched both in software and hardware fronts.&nbsp;
+		I build a turtlebot3 robot, with functions
+		I am developing a smart cleaning robot with frontier-based exploration, path planning, route following and voice control.
+		<a href="https://github.com/jeffliulab/SmartCleaningRobot" target="_blank">[->GitHub]</a>
+	</div>
+	<code><font color="Brown">Map Processing</font></code>
+	<code><font color="Brown">Path Planning</font></code>
+	<br>
+	<code><font color="Brown">GUI Control</font></code>							
+	<code><font color="Brown">Voice Control</font></code>
+	<div>&nbsp;</div>
+</article>
+
+
+<!-- Project: Reinforcement Learning Brick -->
+<article class="col-6 col-12-xsmall">
+	<a href="/project_pages/rl_brick/brick.html" class="image fit thumb">
+		<img src="/project_pages/rl_brick/brick.gif" alt="" />
+	</a>
+	<h3>Value-based Reinforcement Learning Methods on Breakout Game</h3>
+	<div>
+		Explore designing and implementing value-based methods on breakout game.
+		<a href="https://github.com/jeffliulab/rl_brick_game" target="_blank">[->GitHub]</a>
+	</div>
+	<code><font color="Brown">Q-learning</font></code>
+	<code><font color="Brown">DQN</font></code>
+	<code><font color="Brown">RL</font></code>
+	<code><font color="Brown">CUDA</font></code>
+	
+	<!--Just to make a gap between different projects parts-->
+	<div>&nbsp;</div>
+</article>
+
+
+
+
+<!-- Embedded System Course Final: IoT Platform -->
+<article class="col-6 col-12-xsmall">
+	<a href="javascript:void(0);"
+		 onclick="openPdfModal('/project_pages/COLLABORATE_PROJECTS/Smart_IoT_Platform.pdf')" class="image fit thumb">
+		 <img src="/project_pages/COLLABORATE_PROJECTS/thumb.png" alt="" />
+	  </a>
+	<h3><span style="color:steelblue;">
+		IoT Platform (Collaborated Project)</span></h3>
+	<div>
+		This project builds a scalable IoT platform for real-time monitoring and control of diverse devices. Using MQTT and a Raspberry Pi hub, it supports remote setup, data display, and rule-based automation.
+		<span style="color: SteelBlue;">
+			With contributions from 
+			<a href="https://www.linkedin.com/in/abyiber/" target="_blank" style="color: SteelBlue;">Aby Iberkleid</a>, 
+			<a href="https://www.linkedin.com/in/james-p-30bb7a132/" target="_blank" style="color: SteelBlue;">James Petullo</a>, and 
+			<a href="https://www.linkedin.com/in/shubham-sudo/" target="_blank" style="color: SteelBlue;">Shubham Kaushik</a>.
+		</span>
+	</div>
+	<code><font color="Brown">MQTT</font></code>
+	<code><font color="Brown">ROS</font></code>
+	<code><font color="Brown">React</font></code>							
+	<code><font color="Brown">Edge AI</font></code>
+	<div>&nbsp;</div>
+</article>
+
+
+
+
+<!-- Project: Smart Glove (Robot Arm Control) --> <!-- style悬停特效 + 弹出窗口特效 -->
+<article class="col-6 col-12-xsmall">
+	<a href="#" class="image fit thumb" onclick="openVideoModal('yzfBem-gO0Q'); return false;" 
+style="position: relative; display: block; padding-bottom: 56.25%; overflow: hidden; background: #000;">
+	<img src="/project_pages/embedded/smart_glove/smart_glove_robot_arm.png" 
+		alt="Fiducials Detection Demo" 
+		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s ease-in-out;" 
+		class="hover-dim" />
+	</a>
+	<h3>Smart Glove which can control Robot Arm</h3>
+	<div>
+		An AI-powered and raspberrypi-pico based smart glove that can control the robot arm.
+		<a href="https://github.com/jeffliulab/SmartGlove" target="_blank">[->GitHub]</a>
+	</div>
+	<code><font color="Brown">Embedded Development</font></code>
+	<br>
+	<code><font color="Brown">Gesture Recognition</font></code>
+	<div>&nbsp;</div>
+</article>
+
+
+<!-- Project: AI Agent for Sepsis --> <!-- style悬停特效 + 弹出窗口特效 -->
+<article class="col-6 col-12-xsmall">
+	<a href="#" class="image fit thumb" onclick="openVideoModal('_B7MiawMT4U'); return false;" 
+style="position: relative; display: block; padding-bottom: 56.25%; overflow: hidden; background: #000;">
+	<img src="/project_pages/AgentKit/cover.png" 
+		alt="Fiducials Detection Demo" 
+		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s ease-in-out;" 
+		class="hover-dim" />
+	</a>
+	<h3>AI Agent on Sepsis Task</h3>
+	<div> 
+		An AI Agent framework, desgined for seamless extension into domain-specific fields like Finance and Healthcare.
+		See whole report in Research Notes section.
+		<br>
+		<a href="https://github.com/LogicGate-AI-Lab/AgentKit" target="_blank">&nbsp;[->GitHub]</a>
+	</div>
+	<code><font color="Brown">AI Agent</font></code>
+	<code><font color="Brown">AI Infra</font></code>
+	<code><font color="Brown">RAG</font></code>
+	<br>
+	<code><font color="Brown">Tool-augmented Reasoning</font></code>
+	<br>
+	<code><font color="Brown">Prompt Engineering</font></code>
+	<div>&nbsp;</div>
+</article>
+
+
+<!-- Project: Reinforcement Learning Walker2d -->
+<article class="col-6 col-12-xsmall">
+	<a href="/project_pages/walker2d/walker2d.html" class="image fit thumb">
+		<img src="/project_pages/walker2d/thumb.gif" alt="" />
+	</a>
+	<h3>Policy-based Reinforcement Learning Methods on Walker2d task</h3>
+	<div>
+		Explore designing and implementing policy-based methods on walker2d task.
+		<a href="https://github.com/jeffliulab/walker2d" target="_blank">[->GitHub]</a>
+	</div>
+	<code><font color="Brown">Policy-Gradient Control</font></code>
+	<br>
+	<code><font color="Brown">Actor-Critic</font></code>
+	<code><font color="Brown">PPO</font></code>
+	<code><font color="Brown">RL</font></code>			
+	<!--Just to make a gap between different projects parts-->
+	<div>&nbsp;</div>
+</article>
+
+
+
+<!-- Project: Follow the Line -->
+<article class="col-6 col-12-xsmall">
+
+	<a href="/project_pages/line_follower/line_follower.html" class="image fit thumb">
+		<img src="/images/gif_images/line_follower.gif" alt="" />
+	</a>
+
+	<h3>Following Line with Color-based Centroid Detection</h3>
+	<div>This program can allow robot following a line and avoid obstacles.&nbsp;
+			The following logic is based on color and centroid detection.
+			<a href="https://github.com/jeffliulab/brandeis_robot_lab_turtlebot3_project_codes/tree/main/2_FollowingLine" target="_blank">[->GitHub]</a>
+
+	</div>
+	<code><font color="Brown">ROS1</font></code>
+	<code><font color="Brown">OpenCV</font></code>
+	<code><font color="Brown">PID Control</font></code>
+
+
+	<div>&nbsp;</div>
+
+</article>
+
+
+
+
+
+
+
+
+<!-- Project: Escape the Maze with Left Wall Following -->
+<article class="col-6 col-12-xsmall">
+	<a href="project_pages/brandeis_follow_wall.html" class="image fit thumb"
+		style="position: relative; display: block; padding-bottom: 56.25%; overflow: hidden; background: #000;">
+		<img src="project_pages/small_projects/left_wall_follower/thumb.gif" 
+			alt="Escape the Maze with Left Wall Following" 
+			style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s ease-in-out;" 
+			class="hover-dim" />
+	</a>
+	<h3>Escape the Maze with Left Wall Following</h3>
+	<div>
+		This is my first project and designed at Brandeis Robotics lab.&nbsp;
+		This project is to escape the maze with left wall following algorithm.
+		<a href="https://github.com/jeffliulab/brandeis_robot_lab_turtlebot3_project_codes/tree/main/1_EscapeMaze" target="_blank">[->GitHub]</a>
+	</div>
+	<code><font color="Brown">ROS1</font></code>
+	<code><font color="Brown">Linux</font></code>
+	<code><font color="Brown">LiDAR</font></code>
+	<div>&nbsp;</div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Black Jack -->
+<article class="col-6 col-12-xsmall">
+	<a href="/project_pages/small_projects/blackjack/blackjack.html" class="image fit thumb">
+		<img src="/project_pages/small_projects/blackjack/thumb.png" alt="" />
+	</a>
+
+	<h3>Solve Blackjack - Monte Carlo ES</h3>
+	<div>
+		The game blackjack was simulated 2 million times using the Monte Carlo ES method and converged to the optimal solution.
+		<a href="https://github.com/jeffliulab/RL_Projects" target="_blank">[->GitHub]</a>
+	</div>
+	
+	<code><font color="Brown">Reinforcement Learning</font></code>
+	<br>
+	<code><font color="Brown">Monte Carlo ES</font></code>
+	<div>&nbsp;</div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Project: Fiducials --> <!-- style悬停特效 + 弹出窗口特效 -->
+<article class="col-6 col-12-xsmall">
+	<a href="#" class="image fit thumb" onclick="openVideoModal('AX3A4H8DhF4'); return false;" 
+style="position: relative; display: block; padding-bottom: 56.25%; overflow: hidden; background: #000;">
+	<img src="/project_pages/small_projects/fiducials/Fiducial.png" 
+		alt="Fiducials Detection Demo" 
+		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s ease-in-out;" 
+		class="hover-dim" />
+	</a>
+
+	<h3>Fiducials Detection</h3>
+	<div>
+		Implemented a real-time ArUco fiducial marker detection system using computer vision techniques. 
+		<a href="https://github.com/jeffliulab/brandeis_robot_lab_turtlebot3_project_codes/tree/main/3_Fiducials" target="_blank">[->GitHub]</a>
+
+	</div>
+	
+	<code><font color="Brown">Computer Vision</font></code>
+	<code><font color="Brown">ArUco Markers</font></code>
+	<code><font color="Brown">Fiducials</font></code>
+
+	
+	<div>&nbsp;</div>
+</article>
+
+
+
+
+
+
+<!-- Demo: WorkWithFarmerLouise Demo (Simple AI Agent Demo) --> <!-- style悬停特效 + 弹出窗口特效 -->
+<article class="col-6 col-12-xsmall">
+	<a href="#" class="image fit thumb" onclick="openVideoModal('RqKZmQSIQvk'); return false;" 
+style="position: relative; display: block; padding-bottom: 56.25%; overflow: hidden; background: #000;">
+	<img src="/project_pages/small_projects/simple_ai_agent/thumb.gif" 
+		alt="Simple AI Agent Demo" 
+		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s ease-in-out;" 
+		class="hover-dim" />
+	</a>
+
+	<h3>Intelligent NPC Demo</h3>
+	<div>
+	This is the prototype or demo of project "Work With Farmer Louise". 
+	The NPC know nothing at first, all skills need to be learned from player. 
+	<a href="https://github.com/jeffliulab/A_Simple_AI_Agent" target="_blank">[->GitHub]</a>
+	</div>
+
+	<code><font color="Brown">OpenAI API</font></code>
+	<code><font color="Brown">Prompt Engineering</font></code>
+	<code><font color="Brown">Pygame</font></code>
+
+	
+	<div>&nbsp;</div>
+</article>
+
+
+
+<!-- A Star Route Planner --> <!-- 自动适配窗口大小 --> 
+<article class="col-6 col-12-xsmall">
+	<!-- 取消了交互 -->
+	<!-- 用 div 替代 a，保持非交互性 -->
+	<div class="image fit thumb" 
+		style="position: relative; display: block; padding-bottom: 56.25%; overflow: hidden; background: #000;">
+		
+		<!-- 去掉 hover-dim 类 -->
+		<img src="/project_pages/small_projects/a_star/demo.png" 
+			alt="A Star Demo" 
+			style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" />
+	</div>
+
+	<h3>A* Route Planner</h3>
+	<div> Use open source map to implement A* route plan.&nbsp;
+		The start position is Tufts University,&nbsp;
+		and the end point is in a park near Mystic River.&nbsp;
+		No Demo, See Source Codes:
+		<a href="https://github.com/jeffliulab/OSM_Map_AStar" target="_blank">&nbsp;[->GitHub]</a>
+	</div>
+	<code><font color="Brown">OSM</font></code>
+	<code><font color="Brown">C++</font></code>
+	<code><font color="Brown">A*</font></code>
+
+	<div>&nbsp;</div>
+</article>
+
+
+
+<!--/* Project: Ichiban Lottery */-->
+<article class="col-6 col-12-xsmall">
+	<a href="project_pages/tianyuan_ichiban/ichiban.html" class="image fit thumb"><img src="images/thumbs/ichiban_lottery.png" alt="" /></a>
+	<h3><span style="color: ForestGreen;">Ichiban Lottery (Commercial Project)</span></h3>
+	<p>
+		The Tianyuan Ichiban Lottery is a WeChat Mini Program offering anime figure lottery products via a digital platform system. 
+		Deployed in real market and attracted real users, the program generated
+		<span style="color: ForestGreen; font-weight: bold;">over $15,000 in revenue.</span>
+		
+	</p>
+	
+	
+
+</article>
+
+
+</div>
+
+
+
+<!-- 这个是预留的按钮，如果首页只展示部分内容，可以用这个按钮转移到全部作品
+<div>&nbsp;</div> 
+<ul class="actions">
+<li><a href="#" class="button">Full Portfolio</a></li>
+</ul>
+-->
+
+</section>
+<!-- Section Two: Projects --- Ends Here-->
+<!-------------------------->
+
+
+
+
+
+
+
+
+
+
+<!-- Section Three: Research Notes -->
+<section id="research-notes">
+	<header class="major">
+		<h2>Research Notes</h2>
+	</header>
+	
+	<div class="research-list">
+		<ul>
+
+
+<!-- MODIFY ARTICLES BELOW --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES BELOW --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES BELOW --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES BELOW --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES BELOW --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES BELOW --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES BELOW --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES BELOW --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES BELOW --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES BELOW --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES BELOW --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES BELOW --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES BELOW --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES BELOW --------------------------------------------------------------------->
+
+
+
+<li>
+	<h3>
+	  <a href="javascript:void(0);"
+		 onclick="openPdfModal('/research_notes/pdf/2025_05_06_rl_breakout.pdf')">
+		 From Simplified to Complete Atari Breakout: A Practical Implementation with Q-Learning and Deep Q-Networks
+	  </a>
+	</h3>
+	<p>
+		This report applies Q-learning and DQN to Atari game Breakout (Gymnasium v5) using PyTorch, serving as an educational resource.
+		(2025-05-06)
+	</p>
+</li>
+
+
+<li>
+	<h3>
+	  <a href="javascript:void(0);"
+		 onclick="openPdfModal('/research_notes/pdf/2025_05_02_AI_Agent_On_Sepsis_Task.pdf')">
+		 AI Agent on Sepsis Task
+	  </a>
+	</h3>
+	<p>
+		This report discusses how to use an AI Agent to finish a medical sepsis task and discussed the design of a simple AI agent.
+		(2025-05-02)
+	</p>
+</li>
+
+
+<li>
+	<h3>
+	  <a href="javascript:void(0);"
+		 onclick="openPdfModal('/research_notes/pdf/2025_03_14_color_calibration.pdf')">
+		 Color Calibration with Machine Learning Methods
+	</a>
+	</h3>
+	<p>
+		This study uses ML tools to develop and validate a robust color calibration model that achieves precise color reproduction in a real-time MLOps system.
+		(2025-03-14)
+	</p>
+</li>
+  
+  
+
+
+<li>
+	<h3>
+		<a href="./research_notes/research_note.html?md=notes2/3_MonteCarlo_OffPolicy/Racetrack_Solution_Monte_Carlo_Control.md">Off Policy Monte Carlo Control Application in Racetrack</a>
+	</h3>
+	<p>
+		The study demonstrates how off-policy Monte Carlo control can learn an optimal racetrack policy and compares it with Monte Carlo methods in Blackjack.
+	</p>
+</li>
+
+
+<li>
+	<h3><a href="./research_notes/research_note.html?md=notes2/1_Nonstational_Bandit/nonstational.md">Evaluating Q-Estimates in Nonstationary Bandit Environments</a></h3>
+	<p>
+		This is a tiny-research that compares constant step-size method and sample-average method in nonstationary bandit problem.
+	</p>
+</li>
+
+<li>
+	<h3><a href="./research_notes/research_note.html?md=notes/10_arm_bandit_epsilon/10_arm_bandit_epsilon.md">Explore Best ε for 10-armed Bandit Problems</a></h3>
+	<p>
+		This is a tiny-research that setting up a ten-armed bandit experiment and explore how different ε behave.
+	</p>
+</li>
+
+<li>
+	<h3><a href="research_notes/research_note.html?md=notes/centroid_based_line_following/centroid_based_line_following.md">Centroid Based Line Following</a></h3>
+	<p>
+		This is a tiny-research that extracting colors in HSV format and mark the centroid to achieve single color line following.
+	</p>
+</li>
+
+<li>
+	<h3>
+	  <a href="javascript:void(0);"
+		 onclick="openPdfModal('/research_notes/pdf/2024_10_27_Escape_Maze.pdf')">
+		 A Simple Maze Escape Solution
+	  </a>
+	</h3>
+	<p>
+		This is a tiny-research on maze escape solution.
+		(2024-10-27)
+	</p>
+</li>
+
+
+
+
+<!-- MODIFY ARTICLES ABOVE --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES ABOVE --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES ABOVE --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES ABOVE --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES ABOVE --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES ABOVE --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES ABOVE --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES ABOVE --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES ABOVE --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES ABOVE --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES ABOVE --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES ABOVE --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES ABOVE --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES ABOVE --------------------------------------------------------------------->
+<!-- MODIFY ARTICLES ABOVE --------------------------------------------------------------------->
+
+
+
+
+		</ul>
+	</div>
+
+</section>
+
+
+
+<!-- 笔记本风格 -->
+<section id="skills">
+	<header class="major">
+	  <h2>Study Notes</h2>
+	</header>
+	
+	<div class="notebook">
+	  <ul class="note-list">
+
+		<!-- 修改下面 -->
+
+
+		<li class="note-item">
+			<h3>&nbsp;</h3> <!-- 最上面一行留白 保持美观 -->
+		  <h3>A Roadmap of My Study Notes</h3>
+		  <p>
+			<a href="https://jeffliulab.github.io/algorithm-roadmap/">The roadmap of algorithms and data structures.</a>
+			>> This is a road map for my study notes, including data structures, algorithms, artificial intelligence, foundations of computer science.
+			<br>
+
+		  </p>
+		</li>
+
+		<li class="note-item">
+		  <h3>Algorithms, Leetcode and Inverviewing Notes</h3>
+		  <p>
+			<a href="https://jeffliulab.github.io/algorithm-notes">The algorithm and leetcode notes.</a>
+			>> This is the algorithms and leetcode studies notes. This is a practical notebook for industrial works.
+		  </p>
+		</li>
+
+
+		<li class="note-item">
+		  <h3>Reinforcement Learning (Chinese Ver.)</h3>
+		  <p>
+			<a href="https://jeffliulab.github.io/rl-notes">The study notes of Reinforcement Learning</a>
+			>> Mainly based on Sutton&Barto's textbook. This series is suitable for those who has limited background on CS and Mathmatics, but interested in RL and don't know how to learn it.
+		  </p>
+		</li>
+
+
+
+		<li class="note-item">
+		  <h3>Quantitative Economics Study Notes</h3>
+		  <p>
+			<a href="https://jeffliulab.github.io/qe-notes">The notes of Economics, especially Quantitative Economics.</a>
+			>> Focus on Macroeconomics, Quantitative Economics, and AI applications in economics.
+		  </p>
+		</li>
+  
+		<li class="note-item">
+		  <h3>Deep Learning (Chinese Ver.)</h3>
+		  <p>
+			<a href="https://jeffliulab.github.io/dl-notes">The study notes of Deep Learning</a>
+			>> Mainly based on Ian's textbook.
+		  </p>
+		</li>
+
+		<li class="note-item">
+		  <h3>The Golden Rules</h3>
+		  <p>
+			<a href="https://jeffliulab.github.io/golden-rules">The golden rules of one's life and living in current society.</a>
+			>> The Golden Rule encapsulates my entire worldview, value system, and philosophy of life. It reflects the ethical foundation upon which I live and act.
+		  </p>
+		</li>
+
+		<li class="note-item">
+		  <h3>Reading Notes</h3>
+		  <p>
+			<a href="https://jeffliulab.github.io/reading-notes">Reading notes of selected books.</a>
+			>> Economics Theory, Social Science, Psychology Studies. Explore more domains, instead of techniques only. I think the biggest chanllenge in the future is not the technique itself, but the ethics and social system which needs to be fit on AI ERA.
+		  </p>
+		</li>
+
+		<!-- 修改上面 -->
+  
+
+	  </ul>
+	</div>
+  </section>
+
+
+
+
+
+
+<!--------------------------------------------------------------------->
+<!--------------------------------------------------------------------->
+<!--------------------------------------------------------------------->
+<!-- 弹窗效果 --><!-- 弹窗效果 --><!-- 弹窗效果 --><!-- 弹窗效果 --><!-- 弹窗效果 -->
+<!-- Custom Modal -->
+<div id="customVideoModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000;">
+    <div style="position: relative; width: 90%; max-width: 800px; margin: 40px auto;">
+        <!-- Close button -->
+        <button onclick="closeVideoModal()" style="position: absolute; top: -30px; right: -30px; background: none; border: none; color: white; font-size: 24px; cursor: pointer; padding: 5px;">×</button>
+        
+        <!-- Video container with 16:9 aspect ratio -->
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+            <iframe id="youtubeIframe"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                    src=""
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+function openVideoModal(videoId) {  // 修改这里，接收 videoId 参数
+    const modal = document.getElementById('customVideoModal');
+    const iframe = document.getElementById('youtubeIframe');
+    
+    // Set YouTube video URL with autoplay
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;  // 使用传入的 videoId
+    
+    // Show modal
+    modal.style.display = 'block';
+    
+    // Add escape key listener
+    document.addEventListener('keydown', handleEscKey);
+    
+    // Add click outside listener
+    modal.addEventListener('click', handleOutsideClick);
+}
+
+// 其他函数保持不变
+function closeVideoModal() {
+    const modal = document.getElementById('customVideoModal');
+    const iframe = document.getElementById('youtubeIframe');
+    iframe.src = '';
+    modal.style.display = 'none';
+    document.removeEventListener('keydown', handleEscKey);
+    modal.removeEventListener('click', handleOutsideClick);
+}
+
+function handleEscKey(e) {
+    if (e.key === 'Escape') {
+        closeVideoModal();
+    }
+}
+
+function handleOutsideClick(e) {
+    if (e.target === document.getElementById('customVideoModal')) {
+        closeVideoModal();
+    }
+}
+</script>
+<!-- 弹窗效果 --><!-- 弹窗效果 --><!-- 弹窗效果 --><!-- 弹窗效果 --><!-- 弹窗效果 -->
+<!--------------------------------------------------------------------->
+<!--------------------------------------------------------------------->
+<!--------------------------------------------------------------------->
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<!-- Contact Reference from bar_contact -->
+					<section id="contact">
+						
+						<div id="contact-placeholder"></div>
+
+						<script>
+							document.addEventListener("DOMContentLoaded", function () {
+								fetch("/bar_contact.html")
+									.then(response => response.text())
+									.then(data => {
+										document.getElementById("contact-placeholder").innerHTML = data;
+									})
+									.catch(error => console.error("Error loading contact:", error));
+							});
+						</script>
+
+
+					</section>
+
+
+
+
+
+			</div>
+
+		<!-- Footer Reference from /bar_footer.html -->
+			<footer id="footer">
+				<div id="footer-placeholder"></div>
+				<script>
+					document.addEventListener("DOMContentLoaded", function () {
+						fetch("/bar_footer.html")
+							.then(response => response.text())
+							.then(data => {
+								document.getElementById("footer-placeholder").innerHTML = data;
+							})
+							.catch(error => console.error("Error loading header:", error));
+					});
+				</script>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.poptrox.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
+
+
+		<!-- PDF弹窗效果相关2/2：PDF Modal -->
+		<div id="pdfModal" class="modal-overlay">
+			<div class="modal-content" id="modalContent">
+			<button class="modal-close" onclick="closePdfModal()">×</button>
+			<button class="modal-fullscreen" onclick="toggleFullscreen()">⤢</button>
+			<iframe id="pdfFrame" src="" allowfullscreen></iframe>
+			</div>
+		</div>
+		
+		<script>
+			function openPdfModal(pdfUrl) {
+			document.getElementById('pdfFrame').src = pdfUrl + '#page=1';
+			document.getElementById('pdfModal').style.display = 'flex';
+			document.body.style.overflow = 'hidden';
+			}
+			function closePdfModal() {
+			document.getElementById('pdfFrame').src = '';
+			document.getElementById('pdfModal').style.display = 'none';
+			document.body.style.overflow = 'auto';
+			document.getElementById('modalContent').classList.remove('fullscreen');
+			}
+			function toggleFullscreen() {
+			document.getElementById('modalContent').classList.toggle('fullscreen');
+			}
+		</script>
+		<!-- PDF弹窗效果相关2/2：PDF Modal END-->
+  
+
+
+
+
+	</body>
+</html>

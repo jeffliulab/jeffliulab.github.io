@@ -1,0 +1,347 @@
+<!DOCTYPE HTML>
+<!--
+	Strata by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+
+<html>
+	<head>
+		<title>Jeff Liu - Resume</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!-- 新增：统一控制主要区块标题的线与样式 -->
+		<style>
+			/* 只为 #main 下的一级 section 的 h3 设置下划线、深色、加粗 */
+			#main section > h3 {
+				border-bottom: 2px solid #aaa; /* 浅灰色下划线 */
+				padding-bottom: 10px;
+				margin: 20px 0;
+				color: #111;               /* 更深的文字颜色 */
+				font-weight: bold;         /* 加粗 */
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header (Reference from bar_header) -->
+		<header id="header">
+			<div id="header-placeholder"></div>
+			<script>
+				document.addEventListener("DOMContentLoaded", function () {
+					fetch("/bar_header.html")
+						.then(response => response.text())
+						.then(data => {
+							document.getElementById("header-placeholder").innerHTML = data;
+						})
+						.catch(error => console.error("Error loading header:", error));
+				});
+			</script>
+		</header>
+
+		<!-- Main -->
+		<div id="main">
+
+			<!-- One -->
+			<section id="one">
+				<header class="major">
+					<h2>Resume/CV</h2>
+				</header>
+
+				<!-- Profile -->
+				<section>
+					<h3>Profile</h3>
+					<div style="font-family: Arial, sans-serif; font-size: 1.1em; line-height: 1.6; color: #333;">
+						<p>
+							M.S. CS candidate with 3 years of diverse working experience.<br>
+							Focus on AI application development. <br>
+							Specialization in Reinforcement Learning, Robotics, AI Agent.
+						</p>
+					</div>
+				</section>
+
+				<!-- Skills -->
+				<section>
+					<h3>Skills</h3>
+					<div style="font-family: Arial, sans-serif; font-size: 1.1em; line-height: 1.6; color: #333;">
+						<ul>
+							<li><strong>Programming Languages:</strong> Python, Java, C++, SQL, R, HTML</li>
+							<li><strong>Development Tools:</strong> Git/GitHub, Linux/Ubuntu, Bash, Shell, Unity, ROS, Gazebo</li>
+							<li><strong>Data Processing:</strong> OpenCV, Pandas, NumPy, Matplotlib</li>
+							<li><strong>Data Storage:</strong> DVC, PostgreSQL, MySQL, MariaDB, MongoDB</li>
+							<li><strong>ML/AI:</strong> PyTorch, Scikit-Learn, YOLOv8, Gymnasium, Stable Baselines3, OpenAI/Gemini API</li>
+							<li><strong>Cloud/Ops:</strong> MLflow, Kubernetes, FastAPI, Docker, Kubeflow, GCP, AWS, GitHub Actions</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- Education -->
+				<section id="education">
+					<style>
+						/* Education 区域通用样式 */
+						#education {
+							font-family: Arial, sans-serif;
+							color: #333;
+						}
+						/* 去掉内部各学位项的底部分隔线 */
+						.education-item {
+							display: flex;
+							justify-content: space-between;
+							align-items: flex-start;
+							padding-bottom: 10px;
+							margin-bottom: 20px;
+							border-bottom: none;
+						}
+						.education-details {
+							flex: 1;
+						}
+						.education-details strong {
+							font-size: 1.1em;
+						}
+						.education-details span {
+							color: #555;
+						}
+						.education-details ul {
+							margin: 10px 0 0 20px;
+							padding: 0;
+							list-style-type: disc;
+						}
+						.education-date {
+							white-space: nowrap;
+							margin-left: 20px;
+							font-style: italic;
+							color: #555;
+						}
+					</style>
+					
+					<h3>Education</h3>
+					
+					<div class="education-item">
+						<div class="education-details">
+							<strong>M.S. in Computer Science</strong><br>
+							<span>Tufts University</span>
+							<ul>
+								<li>Specialization: AI Application, Reinforcement Learning and Robotics</li>
+							</ul>
+						</div>
+						<div class="education-date">Expected May 2026</div>
+					</div>
+					
+					<div class="education-item">
+						<div class="education-details">
+							<strong>M.A. in Economics</strong><br>
+							<span>Boston University</span>
+							<ul>
+								<li>Specialization: Data Science, Quantitative Economics</li>
+							</ul>
+						</div>
+						<div class="education-date">Jan 2021</div>
+					</div>
+					
+					<!-- 					
+					<div class="education-item">
+						<div class="education-details">
+							<strong>B.B.A in Human Resources</strong><br>
+							<span>Jilin University</span>
+						</div>
+						<div class="education-date">June 2018</div>
+					</div> -->
+				</section>
+
+<!-- Industrial Experience -->
+<section>
+    <h3>Experience</h3>
+    <style>
+        .experience-item {
+            margin-bottom: 30px; /* 每个经历之间留些距离 */
+        }
+        .experience-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin: 0;
+            color: #333;
+        }
+        .experience-company {
+            font-size: 1.1em;
+            color: #555;
+            margin: 5px 0;  /* 与标题和时间间隔 */
+        }
+        .experience-time {
+            color: #777;
+            font-style: italic;
+            margin: 5px 0;
+        }
+    </style>
+
+    <!-- 第 6 个工作经历 -->
+    <div class="experience-item">
+        <h4 class="experience-title">AI Application Developer</h4>
+        <div class="experience-company">
+			<a href="https://github.com/LogicGate-AI-Lab">LogicGate AI Lab</a>
+		</div>
+        <div class="experience-time">June 2025 - Present | Remote</div>
+        <div style="font-family: Arial, sans-serif; font-size: 1.1em; line-height: 1.6; color: #333;">
+            <ul>
+				<li>Developing an AI Financial Advisor system.</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- 第 5 个工作经历 -->
+    <div class="experience-item">
+        <h4 class="experience-title">Developer</h4>
+        <div class="experience-company">
+			<a href="https://github.com/campusrover">Brandeis University Robotics Lab</a>
+		</div>
+        <div class="experience-time">Sep 2024 - May 2025 | Boston Area, MA</div>
+        <div style="font-family: Arial, sans-serif; font-size: 1.1em; line-height: 1.6; color: #333;">
+            <ul>
+                <li>Developed a <a href="https://github.com/jeffliulab/SmartCleaningRobot">smart cleaning robot</a> with fully self designed cleaning algorithms, achieve sim-to-real application with real-time control and visualization.</li>
+				<li>Developed a <a href="https://github.com/jeffliulab/SmartGlove">smart glove which can control the robot arm</a> and integrated in an IoT platform.</li>
+            </ul>
+        </div>
+    </div>
+
+</section>
+
+
+
+<!-- Early Experience -->
+<section>
+    <h3>Early Experience</h3>
+    <style>
+        .experience-item {
+            margin-bottom: 30px; /* 每个经历之间留些距离 */
+        }
+        .experience-title {
+            font-weight: bold;
+            font-size: 1.05em;
+            margin: 0;
+            color: #333;
+        }
+        .experience-company {
+            font-size: 1em;
+            color: #555;
+            margin: 5px 0;  /* 与标题和时间间隔 */
+        }
+        .experience-time {
+            color: #777;
+            font-style: italic;
+            margin: 5px 0;
+        }
+    </style>
+
+	<!-- 第 4 个工作经历 -->
+	<div class="experience-item">
+		<h4 class="experience-title">Co-Founder</h4>
+		<div class="experience-company">Shanghai LogicGate Educational Technology</div>
+		<div class="experience-time">2023 - 2024 | Shanghai, China</div>
+		<div style="font-family: Arial, sans-serif; font-size: 1.1em; line-height: 1.6; color: #333;">
+			<ul>
+				<li>Focused on AP CSA and AP Economics tutoring.</li>
+				<li>Approx. revenue: $60,000.</li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- 第 3 个工作经历 -->
+	<div class="experience-item">
+		<h4 class="experience-title">Co-Founder</h4>
+		<div class="experience-company">Shanghai Tian Yuan Xing Wei Technology</div>
+		<div class="experience-time">2022 - 2023 | Shanghai, China</div>
+		<div style="font-family: Arial, sans-serif; font-size: 1.1em; line-height: 1.6; color: #333;">
+			<ul>
+				<li>Launched an online lottery mini-program on the WeChat platform.</li>
+				<li>Approx. revenue: $15,000.</li>
+			</ul>
+		</div>
+	</div>
+
+
+    <!-- 第 2 个工作经历 -->
+    <div class="experience-item">
+        <h4 class="experience-title">Lecturer</h4>
+        <div class="experience-company">Shanghai Jian Qiao University</div>
+        <div class="experience-time">2022 - 2023 | Shanghai, China</div>
+        <div style="font-family: Arial, sans-serif; font-size: 1.1em; line-height: 1.6; color: #333;">
+            <ul>
+                <li>Lecturer at International Curriculum Center.</li>
+                <li>Teaching Courses: Principles of Economics, Foundations of Computer Science, Java Programming.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 第 1 个工作经历 -->
+    <div class="experience-item">
+        <h4 class="experience-title">Data Engineering</h4>
+        <div class="experience-company">Ping An International Financial Leasing Co Ltd</div>
+        <div class="experience-time">2021 - 2022 | Shanghai, China</div>
+        <div style="font-family: Arial, sans-serif; font-size: 1.1em; line-height: 1.6; color: #333;">
+            <ul>
+                <li>Focused on business data analysis, digital transformation initiatives, and facilitating cross-functional collaboration within Ping An's Car Finance Group.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+				<!-- Awards -->
+				<section>
+					<h3>Awards</h3>
+					<div style="font-family: Arial, sans-serif; font-size: 1.1em; line-height: 1.6; color: #333;">
+						<ul>
+							<li>2013 VEX Robotics World Championship Design Reward at California</li>
+							<li>2012 VEX Robotics National Competition Gold Medal at China</li>
+						</ul>
+					</div>
+				</section>
+				
+				<!-- Back to Homepage Button -->
+				<div style="margin-top: 30px;">
+					<a href="/index.html" class="button">Back to Homepage</a>
+				</div>
+			</section>
+
+			<!-- Contact Reference from bar_contact -->
+			<section id="five">
+				<div id="contact-placeholder"></div>
+				<script>
+					document.addEventListener("DOMContentLoaded", function () {
+						fetch("/bar_contact.html")
+							.then(response => response.text())
+							.then(data => {
+								document.getElementById("contact-placeholder").innerHTML = data;
+							})
+							.catch(error => console.error("Error loading contact:", error));
+					});
+				</script>
+			</section>
+		</div>
+
+		<!-- Footer Reference from /bar_footer.html -->
+		<footer id="footer">
+			<div id="footer-placeholder"></div>
+			<script>
+				document.addEventListener("DOMContentLoaded", function () {
+					fetch("/bar_footer.html")
+						.then(response => response.text())
+						.then(data => {
+							document.getElementById("footer-placeholder").innerHTML = data;
+						})
+						.catch(error => console.error("Error loading footer:", error));
+				});
+			</script>
+		</footer>
+
+		<!-- Scripts -->
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.poptrox.min.js"></script>
+		<script src="/assets/js/browser.min.js"></script>
+		<script src="/assets/js/breakpoints.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>
