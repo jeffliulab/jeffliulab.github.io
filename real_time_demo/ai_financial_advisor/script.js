@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- 【重要】请在这里配置你的后端API地址 ---
-    const BACKEND_API_URL = 'http://34.135.44.130:8000'; 
+    const BACKEND_API_URL = 'https://jeffliulab.com';
     
     // --- 获取DOM元素 ---
     const reportContentEl = document.getElementById('report-content');
