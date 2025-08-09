@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Agent</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 data-translate="title">News Agent</h1>
+            <div id="lang-switcher">
+                <button data-lang="en" class="active">English</button>
+                <button data-lang="cn">中文</button>
+            </div>
+            </header>
+
+        <div class="main-layout">
+            <main id="report-content">
+                <div class="loader"></div>
+                <p data-translate="loading_latest">正在加载最新报告...</p>
+            </main>
+
+            <aside id="sidebar">
+                <h2 data-translate="history_title">历史报告</h2>
+                <div id="sidebar-content">
+                    <p data-translate="loading_list">正在加载列表...</p>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
