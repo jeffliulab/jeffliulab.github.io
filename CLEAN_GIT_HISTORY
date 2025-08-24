@@ -1,0 +1,8 @@
+git fetch origin
+git checkout main
+git pull --ff-only
+git checkout --orphan clean-history
+git add -A 
+git commit -m "INIT"
+git branch -M main 
+git push --force --set-upstream origin main 
