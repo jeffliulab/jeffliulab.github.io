@@ -1,0 +1,249 @@
+/* 强化版自适应笔记本风格CSS */
+
+:root {
+  --line-height: 28px;        /* 每行高度 */
+  --paper-bg: #fdfdfb;        /* 纸张背景色 */
+  --line-color: #a8c4e5;      /* 线条颜色（浅蓝） */
+  --margin-color: #e75454;    /* 红边颜色 */
+  --text-color: #333;         /* 主文本颜色 */
+  --desc-color: #555;         /* 描述文本颜色 */
+  --hole-color: #333;         /* 孔洞颜色 */
+  --hole-size: 10px;          /* 孔洞直径 */
+  --hole-spacing: 160px;      /* 孔洞间距 */
+}
+
+/* 笔记本容器 */
+.notebook {
+  position: relative;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem 2rem 2rem 60px;  /* 左侧额外padding用于红边 */
+  background-color: var(--paper-bg);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-size: 16px; /* 基准字体大小 */
+}
+
+/* 纸张纹理叠加 */
+.notebook::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='2' cy='2' r='1' fill='%23000' fill-opacity='0.03'/%3E%3C/svg%3E");
+  z-index: 5;
+}
+
+/* 红色边线 */
+.notebook::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 40px;
+  width: 2px;
+  background-color: var(--margin-color);
+  z-index: 2;
+}
+
+/* 笔记列表容器 */
+.note-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  /* 确保内容从顶部横线开始 */
+  padding-top: 0;
+  /* 确保列表项对齐到网格 */
+  display: block;
+}
+
+/* 横线背景 - 覆盖整个笔记本 */
+.note-list::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60px; /* 向左延伸覆盖红边区域 */
+  right: -2rem;
+  bottom: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--line-height) - 1px),
+    var(--line-color) calc(var(--line-height) - 1px),
+    var(--line-color) var(--line-height)
+  );
+  background-size: 100% var(--line-height);
+  background-position: 0 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 左侧装订孔 */
+.note-list::after {
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: -40px;
+  width: var(--hole-size);
+  height: 100%;
+  z-index: 3;
+  background-image: radial-gradient(
+    circle at center,
+    var(--hole-color) 0,
+    var(--hole-color) calc(var(--hole-size) / 2),
+    transparent calc(var(--hole-size) / 2)
+  );
+  background-size: var(--hole-size) var(--hole-spacing);
+  background-repeat: repeat-y;
+  background-position: center top;
+}
+
+/* 单个笔记项目 - 确保完美对齐到行 */
+.note-item {
+  position: relative;
+  z-index: 4;
+  /* 将笔记项锁定到网格模式，确保完美对齐 */
+  display: block;
+  /* 确保每个笔记项之间有足够空间 */
+  margin-bottom: var(--line-height);
+  /* 防止内容溢出 */
+  overflow: visible;
+}
+
+/* 标题样式 - 确保对齐到网格线 */
+.note-item h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: var(--text-color);
+  /* 关键：精确设置行高和避免意外的字体大小继承 */
+  line-height: var(--line-height);
+  height: auto; /* 允许多行标题 */
+  /* 使用padding-top而非margin确保更精确的定位 */
+  padding-top: 0;
+  padding-bottom: 0;
+  /* 确保标题不打断网格对齐 */
+  position: relative;
+  z-index: 4;
+  /* 允许标题自然换行 */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* 标题链接样式 */
+.note-item h3 a {
+  color: var(--text-color);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(0,0,0,0.2);
+  transition: border-color .2s;
+}
+
+.note-item h3 a:hover {
+  border-color: rgba(0,0,0,0.5);
+}
+
+/* 描述文本样式 - 始终在标题的下一行开始 */
+.note-item p {
+  margin: 0;
+  padding: 0;
+  color: var(--desc-color);
+  font-size: 0.95rem;
+  /* 关键：精确设置行高 */
+  line-height: var(--line-height);
+  min-height: var(--line-height);
+  /* 重要：控制文本垂直对齐 */
+  position: relative;
+  z-index: 4;
+  /* 允许描述文本自然换行 */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* 确保最后一个笔记项也有足够的底部空间 */
+.note-list .note-item:last-child {
+  margin-bottom: var(--line-height);
+}
+
+/* 移动端适配 - 两种方案 */
+@media (max-width: 600px) {
+  /* 方案一：保持对齐方式，但简化布局 */
+  .notebook {
+    padding: 1.5rem 1rem 1.5rem 1rem;
+    font-size: 15px; /* 稍微调整基准字体大小 */
+  }
+  
+  /* 隐藏红边和孔洞 */
+  .notebook::before,
+  .note-list::after {
+    display: none;
+  }
+  
+  /* 调整横线位置 */
+  .note-list::before {
+    left: -1rem;
+    right: -1rem;
+  }
+  
+  /* 确保每个笔记项都完美对齐到行 */
+  .note-item {
+    margin-bottom: var(--line-height);
+    border-bottom: none; /* 移除额外的底部边框 */
+  }
+  
+  /* 标题样式保持与网格对齐 */
+  .note-item h3 {
+    line-height: var(--line-height);
+    font-size: 1.2rem; /* 稍微减小字体大小 */
+  }
+  
+  /* 描述文本也保持与网格对齐 */
+  .note-item p {
+    line-height: var(--line-height);
+    font-size: 0.9rem; /* 稍微减小字体大小 */
+  }
+  
+  /* 方案二：完全放弃线条对齐（默认禁用）
+  .note-list::before {
+    display: none;
+  }
+  
+  .note-item {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e6e6e6;
+  }
+  
+  .note-item h3 {
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+  }
+  
+  .note-item p {
+    line-height: 1.6;
+    min-height: unset;
+  }
+  */
+}
+
+/* 高DPI设备屏幕适配 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* 使线条更清晰 */
+  .note-list::before {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--line-height) - 0.5px),
+      var(--line-color) calc(var(--line-height) - 0.5px),
+      var(--line-color) var(--line-height)
+    );
+  }
+}

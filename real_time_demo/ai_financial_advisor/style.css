@@ -1,0 +1,252 @@
+/* style.css (完整最终版) */
+:root {
+    --primary-color: #007bff;
+    --border-color: #dee2e6;
+    --background-color: #f8f9fa;
+    --text-color: #212529;
+    --card-bg: #ffffff;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* NEW: Add a class to the body to prevent scrolling when the mobile menu is open */
+body.sidebar-open {
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between; /* MODIFIED */
+    align-items: center;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    margin: 0;
+    color: var(--primary-color);
+    order: 1; /* NEW: Controls flex item order */
+}
+
+.main-layout {
+    display: flex;
+    gap: 20px;
+}
+
+main {
+    flex-grow: 1;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px 30px;
+    min-height: 80vh;
+}
+
+aside {
+    flex-basis: 300px;
+    flex-shrink: 0;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    /* NEW: Add a transition for the mobile slide-in effect */
+    transition: transform 0.3s ease-in-out;
+}
+
+aside h2 {
+    margin-top: 0;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+/* Report content styles */
+#report-content h1, #report-content h2, #report-content h3 {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5em;
+    margin-top: 1.5em;
+}
+
+#report-content blockquote {
+    border-left: 4px solid var(--primary-color);
+    padding-left: 1em;
+    margin-left: 0;
+    color: #6c757d;
+}
+
+/* Sidebar styles */
+.year-toggle, .month-toggle {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 10px 0;
+}
+
+.year-toggle::before, .month-toggle::before {
+    content: '▶ ';
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.year-toggle.open::before, .month-toggle.open::before {
+    transform: rotate(90deg);
+}
+
+.month-list, .report-list {
+    list-style: none;
+    padding-left: 20px;
+    display: none; /* Default fold */
+}
+
+.month-list.open, .report-list.open {
+    display: block;
+}
+
+.report-link {
+    display: block;
+    padding: 8px 0;
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.report-link:hover {
+    background-color: #e9ecef;
+}
+
+.report-link.active {
+    font-weight: bold;
+    background-color: #d4eaff;
+}
+
+/* Loading animation */
+.loader {
+    border: 4px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 4px solid var(--primary-color);
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Language switcher styles */
+#lang-switcher {
+    display: flex;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    overflow: hidden;
+    order: 2; /* NEW: Controls flex item order */
+}
+
+#lang-switcher button {
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-color);
+    transition: background-color 0.2s;
+}
+
+#lang-switcher button:first-child {
+    border-right: 1px solid var(--border-color);
+}
+
+#lang-switcher button:hover {
+    background-color: #e9ecef;
+}
+
+#lang-switcher button.active {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+}
+
+/* NEW: Mobile Menu Button and Overlay Styles */
+.menu-toggle {
+    display: none; /* Hidden by default on desktop */
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    order: 3; /* NEW: Controls flex item order */
+}
+
+.mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998; /* Below the sidebar */
+}
+
+/* --- NEW: Responsive styles for mobile devices --- */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .main-layout {
+        flex-direction: column; /* Stack main content and sidebar vertically */
+    }
+    
+    header {
+        gap: 15px; /* Add some space between header items */
+    }
+
+    /* This makes the title push all other items to the right */
+    header h1 {
+        margin-right: auto; 
+        font-size: 1.25rem;
+    }
+
+    .menu-toggle {
+        display: block; /* Show the hamburger button */
+    }
+    
+    aside#sidebar {
+        position: fixed; /* Make the sidebar an overlay */
+        top: 0;
+        left: 0;
+        height: 100vh; /* Full height */
+        width: 280px; /* A bit narrower for mobile */
+        z-index: 999;
+        transform: translateX(-100%); /* Hide it off-screen to the left */
+        border-radius: 0;
+        overflow-y: auto; /* Allow scrolling within the sidebar */
+        border-right: 1px solid var(--border-color);
+    }
+    
+    /* When the body has this class, the sidebar will be visible */
+    body.sidebar-open aside#sidebar {
+        transform: translateX(0);
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+    }
+
+    /* Show the overlay when the sidebar is open */
+    body.sidebar-open .mobile-overlay {
+        display: block;
+    }
+}

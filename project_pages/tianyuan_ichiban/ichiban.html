@@ -1,0 +1,219 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Tian Yuan Ichiban Program Lookback</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <style>
+        body {
+            color: #333; /* 让文本颜色更深 */
+        }
+        h1, h2, h3 {
+            color: #222; /* 标题颜色更深 */
+        }
+        p, li {
+            color: #333;
+        }
+        img {
+            max-width: 70%; /* 限制图片大小 */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        strong {
+            color: #222; /* 设置深色，与标题颜色一致 */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="is-preload">
+
+    <!-- Header -->
+    <header id="header">
+        <div id="header-placeholder"></div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                fetch("/bar_header.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("header-placeholder").innerHTML = data;
+                    })
+                    .catch(error => console.error("Error loading header:", error));
+            });
+        </script>
+    </header>
+
+    <!-- Main Content -->
+    <div id="main">
+        <section id="one">
+            <header class="major">
+                <h2>Tian Yuan Ichiban Lookback</h2>
+            </header>
+
+            <div>
+                This page introduced my earliest product design and implementation experience.
+            </div>
+            <div>&nbsp;</div>
+
+            <div>
+                <img src="logo.png" alt="Project Logo">
+            </div>
+
+            <div>&nbsp;</div>
+
+            <h2>Overview</h2>
+            <p>
+                The <strong>Tian Yuan Ichiban</strong> WeChat Mini Program was launched in the summer of 2022 and went offline in the spring of 2023.
+                This document was compiled at the end of 2024 to serve as a project display.
+            </p>
+            <p>
+                Due to the project closure and team disbandment, many files were not retained. The images included are past screenshots.
+            </p>
+
+            <h2>Contents</h2>
+            <ul>
+                <li>Requirements Document</li>
+                <li>Program Interface</li>
+                <li>Operation Summary</li>
+            </ul>
+
+            <hr>
+
+            <h2>1. Requirements Document</h2>
+
+            <h3>Overview</h3>
+            <p>This is a <strong>blind box lottery mini-program</strong>, primarily offering ACG figurines as prizes.</p>
+
+            <h3>System Modules</h3>
+
+            <h4>User Side (Mini Program)</h4>
+            <ul>
+                <li><strong>Login</strong>: Users log in through WeChat authorization.</li>
+                <li><strong>Homepage</strong>:
+                    <ul>
+                        <li><strong>Banner Rotation</strong>: Display of promotional images.</li>
+                        <li><strong>Lottery Categories</strong>: Customizable categories, scrollable left/right.</li>
+                        <li><strong>Sorting Options</strong>: By launch date or price.</li>
+                        <li><strong>Product Display</strong>: Two per row, including names, prices, and stock.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Lottery Mechanics</h4>
+            <ul>
+                <li><strong>Dual Random Mode</strong>: Randomly triggers two additional draws.</li>
+                <li><strong>Boxing Mode</strong>: Each round has 5 draws with guaranteed prizes.</li>
+            </ul>
+
+            <h2>2. Program Interface</h2>
+
+            <h3>Main Interfaces</h3>
+
+            <p><strong>Home Page & Lottery Page</strong></p>
+            <img src="1.png" alt="Home Page">
+            <img src="1-2.png" alt="Lottery Page">
+
+            <p><strong>Reward Bag & Prize Details</strong></p>
+            <img src="2.png" alt="Reward Bag">
+
+            <p><strong>Balance & Draw History</strong></p>
+            <img src="3.png" alt="Balance Page">
+
+            <p><strong>User Profile</strong></p>
+            <img src="4.png" alt="User Profile">
+
+            <h3>Admin Panel (Backend)</h3>
+            <ul>
+                <li><strong>Banner Management</strong></li>
+                <li><strong>Category Management</strong></li>
+                <li><strong>Prize Management</strong>: Set amounts, recovery prices, and images.</li>
+                <li><strong>Order Management</strong>: View user orders and process shipments.</li>
+                <li><strong>Probability Adjustments</strong>: Set and adjust draw probabilities.</li>
+            </ul>
+
+            <h2>3. Operation Summary</h2>
+
+            <ul>
+                <li><strong>Launched</strong>: Summer 2022</li>
+                <li><strong>Offline</strong>: Spring 2023</li>
+                <li><strong>Revenue</strong>: Approx. ¥100,000</li>
+            </ul>
+
+            <h3>Challenges & Key Takeaways</h3>
+            <ul>
+                <li><strong>Team & Competition</strong>: The team was part-time, and competition was fierce.</li>
+                <li><strong>Learning Experience</strong>: First-hand experience in product management.</li>
+            </ul>
+
+            <h3>Reflections</h3>
+            <p>
+                The project reinforced my commitment to <strong>lifelong learning and entrepreneurship</strong>.
+                Understanding <strong>market strategy, research, commercialization, and management</strong> is critical for building a successful product.
+            </p>
+
+            <hr>
+
+            <!-- PDF -->
+            <div>
+                &nbsp;
+            </div>
+
+            <h3>The demand analysis and more details (Chinese Only)</h3>
+            
+            <div>
+                
+                <div>
+                    &nbsp;
+                </div>
+                <iframe src="/project_pages/tianyuan_ichiban/tianyuan_ichiban_lookback.pdf" width="100%" height="1000px" title="PROJECT INTRO" style="border:none;">
+                    Your browser does not support iframes.
+                </iframe>
+            </div>
+
+            <hr>
+
+
+            <div>&nbsp;</div>
+            <a href="/index.html" class="button">Back to Homepage</a>
+        </section>
+
+
+       
+
+        <!-- Contact Section -->
+        <section id="five">
+            <div id="contact-placeholder"></div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    fetch("/bar_contact.html")
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById("contact-placeholder").innerHTML = data;
+                        })
+                        .catch(error => console.error("Error loading contact:", error));
+                });
+            </script>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div id="footer-placeholder"></div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                fetch("/bar_footer.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("footer-placeholder").innerHTML = data;
+                    })
+                    .catch(error => console.error("Error loading footer:", error));
+            });
+        </script>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>

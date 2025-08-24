@@ -1,0 +1,294 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Jeff Liu - Resume</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    
+    <style>
+        /* --- 通用区块标题样式 --- */
+        /* 【已修正】这个选择器现在可以正确匹配所有区块标题并添加横线 */
+        #main section > h3 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 12px;
+            margin: 40px 0 25px 0;
+            color: #333;
+            font-weight: 600;
+            font-size: 1.5em;
+        }
+
+        /* --- 通用正文文本样式 --- */
+        /* 统一所有段落和列表的字体、行高和颜色 */
+        #main section p,
+        #main section li {
+            font-family: Arial, sans-serif;
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* --- 统一的简历条目样式 (教育和经历通用) --- */
+        .cv-item {
+            margin-bottom: 30px;
+        }
+        .cv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap; /* 在小屏幕上允许换行 */
+        }
+        .cv-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #333;
+            margin: 0;
+        }
+        .cv-subtitle {
+            font-size: 1.1em;
+            color: #555;
+            margin-top: 5px;
+        }
+        .cv-date {
+            color: #777;
+            font-style: italic;
+            margin-left: 20px;
+            white-space: nowrap;
+            flex-shrink: 0; /* 防止日期被压缩换行 */
+        }
+        .cv-description {
+            margin: 10px 0 0 20px;
+            padding: 0;
+            list-style-type: disc;
+        }
+    </style>
+</head>
+<body class="is-preload">
+
+    <header id="header">
+        <div id="header-placeholder"></div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                fetch("/bar_header.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("header-placeholder").innerHTML = data;
+                    })
+                    .catch(error => console.error("Error loading header:", error));
+            });
+        </script>
+    </header>
+
+    <div id="main">
+
+        <section id="one">
+            <header class="major">
+                <h2>Resume/CV</h2>
+            </header>
+
+            <section>
+                <h3>Profile</h3>
+                <p>
+                    M.S. CS candidate with 3 years of diverse working experience.<br>
+                    Focus on AI application development. <br>
+                    Specialization in Reinforcement Learning, Robotics, AI Agent.
+                </p>
+            </section>
+
+            <section>
+                <h3>Skills</h3>
+                <ul>
+                    <li><strong>Programming Languages:</strong> Python, Java, C++, SQL, R, HTML</li>
+                    <li><strong>Development Tools:</strong> Git/GitHub, Linux/Ubuntu, Bash, Shell, Unity, ROS, Gazebo</li>
+                    <li><strong>Data Processing:</strong> OpenCV, Pandas, NumPy, Matplotlib</li>
+                    <li><strong>Data Storage:</strong> DVC, PostgreSQL, MySQL, MariaDB, MongoDB</li>
+                    <li><strong>ML/AI:</strong> PyTorch, Scikit-Learn, YOLOv8, Gymnasium, Stable Baselines3, OpenAI/Gemini API</li>
+                    <li><strong>Cloud/Ops:</strong> MLflow, Kubernetes, FastAPI, Docker, Kubeflow, GCP, AWS, GitHub Actions</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Education</h3>
+                
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <h4 class="cv-title">M.S. in Computer Science</h4>
+                        <div class="cv-date">Expected May 2026</div>
+                    </div>
+                    <div class="cv-subtitle">Tufts University</div>
+                    <ul class="cv-description">
+                        <li>Specialization: AI Application, Reinforcement Learning and Robotics</li>
+                    </ul>
+                </div>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <h4 class="cv-title">M.A. in Economics</h4>
+                        <div class="cv-date">Jan 2021</div>
+                    </div>
+                    <div class="cv-subtitle">Boston University</div>
+                    <ul class="cv-description">
+                        <li>Specialization: Data Science, Quantitative Economics</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Experience on Developing</h3>
+                
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <h4 class="cv-title">AI Application Developer</h4>
+                        <div class="cv-date">June 2025 - Present | Remote</div>
+                    </div>
+                    <div class="cv-subtitle">
+                        <a href="https://github.com/LogicGate-AI-Lab">LogicGate AI Lab</a>
+                    </div>
+                    <ul class="cv-description">
+                        <li>Developing an AI Financial Advisor system.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <h4 class="cv-title">Developer</h4>
+                        <div class="cv-date">Sep 2024 - May 2025 | Boston Area, MA</div>
+                    </div>
+                    <div class="cv-subtitle">
+                        <a href="https://github.com/campusrover">Brandeis University Robotics Lab</a>
+                    </div>
+                    <ul class="cv-description">
+                        <li>Developed a <a href="https://github.com/jeffliulab/SmartCleaningRobot">smart cleaning robot</a> with fully self designed cleaning algorithms, achieve sim-to-real application with real-time control and visualization.</li>
+                        <li>Developed a <a href="https://github.com/jeffliulab/SmartGlove">smart glove which can control the robot arm</a> and integrated in an IoT platform.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Early Experience on Business</h3>
+                
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <h4 class="cv-title">Co-Founder</h4>
+                        <div class="cv-date">2023 - 2024 | Shanghai, China</div>
+                    </div>
+                    <div class="cv-subtitle">Shanghai LogicGate Educational Technology (旒光教育)</div>
+                    <ul class="cv-description">
+                        <li>Focused on AP CSA and AP Economics tutoring.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <h4 class="cv-title">Co-Founder</h4>
+                        <div class="cv-date">2022 - 2023 | Shanghai, China</div>
+                    </div>
+                    <div class="cv-subtitle">Shanghai Tian Yuan Xing Wei Technology (天元星位)</div>
+                    <ul class="cv-description">
+                        <li>Launched an online lottery mini-program on the WeChat platform.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <h4 class="cv-title">Salesman (Personal Shop)</h4>
+                        <div class="cv-date">2021 - 2022 | Shanghai, China</div>
+                    </div>
+                    <div class="cv-subtitle">Huang Chuan Book Store (荒川中古)</div>
+                    <ul class="cv-description">
+                        <li>Sold used manga books.</li>
+                    </ul>
+                </div>
+
+
+            </section>
+
+            <section>
+                <h3>Early Experience on Work</h3>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <h4 class="cv-title">Computer Science Lecture</h4>
+                        <div class="cv-date">2023 - 2024 | Shanghai, China</div>
+                    </div>
+                    <div class="cv-subtitle">LogicGate Educational Technology</div>
+                    <ul class="cv-description">
+                        <li>Teaching AP CSA and A-Level CS courses.</li>
+                    </ul>
+                </div>
+
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <h4 class="cv-title">Economics Lecture</h4>
+                        <div class="cv-date">2022 - 2023 | Shanghai, China</div>
+                    </div>
+                    <div class="cv-subtitle">Shanghai Jian Qiao University</div>
+                    <ul class="cv-description">
+                        <li>Teaching Economics foundational course: Microeconomics, Macroeconomics.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <h4 class="cv-title">Data Engineer</h4>
+                        <div class="cv-date">2021 - 2022 | Shanghai, China</div>
+                    </div>
+                    <div class="cv-subtitle">Ping An International Financial Leasing Co Ltd</div>
+                    <ul class="cv-description">
+                        <li>Focused on business data analysis, digital transformation initiatives, and facilitating cross-functional collaboration within Ping An's Car Finance Group.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Awards</h3>
+                <ul>
+                    <li>2013 VEX Robotics World Championship Design Reward at California</li>
+                    <li>2012 VEX Robotics National Competition Gold Medal at China</li>
+                </ul>
+            </section>
+            
+            <div style="margin-top: 30px;">
+                <a href="/index.html" class="button">Back to Homepage</a>
+            </div>
+        </section>
+
+        <section id="five">
+            <div id="contact-placeholder"></div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    fetch("/bar_contact.html")
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById("contact-placeholder").innerHTML = data;
+                        })
+                        .catch(error => console.error("Error loading contact:", error));
+                });
+            </script>
+        </section>
+    </div>
+
+    <footer id="footer">
+        <div id="footer-placeholder"></div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                fetch("/bar_footer.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("footer-placeholder").innerHTML = data;
+                    })
+                    .catch(error => console.error("Error loading footer:", error));
+            });
+        </script>
+    </footer>
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.poptrox.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>

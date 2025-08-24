@@ -1,0 +1,190 @@
+<!-- 参数说明 -->
+    <!-- 
+    URL 参数：
+
+    【例】指定md文件和latex公式渲染版本v2：/research_note.html?md=advanced.md&mathjax=v2
+    
+    1. md=<file>.md  
+       - 指定要加载的 Markdown 文件，例如：
+         research_note.html?md=example.md
+       - 默认值："default.md"
+    
+    2. mathjax=v2 | v3  
+       - 选择 MathJax 版本：
+         * v2（默认）支持 `$...$` 和 `$$...$$` 语法
+         * v3 适用于 `\( ... \)` 和 `\[ ... \]` 语法
+       - 示例：
+         research_note.html?md=example.md&mathjax=v3
+         
+    说明：
+    - `md` 参数用于加载不同的 Markdown 文件。
+    - `mathjax` 参数用于选择不同的 MathJax 版本：
+      * `v2` 是旧版（默认），适用于 `$...$` 语法。
+      * `v3` 是新版，适用于 `\( ... \)` 语法。
+    - 不提供 `mathjax` 参数时，默认使用 v2。
+
+    -->
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Research Notes</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <style>
+        /* 调整字体大小和颜色 */
+        body {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+        }
+        h2, h3, h4 {
+            color: #222;
+            font-weight: bold;
+        }
+        strong, b {
+            font-weight: 700;
+            color: #000;
+        }
+        code {
+            font-family: monospace;
+            background: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+        #markdown-content img {
+            max-width: 80%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+
+    <!-- Markdown 解析库 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- 动态加载 MathJax -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            let mathjaxVersion = urlParams.get("mathjax") || "v2";  // 默认使用 v2
+
+            let script = document.createElement("script");
+
+            if (mathjaxVersion === "v3") {
+                // 即使选择v3也使用v2配置
+                script.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML";
+                let config = document.createElement("script");
+                config.type = "text/x-mathjax-config";
+                config.textContent = `
+                    MathJax.Hub.Config({
+                        tex2jax: {
+                            inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+                            displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']],
+                            processEscapes: true
+                        }
+                    });
+                `;
+                document.head.appendChild(config);
+            } else {
+                script.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML";
+                let config = document.createElement("script");
+                config.type = "text/x-mathjax-config";
+                config.textContent = `
+                    MathJax.Hub.Config({
+                        tex2jax: {
+                            inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+                            displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']],
+                            processEscapes: true
+                        }
+                    });
+                `;
+                document.head.appendChild(config);
+            }
+
+            document.head.appendChild(script);
+        });
+    </script>
+
+</head>
+<body class="is-preload">
+
+    <!-- Header -->
+    <header id="header">
+        <div id="header-placeholder"></div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                fetch("/bar_header.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("header-placeholder").innerHTML = data;
+                    })
+                    .catch(error => console.error("Error loading header:", error));
+            });
+        </script>
+    </header>
+
+    <!-- Main Content -->
+    <div id="main">
+        <section id="one">
+            <!-- Markdown 内容将被插入这里 -->
+            <div id="markdown-content"></div>
+
+            <!-- JavaScript 解析 Markdown 并修正图片路径 -->
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    let mdFile = urlParams.get("md") || "default.md";
+
+                    fetch(mdFile)
+                        .then(response => response.text())
+                        .then(text => {
+                            let htmlContent = marked.parse(text);
+
+                            // 修正所有 <img> 标签的路径（假设图片在 md 文件的目录下）
+                            let mdDirectory = mdFile.substring(0, mdFile.lastIndexOf("/"));
+                            htmlContent = htmlContent.replace(/<img src="([^"]+)"/g, `<img src="${mdDirectory}/$1"`);
+
+                            document.getElementById("markdown-content").innerHTML = htmlContent;
+
+                            // 重新渲染数学公式
+                            setTimeout(() => {
+                                if (window.MathJax) {
+                                    if (window.MathJax.typesetPromise) {
+                                        MathJax.typesetPromise();
+                                    } else {
+                                        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+                                    }
+                                }
+                            }, 500);
+                        })
+                        .catch(error => console.error("Error loading markdown:", error));
+                });
+            </script>
+
+            <!-- Back to Homepage Button -->
+            <div>
+                <a href="/index.html" class="button">Back to Homepage</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div id="footer-placeholder"></div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                fetch("/bar_footer.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("footer-placeholder").innerHTML = data;
+                    })
+                    .catch(error => console.error("Error loading footer:", error));
+            });
+        </script>
+    </footer>
+
+</body>
+</html>

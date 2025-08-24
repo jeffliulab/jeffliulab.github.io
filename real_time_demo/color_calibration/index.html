@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Prediction System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --light-gray: #f4f7f6;
+            --dark-gray: #333;
+            --border-color: #ddd;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        h2 {
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 5px;
+        }
+        
+        h3 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+
+        em {
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #drop-zone {
+            width: 90%;
+            height: 150px;
+            line-height: 150px;
+            border: 3px dashed var(--border-color);
+            margin: 30px auto;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            color: #999;
+        }
+
+        #drop-zone.drag-over {
+            border-color: var(--primary-color);
+            background-color: #eaf2fb;
+            color: var(--primary-color);
+        }
+
+        .input-box {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .input-box label {
+            font-weight: 700;
+        }
+
+        .input-box input[type="text"] {
+            padding: 10px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            width: 180px;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-box input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .input-box button {
+            padding: 10px 20px;
+            border: none;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .input-box button:hover {
+            background-color: #357abd;
+        }
+
+        .color-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .color-box {
+            width: 160px;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            font-size: 1em;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .color-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .label {
+            font-weight: 700;
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+
+        .delta-e-box {
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.1em;
+            font-weight: 700;
+            background-color: #fff;
+            border-radius: 10px;
+            line-height: 1.6;
+            box-shadow: var(--shadow);
+        }
+
+        #accuracy-improvement {
+            margin-top: 15px;
+            font-size: 1em;
+            font-weight: 400;
+            color: #27ae60;
+        }
+
+        .additional-content {
+            margin-top: 40px;
+            text-align: left;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .content-section {
+            padding: 20px;
+            border-radius: 10px;
+            background: var(--light-gray);
+        }
+        
+        .content-section p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .content-image {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        #loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            .color-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .input-box {
+                flex-direction: column;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Color Prediction System</h2>
+        <div>
+            <em>Running on Google Cloud Run. Version: Random Forest model_v1.</em>
+        </div>
+        <div>
+            <em>
+                <a href="https://github.com/jeffliulab/Color_Calibration" target="_blank">=> GitHub Repository</a>
+            </em>
+        </div>
+
+        <div id="drop-zone">Drag & Drop Your Image Here or Click to Upload</div>
+        <input type="file" id="file-input" style="display: none;" accept="image/*">
+
+        <div class="input-box">
+            <label for="true-rgb">Enter True RGB Color: (For Comparison Only)</label>
+            <input type="text" id="true-rgb" value="238, 194, 187">
+            <button onclick="setTrueColor()">Set</button>
+        </div>
+
+        <div class="color-container">
+            <div>
+                <div class="color-box" id="captured">Captured</div>
+                <div class="label">Captured Color</div>
+            </div>
+            <div>
+                <div class="color-box" id="predicted">Predicted</div>
+                <div class="label">Predicted Color</div>
+            </div>
+            <div>
+                <div class="color-box" id="true-color">Real</div>
+                <div class="label">Real Color</div>
+            </div>
+        </div>
+
+        <div class="delta-e-box" id="delta-e">
+            <div id="delta-e-captured">ΔE Captured vs Real: --</div>
+            <div id="delta-e-predicted">ΔE Predicted vs Real: --</div>
+            <div id="accuracy-improvement"></div>
+        </div>
+
+        <div class="additional-content">
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3>Usage Instructions</h3>
+                    <p>Follow the steps in the diagram for the most accurate results. Proper lighting and camera angle are key.</p>
+                    <img src="a2.png" alt="Usage Instructions" class="content-image">
+                </div>
+                <div class="content-section">
+                    <h3>Color Card Template</h3>
+                    <p>For best results, print this color card. Click the image to download the template.</p>
+                    <a href="a1.png" download="color_card_template.png">
+                        <img src="a1.png" alt="Color Card Template for printing" class="content-image">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading-overlay">Calculating...</div>
+
+    <script>
+        const API_URL = "https://color-prediction-492048110470.us-central1.run.app/predict/";
+        let trueRgb = [238, 194, 187];
+        let trueRgbSet = false;
+
+        const dropZone = document.getElementById("drop-zone");
+        const fileInput = document.getElementById("file-input");
+
+        window.onload = function() {
+            showLoadingMessage(false);
+            setTrueColor(); // Initialize the "Real Color" box on load
+        };
+
+        dropZone.addEventListener("dragover", (event) => {
+            event.preventDefault();
+            dropZone.classList.add("drag-over");
+        });
+
+        dropZone.addEventListener("dragleave", () => {
+            dropZone.classList.remove("drag-over");
+        });
+
+        dropZone.addEventListener("drop", (event) => {
+            event.preventDefault();
+            dropZone.classList.remove("drag-over");
+            let file = event.dataTransfer.files[0];
+            if (file) uploadImage(file);
+        });
+
+        dropZone.addEventListener("click", () => fileInput.click());
+
+        fileInput.addEventListener("change", (event) => {
+            let file = event.target.files[0];
+            if (file) {
+                fileInput.value = ""; // Clear input for re-uploading same file
+                uploadImage(file);
+            }
+        });
+
+        function setTrueColor() {
+            let input = document.getElementById("true-rgb").value;
+            let rgbArray = input.split(",").map(num => parseInt(num.trim(), 10));
+            if (rgbArray.length === 3 && rgbArray.every(num => !isNaN(num) && num >= 0 && num <= 255)) {
+                trueRgb = rgbArray;
+                trueRgbSet = true;
+                setColorBox("true-color", "Real", trueRgb);
+            } else {
+                alert("Invalid RGB format. Please use: R, G, B (e.g., 238, 194, 187)");
+            }
+        }
+
+        function uploadImage(file) {
+            if (!trueRgbSet) {
+                alert("Please enter the True RGB Color and click 'Set' before uploading an image.");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("file", file);
+            showLoadingMessage(true);
+
+            fetch(API_URL, {
+                method: "POST",
+                body: formData,
+                headers: { "Accept": "application/json" }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                let capturedColor = data.captured_color;
+                let predictedColor = data.predicted_color;
+
+                setColorBox("captured", "Captured", capturedColor);
+                setColorBox("predicted", "Predicted", predictedColor);
+                setColorBox("true-color", "Real", trueRgb);
+
+                let deltaECaptured = computeDeltaE(capturedColor, trueRgb);
+                let deltaEPredicted = computeDeltaE(predictedColor, trueRgb);
+                let improvement = deltaECaptured > 0 ? ((deltaECaptured - deltaEPredicted) / deltaECaptured) * 100 : 0;
+
+                document.getElementById("delta-e-captured").textContent = `ΔE Captured vs Real: ${deltaECaptured.toFixed(2)}`;
+                document.getElementById("delta-e-predicted").textContent = `ΔE Predicted vs Real: ${deltaEPredicted.toFixed(2)}`;
+                
+                document.getElementById("accuracy-improvement").innerHTML = 
+                    `<em>After model correction, prediction accuracy improved by ${improvement.toFixed(2)}%!</em>`;
+
+                showLoadingMessage(false);
+            })
+            .catch(error => {
+                console.error("Image upload failed:", error);
+                alert("Image upload failed. Please check the console for details and ensure the API is running.");
+                showLoadingMessage(false);
+            });
+        }
+
+        function showLoadingMessage(isLoading) {
+            document.getElementById("loading-overlay").style.display = isLoading ? "flex" : "none";
+        }
+        
+        // Helper to determine text color (black/white) based on background brightness
+        function getContrastColor(rgb) {
+            const yiq = ((rgb[0] * 299) + (rgb[1] * 587) + (rgb[2] * 114)) / 1000;
+            return (yiq >= 128) ? 'black' : 'white';
+        }
+
+        function setColorBox(id, title, rgb) {
+            const box = document.getElementById(id);
+            box.style.backgroundColor = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+            box.style.color = getContrastColor(rgb);
+            box.innerHTML = `${title}<br>(${rgb.join(', ')})`;
+        }
+
+        function computeDeltaE(color1, color2) {
+            // This is a simple Euclidean distance in RGB space, not a perceptual Delta E*
+            return Math.sqrt(color1.reduce((sum, val, i) => sum + Math.pow(val - color2[i], 2), 0));
+        }
+    </script>
+</body>
+</html>
