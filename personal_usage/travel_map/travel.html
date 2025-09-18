@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>城市足迹地图 · 极简可靠版</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <style>
+    html, body, #map { height: 100%; margin: 0; }
+    #toolbar {
+      position: fixed; z-index: 1000; top: 12px; left: 12px;
+      background: rgba(255,255,255,0.95); box-shadow: 0 4px 18px rgba(0,0,0,.12);
+      border-radius: 14px; padding: 10px; display: flex; gap: 8px; align-items: center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", sans-serif;
+    }
+    #toolbar button, #toolbar label {
+      border: 1px solid #e5e7eb; background: #fff; padding: 6px 10px; border-radius: 10px;
+      cursor: pointer; font-size: 14px; line-height: 1; display: inline-flex; align-items: center; gap: 6px;
+      transition: all 0.2s ease-in-out;
+    }
+    #toolbar button.active { border-color: #111827; box-shadow: inset 0 0 0 1px #111827; }
+    
+    /* [保留] 未保存更改时，保存按钮的闪烁提示样式 */
+    #btn-save.dirty {
+      border-color: #3b82f6;
+      color: #3b82f6;
+      animation: breathing 2s ease-out infinite;
+    }
+    @keyframes breathing {
+      0% { box-shadow: 0 0 2px 0 rgba(59, 130, 246, 0.4); }
+      50% { box-shadow: 0 0 8px 2px rgba(59, 130, 246, 0.4); }
+      100% { box-shadow: 0 0 2px 0 rgba(59, 130, 246, 0.4); }
+    }
+
+    #toolbar .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .dot.want { background: #3b82f6; }
+    .dot.been-solo { background: #10b981; }
+    .dot.been-couple { background: #ef4444; }
+
+    .marker-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.25), 0 8px 12px rgba(0,0,0,.15); }
+    .marker-flag svg { width: 24px; height: 24px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15)); }
+    .been-solo { background: #10b981; }
+    .been-couple { background: #ef4444; }
+
+    #help { position: fixed; right: 12px; bottom: 12px; z-index: 1000; background: rgba(255,255,255,.95); padding: 10px 12px; border-radius: 12px; box-shadow: 0 4px 18px rgba(0,0,0,.12); font-size: 12px; color: #374151; max-width: 280px; }
+    #file { display: none; }
+  </style>
+</head>
+<body>
+    <div id="toolbar">
+    <button id="mode-want" title="添加“想去”的标记"><span class="dot want"></span>想去</button>
+    <button id="mode-been-solo" title="添加“我自己去过”的标记"><span class="dot been-solo"></span>我自己去过</button>
+    <button id="mode-been-couple" title="添加“和爱人一起去过”的标记"><span class="dot been-couple"></span>和爱人一起去过</button>
+    <button id="mode-select" title="选择/拖动现有标记">选择/移动</button>
+    <span style="width:1px; height:24px; background:#e5e7eb; display:inline-block; margin:0 2px;"></span>
+
+    <button id="btn-save" title="将当前地图标记下载为 JSON 文件">保存</button>
+    <label for="file" title="从 JSON 文件导入标记"><input type="file" id="file" accept="application/json">导入JSON</label>
+    <button id="btn-clear" title="清空所有标记（此操作也需要保存）">清空</button>
+  </div>
+
+  <div id="map"></div>
+    <div id="help">
+      <b>操作方式：</b><br/>
+      1. 在左上角选择模式后，在地图上单击添加标记。<br/>
+      2. 点击【保存】会将所有标记下载为 JSON 文件。<br/>
+      3. 点击【导入JSON】可加载之前保存的文件。<br/>
+      <b>提示：</b>当【保存】按钮变蓝闪烁时，代表有未保存的更改。
+    </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script>
+    const map = L.map('map', { worldCopyJump: true }).setView([30, 110], 4);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors' }).addTo(map);
+
+    const wantLayer = L.layerGroup().addTo(map);
+    const beenSoloLayer = L.layerGroup().addTo(map);
+    const beenCoupleLayer = L.layerGroup().addTo(map);
+
+    L.control.layers(null, { '想去': wantLayer, '我自己去过': beenSoloLayer, '和爱人一起去过': beenCoupleLayer }, { collapsed: false, position: 'bottomleft' }).addTo(map);
+
+    // ====== 未保存更改的状态管理 ======
+    let hasUnsavedChanges = false;
+    const saveButton = document.getElementById('btn-save');
+
+    function setUnsavedChanges(isDirty) {
+      hasUnsavedChanges = isDirty;
+      saveButton.classList.toggle('dirty', isDirty);
+    }
+
+    window.addEventListener('beforeunload', (e) => {
+      if (hasUnsavedChanges) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
+
+    // ====== 交互模式 ======
+    let mode = 'want';
+    const modeButtons = {
+      want: document.getElementById('mode-want'),
+      'been-solo': document.getElementById('mode-been-solo'),
+      'been-couple': document.getElementById('mode-been-couple'),
+      select: document.getElementById('mode-select')
+    };
+    function setMode(next) {
+      mode = next;
+      Object.values(modeButtons).forEach(btn => btn.classList.remove('active'));
+      modeButtons[next].classList.add('active');
+      map.getContainer().style.cursor = (mode === 'select') ? 'grab' : 'crosshair';
+    }
+    setMode('want');
+
+    const MARKER_TYPES = {
+      'want': { label: '想去', layer: wantLayer },
+      'been-solo': { label: '我自己去过', layer: beenSoloLayer },
+      'been-couple': { label: '和爱人一起去过的', layer: beenCoupleLayer }
+    };
+    
+    function createMarkerIcon(type) {
+      if (type === 'want') {
+        return L.divIcon({ className: 'marker-flag', html: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z" style="color:#3b82f6;"></path></svg>`, iconSize: [24, 24], iconAnchor: [5, 22] });
+      }
+      return L.divIcon({ className: '', html: `<div class="marker-dot ${type}"></div>`, iconSize: [18, 18], iconAnchor: [9, 9] });
+    }
+
+    function enableContextDelete(marker, type) {
+      marker.on('contextmenu', () => {
+        if (confirm('删除这个标记？')) {
+          MARKER_TYPES[type].layer.removeLayer(marker);
+          setUnsavedChanges(true);
+        }
+      });
+    }
+
+    map.on('click', (e) => {
+      if (mode === 'select') return;
+      const type = mode;
+      const config = MARKER_TYPES[type];
+      const marker = L.marker(e.latlng, { icon: createMarkerIcon(type), draggable: true }).bindTooltip(config.label, { permanent: false });
+      config.layer.addLayer(marker);
+      marker.on('dragend', () => setUnsavedChanges(true));
+      enableContextDelete(marker, type);
+      setUnsavedChanges(true);
+    });
+
+    // ====== 数据存取 ======
+    function serialize() {
+      const toArray = (layer, type) => Object.values(layer._layers).map(l => ({ lat: l.getLatLng().lat, lng: l.getLatLng().lng, type }));
+      return [ ...toArray(wantLayer, 'want'), ...toArray(beenSoloLayer, 'been-solo'), ...toArray(beenCoupleLayer, 'been-couple') ];
+    }
+    function deserialize(arr = []) {
+      wantLayer.clearLayers();
+      beenSoloLayer.clearLayers();
+      beenCoupleLayer.clearLayers();
+      arr.forEach(p => {
+        const config = MARKER_TYPES[p.type];
+        if (!config) return;
+        const marker = L.marker([p.lat, p.lng], { icon: createMarkerIcon(p.type), draggable: true }).bindTooltip(config.label);
+        config.layer.addLayer(marker);
+        marker.on('dragend', () => setUnsavedChanges(true));
+        enableContextDelete(marker, p.type);
+      });
+      // 导入后，认为本地缓存也应该同步
+      persistToLocalStorage();
+    }
+    
+    // ====== 数据持久化 (仅使用 LocalStorage) ======
+    const STORAGE_KEY = 'travel-footprints-simple-v1';
+
+    function persistToLocalStorage() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(serialize()));
+    }
+    
+    // 页面加载时自动从 LocalStorage 读取
+    (function loadFromLocalStorage() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        try {
+          deserialize(JSON.parse(raw));
+        } catch(e) {
+          console.error("无法从LocalStorage解析数据", e);
+        }
+      }
+      setUnsavedChanges(false);
+    })();
+
+    // ====== 按钮事件 ======
+    document.getElementById('btn-save').addEventListener('click', () => {
+      // 1. 更新LocalStorage备份
+      persistToLocalStorage();
+      
+      // 2. 创建并下载文件
+      const blob = new Blob([JSON.stringify(serialize(), null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = '我的足迹.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      
+      // 3. 清除未保存状态
+      setUnsavedChanges(false);
+    });
+    
+    document.getElementById('file').addEventListener('change', (ev) => {
+      if (hasUnsavedChanges && !confirm('您有未保存的更改，确定要导入新文件覆盖当前内容吗？')) {
+        ev.target.value = '';
+        return;
+      }
+      const file = ev.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          deserialize(JSON.parse(e.target.result));
+          setUnsavedChanges(false); // 导入成功后，状态为已保存
+        } catch (err) {
+          alert('JSON 解析失败，请检查文件格式。');
+        }
+      };
+      reader.readAsText(file);
+      ev.target.value = '';
+    });
+    
+    document.getElementById('btn-clear').addEventListener('click', () => {
+      if (confirm('确定要清空所有标记吗？(此操作需要手动保存)')) {
+        wantLayer.clearLayers();
+        beenSoloLayer.clearLayers();
+        beenCoupleLayer.clearLayers();
+        setUnsavedChanges(true);
+      }
+    });
+
+    // 模式切换按钮
+    modeButtons.want.addEventListener('click', () => setMode('want'));
+    modeButtons['been-solo'].addEventListener('click', () => setMode('been-solo'));
+    modeButtons['been-couple'].addEventListener('click', () => setMode('been-couple'));
+    modeButtons.select.addEventListener('click', () => setMode('select'));
+  </script>
+</body>
+</html>
