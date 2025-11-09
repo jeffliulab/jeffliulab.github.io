@@ -1,66 +1,246 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Pang (Jeff) Liu - Resume</title>
+    <title>Pang (Jeff) Liu - My Story</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/assets/css/main.css" />
     
     <style>
-        /* --- 通用区块标题样式 --- */
-        /* 【已修正】这个选择器现在可以正确匹配所有区块标题并添加横线 */
-        #main section > h3 {
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 12px;
-            margin: 40px 0 25px 0;
-            color: #333;
-            font-weight: 600;
-            font-size: 1.5em;
+        /* --- 基础页面和文本样式 --- */
+        body {
+            background-color: #f9fafb; /* 更柔和的浅灰背景 */
         }
-
-        /* --- 通用正文文本样式 --- */
-        /* 统一所有段落和列表的字体、行高和颜色 */
-        #main section p,
-        #main section li {
+        #main {
+            background-color: #ffffff;
+            padding-bottom: 4em;
+        }
+        
+        /* 【美化】保持原始字体，但确保全局应用 */
+        h2, h3, h4, p, li {
             font-family: Arial, sans-serif;
+        }
+        
+        p, li {
             font-size: 1.1em;
             line-height: 1.6;
-            color: #444;
+            color: #444; /* 保持原始正文颜色 */
         }
 
-        /* --- 统一的简历条目样式 (教育和经历通用) --- */
-        .cv-item {
-            margin-bottom: 30px;
+        /* --- 顶部 "Hero" 区域 --- */
+        .story-hero {
+            text-align: center;
+            padding: 4.5em 1em 3.5em 1em; /* 调整间距 */
+            background: #fff;
+            border-bottom: 1px solid #eaeaeb; /* 更柔和的边框 */
         }
-        .cv-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap; /* 在小屏幕上允许换行 */
-        }
-        .cv-title {
-            font-weight: bold;
-            font-size: 1.2em;
+        .story-hero h2 {
+            font-size: 2.6em;
+            font-weight: 700; /* 标题加粗 */
             color: #333;
-            margin: 0;
+            margin-bottom: 0.5em;
         }
-        .cv-subtitle {
-            font-size: 1.1em;
+        .story-hero .subtitle {
+            font-size: 1.4em;
             color: #555;
-            margin-top: 5px;
-        }
-        .cv-date {
-            color: #777;
+            font-weight: 400; /* 副标题使用常规粗细 */
+            margin-bottom: 1.5em;
             font-style: italic;
-            margin-left: 20px;
-            white-space: nowrap;
-            flex-shrink: 0; /* 防止日期被压缩换行 */
         }
-        .cv-description {
+        .story-hero .profile-summary {
+            font-size: 1.2em;
+            color: #333; /* 摘要文本颜色加深 */
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* --- 故事时间线 (Story Timeline) 容器 --- */
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        /* --- 时间线的中心竖线 --- */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: #e0e0e0; /* 竖线颜色变浅 */
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+
+        /* --- 故事节点 (卡片) --- */
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .timeline-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item.left { left: 0; padding-right: 30px; text-align: right; }
+        .timeline-item.right { left: 50%; padding-left: 30px; text-align: left; }
+
+        /* --- 【美化】卡片上的 "圆点" --- */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: #fff;
+            border: 4px solid #4A90E2; /* 保持您喜欢的蓝色 */
+            top: 30px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(74, 144, 226, 0.3); /* 增加柔和光晕 */
+        }
+        .timeline-item.right::after { left: -10px; }
+
+        /* --- 【美化】卡片内容区域 --- */
+        .timeline-content {
+            padding: 30px 35px; /* 增加内边距 */
+            background-color: white;
+            position: relative;
+            border-radius: 12px; /* 更现代的圆角 */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* 更柔和、精致的阴影 */
+            border: 1px solid #eaeaeb; /* 更柔和的边框 */
+        }
+        
+        .timeline-content h3 {
+            font-size: 1.6em; /* 标题加大 */
+            font-weight: 700; /* 标题加粗 */
+            color: #4A90E2; /* 保持您喜欢的蓝色 */
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        .timeline-content .date {
+            font-size: 1em;
+            font-style: italic;
+            color: #777;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .timeline-content p {
+            margin-bottom: 0;
+            font-size: 1.05em;
+            color: #333;
+        }
+        .timeline-content ul {
             margin: 10px 0 0 20px;
             padding: 0;
             list-style-type: disc;
         }
+        .timeline-content li {
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+        /* 【美化】引用(blockquote)样式优化 */
+        .timeline-content blockquote {
+            border-left: 4px solid #4A90E2; /* 保持蓝色 */
+            padding: 15px 20px;
+            margin: 15px 0 0 0;
+            font-style: italic;
+            color: #333;
+            font-size: 1.05em;
+            background-color: #f9fafb; /* 增加淡淡的背景色 */
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* --- 【美化】区块大标题 --- */
+        .section-header {
+            text-align: center;
+            margin: 60px 0 40px 0;
+            position: relative;
+        }
+        .section-header h2 {
+            display: inline-block;
+            background: #ffffff; /* 确保背景是白色 */
+            padding: 0 30px;
+            font-size: 2.2em; /* 标题加大 */
+            font-weight: 700; /* 标题加粗 */
+            color: #333;
+            position: relative;
+            z-index: 2;
+        }
+        .section-header::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: #e0e0e0; /* 竖线颜色变浅 */
+            top: 50%;
+            left: 0;
+            z-index: 1;
+        }
+        
+        /* --- 【美化】今日综合 (Synthesis Box) --- */
+        .synthesis-box {
+            max-width: 900px;
+            margin: 30px auto 60px auto;
+            background: #fdfdfd; /* 使用一个非常浅的背景色以示区别 */
+            border-radius: 12px; /* 统一样式 */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); /* 统一阴影 */
+            border: 1px solid #eaeaeb; /* 统一边框 */
+            padding: 40px 50px; /* 增加内边距 */
+        }
+        .synthesis-box h3 {
+            font-size: 1.7em; /* 标题加大 */
+            font-weight: 700; /* 标题加粗 */
+            color: #4A90E2; /* 保持蓝色 */
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee; /* 增加分割线 */
+            padding-bottom: 15px;
+        }
+        .synthesis-box p {
+            font-size: 1.15em; /* 字体加大 */
+            line-height: 1.7;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .synthesis-box strong {
+            color: #000;
+            font-weight: 700;
+        }
+        .synthesis-divider {
+            border: 0;
+            height: 1px;
+            background: #eaeaeb; /* 统一分割线颜色 */
+            margin: 25px 0;
+        }
+
+        /* --- 移动端响应式布局 --- */
+        @media screen and (max-width: 768px) {
+            .timeline-container::before { left: 10px; }
+            .timeline-item { width: 100%; padding-left: 45px; padding-right: 15px; }
+            .timeline-item.left,
+            .timeline-item.right { left: 0; text-align: left; }
+            .timeline-item.left::after,
+            .timeline-item.right::after { left: 0px; }
+            
+            .story-hero { padding: 3em 1em 2em 1em; }
+            .story-hero h2 { font-size: 2.1em; }
+            .timeline-content { padding: 25px; }
+            .synthesis-box { padding: 30px 25px; }
+            .synthesis-box h3 { font-size: 1.5em; }
+            .synthesis-box p { font-size: 1.1em; }
+            p, li { font-size: 1em; }
+        }
+
     </style>
 </head>
 <body class="is-preload">
@@ -81,189 +261,153 @@
 
     <div id="main">
 
-        <section id="one">
-            <header class="major">
-                <h2>Resume/Experience</h2>
-            </header>
+        <section class="story-hero">
+            <h2>Pang (Jeff) Liu: My Story</h2>
+            <p class="subtitle">Bridging AI Agent, Financial Accounting and Taxation: What leads me here</p>
+            <p class="profile-summary">
+I have an interdisciplinary background in quantitative economics and computer science, and extensive industry work experience, business experience, and development experience.            </p>
+        </section>
 
-            <section>
-                <h3>Profile</h3>
-                <p>
-                    M.S. CS candidate with 5 years of diverse working experience.<br>
-                    Focus on AI applications and Robotics.
-                </p>
-            </section>
+        <div class="timeline-container">
 
-            <section>
-                <h3>Skills</h3>
-                <ul>
-                    <li><strong>Programming Languages:</strong> Python, C++, C, Java, SQL</li>
-                    <li><strong>Development Tools:</strong> Git/GitHub, Linux/Ubuntu, Bash, Shell</li>
-                    <li><strong>Robotics & Simulations:</strong> ROS Noetic, ROS2 Humble, Unity, Isaac Sim, Gazebo, Rviz, MoveIt, MuJoCo</li>
-                    <li><strong>Data Processing:</strong> OpenCV, Pandas, NumPy, Matplotlib</li>
-                    <li><strong>Data Storage:</strong> DVC, PostgreSQL, MySQL, MariaDB, MongoDB</li>
-                    <li><strong>ML/AI:</strong> PyTorch, Scikit-Learn, YOLOv8, Gymnasium, Stable Baselines3, OpenAI/Gemini API</li>
-                    <li><strong>Cloud/Ops:</strong> MLflow, Kubernetes, FastAPI, Docker, Kubeflow, GCP, AWS, GitHub Actions</li>
-                    <li><strong>Hardwares:</strong> Raspberry Pi</li>
-                </ul>
-            </section>
-
-            <section>
-                <h3>Education Experience</h3>
-                
-                <div class="cv-item">
-                    <div class="cv-header">
-                        <h4 class="cv-title">M.S. in Computer Science</h4>
-                        <div class="cv-date">Sep 2025 - May 2026</div>
-                    </div>
-                    <div class="cv-subtitle">Tufts University</div>
-                    <!-- <ul class="cv-description">
-                        <li>Specialization: AI Application, Reinforcement Learning and Robotics</li>
-                    </ul> -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>Business Background</h3>
+                    <span class="date">Bachelor of Business Administration</span>
+                    <span class="date">2014 - 2018 | Jilin University</span>
+                    
+                    <p>
+My journey began with a business background. During my university years, I studied and practiced business theories, looking up to figures like Steve Jobs and Elon Musk.                    </p>
                 </div>
-
-                <div class="cv-item">
-                    <div class="cv-header">
-                        <h4 class="cv-title">M.S. in Computer Science (Transfer to Tufts)</h4>
-                        <div class="cv-date">Sep 2024 - May 2025</div>
-                    </div>
-                    <div class="cv-subtitle">Brandeis University</div>
-                    <!-- <ul class="cv-description">
-                        <li>Specialization: AI Application, Reinforcement Learning and Robotics</li>
-                    </ul> -->
-                </div>
-
-                <div class="cv-item">
-                    <div class="cv-header">
-                        <h4 class="cv-title">M.A. in Economics</h4>
-                        <div class="cv-date">2019 - 2021</div>
-                    </div>
-                    <div class="cv-subtitle">Boston University</div>
-                    <!-- <ul class="cv-description">
-                        <li>Specialization: Data Science, Quantitative Economics</li>
-                    </ul> -->
-                </div>
-            </section>
-
-                <div class="cv-item">
-                    <div class="cv-header">
-                        <h4 class="cv-title">Bachelor's Degree</h4>
-                        <div class="cv-date">2014 - 2018</div>
-                    </div>
-                    <div class="cv-subtitle">Jilin University</div>
-                    <!-- <ul class="cv-description">
-                        <li>Specialization: Data Science, Quantitative Economics</li>
-                    </ul> -->
-                </div>
-            </section>
-
-            <section>
-                <h3>Experience</h3>
-                
-                <div class="cv-item">
-                    <div class="cv-header">
-                        <h4 class="cv-title">AI Engineer</h4>
-                        <div class="cv-date">Oct 2025 - Present | Remote</div>
-                    </div>
-                    <div class="cv-subtitle">
-                        <!-- <a href="https://github.com/LogicGate-AI-Lab">LogicGate AI Lab</a> -->
-                         Independent Developer
-                    </div>
-                    <ul class="cv-description">
-                        <li>Developing AI solutions on accounting and financial area.</li>
-                    </ul>
-                </div>
-
-                <div class="cv-item">
-                    <div class="cv-header">
-                        <h4 class="cv-title">Robot Developer</h4>
-                        <div class="cv-date">Sep 2024 - May 2025 | Boston Area, MA</div>
-                    </div>
-                    <div class="cv-subtitle">
-                        <a href="https://github.com/campusrover">Brandeis University Robotics Lab</a>
-                    </div>
-                    <ul class="cv-description">
-                        <li>Developed a <a href="https://github.com/jeffliulab/SmartCleaningRobot">smart cleaning robot</a> with fully self designed cleaning algorithms, achieve sim-to-real application with real-time control and visualization.</li>
-                        <li>Developed a <a href="https://github.com/jeffliulab/SmartGlove">smart glove which can control the robot arm</a> and integrated in an IoT platform.</li>
-                    </ul>
-                </div>
-
-                
-                <div class="cv-item">
-                    <div class="cv-header">
-                        <h4 class="cv-title">Founder, CS Tutor</h4>
-                        <div class="cv-date">2022 - 2024 | Shanghai, China</div>
-                    </div>
-                    <div class="cv-subtitle">Shanghai LogicGate Educational Technology (旒光教育)</div>
-                    <ul class="cv-description">
-                        <li>Focused on AP tutoring. Closed due to back to school.</li>
-                    </ul>
-                </div>
-
-                <div class="cv-item">
-                    <div class="cv-header">
-                        <h4 class="cv-title">Co-Founder, Product Manager</h4>
-                        <div class="cv-date">2022 - 2023 | Shanghai, China</div>
-                    </div>
-                    <div class="cv-subtitle">Shanghai Tian Yuan Xing Wei Technology (天元星位)</div>
-                    <ul class="cv-description">
-                        <li>Launched and run an online lottery mini-program on the WeChat platform.</li>
-                    </ul>
-                </div>
-
-
-
-                <div class="cv-item">
-                    <div class="cv-header">
-                        <h4 class="cv-title">Strategy and Business Analyst</h4>
-                        <div class="cv-date">2021 - 2022 | Shanghai, China</div>
-                    </div>
-                    <div class="cv-subtitle">Ping An International Financial Leasing Co Ltd</div>
-                    <ul class="cv-description">
-                        <li>Led the development of the Automated Business Platform.</li>
-                    </ul>
-                </div>
-
-                <div class="cv-item">
-                    <div class="cv-header">
-                        <h4 class="cv-title">Online Shop Owner</h4>
-                        <div class="cv-date">2020 - 2022 | Shanghai, China</div>
-                    </div>
-                    <div class="cv-subtitle">Huang Chuan Book Store (荒川中古书店)</div>
-                    <ul class="cv-description">
-                        <li>Sold used manga books. Closed due to new government regulations.</li>
-                    </ul>
-                </div>
-
-            </section>
-
-            <section>
-                <h3>Awards</h3>
-                <ul>
-                    <li>2013 VEX Robotics World Championship Design Reward at California</li>
-                    <li>2012 VEX Robotics National Competition Gold Medal at China</li>
-                </ul>
-            </section>
-            
-            <div style="margin-top: 30px;">
-                <a href="/index.html" class="button">Back to Homepage</a>
             </div>
-        </section>
 
-        <section id="five">
-            <div id="contact-placeholder"></div>
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    fetch("/bar_contact.html")
-                        .then(response => response.text())
-                        .then(data => {
-                            document.getElementById("contact-placeholder").innerHTML = data;
-                        })
-                        .catch(error => console.error("Error loading contact:", error));
-                });
-            </script>
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>Quantitative Background</h3>
+                    <span class="date">Master of Quantitative Economics</span>
+                    <span class="date">2019 - 2021 | Boston University</span>
+                    <p>
+During my master's studies in economics, I was introduced to machine learning and learned to manipulate data using Python. This laid the foundation for my later work in automation within the industry.                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>Technical Background</h3>
+                    <span class="date">Master of Computer Science</span>
+                    <span class="date">2024 - 2026 | Brandeis & Tufts University</span>
+                    <p>
+My studies in computer science completely filled the gaps in my technical skills, and with the help of AI tools, I was able to quickly transform countless wild ideas into concrete demos and products. Furthermore, my studies in AI and robotics have placed me at the eye of the AI ​​revolution, allowing me to see opportunities to change the future.                    </p>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h2>My Entrepreneurial Trilogy</h2>
+            </div>
+
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>First Try</h3>
+                    <span class="date">2020 - 2022 | Huang Chuan Bookstore</span>
+                    <p>
+Before I even graduated, I started my first business: an online bookstore. This experience came to an abrupt end due to policy changes, but it taught me the essence of business: buying and selling.                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>Software Try</h3>
+                    <span class="date">2022 - 2023 | Tianyuan Xingwei Tech</span>
+                    <p>
+My partner and I developed and operated a lottery program. This experience introduced me to software entrepreneurship for the first time, and I was deeply fascinated by its low-capital and flexible iteration characteristics.                    </T>
+                </div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>A Successful Business</h3>
+                    <span class="date">2023 - 2024 | LogicGate Education</span>
+                    <p>
+Before coming to the United States, I had built a very successful business by combining my experience from my two previous ventures. However, the labor-intensive and non-replicable nature of education did not align with my pursuit of a scalable and replicable business.                    </p>
+                </div>
+            </div>
+            
+            <div class="section-header">
+                <h2>My Professional Journey</h2>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>Data Analyst</h3>
+                    <span class="date">2021 | Lianwei Data Tech</span>
+                    <p>
+During this period, my biggest takeaway was helping the company optimize several data analysis processes.                    </p>
+                </div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>Strategy and Business Analyst</h3>
+                    <span class="date">2021 - 2022 | Ping An</span>
+                    <p>
+At Ping An, I took what I'd learned and applied it on a bigger scale. I automated complex Excel reports with Python, which led to me helping lead the build-out of a new digital analysis platform.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>Teaching Experience</h3>
+                    <span class="date">2022 - 2024 | Shanghai Jian Qiao University & LogicGate</span>
+                    <p>
+                     Teaching taught me something critical:
+                    </p>
+                    <blockquote>
+                        "Only when you can explain a complex matter in the simplest terms do you truly understand it."
+                    </blockquote>
+                </div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>Software Development Engineer</h3>
+                    <span class="date">2024 - 2025 | Brandeis University Robotics Lab</span>
+                    <p>
+At Brandeis's robotics lab, I learned about robotics and ROS development, and completed the development of a robotic vacuum cleaner and a smart glove for use as teaching demonstrations in the lab.                    </p>
+                </div>
+            </div>
+
+        </div> <div class="section-header">
+            <h2>My Mission Today</h2>
+        </div>
+        
+        <section class="synthesis-box">
+            <h3>&nbsp;&nbsp;&nbsp;&nbsp;My Vision: "Sense, Think, Act" in Financial Fields</h3>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;
+
+My educational background excels at interdisciplinary thinking, my work experience has taught me to use automation to optimize workflows, my robotics development experience has made me realize that robots' "perception, thinking, and execution" can be applied to a wider range of fields, and my business acumen tells me that accounting and taxation are the best application areas for robots (i.e., AI agents). Therefore, I now focus on the field of AI finance and taxation, dedicated to helping millions of small businesses in the United States complete their bookkeeping and tax filing tasks more quickly, conveniently, and professionally.
+            
+            </p>
         </section>
-    </div>
+        
+        
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="/index.html" class="button">Back to Homepage</a>
+        </div>
+
+    </div> <section id="five">
+        <div id="contact-placeholder"></div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                fetch("/bar_contact.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("contact-placeholder").innerHTML = data;
+                    })
+                    .catch(error => console.error("Error loading contact:", error));
+            });
+        </script>
+    </section>
 
     <footer id="footer">
         <div id="footer-placeholder"></div>
@@ -285,6 +429,27 @@
     <script src="/assets/js/breakpoints.min.js"></script>
     <script src="/assets/js/util.js"></script>
     <script src="/assets/js/main.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var timelineItems = document.querySelectorAll('.timeline-item');
+        function isElementEnteringViewport(el) {
+            var rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) - 100
+            );
+        }
+        function checkTimelineItems() {
+            for (var i = 0; i < timelineItems.length; i++) {
+                if (isElementEnteringViewport(timelineItems[i]) && !timelineItems[i].classList.contains('is-visible')) {
+                    timelineItems[i].classList.add('is-visible');
+                }
+            }
+        }
+        checkTimelineItems();
+        window.addEventListener('scroll', checkTimelineItems);
+    });
+    </script>
 
 </body>
 </html>
