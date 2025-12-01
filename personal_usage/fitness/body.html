@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY BIO-DASHBOARD | 数字孪生中控</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+
+    <style>
+        :root {
+            --bg-body: #050505;
+            --bg-panel: rgba(20, 20, 25, 0.6);
+            --accent-cyan: #00f3ff;
+            --accent-purple: #bc13fe;
+            --accent-green: #0aff60;
+            --text-main: #ffffff;
+            --text-dim: #888899;
+            --grid-line: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-body);
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden; /* 只有内容区域滚动 */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部导航 */
+        nav {
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .brand {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .status-badge {
+            font-size: 0.8rem;
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(10, 255, 96, 0.1);
+        }
+
+        /* 主布局 */
+        .main-container {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 70px);
+            position: relative;
+        }
+
+        /* 左侧：身体模型交互区 */
+        .body-map-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            min-width: 350px;
+            /* 径向渐变背景，突出人物 */
+            background: radial-gradient(circle at center, rgba(0,243,255,0.05) 0%, transparent 70%);
+        }
+
+        /* SVG 样式 */
+        .human-model {
+            height: 85%;
+            filter: drop-shadow(0 0 20px rgba(0, 243, 255, 0.1));
+            transition: all 0.5s ease;
+        }
+
+        .muscle-group {
+            fill: transparent;
+            stroke: var(--accent-cyan);
+            stroke-width: 1.5;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+
+        /* 悬停效果 */
+        .muscle-group:hover {
+            fill: rgba(0, 243, 255, 0.1);
+            stroke: var(--accent-cyan);
+            stroke-width: 3;
+            filter: drop-shadow(0 0 8px var(--accent-cyan));
+            opacity: 1;
+        }
+
+        /* 激活（选中）效果 */
+        .muscle-group.active {
+            fill: rgba(188, 19, 254, 0.2);
+            stroke: var(--accent-purple);
+            stroke-width: 3;
+            filter: drop-shadow(0 0 15px var(--accent-purple));
+            opacity: 1;
+        }
+
+        .instruction-text {
+            position: absolute;
+            bottom: 20px;
+            color: var(--text-dim);
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        /* 右侧：数据面板区 */
+        .data-panel-section {
+            flex: 1.2;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            background: rgba(0,0,0,0.2);
+            border-left: 1px solid rgba(255,255,255,0.1);
+            overflow-y: auto;
+        }
+
+        .chart-card {
+            background: var(--bg-panel);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: none; /* 默认隐藏，通过JS控制显示 */
+            animation: slideIn 0.4s ease-out;
+            position: relative;
+        }
+        
+        /* 装饰角标 */
+        .chart-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+        }
+
+        .chart-card.active-panel {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .panel-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8rem;
+            margin: 0;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .panel-subtitle {
+            color: var(--accent-cyan);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 900px) {
+            .main-container { flex-direction: column; height: auto; overflow-y: auto; }
+            body { overflow-y: auto; height: auto; }
+            .body-map-section { height: 500px; }
+            .data-panel-section { min-height: 500px; }
+        }
+
+        /* 覆盖 ChartJS 的 tooltip */
+        #chartjs-tooltip {
+            opacity: 1;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 3px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="brand">Bio-Link <span style="font-weight:300; font-size:0.8em; opacity:0.7;">Interface v2.0</span></div>
+        <div class="status-badge">SYSTEM ONLINE</div>
+    </nav>
+
+    <div class="main-container">
+        <!-- 左侧：人体交互区 -->
+        <div class="body-map-section">
+            <!-- 这是一个简化的、美学的几何肌肉SVG -->
+            <svg class="human-model" viewBox="0 0 200 450" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                <!-- 头部 (全局健康) -->
+                <path id="part-head" class="muscle-group active" d="M100,20 C115,20 120,40 115,55 C110,70 90,70 85,55 C80,40 85,20 100,20 Z" 
+                      onclick="selectPart('health', this)" />
+
+                <!-- 肩部 (Shoulders) -->
+                <path id="part-shoulders" class="muscle-group" d="M70,60 Q85,55 100,58 Q115,55 130,60 L140,75 L130,90 Q115,80 100,82 Q85,80 70,90 L60,75 Z" 
+                      onclick="selectPart('shoulders', this)" />
+
+                <!-- 胸部 (Chest) -->
+                <path id="part-chest" class="muscle-group" d="M75,90 Q100,85 125,90 L120,120 Q100,130 80,120 Z" 
+                      onclick="selectPart('chest', this)" />
+
+                <!-- 手臂 (Arms) - 左 -->
+                <path id="part-arm-l" class="muscle-group" d="M60,75 L45,110 L50,150 L65,130 L70,90 Z" 
+                      onclick="selectPart('arms', this)" />
+                <!-- 手臂 (Arms) - 右 -->
+                <path id="part-arm-r" class="muscle-group" d="M140,75 L155,110 L150,150 L135,130 L130,90 Z" 
+                      onclick="selectPart('arms', this)" />
+
+                <!-- 背部 (Back - 模拟背阔肌在正面的视觉) -->
+                <path id="part-back" class="muscle-group" d="M65,130 L75,125 L75,150 L65,160 Z M135,130 L125,125 L125,150 L135,160 Z" 
+                      onclick="selectPart('back', this)" />
+
+                <!-- 核心 (Core/Abs) -->
+                <path id="part-core" class="muscle-group" d="M75,125 L125,125 L120,165 L80,165 Z" 
+                      onclick="selectPart('core', this)" />
+
+                <!-- 腿部 (Legs) -->
+                <path id="part-legs" class="muscle-group" d="M80,170 L120,170 L115,250 L120,300 L110,400 L90,400 L80,300 L85,250 Z" 
+                      onclick="selectPart('legs', this)" />
+                
+                <!-- 装饰性线条 -->
+                <line x1="100" y1="20" x2="100" y2="450" stroke="rgba(255,255,255,0.05)" stroke-dasharray="5,5"/>
+            </svg>
+
+            <div class="instruction-text">/// CLICK BODY PARTS TO SCAN DATA ///</div>
+        </div>
+
+        <!-- 右侧：数据展示区 -->
+        <div class="data-panel-section">
+            
+            <!-- 1. 全局健康面板 (默认显示) -->
+            <div id="panel-health" class="chart-card active-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2 class="panel-title">System Status</h2>
+                        <span class="panel-subtitle">WEIGHT & CARDIOVASCULAR</span>
+                    </div>
+                </div>
+                <div style="height: 250px; margin-bottom: 30px;">
+                    <canvas id="weightChart"></canvas>
+                </div>
+                <div style="height: 200px;">
+                    <canvas id="restingHeartRateChart"></canvas>
+                </div>
+                <!-- 跑步也在全身健康里 -->
+                 <div style="height: 200px; margin-top: 30px; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px;">
+                    <h3 style="color:var(--accent-cyan); margin:0 0 10px 0;">Running Performance</h3>
+                    <canvas id="runningScoreChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 2. 手臂面板 -->
+            <div id="panel-arms" class="chart-card">
+                <div class="panel-header">
+                    <div>
+                        <h2 class="panel-title">Arm Modules</h2>
+                        <span class="panel-subtitle">BICEPS & TRICEPS LOAD</span>
+                    </div>
+                </div>
+                <div style="height: 300px;">
+                    <canvas id="armChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 3. 胸部面板 -->
+            <div id="panel-chest" class="chart-card">
+                <div class="panel-header">
+                    <div>
+                        <h2 class="panel-title">Chest Armor</h2>
+                        <span class="panel-subtitle">PECTORAL STRENGTH</span>
+                    </div>
+                </div>
+                <div style="height: 300px;">
+                    <canvas id="chestChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 4. 背部面板 -->
+            <div id="panel-back" class="chart-card">
+                <div class="panel-header">
+                    <div>
+                        <h2 class="panel-title">Back Support</h2>
+                        <span class="panel-subtitle">LATS & TRAPS</span>
+                    </div>
+                </div>
+                <div style="height: 300px;">
+                    <canvas id="backChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 5. 肩部面板 -->
+            <div id="panel-shoulders" class="chart-card">
+                <div class="panel-header">
+                    <div>
+                        <h2 class="panel-title">Shoulder Mounts</h2>
+                        <span class="panel-subtitle">DELTOID DEVELOPMENT</span>
+                    </div>
+                </div>
+                <div style="height: 300px;">
+                    <canvas id="shoulderChart"></canvas>
+                </div>
+            </div>
+
+             <!-- 6. 核心面板 -->
+             <div id="panel-core" class="chart-card">
+                <div class="panel-header">
+                    <div>
+                        <h2 class="panel-title">Core Reactor</h2>
+                        <span class="panel-subtitle">ABDOMINAL STABILITY</span>
+                    </div>
+                </div>
+                <div style="height: 300px;">
+                    <canvas id="coreChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 7. 腿部面板 -->
+            <div id="panel-legs" class="chart-card">
+                <div class="panel-header">
+                    <div>
+                        <h2 class="panel-title">Leg Hydraulics</h2>
+                        <span class="panel-subtitle">LOWER BODY POWER</span>
+                    </div>
+                </div>
+                <div style="height: 300px;">
+                    <canvas id="legChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+    // ################# 数据源 (保持不变) #################
+    const allWeightData = [
+        { date: '2025-05-15', weight: 86.0 }, { date: '2025-06-15', weight: 83.0 },
+        { date: '2025-07-15', weight: 81.0 }, { date: '2025-08-26', weight: 79.0 },
+        { date: '2025-09-06', weight: 78.3 }, { date: '2025-09-16', weight: 76.7 },
+        { date: '2025-10-04', weight: 75.3 },
+    ];
+    const restingHeartRateData = [{ date: '2025-05-15', value: 85 }, { date: '2025-08-26', value: 75 }];
+    const runningData = [
+        { date: '2025-08-17', distance: 2.5, time: 30, sprintTime: 0 },
+        { date: '2025-08-24', distance: 2.7, time: 35, sprintTime: 1.5 },
+    ];
+    const armData = [
+        { name: '靠墙二头弯举', data: [{ date: '2025-08-17', value: 10 }, { date: '2025-08-24', value: 10 }] },
+        { name: '集中弯举', data: [{ date: '2025-08-17', value: 5 }, { date: '2025-08-24', value: 7 }] },
+    ];
+    const chestData = [{ name: '胸部训练', data: [] }]; // 示例空数据
+    const backData = [{ name: '引体向上', data: [{ date: '2025-08-24', value: 0 }] }];
+    const shoulderData = [
+        { name: '侧平举', data: [{ date: '2025-08-22', value: 5 }, { date: '2025-08-29', value: 5 }] },
+        { name: '推举', data: [{ date: '2025-08-22', value: 5 }, { date: '2025-08-29', value: 9 }] },
+    ];
+    const legData = [{ name: '腿部训练', data: [] }];
+    const coreData = [{ name: '平板支撑', data: [{ date: '2025-08-26', value: 55 }] }];
+
+    // 计算跑步分数
+    const runningScoreData = runningData.map(run => {
+        const score = run.time * (run.distance / (run.time/60)) * (1 + (run.sprintTime / run.time));
+        return { date: run.date, value: score };
+    });
+
+    // ################# 交互逻辑 #################
+
+    function selectPart(partId, element) {
+        // 1. 处理 SVG 高亮
+        // 移除所有激活状态
+        document.querySelectorAll('.muscle-group').forEach(el => el.classList.remove('active'));
+        
+        // 如果是手臂，左右都激活
+        if (partId === 'arms') {
+            document.getElementById('part-arm-l').classList.add('active');
+            document.getElementById('part-arm-r').classList.add('active');
+        } else {
+            element.classList.add('active');
+        }
+
+        // 2. 处理右侧面板显示
+        // 隐藏所有面板
+        document.querySelectorAll('.chart-card').forEach(panel => panel.classList.remove('active-panel'));
+        
+        // 显示目标面板
+        const targetPanel = document.getElementById(`panel-${partId}`);
+        if(targetPanel) targetPanel.classList.add('active-panel');
+    }
+
+    // ################# 图表初始化 #################
+    
+    // 设置全局样式
+    Chart.defaults.color = '#888899';
+    Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.05)';
+    Chart.defaults.font.family = "'Rajdhani', sans-serif";
+
+    function createGradient(ctx, color) {
+        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, color.replace(')', ', 0.5)').replace('rgb', 'rgba'));
+        gradient.addColorStop(1, color.replace(')', ', 0)').replace('rgb', 'rgba'));
+        return gradient;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // 1. 体重 (Health Panel)
+        const weightCtx = document.getElementById('weightChart').getContext('2d');
+        new Chart(weightCtx, {
+            type: 'line',
+            data: { datasets: [{ 
+                label: 'Weight (KG)', 
+                data: allWeightData, 
+                parsing: {xAxisKey: 'date', yAxisKey: 'weight'},
+                borderColor: '#00f3ff', 
+                backgroundColor: createGradient(weightCtx, 'rgb(0, 243, 255)'),
+                tension: 0.4, fill: true, pointRadius: 4, pointBackgroundColor: '#000'
+            }] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { x: {type: 'time', time: {unit: 'month'}} } }
+        });
+
+        // 2. 心率 (Health Panel)
+        const rhrCtx = document.getElementById('restingHeartRateChart').getContext('2d');
+        new Chart(rhrCtx, {
+            type: 'line',
+            data: { datasets: [{ 
+                label: 'Resting HR', 
+                data: restingHeartRateData, 
+                parsing: {xAxisKey: 'date', yAxisKey: 'value'},
+                borderColor: '#bc13fe', 
+                backgroundColor: createGradient(rhrCtx, 'rgb(188, 19, 254)'),
+                tension: 0.4, fill: true
+            }] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { x: {type: 'time', time: {unit: 'month'}} } }
+        });
+
+        // 3. 跑步 (Health Panel)
+        new Chart(document.getElementById('runningScoreChart'), {
+            type: 'bar',
+            data: { datasets: [{ 
+                label: 'Running Score', 
+                data: runningScoreData, 
+                parsing: {xAxisKey: 'date', yAxisKey: 'value'},
+                backgroundColor: '#0aff60', borderRadius: 4
+            }] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { x: {type: 'time', time: {unit: 'week'}} } }
+        });
+
+        // 4. 通用力量图表生成器
+        function createStrengthChart(canvasId, data, color) {
+            new Chart(document.getElementById(canvasId), {
+                type: 'line',
+                data: { 
+                    datasets: data.map(d => ({
+                        label: d.name,
+                        data: d.data,
+                        parsing: {xAxisKey: 'date', yAxisKey: 'value'},
+                        borderColor: color,
+                        tension: 0.3,
+                        pointBackgroundColor: '#000'
+                    }))
+                },
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false,
+                    scales: { x: {type: 'time', time: {unit: 'week'}} } 
+                }
+            });
+        }
+
+        createStrengthChart('armChart', armData, '#00f3ff');
+        createStrengthChart('chestChart', chestData, '#bc13fe');
+        createStrengthChart('backChart', backData, '#0aff60');
+        createStrengthChart('shoulderChart', shoulderData, '#ff0055');
+        createStrengthChart('legChart', legData, '#ffff00');
+        createStrengthChart('coreChart', coreData, '#ffffff');
+    });
+    </script>
+</body>
+</html>

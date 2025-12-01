@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>我的旅行足迹 - 3D Globe</title>
+  <style>
+    body { margin: 0; padding: 0; overflow: hidden; background-color: #020202; font-family: "Microsoft YaHei", sans-serif; }
+    #globeViz { width: 100vw; height: 100vh; }
+
+    /* --- UI 控制面板 --- */
+    .controls {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(5px);
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      z-index: 10;
+      min-width: 220px;
+    }
+
+    .controls h3 {
+      margin: 0 0 12px 0;
+      font-size: 14px;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 8px;
+    }
+
+    .group { margin-bottom: 18px; }
+    .group:last-child { margin-bottom: 0; }
+
+    /* 复选框样式 */
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+      user-select: none;
+      transition: opacity 0.2s;
+    }
+    .checkbox-item:hover { opacity: 0.7; }
+    .checkbox-item input { margin-right: 10px; cursor: pointer; transform: scale(1.1); }
+
+    /* 颜色点 */
+    .color-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    /* 滑动条样式 */
+    .slider-container {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #666;
+    }
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+    input[type=range] {
+      width: 100%;
+      cursor: pointer;
+      accent-color: #666; /* 滑块颜色 */
+    }
+
+    /* 悬浮提示框 */
+    .tooltip {
+      background: rgba(20, 20, 30, 0.9);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      pointer-events: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+      transform: translateY(-10px);
+    }
+  </style>
+  
+  <script src="//unpkg.com/globe.gl"></script>
+</head>
+<body>
+
+  <!-- 控制面板 -->
+  <div class="controls">
+    
+    <!-- 1. 旋转控制 -->
+    <div class="group">
+      <h3>地球控制 / Control</h3>
+      <label class="checkbox-item">
+        <input type="checkbox" id="rotate-toggle" checked onchange="updateRotation()">
+        自动旋转 (Auto Rotate)
+      </label>
+      
+      <div class="slider-container">
+        <div class="slider-header">
+          <span>速度 (Speed)</span>
+          <span id="speed-display">0.25</span>
+        </div>
+        <!-- 范围从 0 到 3，步长 0.05 -->
+        <input type="range" id="speed-slider" min="0" max="3" step="0.05" value="0.25" oninput="updateRotation()">
+      </div>
+    </div>
+
+    <!-- 2. 筛选控制 -->
+    <div class="group">
+      <h3>足迹类型 / Filter</h3>
+      <label class="checkbox-item">
+        <input type="checkbox" value="been-solo" checked onchange="renderMap()">
+        <span class="color-dot" style="background: #00BFFF; box-shadow: 0 0 5px #00BFFF;"></span>
+        独行 (Solo)
+      </label>
+
+      <label class="checkbox-item">
+        <input type="checkbox" value="been-couple" checked onchange="renderMap()">
+        <span class="color-dot" style="background: #FF69B4; box-shadow: 0 0 5px #FF69B4;"></span>
+        双人 (Couple)
+      </label>
+
+      <label class="checkbox-item">
+        <input type="checkbox" value="want" checked onchange="renderMap()">
+        <span class="color-dot" style="background: #FF8C00; box-shadow: 0 0 5px #FF8C00;"></span>
+        想去 (Want)
+      </label>
+    </div>
+  </div>
+
+  <div id="globeViz"></div>
+
+  <script>
+    // --- 1. 数据配置 (直接写入，无需读取文件) ---
+    const travelData = [
+  {
+    "lat": 21.355175542968684,
+    "lng": -157.87305229968058,
+    "type": "want"
+  },
+  {
+    "lat": 20.805817592030525,
+    "lng": -156.30220105694062,
+    "type": "want"
+  },
+  {
+    "lat": 19.58312319783298,
+    "lng": -155.42209249408273,
+    "type": "want"
+  },
+  {
+    "lat": 59.349605026743184,
+    "lng": 18.556939638506268,
+    "type": "want"
+  },
+  {
+    "lat": 60.01542441526289,
+    "lng": 10.557330454250462,
+    "type": "want"
+  },
+  {
+    "lat": 51.571763102469454,
+    "lng": -0.108373936986923,
+    "type": "want"
+  },
+  {
+    "lat": 53.40532129283879,
+    "lng": -6.569519482604003,
+    "type": "want"
+  },
+  {
+    "lat": 55.86777967536792,
+    "lng": -4.020607662465264,
+    "type": "want"
+  },
+  {
+    "lat": 51.469869933918375,
+    "lng": -2.6419812159237877,
+    "type": "want"
+  },
+  {
+    "lat": 56.23991154856071,
+    "lng": 9.49475844297867,
+    "type": "want"
+  },
+  {
+    "lat": 55.62417723800534,
+    "lng": 12.505600361228801,
+    "type": "want"
+  },
+  {
+    "lat": 43.77509534755956,
+    "lng": 7.450902250297959,
+    "type": "want"
+  },
+  {
+    "lat": 45.723970742797306,
+    "lng": 4.8899332334646415,
+    "type": "want"
+  },
+  {
+    "lat": 40.432310554330485,
+    "lng": -3.800896122169624,
+    "type": "want"
+  },
+  {
+    "lat": 41.468861314196,
+    "lng": 2.154305339901686,
+    "type": "want"
+  },
+  {
+    "lat": 33.54134609069428,
+    "lng": -8.394387346828609,
+    "type": "want"
+  },
+  {
+    "lat": 37.46582738761692,
+    "lng": 14.965604338527859,
+    "type": "want"
+  },
+  {
+    "lat": 45.524435969060434,
+    "lng": 9.054114271774006,
+    "type": "want"
+  },
+  {
+    "lat": 41.885541317286176,
+    "lng": 12.52001537332826,
+    "type": "want"
+  },
+  {
+    "lat": 38.83551621974005,
+    "lng": 22.218377127466212,
+    "type": "want"
+  },
+  {
+    "lat": 41.27198712181829,
+    "lng": 29.146686936407537,
+    "type": "want"
+  },
+  {
+    "lat": 55.52009928452908,
+    "lng": 37.80920989896706,
+    "type": "want"
+  },
+  {
+    "lat": 52.100092928838116,
+    "lng": 21.40698119988081,
+    "type": "want"
+  },
+  {
+    "lat": 41.864755630621495,
+    "lng": -87.71057744395526,
+    "type": "want"
+  },
+  {
+    "lat": 43.09431949915202,
+    "lng": -79.07904421582654,
+    "type": "want"
+  },
+  {
+    "lat": -34.64295356040981,
+    "lng": -58.421069583289224,
+    "type": "want"
+  },
+  {
+    "lat": -54.68804634513599,
+    "lng": -66.13642271718585,
+    "type": "want"
+  },
+  {
+    "lat": -65.59916721887481,
+    "lng": -63.27276889261115,
+    "type": "want"
+  },
+  {
+    "lat": -34.4624413519732,
+    "lng": -70.4758514488878,
+    "type": "want"
+  },
+  {
+    "lat": 47.88279359912276,
+    "lng": -122.16547077201407,
+    "type": "want"
+  },
+  {
+    "lat": 24.638324523159525,
+    "lng": 55.59746441889563,
+    "type": "want"
+  },
+  {
+    "lat": 39.868148946545205,
+    "lng": 74.44941976145388,
+    "type": "want"
+  },
+  {
+    "lat": 44.14548895154066,
+    "lng": 87.63558874649094,
+    "type": "want"
+  },
+  {
+    "lat": 40.94336287271152,
+    "lng": 80.33528892232192,
+    "type": "want"
+  },
+  {
+    "lat": 47.739695307595895,
+    "lng": 87.96128998533503,
+    "type": "want"
+  },
+  {
+    "lat": 29.832008083071333,
+    "lng": 91.10388199991723,
+    "type": "want"
+  },
+  {
+    "lat": 29.526407049493894,
+    "lng": 94.33449340125132,
+    "type": "want"
+  },
+  {
+    "lat": 36.94857038358618,
+    "lng": 99.83453521897759,
+    "type": "want"
+  },
+  {
+    "lat": 39.78196415769157,
+    "lng": 98.50675719018143,
+    "type": "want"
+  },
+  {
+    "lat": 39.646675375567746,
+    "lng": 101.56155300504832,
+    "type": "want"
+  },
+  {
+    "lat": 37.88990858395455,
+    "lng": 102.58348110138867,
+    "type": "want"
+  },
+  {
+    "lat": 36.07243606561559,
+    "lng": 103.78122478419623,
+    "type": "want"
+  },
+  {
+    "lat": 38.9320635732098,
+    "lng": 100.4077632188576,
+    "type": "want"
+  },
+  {
+    "lat": 38.57760804412404,
+    "lng": 106.2684312908997,
+    "type": "want"
+  },
+  {
+    "lat": -16.76556792431324,
+    "lng": 145.7055121594445,
+    "type": "want"
+  },
+  {
+    "lat": -17.312065061868736,
+    "lng": 151.06788754669296,
+    "type": "want"
+  },
+  {
+    "lat": -17.74435249994238,
+    "lng": 178.7144662876059,
+    "type": "want"
+  },
+  {
+    "lat": -37.81131623355628,
+    "lng": 175.90141690413125,
+    "type": "want"
+  },
+  {
+    "lat": -43.73181022428637,
+    "lng": 172.12138179508736,
+    "type": "want"
+  },
+  {
+    "lat": 1.664871152667258,
+    "lng": 103.7213672019001,
+    "type": "want"
+  },
+  {
+    "lat": -8.30428517896372,
+    "lng": 115.12166059982454,
+    "type": "want"
+  },
+  {
+    "lat": 30.691094660977733,
+    "lng": 31.578469557137016,
+    "type": "want"
+  },
+  {
+    "lat": 36.88918703683923,
+    "lng": 10.029797853681037,
+    "type": "want"
+  },
+  {
+    "lat": 44.346157661663625,
+    "lng": 23.7856764237287,
+    "type": "want"
+  },
+  {
+    "lat": 45.21710262567409,
+    "lng": 14.594135808395096,
+    "type": "want"
+  },
+  {
+    "lat": 38.72580980078288,
+    "lng": -9.313101365035868,
+    "type": "want"
+  },
+  {
+    "lat": 52.75356939662452,
+    "lng": 106.96289062500001,
+    "type": "want"
+  },
+  {
+    "lat": 44.61812816499797,
+    "lng": -110.62683105468751,
+    "type": "want"
+  },
+  {
+    "lat": 36.45123516964157,
+    "lng": -113.72772216796876,
+    "type": "want"
+  },
+  {
+    "lat": 36.51472381825331,
+    "lng": -117.03186035156251,
+    "type": "want"
+  },
+  {
+    "lat": 50.1138945995807,
+    "lng": 14.436035156250002,
+    "type": "want"
+  },
+  {
+    "lat": 26.541662341446347,
+    "lng": 106.61132812500001,
+    "type": "want"
+  },
+  {
+    "lat": 18.37998579989722,
+    "lng": 109.61059570312501,
+    "type": "want"
+  },
+  {
+    "lat": 64.23975727908181,
+    "lng": -20.126953125000004,
+    "type": "want"
+  },
+  {
+    "lat": 34.98350134091273,
+    "lng": 135.29488162303815,
+    "type": "want"
+  },
+  {
+    "lat": 32.67429615118377,
+    "lng": 131.01076157684662,
+    "type": "want"
+  },
+  {
+    "lat": 44.2120969872808,
+    "lng": 142.85734128030956,
+    "type": "want"
+  },
+  {
+    "lat": 48.457617944940715,
+    "lng": 69.91280945472974,
+    "type": "want"
+  },
+  {
+    "lat": 62.584866214134536,
+    "lng": -42.20803809251986,
+    "type": "want"
+  },
+  {
+    "lat": 49.57788470933478,
+    "lng": -123.61935251424653,
+    "type": "want"
+  },
+  {
+    "lat": 64.69128440781287,
+    "lng": -151.5436257452525,
+    "type": "want"
+  },
+  {
+    "lat": 42.913847839065866,
+    "lng": 130.37603918483515,
+    "type": "been-solo"
+  },
+  {
+    "lat": 43.00233826318808,
+    "lng": 129.47498430419094,
+    "type": "been-solo"
+  },
+  {
+    "lat": 42.080546233864176,
+    "lng": 127.99116581127929,
+    "type": "been-solo"
+  },
+  {
+    "lat": 43.93313254028928,
+    "lng": 125.249541509807,
+    "type": "been-solo"
+  },
+  {
+    "lat": 45.75277022371868,
+    "lng": 126.59562959369622,
+    "type": "been-solo"
+  },
+  {
+    "lat": 50.18103029854491,
+    "lng": 127.37629089616979,
+    "type": "been-solo"
+  },
+  {
+    "lat": 50.29510765274612,
+    "lng": 127.55958116932186,
+    "type": "been-solo"
+  },
+  {
+    "lat": 48.48916651363062,
+    "lng": 135.01168486062878,
+    "type": "been-solo"
+  },
+  {
+    "lat": 48.79244958735294,
+    "lng": 132.92677635157492,
+    "type": "been-solo"
+  },
+  {
+    "lat": 43.11418437832023,
+    "lng": 131.9050773962485,
+    "type": "been-solo"
+  },
+  {
+    "lat": 38.303866718671955,
+    "lng": 109.7440476006106,
+    "type": "been-solo"
+  },
+  {
+    "lat": 41.687898193612256,
+    "lng": 111.46923804281963,
+    "type": "been-solo"
+  },
+  {
+    "lat": 29.618541343361432,
+    "lng": 106.61080878593397,
+    "type": "been-solo"
+  },
+  {
+    "lat": 30.701972455425977,
+    "lng": 104.07247125631437,
+    "type": "been-solo"
+  },
+  {
+    "lat": 30.604206999680212,
+    "lng": 122.07217369596826,
+    "type": "been-solo"
+  },
+  {
+    "lat": 35.66496342683894,
+    "lng": 139.3138150604137,
+    "type": "been-solo"
+  },
+  {
+    "lat": 35.6254085141653,
+    "lng": 139.2637119686744,
+    "type": "been-solo"
+  },
+  {
+    "lat": 35.000103461030065,
+    "lng": 135.76883238963512,
+    "type": "been-solo"
+  },
+  {
+    "lat": 34.68661073007512,
+    "lng": 135.5051090099344,
+    "type": "been-solo"
+  },
+  {
+    "lat": 34.684351063530954,
+    "lng": 135.18506970019337,
+    "type": "been-solo"
+  },
+  {
+    "lat": 28.37145516046478,
+    "lng": 112.9426807529131,
+    "type": "been-solo"
+  },
+  {
+    "lat": 25.63921508384696,
+    "lng": 100.23941447263145,
+    "type": "been-solo"
+  },
+  {
+    "lat": 24.941214639575595,
+    "lng": 102.67784924716946,
+    "type": "been-solo"
+  },
+  {
+    "lat": 21.735024027124766,
+    "lng": 100.74460744595785,
+    "type": "been-solo"
+  },
+  {
+    "lat": 23.15727918457788,
+    "lng": 113.29344493005154,
+    "type": "been-solo"
+  },
+  {
+    "lat": 22.541191805454098,
+    "lng": 114.07228747278035,
+    "type": "been-solo"
+  },
+  {
+    "lat": 25.27436285525385,
+    "lng": 110.33703462762342,
+    "type": "been-solo"
+  },
+  {
+    "lat": 36.15867860414006,
+    "lng": 120.41384312816133,
+    "type": "been-solo"
+  },
+  {
+    "lat": 37.49432813796546,
+    "lng": 121.41177486271847,
+    "type": "been-solo"
+  },
+  {
+    "lat": 37.50304890191801,
+    "lng": 122.10404873443291,
+    "type": "been-solo"
+  },
+  {
+    "lat": 36.66122378322628,
+    "lng": 117.07132757181043,
+    "type": "been-solo"
+  },
+  {
+    "lat": 39.09878423041931,
+    "lng": 117.1812123133524,
+    "type": "been-solo"
+  },
+  {
+    "lat": 38.99634371417792,
+    "lng": 117.71964754690808,
+    "type": "been-solo"
+  },
+  {
+    "lat": 39.94666522095777,
+    "lng": 119.62065357558427,
+    "type": "been-solo"
+  },
+  {
+    "lat": 38.91086316558721,
+    "lng": 121.59857892333982,
+    "type": "been-solo"
+  },
+  {
+    "lat": 38.80815046381402,
+    "lng": 121.14805148301774,
+    "type": "been-solo"
+  },
+  {
+    "lat": 41.79179065997665,
+    "lng": 123.4226656329366,
+    "type": "been-solo"
+  },
+  {
+    "lat": 41.05232113605831,
+    "lng": 121.11963926382911,
+    "type": "been-solo"
+  },
+  {
+    "lat": 30.683662980600555,
+    "lng": 114.28388407201726,
+    "type": "been-solo"
+  },
+  {
+    "lat": 25.062482606033967,
+    "lng": 121.52157161706333,
+    "type": "been-solo"
+  },
+  {
+    "lat": 24.081051089024843,
+    "lng": 120.61115709842586,
+    "type": "been-solo"
+  },
+  {
+    "lat": 23.023047693382274,
+    "lng": 120.17161813225796,
+    "type": "been-solo"
+  },
+  {
+    "lat": 22.617781485934962,
+    "lng": 120.30347982210834,
+    "type": "been-solo"
+  },
+  {
+    "lat": 21.977064892483337,
+    "lng": 120.78697268489303,
+    "type": "been-solo"
+  },
+  {
+    "lat": 23.978628201605723,
+    "lng": 121.59289690870793,
+    "type": "been-solo"
+  },
+  {
+    "lat": 24.48507507998297,
+    "lng": 118.03843776707325,
+    "type": "been-solo"
+  },
+  {
+    "lat": 26.050616234609443,
+    "lng": 119.24716992403496,
+    "type": "been-solo"
+  },
+  {
+    "lat": 33.84472725472375,
+    "lng": -117.89905545207603,
+    "type": "been-solo"
+  },
+  {
+    "lat": 37.77424861093427,
+    "lng": -122.46322078561559,
+    "type": "been-solo"
+  },
+  {
+    "lat": 37.87357385447522,
+    "lng": -122.53844319919499,
+    "type": "been-solo"
+  },
+  {
+    "lat": 37.868150657283124,
+    "lng": -122.28021405657132,
+    "type": "been-solo"
+  },
+  {
+    "lat": 25.75299371981818,
+    "lng": -80.25583380139372,
+    "type": "been-solo"
+  },
+  {
+    "lat": 24.603072768513336,
+    "lng": -81.76634728780458,
+    "type": "been-solo"
+  },
+  {
+    "lat": 38.88962529496,
+    "lng": -77.04767576684985,
+    "type": "been-solo"
+  },
+  {
+    "lat": 40.70661439724559,
+    "lng": -74.04325846486935,
+    "type": "been-solo"
+  },
+  {
+    "lat": 20.992423712743353,
+    "lng": -87.00904050556147,
+    "type": "been-solo"
+  },
+  {
+    "lat": 48.90986895827369,
+    "lng": 2.335393720106907,
+    "type": "been-solo"
+  },
+  {
+    "lat": 52.545403940718,
+    "lng": 13.341728738612126,
+    "type": "been-solo"
+  },
+  {
+    "lat": 46.681769775041,
+    "lng": 7.848613263517704,
+    "type": "been-solo"
+  },
+  {
+    "lat": 53.60139399011686,
+    "lng": 9.848381131008002,
+    "type": "been-solo"
+  },
+  {
+    "lat": 51.35236980391704,
+    "lng": 6.947419662241467,
+    "type": "been-solo"
+  },
+  {
+    "lat": 50.963114822857825,
+    "lng": 6.967239851206416,
+    "type": "been-solo"
+  },
+  {
+    "lat": 47.569848189706555,
+    "lng": 19.01103029195863,
+    "type": "been-solo"
+  },
+  {
+    "lat": 48.16313806956855,
+    "lng": 17.097196642106177,
+    "type": "been-solo"
+  },
+  {
+    "lat": 48.186440658020686,
+    "lng": 16.354023920960397,
+    "type": "been-solo"
+  },
+  {
+    "lat": -27.45506640858711,
+    "lng": 153.13721013115725,
+    "type": "been-solo"
+  },
+  {
+    "lat": -34.460655288605274,
+    "lng": 150.8296305587758,
+    "type": "been-solo"
+  },
+  {
+    "lat": -33.874337971264886,
+    "lng": 151.23148713030483,
+    "type": "been-solo"
+  },
+  {
+    "lat": -37.837236079256265,
+    "lng": 144.96805686241228,
+    "type": "been-solo"
+  },
+  {
+    "lat": -38.68707681786207,
+    "lng": 143.13060533693346,
+    "type": "been-solo"
+  },
+  {
+    "lat": 31.470998539639247,
+    "lng": 104.69287756168066,
+    "type": "been-solo"
+  },
+  {
+    "lat": 36.61687225327727,
+    "lng": -121.85485839843751,
+    "type": "been-solo"
+  },
+  {
+    "lat": 29.25915651249482,
+    "lng": 110.36865234375001,
+    "type": "been-solo"
+  },
+  {
+    "lat": 39.61157787547211,
+    "lng": 109.71108217814802,
+    "type": "been-couple"
+  },
+  {
+    "lat": 38.853818695107435,
+    "lng": 110.49126384309606,
+    "type": "been-couple"
+  },
+  {
+    "lat": 40.67032214315083,
+    "lng": 111.73296142252038,
+    "type": "been-couple"
+  },
+  {
+    "lat": 39.89046196816586,
+    "lng": 116.38108598974596,
+    "type": "been-couple"
+  },
+  {
+    "lat": 40.09257710787219,
+    "lng": 113.30431322657061,
+    "type": "been-couple"
+  },
+  {
+    "lat": 37.855269153267805,
+    "lng": 112.5834404311274,
+    "type": "been-couple"
+  },
+  {
+    "lat": 34.380045278772414,
+    "lng": 108.89680735239416,
+    "type": "been-couple"
+  },
+  {
+    "lat": 33.07224490526288,
+    "lng": 106.99015042650944,
+    "type": "been-couple"
+  },
+  {
+    "lat": 33.37109837879814,
+    "lng": 106.09458978294235,
+    "type": "been-couple"
+  },
+  {
+    "lat": 26.874130248947413,
+    "lng": 100.22514100622534,
+    "type": "been-couple"
+  },
+  {
+    "lat": 27.687003430169604,
+    "lng": 100.76934733977023,
+    "type": "been-couple"
+  },
+  {
+    "lat": 31.216853774371625,
+    "lng": 121.46535879700717,
+    "type": "been-couple"
+  },
+  {
+    "lat": 30.904125277179958,
+    "lng": 121.89635810950112,
+    "type": "been-couple"
+  },
+  {
+    "lat": 31.33933643929331,
+    "lng": 120.62444222615274,
+    "type": "been-couple"
+  },
+  {
+    "lat": 30.23899604602044,
+    "lng": 120.21237229934086,
+    "type": "been-couple"
+  },
+  {
+    "lat": 29.548800936129105,
+    "lng": 119.06959673965498,
+    "type": "been-couple"
+  },
+  {
+    "lat": 32.05361913673757,
+    "lng": 118.7891073728688,
+    "type": "been-couple"
+  },
+  {
+    "lat": 43.07665197099582,
+    "lng": 141.34985086289197,
+    "type": "been-couple"
+  },
+  {
+    "lat": 43.196969639979926,
+    "lng": 140.91031189672407,
+    "type": "been-couple"
+  },
+  {
+    "lat": 35.68189304429411,
+    "lng": 139.79521997931408,
+    "type": "been-couple"
+  },
+  {
+    "lat": 28.67835710435292,
+    "lng": 115.73436266037135,
+    "type": "been-couple"
+  },
+  {
+    "lat": 28.736203089711378,
+    "lng": 121.36046142732047,
+    "type": "been-couple"
+  },
+  {
+    "lat": 34.6473519996455,
+    "lng": 113.51689699923833,
+    "type": "been-couple"
+  },
+  {
+    "lat": 34.6473519996455,
+    "lng": 112.37409568720179,
+    "type": "been-couple"
+  },
+  {
+    "lat": 34.01416008444361,
+    "lng": 113.89819514775874,
+    "type": "been-couple"
+  },
+  {
+    "lat": 32.7627162805339,
+    "lng": -97.11281842298432,
+    "type": "been-couple"
+  },
+  {
+    "lat": 30.194495821731028,
+    "lng": -97.83805771716133,
+    "type": "been-couple"
+  },
+  {
+    "lat": 29.43151996622814,
+    "lng": -98.5193431147216,
+    "type": "been-couple"
+  },
+  {
+    "lat": 29.75649579641251,
+    "lng": -95.28873171338752,
+    "type": "been-couple"
+  },
+  {
+    "lat": 34.02620959411079,
+    "lng": -118.2263678894281,
+    "type": "been-couple"
+  },
+  {
+    "lat": 33.97626035489117,
+    "lng": -118.45586522218352,
+    "type": "been-couple"
+  },
+  {
+    "lat": 34.0567237298766,
+    "lng": -117.72049274707034,
+    "type": "been-couple"
+  },
+  {
+    "lat": 36.16886480581185,
+    "lng": -115.2394700904893,
+    "type": "been-couple"
+  },
+  {
+    "lat": 40.76223634025342,
+    "lng": -73.98306062791522,
+    "type": "been-couple"
+  },
+  {
+    "lat": 40.70243524710014,
+    "lng": -73.98936819328618,
+    "type": "been-couple"
+  },
+  {
+    "lat": 40.746950768026586,
+    "lng": -73.95296887265042,
+    "type": "been-couple"
+  },
+  {
+    "lat": 40.78415433474671,
+    "lng": -73.82316752170395,
+    "type": "been-couple"
+  },
+  {
+    "lat": 42.360287640174136,
+    "lng": -71.06156533164021,
+    "type": "been-couple"
+  },
+  {
+    "lat": 42.37396081272662,
+    "lng": -71.11816013649506,
+    "type": "been-couple"
+  },
+  {
+    "lat": 42.35264079152003,
+    "lng": -71.13017878010122,
+    "type": "been-couple"
+  },
+  {
+    "lat": 42.40947810335503,
+    "lng": -70.99213607353911,
+    "type": "been-couple"
+  },
+  {
+    "lat": 42.36586854849758,
+    "lng": -71.25848061411699,
+    "type": "been-couple"
+  },
+  {
+    "lat": 42.40741820740202,
+    "lng": -71.11824356338012,
+    "type": "been-couple"
+  },
+  {
+    "lat": 42.40367703151326,
+    "lng": -71.08862619163638,
+    "type": "been-couple"
+  },
+  {
+    "lat": 42.68593546104893,
+    "lng": -70.7790424413637,
+    "type": "been-couple"
+  },
+  {
+    "lat": 42.05208950989815,
+    "lng": -70.18829946246586,
+    "type": "been-couple"
+  },
+  {
+    "lat": 42.076565454193194,
+    "lng": -70.22890766186967,
+    "type": "been-couple"
+  },
+  {
+    "lat": 18.439751403248643,
+    "lng": -66.11254901440844,
+    "type": "been-couple"
+  },
+  {
+    "lat": 18.32831762407706,
+    "lng": -65.34168244060038,
+    "type": "been-couple"
+  },
+  {
+    "lat": 18.102642922892095,
+    "lng": -65.45336997239687,
+    "type": "been-couple"
+  },
+  {
+    "lat": 18.113090607749978,
+    "lng": -65.5735564084584,
+    "type": "been-couple"
+  },
+  {
+    "lat": 18.14867335624052,
+    "lng": -65.4447852269639,
+    "type": "been-couple"
+  },
+  {
+    "lat": 32.70555096292986,
+    "lng": -117.1528902273901,
+    "type": "been-couple"
+  },
+  {
+    "lat": 33.92822381519273,
+    "lng": -115.90850830078126,
+    "type": "been-couple"
+  },
+  {
+    "lat": 33.82157547438011,
+    "lng": -116.55052185058595,
+    "type": "been-couple"
+  },
+  {
+    "lat": 33.6676151081023,
+    "lng": -117.84347534179689,
+    "type": "been-couple"
+  },
+  {
+    "lat": 31.12688378598179,
+    "lng": 120.26870727539062,
+    "type": "been-couple"
+  }
+];
+
+    // --- 2. 颜色美化配置 ---
+    const colorMap = {
+      'been-solo': '#00BFFF',   // DeepSkyBlue - 优雅的深天蓝 (不刺眼)
+      'been-couple': '#FF69B4', // HotPink - 柔和的热粉色
+      'want': '#FF8C00'         // DarkOrange - 深橙色 (在蓝色地球上对比度极佳)
+    };
+
+    let globe;
+
+    // --- 3. 初始化地球 ---
+    function initGlobe() {
+      const globeEl = document.getElementById('globeViz');
+      
+      globe = window.Globe()(globeEl)
+        // 使用高清白天纹理
+        .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+        // 宇宙背景
+        .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
+        // 大气层调整 (更自然)
+        .atmosphereColor('#87CEEB') 
+        .atmosphereAltitude(0.15)
+        
+        // 悬浮提示框逻辑
+        .labelLabel(d => `
+          <div class="tooltip">
+             <div style="font-weight:bold; color:${colorMap[d.type]}; margin-bottom:3px;">
+               ${d.type.toUpperCase().replace('-', ' ')}
+             </div>
+             <div>Lat: ${d.lat.toFixed(2)} | Lng: ${d.lng.toFixed(2)}</div>
+          </div>
+        `)
+        .labelSize(0)
+        .labelDotRadius(0.5);
+
+      // 初始化旋转状态
+      updateRotation();
+      
+      // 初始渲染数据
+      renderMap();
+    }
+
+    // --- 4. 核心功能：旋转控制 (修复版) ---
+    function updateRotation() {
+      if (!globe) return;
+
+      const isRotate = document.getElementById('rotate-toggle').checked;
+      const speed = document.getElementById('speed-slider').value;
+
+      // 更新显示的数值
+      document.getElementById('speed-display').innerText = speed;
+
+      // 直接控制 Globe 的控制器
+      const controls = globe.controls();
+      controls.autoRotate = isRotate;
+      controls.autoRotateSpeed = parseFloat(speed);
+    }
+
+    // --- 5. 核心功能：数据渲染 ---
+    function renderMap() {
+      if (!globe) return;
+
+      // 获取勾选的类型
+      const checkboxes = document.querySelectorAll('.group input[type="checkbox"]:not(#rotate-toggle)');
+      const activeTypes = new Set();
+      checkboxes.forEach(cb => {
+        if (cb.checked) activeTypes.add(cb.value);
+      });
+
+      // 过滤数据
+      const filteredData = travelData.filter(d => activeTypes.has(d.type));
+
+      // >>> 渲染层级 1：实心点 <<<
+      globe.pointsData(filteredData)
+        .pointLat(d => d.lat)
+        .pointLng(d => d.lng)
+        .pointColor(d => colorMap[d.type])
+        .pointAltitude(0.01) // 微微抬起
+        .pointRadius(0.5);   // 点的大小
+
+      // >>> 渲染层级 2：呼吸光环 <<<
+      globe.ringsData(filteredData)
+        .ringLat(d => d.lat)
+        .ringLng(d => d.lng)
+        .ringColor(d => colorMap[d.type])
+        .ringMaxRadius(3)        // 光环最大扩散半径
+        .ringPropagationSpeed(2) // 扩散速度
+        .ringRepeatPeriod(1200); // 呼吸频率 (毫秒)
+    }
+
+    // 启动!
+    initGlobe();
+
+  </script>
+</body>
+</html>
