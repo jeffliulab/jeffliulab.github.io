@@ -1,205 +1,156 @@
-<!DOCTYPE HTML>
-<!--
-	Strata by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!DOCTYPE html>
+<html lang="en" class="lang-en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Value-based RL on Breakout — Jeff Liu</title>
+	<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+	<link rel="stylesheet" href="/assets/new_homepage/showdev.css" />
+	<style>
+		.project-page-wrap {
+			max-width: 860px;
+			margin: 0 auto;
+			padding: 48px 24px 80px;
+		}
+		.back-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: var(--accent);
+			color: #fff;
+			border: none;
+			border-radius: 8px;
+			padding: 10px 20px;
+			font-size: 0.9em;
+			font-weight: 600;
+			text-decoration: none;
+			cursor: pointer;
+			margin-bottom: 40px;
+			transition: background 0.2s;
+		}
+		.back-btn:hover { background: var(--accent-light); color: #fff; }
+		.page-title {
+			font-family: var(--font-heading);
+			font-size: 2em;
+			color: var(--text-primary);
+			margin-bottom: 8px;
+		}
+		.page-subtitle {
+			color: var(--text-muted);
+			font-size: 0.95em;
+			margin-bottom: 32px;
+		}
+		.content-card {
+			background: var(--card-bg);
+			border-radius: 14px;
+			padding: 36px 40px;
+			box-shadow: var(--card-shadow);
+			border: 1px solid var(--border-color);
+		}
+		.content-card h2 {
+			font-family: var(--font-heading);
+			font-size: 1.3em;
+			color: var(--text-primary);
+			margin: 28px 0 12px;
+		}
+		.content-card h2:first-child { margin-top: 0; }
+		.content-card p {
+			color: var(--text-secondary);
+			line-height: 1.7;
+			margin-bottom: 16px;
+		}
+		.content-card img {
+			max-width: 100%;
+			border-radius: 8px;
+			margin: 16px 0;
+			border: 1px solid var(--border-color);
+		}
+		.video-wrap {
+			position: relative;
+			width: 100%;
+			padding-bottom: 56.25%;
+			margin: 16px 0;
+			border-radius: 8px;
+			overflow: hidden;
+			border: 1px solid var(--border-color);
+		}
+		.video-wrap iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border: none;
+		}
+		.action-row {
+			display: flex;
+			gap: 12px;
+			margin-top: 32px;
+			flex-wrap: wrap;
+		}
+		.action-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: #6b5e7a;
+			color: #fff;
+			padding: 10px 20px;
+			border-radius: 8px;
+			font-size: 0.88em;
+			font-weight: 600;
+			text-decoration: none;
+			transition: background 0.2s;
+		}
+		.action-btn:hover { background: #8a7da0; color: #fff; }
+	</style>
+</head>
+<body>
 
+<div class="project-page-wrap" data-aos="fade-up">
 
-<html>
-	<head>
-		<title>Jeff Pang Liu - Portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="/assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+	<a href="/index.html" class="back-btn">
+		<i class="bi bi-arrow-left"></i> Back to Homepage
+	</a>
 
-		<!-- Header (Reference from bar_header) -->
-		<header id="header">
-			<div id="header-placeholder"></div>
-	
-			<script>
-				document.addEventListener("DOMContentLoaded", function () {
-					fetch("/bar_header.html")
-						.then(response => response.text())
-						.then(data => {
-							document.getElementById("header-placeholder").innerHTML = data;
-						})
-						.catch(error => console.error("Error loading header:", error));
-				});
-			</script>
-			</header>
+	<h1 class="page-title">Value-based Reinforcement Learning Methods on Breakout Game</h1>
+	<p class="page-subtitle">Reinforcement Learning · DQN · Q-learning</p>
 
-<!-- Main -->
-<div id="main">
+	<div class="content-card">
+		<h2>V3: Reach the highest score of 287</h2>
+		<div class="video-wrap">
+			<iframe src="https://www.youtube.com/embed/3Quh8cz5umc?si=QNTdUdNoSKUDP3CX" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+		</div>
 
-<!-- One -->
-<section id="one">
+		<h2>V2: Set up an abstraction to show how to use Q-learning to solve brick game</h2>
+		<div class="video-wrap">
+			<iframe src="https://www.youtube.com/embed/LAaB83QU80Q?si=hZiQan67BH1f0SDu" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+		</div>
 
-
-<!-------------------------MODIFY BELOW--------------------------------->
-<!--------------------------MODIFY BELOW---------------------------------->
-<!----------------------------MODIFY BELOW---------------------------------->
-
-<header class="major">
-	<!-- THE TITLE OF THE PROJECT -->
-	<h2>
-		Value-based Reinforcement Learning Methods on Breakout Game
-	</h2>
-</header>
-
-	<!-- MAIN ARTICAL -->
-
-	<h3>
-		V3: Reach the highest score of 287
-	</h3>
-
-	<div>
-		<!-- DQN - 285分版本 -->
-
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/3Quh8cz5umc?si=QNTdUdNoSKUDP3CX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-	</div>
-
-	<hr><!-- 分隔线 -->
-
-	<h3>
-		V2: Set up an abstraction to show how to use Q-learning to solve brick game
-	</h3>
-
-	<div>
-		<!-- Q-learning 简化完全解决版本 -->
-
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/LAaB83QU80Q?si=hZiQan67BH1f0SDu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-	</div>
-
-	<hr><!-- 分隔线 -->
-
-	<h3>
-		V1: a tough model which can average eliminate 15 - 20 bricks.
-	</h3>
-
-	<!-- THE INTRODUCTION OF THE PROJECT -->
-		<div>
+		<h2>V1: a tough model which can average eliminate 15 - 20 bricks.</h2>
+		<p>
 			This is an ongoing project, you can see the V1 source codes at:
 			<a href="https://github.com/jeffliulab/rl_brick_game">GITHUB_LINK</a>
-
-			
-		</div>
-		<div>
-			&nbsp;
-		</div>
-
-
-	<!-- Youtube Video -->
-		<div>
+		</p>
+		<p>
 			The V1 version has limited performance on playing this game. I'm thinking to optimize it when I have time. Now I'm busy in learning RL foundamental knowledges, which can help me figure out what happend in a lower level and allow me to modify this model to achieve the final goal: win the game (eliminate all the bricks).
-			The V1 Version's video is showing below: &nbsp;
+			The V1 Version's video is showing below:
+		</p>
+		<div class="video-wrap">
+			<iframe src="https://www.youtube.com/embed/CfP-sXoLQ14?si=x4LdnR2wzKcGOt9o" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 		</div>
-		<div>
-			
-			<div>
 
-				&nbsp;
-			</div>
-			<iframe width="560" height="315" src="https://www.youtube.com/embed/CfP-sXoLQ14?si=x4LdnR2wzKcGOt9o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-		</div>	
-
-	
-	<!-- PDF -->
-	<!--
-		<div>
-			&nbsp;
+		<div class="action-row">
+			<a href="https://github.com/jeffliulab/rl_brick_game" target="_blank" class="action-btn">
+				<i class="bi bi-github"></i> GitHub
+			</a>
 		</div>
-		
-		<div>
-			The slides of algorithm introduction is not available yet.
-			<div>
-				&nbsp;
-			</div>
-			<iframe src="/project_pages/project_pdf/template.pdf" width="100%" height="471px" title="PROJECT INTRO" style="border:none;">
-				Your browser does not support iframes.
-			</iframe>
-		</div>
-	-->
-	
+	</div>
 
+</div>
 
-
-
-
-
-<!-------------------------MODIFY ABOVE--------------------------------->
-<!--------------------------MODIFY ABOVE---------------------------------->
-<!----------------------------MODIFY ABOVE---------------------------------->
-                            
-                            
-                            <!-- Back to Homepage Button -->
-                            <div>
-                                <div>&nbsp;</div>
-                                <div>&nbsp;</div>
-
-                                <a href="/index.html" class="button">Back to Homepage</a>
-                            
-                            </div>
-
-					
-
-						</ul>
-					</section>
-
-			
-
-
-
-
-
-
-
-				<!-- Contact Reference from bar_contact -->
-				<section id="five">
-						
-					<div id="contact-placeholder"></div>
-
-					<script>
-						document.addEventListener("DOMContentLoaded", function () {
-							fetch("/bar_contact.html")
-								.then(response => response.text())
-								.then(data => {
-									document.getElementById("contact-placeholder").innerHTML = data;
-								})
-								.catch(error => console.error("Error loading contact:", error));
-						});
-					</script>
-
-
-				</section>
-
-			</div>
-
-		<!-- Footer Reference from /bar_footer.html -->
-		<footer id="footer">
-			<div id="footer-placeholder"></div>
-			<script>
-				document.addEventListener("DOMContentLoaded", function () {
-					fetch("/bar_footer.html")
-						.then(response => response.text())
-						.then(data => {
-							document.getElementById("footer-placeholder").innerHTML = data;
-						})
-						.catch(error => console.error("Error loading header:", error));
-				});
-			</script>
-		</footer>
-
-		<!-- Scripts -->
-			<script src="/assets/js/jquery.min.js"></script>
-			<script src="/assets/js/jquery.poptrox.min.js"></script>
-			<script src="/assets/js/browser.min.js"></script>
-			<script src="/assets/js/breakpoints.min.js"></script>
-			<script src="/assets/js/util.js"></script>
-			<script src="/assets/js/main.js"></script>
-
-	</body>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init({ once: true, duration: 500 });</script>
+<script src="/assets/new_homepage/showdev.js"></script>
+</body>
 </html>
