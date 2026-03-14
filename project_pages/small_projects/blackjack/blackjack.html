@@ -1,153 +1,133 @@
-<!DOCTYPE HTML>
-<!--
-	Strata by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!DOCTYPE html>
+<html lang="en" class="lang-en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Monte Carlo ES: Optimal Blackjack Policy — Jeff Liu</title>
+	<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+	<link rel="stylesheet" href="/assets/new_homepage/showdev.css" />
+	<style>
+		.project-page-wrap {
+			max-width: 860px;
+			margin: 0 auto;
+			padding: 48px 24px 80px;
+		}
+		.back-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: var(--accent);
+			color: #fff;
+			border: none;
+			border-radius: 8px;
+			padding: 10px 20px;
+			font-size: 0.9em;
+			font-weight: 600;
+			text-decoration: none;
+			cursor: pointer;
+			margin-bottom: 40px;
+			transition: background 0.2s;
+		}
+		.back-btn:hover { background: var(--accent-light); color: #fff; }
+		.page-title {
+			font-family: var(--font-heading);
+			font-size: 2em;
+			color: var(--text-primary);
+			margin-bottom: 8px;
+		}
+		.page-subtitle {
+			color: var(--text-muted);
+			font-size: 0.95em;
+			margin-bottom: 32px;
+		}
+		.content-card {
+			background: var(--card-bg);
+			border-radius: 14px;
+			padding: 36px 40px;
+			box-shadow: var(--card-shadow);
+			border: 1px solid var(--border-color);
+		}
+		.content-card h2 {
+			font-family: var(--font-heading);
+			font-size: 1.3em;
+			color: var(--text-primary);
+			margin: 28px 0 12px;
+		}
+		.content-card h2:first-child { margin-top: 0; }
+		.content-card p {
+			color: var(--text-secondary);
+			line-height: 1.7;
+			margin-bottom: 16px;
+		}
+		.content-card img {
+			max-width: 100%;
+			border-radius: 8px;
+			margin: 16px 0;
+			border: 1px solid var(--border-color);
+		}
+		.action-row {
+			display: flex;
+			gap: 12px;
+			margin-top: 32px;
+			flex-wrap: wrap;
+		}
+		.action-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: #6b5e7a;
+			color: #fff;
+			padding: 10px 20px;
+			border-radius: 8px;
+			font-size: 0.88em;
+			font-weight: 600;
+			text-decoration: none;
+			transition: background 0.2s;
+		}
+		.action-btn:hover { background: #8a7da0; color: #fff; }
+	</style>
+</head>
+<body>
 
+<div class="project-page-wrap" data-aos="fade-up">
 
-<html>
-	<head>
-		<title>Jeff Pang Liu - Portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="/assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+	<a href="/index.html" class="back-btn">
+		<i class="bi bi-arrow-left"></i> Back to Homepage
+	</a>
 
-		<!-- Header (Reference from bar_header) -->
-		<header id="header">
-			<div id="header-placeholder"></div>
-	
-			<script>
-				document.addEventListener("DOMContentLoaded", function () {
-					fetch("/bar_header.html")
-						.then(response => response.text())
-						.then(data => {
-							document.getElementById("header-placeholder").innerHTML = data;
-						})
-						.catch(error => console.error("Error loading header:", error));
-				});
-			</script>
-			</header>
+	<h1 class="page-title">Monte Carlo ES: Optimal Blackjack Policy</h1>
+	<p class="page-subtitle">Reinforcement Learning · Monte Carlo Methods</p>
 
-<!-- Main -->
-<div id="main">
+	<div class="content-card">
+		<h2>Overview</h2>
+		<p>
+			Using <strong>Monte Carlo Exploring Starts (MC ES)</strong> to solve Blackjack and converge on the optimal policy (strategy).
+			The game was simulated <strong>2 million times</strong>, allowing the algorithm to explore enough state-action pairs to reliably estimate the optimal value function.
+		</p>
 
-<!-- One -->
-<section id="one">
+		<h2>Result</h2>
+		<p>The optimal strategy derived from simulation, showing when to hit or stand based on player hand and dealer's upcard:</p>
+		<img src="result.png" alt="Optimal Blackjack Policy — Monte Carlo ES result" />
 
+		<h2>Method</h2>
+		<p>
+			Monte Carlo ES works by generating complete episodes starting from randomly selected state-action pairs (exploring starts),
+			then updating action-value estimates using the returns from each episode.
+			After sufficient episodes, the greedy policy with respect to the estimated Q-values converges to the optimal policy.
+		</p>
 
-<!-------------------------MODIFY BELOW--------------------------------->
-<!--------------------------MODIFY BELOW---------------------------------->
-<!----------------------------MODIFY BELOW---------------------------------->
-
-
-
-
-
-
-<header class="major">
-	<!-- THE TITLE OF THE PROJECT -->
-	<h2>
-		Solve Blackjack - Monte Carlo ES
-	</h2>
-</header>
-
-
-	<!-- THE INTRODUCTION OF THE PROJECT -->
-	<div>
-		Using Monte Carlo ES to solve blackjack, find the optimal policy (strategy).
-		<br>
-		See following result, which is the optimal strategy on blackjack game:
+		<div class="action-row">
+			<a href="https://github.com/jeffliulab/RL_Projects" target="_blank" class="action-btn">
+				<i class="bi bi-github"></i> GitHub
+			</a>
+		</div>
 	</div>
-	<div>
-		<img src="result.png" alt="Blackjack Thumbnail" width="800">
-	</div>
-	<div>
-		The game blackjack was simulated 2 million times using the Monte Carlo ES method and converged to the optimal solution.
-		<a href="https://github.com/jeffliulab/RL_Projects" target="_blank">[->GitHub]</a>
-	</div>
 
+</div>
 
-
-	
-
-
-
-
-
-
-<!-------------------------MODIFY ABOVE--------------------------------->
-<!--------------------------MODIFY ABOVE---------------------------------->
-<!----------------------------MODIFY ABOVE---------------------------------->
-                            
-                            
-                            <!-- Back to Homepage Button -->
-                            <div>
-                                <div>&nbsp;</div>
-                                <div>&nbsp;</div>
-
-                                <a href="/index.html" class="button">Back to Homepage</a>
-                            
-                            </div>
-
-					
-
-						</ul>
-					</section>
-
-			
-
-
-
-
-
-
-
-				<!-- Contact Reference from bar_contact -->
-				<section id="five">
-						
-					<div id="contact-placeholder"></div>
-
-					<script>
-						document.addEventListener("DOMContentLoaded", function () {
-							fetch("/bar_contact.html")
-								.then(response => response.text())
-								.then(data => {
-									document.getElementById("contact-placeholder").innerHTML = data;
-								})
-								.catch(error => console.error("Error loading contact:", error));
-						});
-					</script>
-
-
-				</section>
-
-			</div>
-
-		<!-- Footer Reference from /bar_footer.html -->
-		<footer id="footer">
-			<div id="footer-placeholder"></div>
-			<script>
-				document.addEventListener("DOMContentLoaded", function () {
-					fetch("/bar_footer.html")
-						.then(response => response.text())
-						.then(data => {
-							document.getElementById("footer-placeholder").innerHTML = data;
-						})
-						.catch(error => console.error("Error loading header:", error));
-				});
-			</script>
-		</footer>
-
-		<!-- Scripts -->
-			<script src="/assets/js/jquery.min.js"></script>
-			<script src="/assets/js/jquery.poptrox.min.js"></script>
-			<script src="/assets/js/browser.min.js"></script>
-			<script src="/assets/js/breakpoints.min.js"></script>
-			<script src="/assets/js/util.js"></script>
-			<script src="/assets/js/main.js"></script>
-
-	</body>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init({ once: true, duration: 500 });</script>
+<script src="/assets/new_homepage/showdev.js"></script>
+</body>
 </html>

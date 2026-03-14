@@ -217,16 +217,17 @@
 
 	<!-- 分类标签 — data-tab 值必须与下面 project-group 的 data-group 一一对应 -->
 	<div class="project-tabs" data-aos="fade-up">
-		<button class="tab-btn active" data-tab="solutions"><span class="lang-en">Solutions Portfolio</span><span class="lang-cn">解决方案</span></button>
+		<button class="tab-btn active" data-tab="featured"><span class="lang-en">Featured</span><span class="lang-cn">精选</span></button>
+		<button class="tab-btn" data-tab="solutions"><span class="lang-en">Solutions Portfolio</span><span class="lang-cn">解决方案</span></button>
+		<button class="tab-btn" data-tab="innovation"><span class="lang-en">Innovation</span><span class="lang-cn">创新探索</span></button>
 		<button class="tab-btn" data-tab="technical"><span class="lang-en">Core Algorithms</span><span class="lang-cn">核心算法</span></button>
 		<button class="tab-btn" data-tab="commercial"><span class="lang-en">Commercial</span><span class="lang-cn">商业项目</span></button>
-		<button class="tab-btn" data-tab="all"><span class="lang-en">All</span><span class="lang-cn">全部</span></button>
 	</div>
 
 	<!-- ── 解决方案项目 (SOLUTIONS PORTFOLIO) ─────────────────── -->
 	<div class="project-group" data-group="solutions">
 
-		<div class="project-showcase" data-aos="fade-up">
+		<div class="project-showcase" data-featured="true" data-featured-class="24" data-origin-group="solutions" data-aos="fade-up">
 			<div class="image-section">
 				<a href="https://jeffliulab.github.io/real_time_demo/color_calibration/index.html" target="_blank"><img src="/project_pages/color_calibration/pipeline.png" class="snapshot-image" alt="Color Calibration" /></a>
 			</div>
@@ -243,7 +244,7 @@
 		</div>
 		<hr class="project-divider" />
 
-		<div class="project-showcase" data-aos="fade-up">
+		<div class="project-showcase" data-featured="true" data-featured-class="20" data-origin-group="solutions" data-aos="fade-up">
 			<div class="image-section">
 				<a href="/project_pages/smart_cleaning_robot/smart_cleaning_robot.html"><img src="/project_pages/smart_cleaning_robot/thumb.png" class="snapshot-image" alt="Smart Cleaning Robot" /></a>
 			</div>
@@ -259,7 +260,7 @@
 		</div>
 		<hr class="project-divider" />
 
-		<div class="project-showcase" data-aos="fade-up">
+		<div class="project-showcase" data-featured="true" data-featured-class="30" data-origin-group="solutions" data-aos="fade-up">
 			<div class="image-section">
 				<a href="https://github.com/LogicGate-AI-Lab/model-court" target="_blank"><img src="/project_pages/OPEN_SOURCE/model_court/thumb.png" class="snapshot-image" alt="Model Court" /></a>
 			</div>
@@ -276,7 +277,7 @@
 		</div>
 		<hr class="project-divider" />
 
-		<div class="project-showcase" data-aos="fade-up">
+		<div class="project-showcase" data-featured="true" data-featured-class="32" data-origin-group="solutions" data-aos="fade-up">
 			<div class="image-section">
 				<a href="javascript:void(0)" onclick="openVideoModal('_5-A-WvDAkE')"><img src="/project_pages/academic/https_proxy/fact_check.png" class="snapshot-image" alt="Fact Check" /></a>
 			</div>
@@ -293,7 +294,7 @@
 		</div>
 		<hr class="project-divider" />
 
-		<div class="project-showcase" data-aos="fade-up">
+		<div class="project-showcase" data-featured="true" data-featured-class="36" data-origin-group="solutions" data-aos="fade-up">
 			<div class="image-section">
 				<a href="javascript:void(0)" onclick="openVideoModal('_B7MiawMT4U')"><img src="/project_pages/AgentKit/cover.png" class="snapshot-image" alt="AgentKit" /></a>
 			</div>
@@ -339,11 +340,31 @@
 
 	</div>
 
+	<!-- ── 创新探索项目 (INNOVATION) ──────────────────────────── -->
+	<div class="project-group" data-group="innovation" style="display:none;">
+
+		<div class="project-showcase" data-featured="true" data-featured-class="22" data-origin-group="innovation" data-aos="fade-up">
+			<div class="image-section">
+				<a href="https://github.com/jeffliulab/ALICE_PROJECT" target="_blank"><img src="/project_pages/2026_Projects/ALICE_PROJECT/thumb.png" class="snapshot-image" alt="A.L.I.C.E. x Generative Agents" /></a>
+			</div>
+			<div class="text-section">
+				<h3 class="project-title"><span class="lang-en">A.L.I.C.E. × Generative Agents</span><span class="lang-cn">A.L.I.C.E. × 生成式智能体</span></h3>
+				<div class="project-status opensource"><span class="status-dot">●</span> Open Source</div>
+				<p class="project-description"><span class="lang-en"><strong>A 2D Westworld</strong> — five AI villagers live, scheme, and dream in a simulated medieval world, each with hidden secrets and a consciousness that evolves over time. They don't just react — they plan their days, reflect on past events, and consolidate memories each night in a "dream cycle." Built on Stanford's Generative Agents architecture, this project explores what it means for an artificial mind to have an inner life, and whether a simulated world can develop its own emergent truths.</span><span class="lang-cn"><strong>2D版西部世界</strong> — 五位AI村民在中世纪模拟世界中生活、谋划、做梦，每个人都有隐藏的秘密与随时间演化的意识。他们不只是被动回应——他们规划每一天，反思过去，每晚在梦境周期中整合记忆。基于Stanford生成式智能体架构，这个项目探索的是：一个人工心智能否拥有内心世界，一个模拟世界能否孕育出属于自己的涌现真相。</span></p>
+				<div class="tech-stack"><span class="tech-badge">Generative Agents</span><span class="tech-badge">FastAPI</span><span class="tech-badge">LLM Integration</span><span class="tech-badge">WebSocket</span><span class="tech-badge">Canvas</span></div>
+				<div class="project-actions">
+					<a href="https://github.com/jeffliulab/ALICE_PROJECT" target="_blank" class="case-study-btn">GitHub</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
 	<!-- ── 核心算法项目 (CORE ALGORITHMS) ─────────────────────── -->
 	<!-- style="display:none;" 表示默认隐藏，点击对应 Tab 时由 JS 切换显示 -->
 	<div class="project-group" data-group="technical" style="display:none;">
 
-		<div class="project-showcase" data-aos="fade-up">
+		<div class="project-showcase" data-featured="true" data-featured-class="50" data-origin-group="technical" data-aos="fade-up">
 			<div class="image-section">
 				<a href="/project_pages/rl_brick/brick.html"><img src="/project_pages/rl_brick/brick.gif" class="snapshot-image" alt="Breakout" /></a>
 			</div>
@@ -358,7 +379,7 @@
 		</div>
 		<hr class="project-divider" />
 
-		<div class="project-showcase" data-aos="fade-up">
+		<div class="project-showcase" data-featured="true" data-featured-class="52" data-origin-group="technical" data-aos="fade-up">
 			<div class="image-section">
 				<a href="javascript:void(0)" onclick="openVideoModal('yzfBem-gO0Q')"><img src="/project_pages/embedded/smart_glove/smart_glove_robot_arm.png" class="snapshot-image" alt="Smart Glove" /></a>
 			</div>
@@ -374,7 +395,7 @@
 		</div>
 		<hr class="project-divider" />
 
-		<div class="project-showcase" data-aos="fade-up">
+		<div class="project-showcase" data-featured="true" data-featured-class="56" data-origin-group="technical" data-aos="fade-up">
 			<div class="image-section">
 				<a href="/project_pages/walker2d/walker2d.html"><img src="/project_pages/walker2d/thumb.gif" class="snapshot-image" alt="Walker2d" /></a>
 			</div>
@@ -480,10 +501,11 @@
 
 		<div class="project-showcase" data-aos="fade-up">
 			<div class="image-section">
-				<img src="/project_pages/small_projects/a_star/demo.png" class="snapshot-image" alt="A Star" />
+				<a href="https://github.com/jeffliulab/OSM_Map_AStar" target="_blank"><img src="/project_pages/small_projects/a_star/demo.png" class="snapshot-image" alt="A Star" /></a>
 			</div>
 			<div class="text-section">
 				<h3 class="project-title"><span class="lang-en">A* Search: OpenStreetMap Route Planner</span><span class="lang-cn">A*搜索：OpenStreetMap路径规划</span></h3>
+				<div class="project-status opensource"><span class="status-dot">●</span> Open Source</div>
 				<p class="project-description"><span class="lang-en">Implemented A* route planning on OpenStreetMap data — from Tufts University to Mystic River.</span><span class="lang-cn">在OpenStreetMap数据上实现A*路径规划——从塔夫茨大学到Mystic River。</span></p>
 				<div class="tech-stack"><span class="tech-badge">OSM</span><span class="tech-badge">C++</span><span class="tech-badge">A*</span></div>
 				<div class="project-actions">
@@ -499,6 +521,7 @@
 			</div>
 			<div class="text-section">
 				<h3 class="project-title"><span class="lang-en">DS&A Roadmap</span><span class="lang-cn">数据结构与算法路线图</span></h3>
+				<div class="project-status live"><span class="status-dot">●</span> Online App</div>
 				<p class="project-description"><span class="lang-en">A structured study roadmap covering foundational data structures and algorithms, plus competitive programming links.</span><span class="lang-cn">结构化学习路线图，涵盖基础数据结构与算法以及竞赛编程链接。</span></p>
 				<div class="tech-stack"><span class="tech-badge">Data Structures</span><span class="tech-badge">Algorithms</span></div>
 				<div class="project-actions">
