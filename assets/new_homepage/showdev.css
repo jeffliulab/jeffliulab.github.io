@@ -1296,6 +1296,31 @@ body.dark-mode .skills-section {
 
 	.project-actions { justify-content: center; }
 
+	/* Tech stack: stop marquee, show wrapped badges on tablet */
+	.project-meta-row {
+		flex-wrap: wrap;
+	}
+
+	.tech-stack {
+		overflow: visible;
+	}
+
+	.tech-stack.scrolling .tech-scroll-track {
+		animation: none;
+	}
+
+	.tech-scroll-track {
+		flex-wrap: wrap;
+		width: auto;
+		justify-content: center;
+	}
+
+	/* Description wrapper: remove fixed max-height */
+	.project-desc-wrap {
+		max-height: none;
+		overflow: visible;
+	}
+
 	.timeline {
 		flex-direction: column;
 		align-items: center;
@@ -1326,10 +1351,25 @@ body.dark-mode .skills-section {
 	.hero .typing-line { font-size: 1em; }
 	.hero .subtitle { font-size: 0.9em; }
 
+	/* --- Navbar: full-width pill with scrollable links --- */
 	.navbar {
 		top: 10px;
-		padding: 6px 12px;
-		border-radius: 30px;
+		width: calc(100% - 24px);
+		padding: 6px 10px;
+		border-radius: 25px;
+		gap: 0;
+	}
+
+	.nav-links {
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+		flex: 1;
+		min-width: 0;
+	}
+
+	.nav-links::-webkit-scrollbar {
+		display: none;
 	}
 
 	.nav-links a {
@@ -1337,6 +1377,12 @@ body.dark-mode .skills-section {
 		font-size: 0.7em;
 	}
 
+	.nav-controls {
+		margin-left: 4px;
+		flex-shrink: 0;
+	}
+
+	/* --- Section --- */
 	.section {
 		padding: 40px 14px;
 	}
@@ -1345,11 +1391,21 @@ body.dark-mode .skills-section {
 		font-size: 1.5em;
 	}
 
+	.section-header p {
+		font-size: 0.88em;
+	}
+
+	/* --- About --- */
 	.about-grid { gap: 24px; }
 
 	.about-avatar img {
 		width: 140px;
 		height: 140px;
+	}
+
+	.about-text {
+		font-size: 0.95em;
+		line-height: 1.7;
 	}
 
 	.social-strip { display: none; }
@@ -1361,24 +1417,124 @@ body.dark-mode .skills-section {
 
 	.about-highlights {
 		justify-content: center;
+		gap: 10px;
 	}
 
-	.project-title { font-size: 1.2em; }
-	.project-description { font-size: 0.88em; }
-
-	.insight-item {
-		flex-direction: column;
-		align-items: flex-start;
+	.highlight-item {
+		font-size: 0.82em;
+		padding: 6px 12px;
 	}
 
-	.contact-info {
-		flex-direction: column;
-		align-items: center;
+	/* --- Projects --- */
+	.project-tabs {
+		gap: 8px;
+		margin-bottom: 24px;
 	}
 
 	.tab-btn {
-		padding: 6px 16px;
-		font-size: 0.8em;
+		padding: 6px 14px;
+		font-size: 0.78em;
+	}
+
+	.project-showcase {
+		gap: 14px;
+		margin-bottom: 28px;
+		padding: 0 10px;
+	}
+
+	.project-showcase .image-section a,
+	.project-showcase .image-section > img {
+		height: 190px;
+	}
+
+	.project-showcase .coming-soon-placeholder {
+		height: 190px;
+	}
+
+	.project-title { font-size: 1.15em; }
+
+	.project-description {
+		font-size: 0.85em;
+		line-height: 1.5;
+	}
+
+	.tech-badge {
+		font-size: 0.7em;
+		padding: 3px 8px;
+	}
+
+	.project-actions {
+		justify-content: center;
+		margin-top: 10px;
+	}
+
+	.case-study-btn {
+		padding: 7px 16px;
+		font-size: 0.78em;
+	}
+
+	.project-divider {
+		margin-bottom: 28px;
+	}
+
+	/* --- Insights --- */
+	.insight-item {
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 14px 16px;
+		gap: 8px;
+	}
+
+	.insight-item h3 {
+		font-size: 0.88em;
+	}
+
+	/* --- Timeline --- */
+	.timeline-item {
+		padding: 20px 16px;
+		gap: 12px;
+	}
+
+	.timeline-icon {
+		min-width: 48px;
+		width: 48px;
+		height: 48px;
+	}
+
+	.timeline-icon.edu-logo {
+		min-width: 56px;
+		width: 56px;
+		height: 56px;
+	}
+
+	.timeline-content h3 {
+		font-size: 0.95em;
+	}
+
+	.timeline-content p {
+		font-size: 0.82em;
+	}
+
+	/* --- Contact --- */
+	.contact-info {
+		flex-direction: column;
+		align-items: center;
+		gap: 16px;
+	}
+
+	.contact-info .contact-item {
+		font-size: 0.88em;
+	}
+
+	/* --- Skills --- */
+	.skills-grid {
+		gap: 12px;
+	}
+
+	/* --- Modals --- */
+	.video-modal-inner {
+		width: 95%;
+		margin: 40px auto;
 	}
 }
 
@@ -1389,10 +1545,16 @@ body.dark-mode .skills-section {
 @media screen and (max-width: 480px) {
 	.hero h1 { font-size: 1.5em; }
 	.hero .typing-line { font-size: 0.9em; }
+	.hero .subtitle { font-size: 0.82em; }
+	.hero { padding: 60px 16px; }
 
 	.navbar {
-		gap: 2px;
+		width: calc(100% - 16px);
 		padding: 5px 8px;
+	}
+
+	.nav-links {
+		gap: 0;
 	}
 
 	.nav-links a {
@@ -1404,14 +1566,106 @@ body.dark-mode .skills-section {
 		padding: 30px 10px;
 	}
 
-	.about-avatar img {
-		width: 100px;
-		height: 100px;
+	.section-header h2 {
+		font-size: 1.35em;
 	}
 
-	.project-showcase { margin-bottom: 30px; }
-	.project-title { font-size: 1.1em; }
+	.about-avatar img {
+		width: 110px;
+		height: 110px;
+	}
 
+	.about-name {
+		font-size: 1.1em;
+	}
+
+	.about-text {
+		font-size: 0.88em;
+		line-height: 1.6;
+	}
+
+	.about-highlights {
+		flex-direction: column;
+		align-items: center;
+		gap: 8px;
+	}
+
+	/* --- Projects --- */
+	.project-showcase {
+		margin-bottom: 24px;
+		gap: 10px;
+	}
+
+	.project-showcase .image-section a,
+	.project-showcase .image-section > img {
+		height: 170px;
+	}
+
+	.project-showcase .coming-soon-placeholder {
+		height: 170px;
+		font-size: 0.95em;
+	}
+
+	.project-title { font-size: 1.05em; }
+
+	.project-description {
+		font-size: 0.82em;
+	}
+
+	.tab-btn {
+		padding: 5px 12px;
+		font-size: 0.74em;
+	}
+
+	.project-actions {
+		gap: 8px;
+	}
+
+	.case-study-btn {
+		padding: 6px 14px;
+		font-size: 0.75em;
+	}
+
+	.project-divider {
+		margin-bottom: 24px;
+	}
+
+	/* --- Timeline --- */
+	.timeline {
+		gap: 16px;
+	}
+
+	.timeline-item {
+		padding: 16px 12px;
+		gap: 10px;
+	}
+
+	.timeline-icon {
+		min-width: 42px;
+		width: 42px;
+		height: 42px;
+		font-size: 1.1em;
+	}
+
+	.timeline-icon.edu-logo {
+		min-width: 48px;
+		width: 48px;
+		height: 48px;
+	}
+
+	.timeline-content h3 {
+		font-size: 0.9em;
+	}
+
+	.timeline-company {
+		font-size: 0.85em;
+	}
+
+	.timeline-content p {
+		font-size: 0.8em;
+	}
+
+	/* --- Skills --- */
 	.skills-grid {
 		grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
 		gap: 10px;
@@ -1424,4 +1678,38 @@ body.dark-mode .skills-section {
 	}
 
 	.skill-name { font-size: 0.68em; }
+
+	/* --- Insights --- */
+	.insight-item {
+		padding: 12px 14px;
+	}
+
+	.insight-item h3 {
+		font-size: 0.85em;
+	}
+
+	.insight-item p {
+		font-size: 0.75em;
+	}
+
+	/* --- Contact --- */
+	.contact-info .contact-item {
+		font-size: 0.85em;
+	}
+
+	/* --- Footer --- */
+	.site-footer {
+		padding: 24px 14px;
+	}
+
+	/* --- Modals --- */
+	.video-modal-inner {
+		width: 96%;
+		margin: 20px auto;
+	}
+
+	.modal-content {
+		width: 96%;
+		height: 85%;
+	}
 }
