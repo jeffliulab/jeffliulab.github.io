@@ -218,49 +218,85 @@
 	<!-- 分类标签 — data-tab 值必须与下面 project-group 的 data-group 一一对应 -->
 	<div class="project-tabs" data-aos="fade-up">
 		<button class="tab-btn active" data-tab="featured"><span class="lang-en">Featured</span><span class="lang-cn">精选</span></button>
-		<button class="tab-btn" data-tab="solutions"><span class="lang-en">Solutions Portfolio</span><span class="lang-cn">解决方案</span></button>
-		<button class="tab-btn" data-tab="innovation"><span class="lang-en">Innovation</span><span class="lang-cn">创新探索</span></button>
-		<button class="tab-btn" data-tab="technical"><span class="lang-en">Core Algorithms</span><span class="lang-cn">核心算法</span></button>
+		<button class="tab-btn" data-tab="agents"><span class="lang-en">AI Agents</span><span class="lang-cn">AI智能体</span></button>
+		<button class="tab-btn" data-tab="mllms"><span class="lang-en">MLLMs</span><span class="lang-cn">大模型</span></button>
+		<button class="tab-btn" data-tab="dl"><span class="lang-en">Deep Learning</span><span class="lang-cn">深度学习</span></button>
+		<button class="tab-btn" data-tab="rl"><span class="lang-en">Reinforcement Learning</span><span class="lang-cn">强化学习</span></button>
+		<button class="tab-btn" data-tab="robotics"><span class="lang-en">Robotics</span><span class="lang-cn">机器人</span></button>
 		<button class="tab-btn" data-tab="commercial"><span class="lang-en">Commercial</span><span class="lang-cn">商业项目</span></button>
+		<button class="tab-btn" data-tab="classic"><span class="lang-en">Classic</span><span class="lang-cn">传统方法</span></button>
 	</div>
 
-	<!-- ── 解决方案项目 (SOLUTIONS PORTFOLIO) ─────────────────── -->
-	<div class="project-group" data-group="solutions">
+	<!-- ── AI Agents ─────────────────────────────────────────── -->
+	<div class="project-group" data-group="agents" style="display:none;">
 
-		<div class="project-showcase" data-featured="true" data-featured-class="24" data-origin-group="solutions" data-aos="fade-up">
+		<div class="project-showcase" data-featured="true" data-featured-class="22" data-origin-group="agents" data-aos="fade-up">
 			<div class="image-section">
-				<a href="https://jeffliulab.github.io/real_time_demo/color_calibration/index.html" target="_blank"><img src="/project_pages/color_calibration/pipeline.png" class="snapshot-image" alt="Color Calibration" /></a>
+				<a href="https://github.com/jeffliulab/ALICE_PROJECT" target="_blank"><img src="/project_pages/2026_Projects/ALICE_PROJECT/thumb.png" class="snapshot-image" alt="A.L.I.C.E. x Generative Agents" /></a>
 			</div>
 			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">Color Calibration Solution</span><span class="lang-cn">色彩校准解决方案</span></h3>
-				<div class="project-status live"><span class="status-dot">●</span> Live Demo</div>
-				<p class="project-description"><span class="lang-en"><strong>Interior Design & Quality Inspection</strong> — Color recognition fails under variable lighting. Built an MLOps pipeline with multi-model comparison for robust color ID. Deployed as a real-time web tool.</span><span class="lang-cn"><strong>室内设计与质量检测</strong> — 不同光照下颜色识别失败。构建了MLOps流水线，通过多模型对比实现精准颜色识别，已部署为实时Web工具。</span></p>
-				<div class="tech-stack"><span class="tech-badge">MLOps</span><span class="tech-badge">ML Pipeline</span><span class="tech-badge">Multi-Model</span><span class="tech-badge">Real-Time</span></div>
-				<div class="project-actions">
-					<a href="https://jeffliulab.github.io/real_time_demo/color_calibration/index.html" target="_blank" class="case-study-btn">Live Demo</a>
-					<a href="https://github.com/jeffliulab/Color_Calibration" target="_blank" class="case-study-btn">GitHub</a>
-				</div>
-			</div>
-		</div>
-		<hr class="project-divider" />
-
-		<div class="project-showcase" data-featured="true" data-featured-class="20" data-origin-group="solutions" data-aos="fade-up">
-			<div class="image-section">
-				<a href="/project_pages/smart_cleaning_robot/smart_cleaning_robot.html"><img src="/project_pages/smart_cleaning_robot/thumb.png" class="snapshot-image" alt="Smart Cleaning Robot" /></a>
-			</div>
-			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">Smart Cleaning Robot: Autonomous Coverage</span><span class="lang-cn">智能清扫机器人：自主全覆盖方案</span></h3>
+				<h3 class="project-title"><span class="lang-en">A.L.I.C.E. × Generative Agents</span><span class="lang-cn">A.L.I.C.E. × 生成式智能体</span></h3>
 				<div class="project-status opensource"><span class="status-dot">●</span> Open Source</div>
-				<p class="project-description"><span class="lang-en"><strong>Service Robotics & Smart Home</strong> — Commercial robots follow random paths, leaving blind spots. Built intelligent cleaning with frontier exploration, optimal path planning, and multi-modal control. (Note: This version is a branch of cleaning robot series, and archive in noetic branch.)</span><span class="lang-cn"><strong>服务机器人与智能家居</strong> — 市面清扫机器人采用随机路线，存在清扫盲区。构建了前沿探索式自主建图、最优路径规划和多模态控制的智能清扫方案。(该项目是扫地机器人系列的一个分支，现在归档于noetic分支。)</span></p>
-				<div class="tech-stack"><span class="tech-badge">Frontier Exploration</span><span class="tech-badge">Path Planning</span><span class="tech-badge">Voice Control</span><span class="tech-badge">ROS</span></div>
+				<p class="project-description"><span class="lang-en"><strong>A 2D Westworld</strong> — five AI villagers live, scheme, and dream in a simulated medieval world, each with hidden secrets and a consciousness that evolves over time. They don't just react — they plan their days, reflect on past events, and consolidate memories each night in a "dream cycle." Built on Stanford's Generative Agents architecture, this project explores what it means for an artificial mind to have an inner life, and whether a simulated world can develop its own emergent truths.</span><span class="lang-cn"><strong>2D版西部世界</strong> — 五位AI村民在中世纪模拟世界中生活、谋划、做梦，每个人都有隐藏的秘密与随时间演化的意识。他们不只是被动回应——他们规划每一天，反思过去，每晚在梦境周期中整合记忆。基于Stanford生成式智能体架构，这个项目探索的是：一个人工心智能否拥有内心世界，一个模拟世界能否孕育出属于自己的涌现真相。</span></p>
+				<div class="tech-stack"><span class="tech-badge">Generative Agents</span><span class="tech-badge">FastAPI</span><span class="tech-badge">LLM Integration</span><span class="tech-badge">WebSocket</span><span class="tech-badge">Canvas</span></div>
 				<div class="project-actions">
-					<a href="https://github.com/jeffliulab/SmartCleaningRobot/tree/noetic" target="_blank" class="case-study-btn">GitHub</a>
+					<a href="https://github.com/jeffliulab/ALICE_PROJECT" target="_blank" class="case-study-btn">GitHub</a>
 				</div>
 			</div>
 		</div>
 		<hr class="project-divider" />
 
-		<div class="project-showcase" data-featured="true" data-featured-class="30" data-origin-group="solutions" data-aos="fade-up">
+		<div class="project-showcase" data-featured="true" data-featured-class="36" data-origin-group="agents" data-aos="fade-up">
+			<div class="image-section">
+				<a href="javascript:void(0)" onclick="openVideoModal('_B7MiawMT4U')"><img src="/project_pages/AgentKit/cover.png" class="snapshot-image" alt="AgentKit" /></a>
+			</div>
+			<div class="text-section">
+				<h3 class="project-title"><span class="lang-en">AgentKit: Domain-Specific AI Agent</span><span class="lang-cn">AgentKit：领域AI智能体框架</span></h3>
+				<div class="project-status video"><span class="status-dot">●</span> Video Demo</div>
+				<p class="project-description"><span class="lang-en"><strong>Healthcare & Finance</strong> — Complex tasks require AI systems that reason, retrieve, and act. Built an extensible Agent framework with RAG, demonstrated on medical sepsis task.</span><span class="lang-cn"><strong>医疗与金融</strong> — 复杂任务需要AI自主推理、检索和执行。构建了可扩展Agent框架，集成RAG，在医疗败血症任务上验证。</span></p>
+				<div class="tech-stack"><span class="tech-badge">AI Agent</span><span class="tech-badge">RAG</span><span class="tech-badge">Tool-augmented</span><span class="tech-badge">Prompt Eng.</span></div>
+				<div class="project-actions">
+					<a href="https://github.com/LogicGate-AI-Lab/AgentKit" target="_blank" class="case-study-btn">GitHub</a>
+				</div>
+			</div>
+		</div>
+		<hr class="project-divider" />
+
+		<div class="project-showcase" data-aos="fade-up">
+			<div class="image-section">
+				<a href="javascript:void(0)" onclick="openVideoModal('RqKZmQSIQvk')"><img src="/project_pages/small_projects/simple_ai_agent/thumb.gif" class="snapshot-image" alt="NPC Demo" /></a>
+			</div>
+			<div class="text-section">
+				<h3 class="project-title"><span class="lang-en">LLM Agent: Intelligent NPC</span><span class="lang-cn">LLM智能体：NPC自主学习</span></h3>
+				<div class="project-status video"><span class="status-dot">●</span> Video Demo</div>
+				<p class="project-description"><span class="lang-en">A prototype AI agent in a game environment where the NPC learns all skills from the player through natural interaction.</span><span class="lang-cn">一个游戏环境中的AI智能体原型，NPC通过自然交互从玩家处学习所有技能。</span></p>
+				<div class="tech-stack"><span class="tech-badge">OpenAI API</span><span class="tech-badge">Prompt Eng.</span><span class="tech-badge">Pygame</span></div>
+				<div class="project-actions">
+					<a href="https://github.com/jeffliulab/A_Simple_AI_Agent" target="_blank" class="case-study-btn">GitHub</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- ── Multimodal LLMs ────────────────────────────────────── -->
+	<div class="project-group" data-group="mllms" style="display:none;">
+
+		<div class="project-showcase" data-aos="fade-up">
+			<div class="image-section"><div class="coming-soon-placeholder"><span class="lang-en">Coming Soon</span><span class="lang-cn">即将发布</span></div></div>
+			<div class="text-section">
+				<h3 class="project-title"><span class="lang-en">VisInject: Visual Prompt Injection Attack & Defense</span><span class="lang-cn">VisInject：视觉提示注入攻防研究</span></h3>
+				<div class="project-status soon">In Progress</div>
+				<p class="project-description"><span class="lang-en"><strong>AI Security</strong> — Open-source model deployments face security vulnerabilities from visual prompt injection. Researching attack vectors and building defense mechanisms.</span><span class="lang-cn"><strong>AI安全</strong> — 开源模型部署面临视觉提示注入攻击漏洞。研究攻击向量并构建防御机制。</span></p>
+				<div class="tech-stack"><span class="tech-badge">AI Security</span><span class="tech-badge">Prompt Injection</span><span class="tech-badge">LLM Defense</span></div>
+				<div class="project-actions">
+					<a href="https://github.com/jeffliulab/vis_inject" target="_blank" class="case-study-btn">GitHub</a>
+				</div>
+			</div>
+		</div>
+		<hr class="project-divider" />
+
+		<div class="project-showcase" data-featured="true" data-featured-class="30" data-origin-group="mllms" data-aos="fade-up">
 			<div class="image-section">
 				<a href="https://github.com/LogicGate-AI-Lab/model-court" target="_blank"><img src="/project_pages/OPEN_SOURCE/model_court/thumb.png" class="snapshot-image" alt="Model Court" /></a>
 			</div>
@@ -277,7 +313,7 @@
 		</div>
 		<hr class="project-divider" />
 
-		<div class="project-showcase" data-featured="true" data-featured-class="32" data-origin-group="solutions" data-aos="fade-up">
+		<div class="project-showcase" data-featured="true" data-featured-class="32" data-origin-group="mllms" data-aos="fade-up">
 			<div class="image-section">
 				<a href="javascript:void(0)" onclick="openVideoModal('_5-A-WvDAkE')"><img src="/project_pages/academic/https_proxy/fact_check.png" class="snapshot-image" alt="Fact Check" /></a>
 			</div>
@@ -292,39 +328,12 @@
 				</div>
 			</div>
 		</div>
-		<hr class="project-divider" />
 
-		<div class="project-showcase" data-featured="true" data-featured-class="36" data-origin-group="solutions" data-aos="fade-up">
-			<div class="image-section">
-				<a href="javascript:void(0)" onclick="openVideoModal('_B7MiawMT4U')"><img src="/project_pages/AgentKit/cover.png" class="snapshot-image" alt="AgentKit" /></a>
-			</div>
-			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">AgentKit: Domain-Specific AI Agent</span><span class="lang-cn">AgentKit：领域AI智能体框架</span></h3>
-				<div class="project-status video"><span class="status-dot">●</span> Video Demo</div>
-				<p class="project-description"><span class="lang-en"><strong>Healthcare & Finance</strong> — Complex tasks require AI systems that reason, retrieve, and act. Built an extensible Agent framework with RAG, demonstrated on medical sepsis task.</span><span class="lang-cn"><strong>医疗与金融</strong> — 复杂任务需要AI自主推理、检索和执行。构建了可扩展Agent框架，集成RAG，在医疗败血症任务上验证。</span></p>
-				<div class="tech-stack"><span class="tech-badge">AI Agent</span><span class="tech-badge">RAG</span><span class="tech-badge">Tool-augmented</span><span class="tech-badge">Prompt Eng.</span></div>
-				<div class="project-actions">
-					<a href="https://github.com/LogicGate-AI-Lab/AgentKit" target="_blank" class="case-study-btn">GitHub</a>
-				</div>
-			</div>
-		</div>
-		<hr class="project-divider" />
+	</div>
 
-		<!-- 未完成的项目：用 coming-soon-placeholder 替代缩略图 -->
-		<div class="project-showcase" data-aos="fade-up">
-			<div class="image-section"><div class="coming-soon-placeholder"><span class="lang-en">Coming Soon</span><span class="lang-cn">即将发布</span></div></div>
-			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">VisInject: Visual Prompt Injection Attack & Defense</span><span class="lang-cn">VisInject：视觉提示注入攻防研究</span></h3>
-				<div class="project-status soon">In Progress</div>
-				<p class="project-description"><span class="lang-en"><strong>AI Security</strong> — Open-source model deployments face security vulnerabilities from visual prompt injection. Researching attack vectors and building defense mechanisms.</span><span class="lang-cn"><strong>AI安全</strong> — 开源模型部署面临视觉提示注入攻击漏洞。研究攻击向量并构建防御机制。</span></p>
-				<div class="tech-stack"><span class="tech-badge">AI Security</span><span class="tech-badge">Prompt Injection</span><span class="tech-badge">LLM Defense</span></div>
-				<div class="project-actions">
-					<a href="https://github.com/jeffliulab/vis_inject" target="_blank" class="case-study-btn">GitHub</a>
-				</div>
-			</div>
-		</div>
-		<hr class="project-divider" />
-		
+	<!-- ── Deep Learning ─────────────────────────────────────── -->
+	<div class="project-group" data-group="dl" style="display:none;">
+
 		<div class="project-showcase" data-aos="fade-up">
 			<div class="image-section"><div class="coming-soon-placeholder"><span class="lang-en">Coming Soon</span><span class="lang-cn">即将发布</span></div></div>
 			<div class="text-section">
@@ -340,31 +349,24 @@
 
 	</div>
 
-	<!-- ── 创新探索项目 (INNOVATION) ──────────────────────────── -->
-	<div class="project-group" data-group="innovation" style="display:none;">
+	<!-- ── Reinforcement Learning ────────────────────────────── -->
+	<div class="project-group" data-group="rl" style="display:none;">
 
-		<div class="project-showcase" data-featured="true" data-featured-class="22" data-origin-group="innovation" data-aos="fade-up">
-			<div class="image-section">
-				<a href="https://github.com/jeffliulab/ALICE_PROJECT" target="_blank"><img src="/project_pages/2026_Projects/ALICE_PROJECT/thumb.png" class="snapshot-image" alt="A.L.I.C.E. x Generative Agents" /></a>
-			</div>
+		<div class="project-showcase" data-aos="fade-up">
+			<div class="image-section"><div class="coming-soon-placeholder"><span class="lang-en">Coming Soon</span><span class="lang-cn">即将发布</span></div></div>
 			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">A.L.I.C.E. × Generative Agents</span><span class="lang-cn">A.L.I.C.E. × 生成式智能体</span></h3>
-				<div class="project-status opensource"><span class="status-dot">●</span> Open Source</div>
-				<p class="project-description"><span class="lang-en"><strong>A 2D Westworld</strong> — five AI villagers live, scheme, and dream in a simulated medieval world, each with hidden secrets and a consciousness that evolves over time. They don't just react — they plan their days, reflect on past events, and consolidate memories each night in a "dream cycle." Built on Stanford's Generative Agents architecture, this project explores what it means for an artificial mind to have an inner life, and whether a simulated world can develop its own emergent truths.</span><span class="lang-cn"><strong>2D版西部世界</strong> — 五位AI村民在中世纪模拟世界中生活、谋划、做梦，每个人都有隐藏的秘密与随时间演化的意识。他们不只是被动回应——他们规划每一天，反思过去，每晚在梦境周期中整合记忆。基于Stanford生成式智能体架构，这个项目探索的是：一个人工心智能否拥有内心世界，一个模拟世界能否孕育出属于自己的涌现真相。</span></p>
-				<div class="tech-stack"><span class="tech-badge">Generative Agents</span><span class="tech-badge">FastAPI</span><span class="tech-badge">LLM Integration</span><span class="tech-badge">WebSocket</span><span class="tech-badge">Canvas</span></div>
+				<h3 class="project-title"><span class="lang-en">Deep RL: Maze Escape V2</span><span class="lang-cn">深度RL：迷宫逃脱V2</span></h3>
+				<div class="project-status soon">In Progress</div>
+				<p class="project-description"><span class="lang-en">Training an RL agent to explore and escape unknown mazes through trial-and-error, replacing hand-crafted wall-following rules with learned policies.</span><span class="lang-cn">训练RL智能体通过试错探索未知迷宫并逃脱，用学习到的策略替代手工编写的沿墙规则。</span></p>
+				<div class="tech-stack"><span class="tech-badge">Reinforcement Learning</span><span class="tech-badge">Deep Q-Network</span><span class="tech-badge">Exploration</span></div>
 				<div class="project-actions">
-					<a href="https://github.com/jeffliulab/ALICE_PROJECT" target="_blank" class="case-study-btn">GitHub</a>
+					<a href="https://jeffliulab.github.io/algorithm-roadmap/" target="_blank" class="case-study-btn">GitHub</a>
 				</div>
 			</div>
 		</div>
+		<hr class="project-divider" />
 
-	</div>
-
-	<!-- ── 核心算法项目 (CORE ALGORITHMS) ─────────────────────── -->
-	<!-- style="display:none;" 表示默认隐藏，点击对应 Tab 时由 JS 切换显示 -->
-	<div class="project-group" data-group="technical" style="display:none;">
-
-		<div class="project-showcase" data-featured="true" data-featured-class="50" data-origin-group="technical" data-aos="fade-up">
+		<div class="project-showcase" data-featured="true" data-featured-class="50" data-origin-group="rl" data-aos="fade-up">
 			<div class="image-section">
 				<a href="/project_pages/rl_brick/brick.html"><img src="/project_pages/rl_brick/brick.gif" class="snapshot-image" alt="Breakout" /></a>
 			</div>
@@ -379,7 +381,57 @@
 		</div>
 		<hr class="project-divider" />
 
-		<div class="project-showcase" data-featured="true" data-featured-class="52" data-origin-group="technical" data-aos="fade-up">
+		<div class="project-showcase" data-featured="true" data-featured-class="56" data-origin-group="rl" data-aos="fade-up">
+			<div class="image-section">
+				<a href="/project_pages/walker2d/walker2d.html"><img src="/project_pages/walker2d/thumb.gif" class="snapshot-image" alt="Walker2d" /></a>
+			</div>
+			<div class="text-section">
+				<h3 class="project-title"><span class="lang-en">PPO & Actor-Critic: Walker2d Locomotion</span><span class="lang-cn">PPO与Actor-Critic：Walker2d运动控制</span></h3>
+				<p class="project-description"><span class="lang-en">Implemented policy-based RL methods (PPO, Actor-Critic) on the MuJoCo Walker2d locomotion task.</span><span class="lang-cn">在MuJoCo Walker2d运动任务上实现基于策略的强化学习方法（PPO、Actor-Critic）。</span></p>
+				<div class="tech-stack"><span class="tech-badge">MuJoCo</span><span class="tech-badge">PPO</span><span class="tech-badge">Actor-Critic</span><span class="tech-badge">RL</span></div>
+				<div class="project-actions">
+					<a href="https://github.com/jeffliulab/walker2d" target="_blank" class="case-study-btn">GitHub</a>
+				</div>
+			</div>
+		</div>
+		<hr class="project-divider" />
+
+		<div class="project-showcase" data-aos="fade-up">
+			<div class="image-section">
+				<a href="/project_pages/small_projects/blackjack/blackjack.html"><img src="/project_pages/small_projects/blackjack/thumb.png" class="snapshot-image" alt="Blackjack" /></a>
+			</div>
+			<div class="text-section">
+				<h3 class="project-title"><span class="lang-en">Monte Carlo ES: Optimal Blackjack Policy</span><span class="lang-cn">蒙特卡洛ES：最优21点策略</span></h3>
+				<p class="project-description"><span class="lang-en">Simulated Blackjack 2 million times using Monte Carlo Exploring Starts to converge on the optimal policy.</span><span class="lang-cn">使用蒙特卡洛探索起始方法模拟21点游戏200万次，收敛至最优策略。</span></p>
+				<div class="tech-stack"><span class="tech-badge">RL</span><span class="tech-badge">Monte Carlo ES</span></div>
+				<div class="project-actions">
+					<a href="https://github.com/jeffliulab/RL_Projects" target="_blank" class="case-study-btn">GitHub</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- ── Robotics ───────────────────────────────────────────── -->
+	<div class="project-group" data-group="robotics" style="display:none;">
+
+		<div class="project-showcase" data-featured="true" data-featured-class="20" data-origin-group="robotics" data-aos="fade-up">
+			<div class="image-section">
+				<a href="/project_pages/smart_cleaning_robot/smart_cleaning_robot.html"><img src="/project_pages/smart_cleaning_robot/thumb.png" class="snapshot-image" alt="Smart Cleaning Robot" /></a>
+			</div>
+			<div class="text-section">
+				<h3 class="project-title"><span class="lang-en">Smart Cleaning Robot: Autonomous Coverage</span><span class="lang-cn">智能清扫机器人：自主全覆盖方案</span></h3>
+				<div class="project-status opensource"><span class="status-dot">●</span> Open Source</div>
+				<p class="project-description"><span class="lang-en"><strong>Service Robotics & Smart Home</strong> — Commercial robots follow random paths, leaving blind spots. Built intelligent cleaning with frontier exploration, optimal path planning, and multi-modal control. (Note: This version is a branch of cleaning robot series, and archive in noetic branch.)</span><span class="lang-cn"><strong>服务机器人与智能家居</strong> — 市面清扫机器人采用随机路线，存在清扫盲区。构建了前沿探索式自主建图、最优路径规划和多模态控制的智能清扫方案。(该项目是扫地机器人系列的一个分支，现在归档于noetic分支。)</span></p>
+				<div class="tech-stack"><span class="tech-badge">Frontier Exploration</span><span class="tech-badge">Path Planning</span><span class="tech-badge">Voice Control</span><span class="tech-badge">ROS</span></div>
+				<div class="project-actions">
+					<a href="https://github.com/jeffliulab/SmartCleaningRobot/tree/noetic" target="_blank" class="case-study-btn">GitHub</a>
+				</div>
+			</div>
+		</div>
+		<hr class="project-divider" />
+
+		<div class="project-showcase" data-featured="true" data-featured-class="52" data-origin-group="robotics" data-aos="fade-up">
 			<div class="image-section">
 				<a href="javascript:void(0)" onclick="openVideoModal('yzfBem-gO0Q')"><img src="/project_pages/embedded/smart_glove/smart_glove_robot_arm.png" class="snapshot-image" alt="Smart Glove" /></a>
 			</div>
@@ -390,21 +442,6 @@
 				<div class="tech-stack"><span class="tech-badge">Embedded</span><span class="tech-badge">Gesture Recognition</span></div>
 				<div class="project-actions">
 					<a href="https://github.com/jeffliulab/SmartGlove" target="_blank" class="case-study-btn">GitHub</a>
-				</div>
-			</div>
-		</div>
-		<hr class="project-divider" />
-
-		<div class="project-showcase" data-featured="true" data-featured-class="56" data-origin-group="technical" data-aos="fade-up">
-			<div class="image-section">
-				<a href="/project_pages/walker2d/walker2d.html"><img src="/project_pages/walker2d/thumb.gif" class="snapshot-image" alt="Walker2d" /></a>
-			</div>
-			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">PPO & Actor-Critic: Walker2d Locomotion</span><span class="lang-cn">PPO与Actor-Critic：Walker2d运动控制</span></h3>
-				<p class="project-description"><span class="lang-en">Implemented policy-based RL methods (PPO, Actor-Critic) on the MuJoCo Walker2d locomotion task.</span><span class="lang-cn">在MuJoCo Walker2d运动任务上实现基于策略的强化学习方法（PPO、Actor-Critic）。</span></p>
-				<div class="tech-stack"><span class="tech-badge">MuJoCo</span><span class="tech-badge">PPO</span><span class="tech-badge">Actor-Critic</span><span class="tech-badge">RL</span></div>
-				<div class="project-actions">
-					<a href="https://github.com/jeffliulab/walker2d" target="_blank" class="case-study-btn">GitHub</a>
 				</div>
 			</div>
 		</div>
@@ -454,21 +491,6 @@
 
 		<div class="project-showcase" data-aos="fade-up">
 			<div class="image-section">
-				<a href="/project_pages/small_projects/blackjack/blackjack.html"><img src="/project_pages/small_projects/blackjack/thumb.png" class="snapshot-image" alt="Blackjack" /></a>
-			</div>
-			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">Monte Carlo ES: Optimal Blackjack Policy</span><span class="lang-cn">蒙特卡洛ES：最优21点策略</span></h3>
-				<p class="project-description"><span class="lang-en">Simulated Blackjack 2 million times using Monte Carlo Exploring Starts to converge on the optimal policy.</span><span class="lang-cn">使用蒙特卡洛探索起始方法模拟21点游戏200万次，收敛至最优策略。</span></p>
-				<div class="tech-stack"><span class="tech-badge">RL</span><span class="tech-badge">Monte Carlo ES</span></div>
-				<div class="project-actions">
-					<a href="https://github.com/jeffliulab/RL_Projects" target="_blank" class="case-study-btn">GitHub</a>
-				</div>
-			</div>
-		</div>
-		<hr class="project-divider" />
-
-		<div class="project-showcase" data-aos="fade-up">
-			<div class="image-section">
 				<a href="javascript:void(0)" onclick="openVideoModal('AX3A4H8DhF4')"><img src="/project_pages/small_projects/fiducials/Fiducial.png" class="snapshot-image" alt="Fiducials" /></a>
 			</div>
 			<div class="text-section">
@@ -481,19 +503,44 @@
 				</div>
 			</div>
 		</div>
-		<hr class="project-divider" />
+
+	</div>
+
+	<!-- ── 商业项目 (COMMERCIAL PROJECTS) ─────────────────────── -->
+	<div class="project-group" data-group="commercial" style="display:none;">
 
 		<div class="project-showcase" data-aos="fade-up">
 			<div class="image-section">
-				<a href="javascript:void(0)" onclick="openVideoModal('RqKZmQSIQvk')"><img src="/project_pages/small_projects/simple_ai_agent/thumb.gif" class="snapshot-image" alt="NPC Demo" /></a>
+				<a href="/project_pages/tianyuan_ichiban/ichiban.html"><img src="/images/thumbs/ichiban_lottery.png" class="snapshot-image" alt="Ichiban Lottery" /></a>
 			</div>
 			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">LLM Agent: Intelligent NPC Learning</span><span class="lang-cn">LLM智能体：NPC自主学习</span></h3>
-				<div class="project-status video"><span class="status-dot">●</span> Video Demo</div>
-				<p class="project-description"><span class="lang-en">A prototype AI agent in a game environment where the NPC learns all skills from the player through natural interaction.</span><span class="lang-cn">一个游戏环境中的AI智能体原型，NPC通过自然交互从玩家处学习所有技能。</span></p>
-				<div class="tech-stack"><span class="tech-badge">OpenAI API</span><span class="tech-badge">Prompt Eng.</span><span class="tech-badge">Pygame</span></div>
+				<h3 class="project-title"><span class="lang-en">Ichiban Lottery</span><span class="lang-cn">天元一番赏</span></h3>
+				<div class="project-status commercial"><span class="status-dot">●</span> Commercial</div>
+				<p class="project-description"><span class="lang-en">A WeChat Mini Program for anime figure lottery, deployed in a real market with real users, generating over $15,000 in revenue. Demonstrates end-to-end product delivery.</span><span class="lang-cn">微信小程序动漫手办抽奖平台，已在真实市场部署，累计营收超过$15,000。展示了端到端产品交付能力。</span></p>
+				<div class="tech-stack"><span class="tech-badge">WeChat Mini Program</span><span class="tech-badge">Product</span><span class="tech-badge">E-commerce</span></div>
 				<div class="project-actions">
-					<a href="https://github.com/jeffliulab/A_Simple_AI_Agent" target="_blank" class="case-study-btn">GitHub</a>
+					<a href="/project_pages/tianyuan_ichiban/ichiban.html" class="case-study-btn">Details</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- ── Classic / Algorithms ──────────────────────────────── -->
+	<div class="project-group" data-group="classic" style="display:none;">
+
+		<div class="project-showcase" data-featured="true" data-featured-class="24" data-origin-group="classic" data-aos="fade-up">
+			<div class="image-section">
+				<a href="https://jeffliulab.github.io/real_time_demo/color_calibration/index.html" target="_blank"><img src="/project_pages/color_calibration/pipeline.png" class="snapshot-image" alt="Color Calibration" /></a>
+			</div>
+			<div class="text-section">
+				<h3 class="project-title"><span class="lang-en">Color Calibration Solution</span><span class="lang-cn">色彩校准解决方案</span></h3>
+				<div class="project-status live"><span class="status-dot">●</span> Live Demo</div>
+				<p class="project-description"><span class="lang-en"><strong>Interior Design & Quality Inspection</strong> — Color recognition fails under variable lighting. Built an MLOps pipeline with multi-model comparison for robust color ID. Deployed as a real-time web tool.</span><span class="lang-cn"><strong>室内设计与质量检测</strong> — 不同光照下颜色识别失败。构建了MLOps流水线，通过多模型对比实现精准颜色识别，已部署为实时Web工具。</span></p>
+				<div class="tech-stack"><span class="tech-badge">MLOps</span><span class="tech-badge">ML Pipeline</span><span class="tech-badge">Multi-Model</span><span class="tech-badge">Real-Time</span></div>
+				<div class="project-actions">
+					<a href="https://jeffliulab.github.io/real_time_demo/color_calibration/index.html" target="_blank" class="case-study-btn">Live Demo</a>
+					<a href="https://github.com/jeffliulab/Color_Calibration" target="_blank" class="case-study-btn">GitHub</a>
 				</div>
 			</div>
 		</div>
@@ -526,40 +573,6 @@
 				<div class="tech-stack"><span class="tech-badge">Data Structures</span><span class="tech-badge">Algorithms</span></div>
 				<div class="project-actions">
 					<a href="https://jeffliulab.github.io/algorithm-roadmap/" target="_blank" class="case-study-btn">View</a>
-				</div>
-			</div>
-		</div>
-		<hr class="project-divider" />
-
-		<div class="project-showcase" data-aos="fade-up">
-			<div class="image-section"><div class="coming-soon-placeholder"><span class="lang-en">Coming Soon</span><span class="lang-cn">即将发布</span></div></div>
-			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">Deep RL: Maze Escape V2</span><span class="lang-cn">深度RL：迷宫逃脱V2</span></h3>
-				<div class="project-status soon">In Progress</div>
-				<p class="project-description"><span class="lang-en">Training an RL agent to explore and escape unknown mazes through trial-and-error, replacing hand-crafted wall-following rules with learned policies.</span><span class="lang-cn">训练RL智能体通过试错探索未知迷宫并逃脱，用学习到的策略替代手工编写的沿墙规则。</span></p>
-				<div class="tech-stack"><span class="tech-badge">Reinforcement Learning</span><span class="tech-badge">Deep Q-Network</span><span class="tech-badge">Exploration</span></div>
-				<div class="project-actions">
-					<a href="https://jeffliulab.github.io/algorithm-roadmap/" target="_blank" class="case-study-btn">GitHub</a>
-				</div>
-			</div>
-		</div>
-
-	</div>
-
-	<!-- ── 商业项目 (COMMERCIAL PROJECTS) ─────────────────────── -->
-	<div class="project-group" data-group="commercial" style="display:none;">
-
-		<div class="project-showcase" data-aos="fade-up">
-			<div class="image-section">
-				<a href="/project_pages/tianyuan_ichiban/ichiban.html"><img src="/images/thumbs/ichiban_lottery.png" class="snapshot-image" alt="Ichiban Lottery" /></a>
-			</div>
-			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">Ichiban Lottery</span><span class="lang-cn">天元一番赏</span></h3>
-				<div class="project-status commercial"><span class="status-dot">●</span> Commercial</div>
-				<p class="project-description"><span class="lang-en">A WeChat Mini Program for anime figure lottery, deployed in a real market with real users, generating over $15,000 in revenue. Demonstrates end-to-end product delivery.</span><span class="lang-cn">微信小程序动漫手办抽奖平台，已在真实市场部署，累计营收超过$15,000。展示了端到端产品交付能力。</span></p>
-				<div class="tech-stack"><span class="tech-badge">WeChat Mini Program</span><span class="tech-badge">Product</span><span class="tech-badge">E-commerce</span></div>
-				<div class="project-actions">
-					<a href="/project_pages/tianyuan_ichiban/ichiban.html" class="case-study-btn">Details</a>
 				</div>
 			</div>
 		</div>
