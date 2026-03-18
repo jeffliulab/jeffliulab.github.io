@@ -218,16 +218,14 @@
 	<!-- 分类标签 — data-tab 值必须与下面 project-group 的 data-group 一一对应 -->
 	<div class="project-tabs" data-aos="fade-up">
 		<button class="tab-btn active" data-tab="featured"><span class="lang-en">Featured</span><span class="lang-cn">精选</span></button>
-		<button class="tab-btn" data-tab="agents"><span class="lang-en">AI Agents</span><span class="lang-cn">AI智能体</span></button>
-		<button class="tab-btn" data-tab="mllms"><span class="lang-en">MLLMs</span><span class="lang-cn">大模型</span></button>
-		<button class="tab-btn" data-tab="dl"><span class="lang-en">Deep Learning</span><span class="lang-cn">深度学习</span></button>
+		<button class="tab-btn" data-tab="agents"><span class="lang-en">MLLMs & AI Agents</span><span class="lang-cn">大模型与AI智能体</span></button>
 		<button class="tab-btn" data-tab="rl"><span class="lang-en">Reinforcement Learning</span><span class="lang-cn">强化学习</span></button>
-		<button class="tab-btn" data-tab="robotics"><span class="lang-en">Robotics</span><span class="lang-cn">机器人</span></button>
-		<button class="tab-btn" data-tab="commercial"><span class="lang-en">Commercial</span><span class="lang-cn">商业项目</span></button>
-		<button class="tab-btn" data-tab="classic"><span class="lang-en">Classic</span><span class="lang-cn">传统方法</span></button>
+		<button class="tab-btn" data-tab="robotics"><span class="lang-en">Robotics & Hardwares</span><span class="lang-cn">机器人与硬件</span></button>
+		<button class="tab-btn" data-tab="ml"><span class="lang-en">Machine Learning</span><span class="lang-cn">机器学习</span></button>
+		<button class="tab-btn" data-tab="classic"><span class="lang-en">Others</span><span class="lang-cn">其他</span></button>
 	</div>
 
-	<!-- ── AI Agents ─────────────────────────────────────────── -->
+	<!-- ── MLLMs & AI Agents ────────────────────────────────── -->
 	<div class="project-group" data-group="agents" style="display:none;">
 
 		<div class="project-showcase" data-featured="true" data-featured-class="22" data-origin-group="agents" data-aos="fade-up">
@@ -241,6 +239,37 @@
 				<div class="tech-stack"><span class="tech-badge">Generative Agents</span><span class="tech-badge">FastAPI</span><span class="tech-badge">LLM Integration</span><span class="tech-badge">WebSocket</span><span class="tech-badge">Canvas</span></div>
 				<div class="project-actions">
 					<a href="https://github.com/jeffliulab/ALICE_PROJECT" target="_blank" class="case-study-btn">GitHub</a>
+				</div>
+			</div>
+		</div>
+		<hr class="project-divider" />
+
+		<div class="project-showcase" data-aos="fade-up">
+			<div class="image-section"><div class="coming-soon-placeholder"><span class="lang-en">Coming Soon</span><span class="lang-cn">即将发布</span></div></div>
+			<div class="text-section">
+				<h3 class="project-title"><span class="lang-en">VisInject: Visual Prompt Injection Attack & Defense</span><span class="lang-cn">VisInject：视觉提示注入攻防研究</span></h3>
+				<div class="project-status soon">In Progress</div>
+				<p class="project-description"><span class="lang-en"><strong>AI Security</strong> — Open-source model deployments face security vulnerabilities from visual prompt injection. Researching attack vectors and building defense mechanisms.</span><span class="lang-cn"><strong>AI安全</strong> — 开源模型部署面临视觉提示注入攻击漏洞。研究攻击向量并构建防御机制。</span></p>
+				<div class="tech-stack"><span class="tech-badge">AI Security</span><span class="tech-badge">Prompt Injection</span><span class="tech-badge">LLM Defense</span></div>
+				<div class="project-actions">
+					<a href="https://github.com/jeffliulab/vis_inject" target="_blank" class="case-study-btn">GitHub</a>
+				</div>
+			</div>
+		</div>
+		<hr class="project-divider" />
+
+		<div class="project-showcase" data-featured="true" data-featured-class="30" data-origin-group="agents" data-aos="fade-up">
+			<div class="image-section">
+				<a href="https://github.com/LogicGate-AI-Lab/model-court" target="_blank"><img src="/project_pages/OPEN_SOURCE/model_court/thumb.png" class="snapshot-image" alt="Model Court" /></a>
+			</div>
+			<div class="text-section">
+				<h3 class="project-title"><span class="lang-en">Model Court: Multi-Model Verification</span><span class="lang-cn">Model Court：多模型交叉验证框架</span></h3>
+				<div class="project-status opensource"><span class="status-dot">●</span> Open Source</div>
+				<p class="project-description"><span class="lang-en"><strong>AI Compliance & Reliability</strong> — Single-model outputs can be unreliable in high-stakes domains. Designed a multi-model ensemble and cross-validation framework. Published on PyPI.</span><span class="lang-cn"><strong>AI合规与可靠性</strong> — 单一模型输出在高风险领域不可靠。设计了多模型集成与交叉验证框架，已发布至PyPI。</span></p>
+				<div class="tech-stack"><span class="tech-badge">Multi-Model</span><span class="tech-badge">Cross-Validation</span><span class="tech-badge">AI Compliance</span></div>
+				<div class="project-actions">
+					<a href="https://github.com/LogicGate-AI-Lab/model-court" target="_blank" class="case-study-btn">GitHub</a>
+					<a href="https://pypi.org/project/model-court/" target="_blank" class="case-study-btn">PyPI</a>
 				</div>
 			</div>
 		</div>
@@ -262,58 +291,7 @@
 		</div>
 		<hr class="project-divider" />
 
-		<div class="project-showcase" data-aos="fade-up">
-			<div class="image-section">
-				<a href="javascript:void(0)" onclick="openVideoModal('RqKZmQSIQvk')"><img src="/project_pages/small_projects/simple_ai_agent/thumb.gif" class="snapshot-image" alt="NPC Demo" /></a>
-			</div>
-			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">LLM Agent: Intelligent NPC</span><span class="lang-cn">LLM智能体：NPC自主学习</span></h3>
-				<div class="project-status video"><span class="status-dot">●</span> Video Demo</div>
-				<p class="project-description"><span class="lang-en">A prototype AI agent in a game environment where the NPC learns all skills from the player through natural interaction.</span><span class="lang-cn">一个游戏环境中的AI智能体原型，NPC通过自然交互从玩家处学习所有技能。</span></p>
-				<div class="tech-stack"><span class="tech-badge">OpenAI API</span><span class="tech-badge">Prompt Eng.</span><span class="tech-badge">Pygame</span></div>
-				<div class="project-actions">
-					<a href="https://github.com/jeffliulab/A_Simple_AI_Agent" target="_blank" class="case-study-btn">GitHub</a>
-				</div>
-			</div>
-		</div>
-
-	</div>
-
-	<!-- ── Multimodal LLMs ────────────────────────────────────── -->
-	<div class="project-group" data-group="mllms" style="display:none;">
-
-		<div class="project-showcase" data-aos="fade-up">
-			<div class="image-section"><div class="coming-soon-placeholder"><span class="lang-en">Coming Soon</span><span class="lang-cn">即将发布</span></div></div>
-			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">VisInject: Visual Prompt Injection Attack & Defense</span><span class="lang-cn">VisInject：视觉提示注入攻防研究</span></h3>
-				<div class="project-status soon">In Progress</div>
-				<p class="project-description"><span class="lang-en"><strong>AI Security</strong> — Open-source model deployments face security vulnerabilities from visual prompt injection. Researching attack vectors and building defense mechanisms.</span><span class="lang-cn"><strong>AI安全</strong> — 开源模型部署面临视觉提示注入攻击漏洞。研究攻击向量并构建防御机制。</span></p>
-				<div class="tech-stack"><span class="tech-badge">AI Security</span><span class="tech-badge">Prompt Injection</span><span class="tech-badge">LLM Defense</span></div>
-				<div class="project-actions">
-					<a href="https://github.com/jeffliulab/vis_inject" target="_blank" class="case-study-btn">GitHub</a>
-				</div>
-			</div>
-		</div>
-		<hr class="project-divider" />
-
-		<div class="project-showcase" data-featured="true" data-featured-class="30" data-origin-group="mllms" data-aos="fade-up">
-			<div class="image-section">
-				<a href="https://github.com/LogicGate-AI-Lab/model-court" target="_blank"><img src="/project_pages/OPEN_SOURCE/model_court/thumb.png" class="snapshot-image" alt="Model Court" /></a>
-			</div>
-			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">Model Court: Multi-Model Verification</span><span class="lang-cn">Model Court：多模型交叉验证框架</span></h3>
-				<div class="project-status opensource"><span class="status-dot">●</span> Open Source</div>
-				<p class="project-description"><span class="lang-en"><strong>AI Compliance & Reliability</strong> — Single-model outputs can be unreliable in high-stakes domains. Designed a multi-model ensemble and cross-validation framework. Published on PyPI.</span><span class="lang-cn"><strong>AI合规与可靠性</strong> — 单一模型输出在高风险领域不可靠。设计了多模型集成与交叉验证框架，已发布至PyPI。</span></p>
-				<div class="tech-stack"><span class="tech-badge">Multi-Model</span><span class="tech-badge">Cross-Validation</span><span class="tech-badge">AI Compliance</span></div>
-				<div class="project-actions">
-					<a href="https://github.com/LogicGate-AI-Lab/model-court" target="_blank" class="case-study-btn">GitHub</a>
-					<a href="https://pypi.org/project/model-court/" target="_blank" class="case-study-btn">PyPI</a>
-				</div>
-			</div>
-		</div>
-		<hr class="project-divider" />
-
-		<div class="project-showcase" data-featured="true" data-featured-class="32" data-origin-group="mllms" data-aos="fade-up">
+		<div class="project-showcase" data-featured="true" data-featured-class="32" data-origin-group="agents" data-aos="fade-up">
 			<div class="image-section">
 				<a href="javascript:void(0)" onclick="openVideoModal('_5-A-WvDAkE')"><img src="/project_pages/academic/https_proxy/fact_check.png" class="snapshot-image" alt="Fact Check" /></a>
 			</div>
@@ -328,21 +306,19 @@
 				</div>
 			</div>
 		</div>
-
-	</div>
-
-	<!-- ── Deep Learning ─────────────────────────────────────── -->
-	<div class="project-group" data-group="dl" style="display:none;">
+		<hr class="project-divider" />
 
 		<div class="project-showcase" data-aos="fade-up">
-			<div class="image-section"><div class="coming-soon-placeholder"><span class="lang-en">Coming Soon</span><span class="lang-cn">即将发布</span></div></div>
+			<div class="image-section">
+				<a href="javascript:void(0)" onclick="openVideoModal('RqKZmQSIQvk')"><img src="/project_pages/small_projects/simple_ai_agent/thumb.gif" class="snapshot-image" alt="LLM Agent Demo" /></a>
+			</div>
 			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">Real-Time Weather Prediction</span><span class="lang-cn">实时天气预测系统</span></h3>
-				<div class="project-status soon">In Progress</div>
-				<p class="project-description"><span class="lang-en"><strong>Agriculture & Logistics</strong> — Traditional weather forecasts lack hyper-local, real-time granularity needed for precision agriculture, outdoor event planning, and last-mile delivery optimization. Building a CNN-based system that predicts short-term weather from satellite image sequences.</span><span class="lang-cn"><strong>农业与物流</strong> — 传统天气预报缺乏精准农业、户外活动规划和末端配送优化所需的超本地化实时精度。构建基于CNN的短期天气预测系统，通过卫星图像序列进行推断。</span></p>
-				<div class="tech-stack"><span class="tech-badge">CNN</span><span class="tech-badge">Satellite Imagery</span><span class="tech-badge">Time-Series</span><span class="tech-badge">Real-Time</span></div>
+				<h3 class="project-title"><span class="lang-en">LLM Agent Demo</span><span class="lang-cn">LLM智能体演示</span></h3>
+				<div class="project-status video"><span class="status-dot">●</span> Video Demo</div>
+				<p class="project-description"><span class="lang-en">A prototype AI agent in a game environment where the NPC learns all skills from the player through natural interaction.</span><span class="lang-cn">一个游戏环境中的AI智能体原型，NPC通过自然交互从玩家处学习所有技能。</span></p>
+				<div class="tech-stack"><span class="tech-badge">OpenAI API</span><span class="tech-badge">Prompt Eng.</span><span class="tech-badge">Pygame</span></div>
 				<div class="project-actions">
-					<a href="https://github.com/jeffliulab/real_time_weather_forecasting" target="_blank" class="case-study-btn">GitHub</a>
+					<a href="https://github.com/jeffliulab/A_Simple_AI_Agent" target="_blank" class="case-study-btn">GitHub</a>
 				</div>
 			</div>
 		</div>
@@ -506,35 +482,29 @@
 
 	</div>
 
-	<!-- ── 商业项目 (COMMERCIAL PROJECTS) ─────────────────────── -->
-	<div class="project-group" data-group="commercial" style="display:none;">
+	<!-- ── Machine Learning ─────────────────────────────────── -->
+	<div class="project-group" data-group="ml" style="display:none;">
 
 		<div class="project-showcase" data-aos="fade-up">
-			<div class="image-section">
-				<a href="/project_pages/tianyuan_ichiban/ichiban.html"><img src="/images/thumbs/ichiban_lottery.png" class="snapshot-image" alt="Ichiban Lottery" /></a>
-			</div>
+			<div class="image-section"><div class="coming-soon-placeholder"><span class="lang-en">Coming Soon</span><span class="lang-cn">即将发布</span></div></div>
 			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">Ichiban Lottery</span><span class="lang-cn">天元一番赏</span></h3>
-				<div class="project-status commercial"><span class="status-dot">●</span> Commercial</div>
-				<p class="project-description"><span class="lang-en">A WeChat Mini Program for anime figure lottery, deployed in a real market with real users, generating over $15,000 in revenue. Demonstrates end-to-end product delivery.</span><span class="lang-cn">微信小程序动漫手办抽奖平台，已在真实市场部署，累计营收超过$15,000。展示了端到端产品交付能力。</span></p>
-				<div class="tech-stack"><span class="tech-badge">WeChat Mini Program</span><span class="tech-badge">Product</span><span class="tech-badge">E-commerce</span></div>
+				<h3 class="project-title"><span class="lang-en">Real-Time Weather Prediction</span><span class="lang-cn">实时天气预测系统</span></h3>
+				<div class="project-status soon">In Progress</div>
+				<p class="project-description"><span class="lang-en"><strong>Agriculture & Logistics</strong> — Traditional weather forecasts lack hyper-local, real-time granularity needed for precision agriculture, outdoor event planning, and last-mile delivery optimization. Building a CNN-based system that predicts short-term weather from satellite image sequences.</span><span class="lang-cn"><strong>农业与物流</strong> — 传统天气预报缺乏精准农业、户外活动规划和末端配送优化所需的超本地化实时精度。构建基于CNN的短期天气预测系统，通过卫星图像序列进行推断。</span></p>
+				<div class="tech-stack"><span class="tech-badge">CNN</span><span class="tech-badge">Satellite Imagery</span><span class="tech-badge">Time-Series</span><span class="tech-badge">Real-Time</span></div>
 				<div class="project-actions">
-					<a href="/project_pages/tianyuan_ichiban/ichiban.html" class="case-study-btn">Details</a>
+					<a href="https://github.com/jeffliulab/real_time_weather_forecasting" target="_blank" class="case-study-btn">GitHub</a>
 				</div>
 			</div>
 		</div>
+		<hr class="project-divider" />
 
-	</div>
-
-	<!-- ── Classic / Algorithms ──────────────────────────────── -->
-	<div class="project-group" data-group="classic" style="display:none;">
-
-		<div class="project-showcase" data-featured="true" data-featured-class="24" data-origin-group="classic" data-aos="fade-up">
+		<div class="project-showcase" data-featured="true" data-featured-class="24" data-origin-group="ml" data-aos="fade-up">
 			<div class="image-section">
-				<a href="https://jeffliulab.github.io/real_time_demo/color_calibration/index.html" target="_blank"><img src="/project_pages/color_calibration/pipeline.png" class="snapshot-image" alt="Color Calibration" /></a>
+				<a href="https://jeffliulab.github.io/real_time_demo/color_calibration/index.html" target="_blank"><img src="/project_pages/color_calibration/pipeline.png" class="snapshot-image" alt="Color Calibration System" /></a>
 			</div>
 			<div class="text-section">
-				<h3 class="project-title"><span class="lang-en">Color Calibration Solution</span><span class="lang-cn">色彩校准解决方案</span></h3>
+				<h3 class="project-title"><span class="lang-en">Color Calibration System</span><span class="lang-cn">色彩校准系统</span></h3>
 				<div class="project-status live"><span class="status-dot">●</span> Live Demo</div>
 				<p class="project-description"><span class="lang-en"><strong>Interior Design & Quality Inspection</strong> — Color recognition fails under variable lighting. Built an MLOps pipeline with multi-model comparison for robust color ID. Deployed as a real-time web tool.</span><span class="lang-cn"><strong>室内设计与质量检测</strong> — 不同光照下颜色识别失败。构建了MLOps流水线，通过多模型对比实现精准颜色识别，已部署为实时Web工具。</span></p>
 				<div class="tech-stack"><span class="tech-badge">MLOps</span><span class="tech-badge">ML Pipeline</span><span class="tech-badge">Multi-Model</span><span class="tech-badge">Real-Time</span></div>
@@ -544,7 +514,11 @@
 				</div>
 			</div>
 		</div>
-		<hr class="project-divider" />
+
+	</div>
+
+	<!-- ── Others ───────────────────────────────────────────── -->
+	<div class="project-group" data-group="classic" style="display:none;">
 
 		<div class="project-showcase" data-aos="fade-up">
 			<div class="image-section">
@@ -557,6 +531,22 @@
 				<div class="tech-stack"><span class="tech-badge">OSM</span><span class="tech-badge">C++</span><span class="tech-badge">A*</span></div>
 				<div class="project-actions">
 					<a href="https://github.com/jeffliulab/OSM_Map_AStar" target="_blank" class="case-study-btn">GitHub</a>
+				</div>
+			</div>
+		</div>
+		<hr class="project-divider" />
+
+		<div class="project-showcase" data-aos="fade-up">
+			<div class="image-section">
+				<a href="/project_pages/tianyuan_ichiban/ichiban.html"><img src="/images/thumbs/ichiban_lottery.png" class="snapshot-image" alt="Ichiban Lottery" /></a>
+			</div>
+			<div class="text-section">
+				<h3 class="project-title"><span class="lang-en">Ichiban Lottery</span><span class="lang-cn">天元一番赏</span></h3>
+				<div class="project-status commercial"><span class="status-dot">●</span> Commercial</div>
+				<p class="project-description"><span class="lang-en">A WeChat Mini Program for anime figure lottery, deployed in a real market with real users, generating over $15,000 in revenue. Demonstrates end-to-end product delivery.</span><span class="lang-cn">微信小程序动漫手办抽奖平台，已在真实市场部署，累计营收超过$15,000。展示了端到端产品交付能力。</span></p>
+				<div class="tech-stack"><span class="tech-badge">WeChat Mini Program</span><span class="tech-badge">Product</span><span class="tech-badge">E-commerce</span></div>
+				<div class="project-actions">
+					<a href="/project_pages/tianyuan_ichiban/ichiban.html" class="case-study-btn">Details</a>
 				</div>
 			</div>
 		</div>

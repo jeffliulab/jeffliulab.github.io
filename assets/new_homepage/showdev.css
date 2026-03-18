@@ -27,7 +27,6 @@
 	--badge-video: #b48878;
 	--badge-opensource: #7898b4;
 	--badge-soon: #a8a4a0;
-	--badge-commercial: #a89670;
 	--section-gap: 80px;
 	--font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 	--font-heading: 'Source Serif 4', Georgia, serif;
@@ -531,11 +530,8 @@ body.dark-mode .projects-bg {
 .tab-btn[data-tab="agents"]:hover                { border-color: #7a9e8c; color: #7a9e8c; }
 .tab-btn[data-tab="agents"].active               { background: #7a9e8c; border-color: #7a9e8c; }
 
-.tab-btn[data-tab="mllms"]:hover                 { border-color: #7898b4; color: #7898b4; }
-.tab-btn[data-tab="mllms"].active                { background: #7898b4; border-color: #7898b4; }
-
-.tab-btn[data-tab="dl"]:hover                    { border-color: #9490b0; color: #9490b0; }
-.tab-btn[data-tab="dl"].active                   { background: #9490b0; border-color: #9490b0; }
+.tab-btn[data-tab="ml"]:hover                    { border-color: #9490b0; color: #9490b0; }
+.tab-btn[data-tab="ml"].active                   { background: #9490b0; border-color: #9490b0; }
 
 .tab-btn[data-tab="rl"]:hover                    { border-color: #b89478; color: #b89478; }
 .tab-btn[data-tab="rl"].active                   { background: #b89478; border-color: #b89478; }
@@ -543,11 +539,8 @@ body.dark-mode .projects-bg {
 .tab-btn[data-tab="robotics"]:hover              { border-color: #7aa49c; color: #7aa49c; }
 .tab-btn[data-tab="robotics"].active             { background: #7aa49c; border-color: #7aa49c; }
 
-.tab-btn[data-tab="commercial"]:hover            { border-color: #a89670; color: #a89670; }
-.tab-btn[data-tab="commercial"].active           { background: #a89670; border-color: #a89670; }
-
-.tab-btn[data-tab="classic"]:hover               { border-color: #8a9e8c; color: #8a9e8c; }
-.tab-btn[data-tab="classic"].active              { background: #8a9e8c; border-color: #8a9e8c; }
+.tab-btn[data-tab="classic"]:hover               { border-color: #7898b4; color: #7898b4; }
+.tab-btn[data-tab="classic"].active              { background: #7898b4; border-color: #7898b4; }
 
 .tab-btn.active,
 .tab-btn.active:hover {
@@ -782,17 +775,11 @@ body.dark-mode .projects-bg {
 .project-group[data-group="agents"] .case-study-btn { background: #7a9e8c; }
 .project-group[data-group="agents"] .case-study-btn:hover { background: #96b4a4; }
 
-.project-group[data-group="mllms"] .project-title { color: #506882; }
-.project-group[data-group="mllms"] .project-status { color: #506882; }
-.project-group[data-group="mllms"] .tech-badge { background: #d4e4f0; color: #3c5470; }
-.project-group[data-group="mllms"] .case-study-btn { background: #7898b4; }
-.project-group[data-group="mllms"] .case-study-btn:hover { background: #90aec8; }
-
-.project-group[data-group="dl"] .project-title { color: #6a6882; }
-.project-group[data-group="dl"] .project-status { color: #6a6882; }
-.project-group[data-group="dl"] .tech-badge { background: #e4e2f4; color: #565472; }
-.project-group[data-group="dl"] .case-study-btn { background: #9490b0; }
-.project-group[data-group="dl"] .case-study-btn:hover { background: #aca8c4; }
+.project-group[data-group="ml"] .project-title { color: #6a6882; }
+.project-group[data-group="ml"] .project-status { color: #6a6882; }
+.project-group[data-group="ml"] .tech-badge { background: #e4e2f4; color: #565472; }
+.project-group[data-group="ml"] .case-study-btn { background: #9490b0; }
+.project-group[data-group="ml"] .case-study-btn:hover { background: #aca8c4; }
 
 .project-group[data-group="rl"] .project-title { color: #826050; }
 .project-group[data-group="rl"] .project-status { color: #826050; }
@@ -806,29 +793,19 @@ body.dark-mode .projects-bg {
 .project-group[data-group="robotics"] .case-study-btn { background: #7aa49c; }
 .project-group[data-group="robotics"] .case-study-btn:hover { background: #92bcb4; }
 
-.project-group[data-group="commercial"] .project-title { color: #786644; }
-.project-group[data-group="commercial"] .project-status { color: #786644; }
-.project-group[data-group="commercial"] .tech-badge { background: #e8dfc8; color: #645438; }
-.project-group[data-group="commercial"] .case-study-btn { background: #a89670; }
-.project-group[data-group="commercial"] .case-study-btn:hover { background: #bcaa88; }
-
-.project-group[data-group="classic"] .project-title { color: #5e7260; }
-.project-group[data-group="classic"] .project-status { color: #5e7260; }
-.project-group[data-group="classic"] .tech-badge { background: #dce8de; color: #4a5e4c; }
-.project-group[data-group="classic"] .case-study-btn { background: #8a9e8c; }
-.project-group[data-group="classic"] .case-study-btn:hover { background: #a4b6a6; }
+.project-group[data-group="classic"] .project-title { color: #506882; }
+.project-group[data-group="classic"] .project-status { color: #506882; }
+.project-group[data-group="classic"] .tech-badge { background: #d4e4f0; color: #3c5470; }
+.project-group[data-group="classic"] .case-study-btn { background: #7898b4; }
+.project-group[data-group="classic"] .case-study-btn:hover { background: #90aec8; }
 
 body.dark-mode .project-group[data-group="agents"] .project-title { color: #96c4b0; }
 body.dark-mode .project-group[data-group="agents"] .tech-badge { background: #2a3e36; color: #96c4b0; }
 body.dark-mode .project-group[data-group="agents"] .case-study-btn { background: #7a9e8c; }
 
-body.dark-mode .project-group[data-group="mllms"] .project-title { color: #90b8d4; }
-body.dark-mode .project-group[data-group="mllms"] .tech-badge { background: #263446; color: #90b8d4; }
-body.dark-mode .project-group[data-group="mllms"] .case-study-btn { background: #7898b4; }
-
-body.dark-mode .project-group[data-group="dl"] .project-title { color: #b0aece; }
-body.dark-mode .project-group[data-group="dl"] .tech-badge { background: #2e2e40; color: #b0aece; }
-body.dark-mode .project-group[data-group="dl"] .case-study-btn { background: #9490b0; }
+body.dark-mode .project-group[data-group="ml"] .project-title { color: #b0aece; }
+body.dark-mode .project-group[data-group="ml"] .tech-badge { background: #2e2e40; color: #b0aece; }
+body.dark-mode .project-group[data-group="ml"] .case-study-btn { background: #9490b0; }
 
 body.dark-mode .project-group[data-group="rl"] .project-title { color: #d4b49e; }
 body.dark-mode .project-group[data-group="rl"] .tech-badge { background: #3e2e26; color: #d4b49e; }
@@ -838,13 +815,9 @@ body.dark-mode .project-group[data-group="robotics"] .project-title { color: #96
 body.dark-mode .project-group[data-group="robotics"] .tech-badge { background: #283836; color: #96c0b8; }
 body.dark-mode .project-group[data-group="robotics"] .case-study-btn { background: #7aa49c; }
 
-body.dark-mode .project-group[data-group="commercial"] .project-title { color: #c8b898; }
-body.dark-mode .project-group[data-group="commercial"] .tech-badge { background: #362c1e; color: #c8b898; }
-body.dark-mode .project-group[data-group="commercial"] .case-study-btn { background: #a89670; }
-
-body.dark-mode .project-group[data-group="classic"] .project-title { color: #a4b8a6; }
-body.dark-mode .project-group[data-group="classic"] .tech-badge { background: #2c382e; color: #a4b8a6; }
-body.dark-mode .project-group[data-group="classic"] .case-study-btn { background: #8a9e8c; }
+body.dark-mode .project-group[data-group="classic"] .project-title { color: #90b8d4; }
+body.dark-mode .project-group[data-group="classic"] .tech-badge { background: #263446; color: #90b8d4; }
+body.dark-mode .project-group[data-group="classic"] .case-study-btn { background: #7898b4; }
 
 /* ── Featured group: preserve origin-group colors on cloned showcases ── */
 
@@ -854,17 +827,11 @@ body.dark-mode .project-group[data-group="classic"] .case-study-btn { background
 .project-showcase[data-origin-group="agents"] .case-study-btn { background: #7a9e8c; }
 .project-showcase[data-origin-group="agents"] .case-study-btn:hover { background: #96b4a4; }
 
-.project-showcase[data-origin-group="mllms"] .project-title { color: #506882; }
-.project-showcase[data-origin-group="mllms"] .project-status { color: #506882; }
-.project-showcase[data-origin-group="mllms"] .tech-badge { background: #d4e4f0; color: #3c5470; }
-.project-showcase[data-origin-group="mllms"] .case-study-btn { background: #7898b4; }
-.project-showcase[data-origin-group="mllms"] .case-study-btn:hover { background: #90aec8; }
-
-.project-showcase[data-origin-group="dl"] .project-title { color: #6a6882; }
-.project-showcase[data-origin-group="dl"] .project-status { color: #6a6882; }
-.project-showcase[data-origin-group="dl"] .tech-badge { background: #e4e2f4; color: #565472; }
-.project-showcase[data-origin-group="dl"] .case-study-btn { background: #9490b0; }
-.project-showcase[data-origin-group="dl"] .case-study-btn:hover { background: #aca8c4; }
+.project-showcase[data-origin-group="ml"] .project-title { color: #6a6882; }
+.project-showcase[data-origin-group="ml"] .project-status { color: #6a6882; }
+.project-showcase[data-origin-group="ml"] .tech-badge { background: #e4e2f4; color: #565472; }
+.project-showcase[data-origin-group="ml"] .case-study-btn { background: #9490b0; }
+.project-showcase[data-origin-group="ml"] .case-study-btn:hover { background: #aca8c4; }
 
 .project-showcase[data-origin-group="rl"] .project-title { color: #826050; }
 .project-showcase[data-origin-group="rl"] .project-status { color: #826050; }
@@ -878,29 +845,19 @@ body.dark-mode .project-group[data-group="classic"] .case-study-btn { background
 .project-showcase[data-origin-group="robotics"] .case-study-btn { background: #7aa49c; }
 .project-showcase[data-origin-group="robotics"] .case-study-btn:hover { background: #92bcb4; }
 
-.project-showcase[data-origin-group="commercial"] .project-title { color: #786644; }
-.project-showcase[data-origin-group="commercial"] .project-status { color: #786644; }
-.project-showcase[data-origin-group="commercial"] .tech-badge { background: #e8dfc8; color: #645438; }
-.project-showcase[data-origin-group="commercial"] .case-study-btn { background: #a89670; }
-.project-showcase[data-origin-group="commercial"] .case-study-btn:hover { background: #bcaa88; }
-
-.project-showcase[data-origin-group="classic"] .project-title { color: #5e7260; }
-.project-showcase[data-origin-group="classic"] .project-status { color: #5e7260; }
-.project-showcase[data-origin-group="classic"] .tech-badge { background: #dce8de; color: #4a5e4c; }
-.project-showcase[data-origin-group="classic"] .case-study-btn { background: #8a9e8c; }
-.project-showcase[data-origin-group="classic"] .case-study-btn:hover { background: #a4b6a6; }
+.project-showcase[data-origin-group="classic"] .project-title { color: #506882; }
+.project-showcase[data-origin-group="classic"] .project-status { color: #506882; }
+.project-showcase[data-origin-group="classic"] .tech-badge { background: #d4e4f0; color: #3c5470; }
+.project-showcase[data-origin-group="classic"] .case-study-btn { background: #7898b4; }
+.project-showcase[data-origin-group="classic"] .case-study-btn:hover { background: #90aec8; }
 
 body.dark-mode .project-showcase[data-origin-group="agents"] .project-title { color: #96c4b0; }
 body.dark-mode .project-showcase[data-origin-group="agents"] .tech-badge { background: #2a3e36; color: #96c4b0; }
 body.dark-mode .project-showcase[data-origin-group="agents"] .case-study-btn { background: #7a9e8c; }
 
-body.dark-mode .project-showcase[data-origin-group="mllms"] .project-title { color: #90b8d4; }
-body.dark-mode .project-showcase[data-origin-group="mllms"] .tech-badge { background: #263446; color: #90b8d4; }
-body.dark-mode .project-showcase[data-origin-group="mllms"] .case-study-btn { background: #7898b4; }
-
-body.dark-mode .project-showcase[data-origin-group="dl"] .project-title { color: #b0aece; }
-body.dark-mode .project-showcase[data-origin-group="dl"] .tech-badge { background: #2e2e40; color: #b0aece; }
-body.dark-mode .project-showcase[data-origin-group="dl"] .case-study-btn { background: #9490b0; }
+body.dark-mode .project-showcase[data-origin-group="ml"] .project-title { color: #b0aece; }
+body.dark-mode .project-showcase[data-origin-group="ml"] .tech-badge { background: #2e2e40; color: #b0aece; }
+body.dark-mode .project-showcase[data-origin-group="ml"] .case-study-btn { background: #9490b0; }
 
 body.dark-mode .project-showcase[data-origin-group="rl"] .project-title { color: #d4b49e; }
 body.dark-mode .project-showcase[data-origin-group="rl"] .tech-badge { background: #3e2e26; color: #d4b49e; }
@@ -910,13 +867,9 @@ body.dark-mode .project-showcase[data-origin-group="robotics"] .project-title { 
 body.dark-mode .project-showcase[data-origin-group="robotics"] .tech-badge { background: #283836; color: #96c0b8; }
 body.dark-mode .project-showcase[data-origin-group="robotics"] .case-study-btn { background: #7aa49c; }
 
-body.dark-mode .project-showcase[data-origin-group="commercial"] .project-title { color: #c8b898; }
-body.dark-mode .project-showcase[data-origin-group="commercial"] .tech-badge { background: #362c1e; color: #c8b898; }
-body.dark-mode .project-showcase[data-origin-group="commercial"] .case-study-btn { background: #a89670; }
-
-body.dark-mode .project-showcase[data-origin-group="classic"] .project-title { color: #a4b8a6; }
-body.dark-mode .project-showcase[data-origin-group="classic"] .tech-badge { background: #2c382e; color: #a4b8a6; }
-body.dark-mode .project-showcase[data-origin-group="classic"] .case-study-btn { background: #8a9e8c; }
+body.dark-mode .project-showcase[data-origin-group="classic"] .project-title { color: #90b8d4; }
+body.dark-mode .project-showcase[data-origin-group="classic"] .tech-badge { background: #263446; color: #90b8d4; }
+body.dark-mode .project-showcase[data-origin-group="classic"] .case-study-btn { background: #7898b4; }
 
 /* ============================================================
    WORK EXPERIENCE SECTION
