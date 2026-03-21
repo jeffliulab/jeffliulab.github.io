@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" class="lang-en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>PID Control: Centroid-Based Line Following — Jeff Liu</title>
+	<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+	<link rel="stylesheet" href="/assets/new_homepage/showdev.css" />
+	<style>
+		.project-page-wrap {
+			max-width: 860px;
+			margin: 0 auto;
+			padding: 48px 24px 80px;
+		}
+		.back-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: var(--accent);
+			color: #fff;
+			border: none;
+			border-radius: 8px;
+			padding: 10px 20px;
+			font-size: 0.9em;
+			font-weight: 600;
+			text-decoration: none;
+			cursor: pointer;
+			margin-bottom: 40px;
+			transition: background 0.2s;
+		}
+		.back-btn:hover { background: var(--accent-light); color: #fff; }
+		.page-title {
+			font-family: var(--font-heading);
+			font-size: 2em;
+			color: var(--text-primary);
+			margin-bottom: 8px;
+		}
+		.page-subtitle {
+			color: var(--text-muted);
+			font-size: 0.95em;
+			margin-bottom: 32px;
+		}
+		.content-card {
+			background: var(--card-bg);
+			border-radius: 14px;
+			padding: 36px 40px;
+			box-shadow: var(--card-shadow);
+			border: 1px solid var(--border-color);
+		}
+		.content-card h2 {
+			font-family: var(--font-heading);
+			font-size: 1.3em;
+			color: var(--text-primary);
+			margin: 28px 0 12px;
+		}
+		.content-card h2:first-child { margin-top: 0; }
+		.content-card p {
+			color: var(--text-secondary);
+			line-height: 1.7;
+			margin-bottom: 16px;
+		}
+		.content-card img {
+			max-width: 100%;
+			border-radius: 8px;
+			margin: 16px 0;
+			border: 1px solid var(--border-color);
+		}
+		.video-wrap {
+			position: relative;
+			width: 100%;
+			padding-bottom: 56.25%;
+			margin: 16px 0;
+			border-radius: 8px;
+			overflow: hidden;
+			border: 1px solid var(--border-color);
+		}
+		.video-wrap iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border: none;
+		}
+		.pdf-wrap {
+			width: 100%;
+			height: 500px;
+			margin: 16px 0;
+			border-radius: 8px;
+			overflow: hidden;
+			border: 1px solid var(--border-color);
+		}
+		.pdf-wrap iframe {
+			width: 100%;
+			height: 100%;
+			border: none;
+		}
+		.action-row {
+			display: flex;
+			gap: 12px;
+			margin-top: 32px;
+			flex-wrap: wrap;
+		}
+		.action-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: #6b5e7a;
+			color: #fff;
+			padding: 10px 20px;
+			border-radius: 8px;
+			font-size: 0.88em;
+			font-weight: 600;
+			text-decoration: none;
+			transition: background 0.2s;
+		}
+		.action-btn:hover { background: #8a7da0; color: #fff; }
+	</style>
+</head>
+<body>
+
+<div class="project-page-wrap" data-aos="fade-up">
+
+	<a href="/index.html" class="back-btn">
+		<i class="bi bi-arrow-left"></i> Back to Homepage
+	</a>
+
+	<h1 class="page-title">PID Control: Centroid-Based Line Following</h1>
+	<p class="page-subtitle">Robotics · OpenCV · PID Control · ROS</p>
+
+	<div class="content-card">
+		<p>
+			This project implements line following using OpenCV's centroid detection algorithm on a Raspberry Pi-controlled robot.
+			The camera captures video feed, OpenCV detects the line centroid, and a P controller adjusts the angular speed to keep the centroid centered in the frame.
+		</p>
+
+		<h2>Algorithm Introduction</h2>
+		<div class="pdf-wrap">
+			<iframe src="/projects/robotics/line_follower/Centroid_Detection_Based_Line_Follower.pdf" title="Centroid Detection Based Line Follower"></iframe>
+		</div>
+
+		<h2>Simulation Demo</h2>
+		<div class="video-wrap">
+			<iframe src="https://www.youtube.com/embed/zKLicZ-6LW8?si=9sUdbEFtujuC4FAj" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+		</div>
+
+		<div class="action-row">
+			<a href="https://github.com/jeffliulab/brandeis_robot_lab_turtlebot3_project_codes/tree/main/2_FollowingLine" target="_blank" class="action-btn">
+				<i class="bi bi-github"></i> GitHub
+			</a>
+		</div>
+	</div>
+
+</div>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init({ once: true, duration: 500 });</script>
+<script src="/assets/new_homepage/showdev.js"></script>
+</body>
+</html>
