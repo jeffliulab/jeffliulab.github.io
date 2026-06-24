@@ -181,13 +181,17 @@
 			.project-thumb { width: 80px; height: 80px; }
 		}
 
-/* standalone floating language toggle (file-based, github.io static) */
-.lang-toggle { position: fixed; top: 20px; right: 24px; background:#fff; border:1px solid #ddd; border-radius:6px; padding:4px 12px; font-size:.82rem; color:#555; cursor:pointer; z-index:100; transition:all .2s; box-shadow:0 1px 3px rgba(0,0,0,.08); text-decoration:none; }
-.lang-toggle:hover { background:#f5f5f5; color:#333; }
+/* standalone language switch — #9 实心分段（滑块），file-based for github.io */
+.lang-switch { position: fixed; top: 20px; right: 24px; z-index: 100; display: inline-flex; background: #f0eadf; border-radius: 22px; padding: 3px; box-shadow: 0 1px 4px rgba(0,0,0,.1); font-size: .8rem; }
+.lang-switch a { padding: 5px 16px; border-radius: 18px; text-decoration: none; color: #6b645a; transition: all .2s; }
+.lang-switch a.active { background: #fff; color: #23201c; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
 </style>
 </head>
 <body>
-<a class="lang-toggle" href="index.html">EN</a>
+<div class="lang-switch">
+    <a href="index.html" class="">EN</a>
+    <a href="index_cn.html" class="active">中文</a>
+</div>
 <div class="container">
     <header class="header">
         <div class="header-inner">
