@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>刘杰夫 — 项目与研究</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-	<style>
-		/* ── Reset & Base ── */
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>刘杰夫 — 项目与研究</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+/* About Me — extracted from the original me homepage, data-driven via about.json */
+/* ── Reset & Base ── */
 		*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 		html { scroll-behavior: smooth; }
 		body {
-			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 			color: #1a1a2e; background: #fafafa; line-height: 1.6;
 		}
 		a { color: inherit; text-decoration: none; }
@@ -48,7 +49,7 @@
 		section + section { border-top: 1px solid #e8e8e8; }
 		.section-title {
 			font-size: 1.25rem; font-weight: 700; margin-bottom: 20px;
-			letter-spacing: 1px; color: #333;
+			text-transform: uppercase; letter-spacing: 1px; color: #333;
 		}
 
 		/* ── About ── */
@@ -82,11 +83,12 @@
 		.badge {
 			display: inline-block; font-size: 0.7rem; font-weight: 600;
 			padding: 2px 8px; border-radius: 10px;
-			letter-spacing: 0.5px;
+			text-transform: uppercase; letter-spacing: 0.5px;
 		}
 		.badge-live { background: #d4edda; color: #155724; }
 		.badge-opensource { background: #cce5ff; color: #004085; }
 		.badge-progress { background: #fff3cd; color: #856404; }
+		.badge-featured { background: #e8daef; color: #6c3483; }
 		.project-info p { color: #555; font-size: 0.9rem; }
 		.tech-tags { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
 		.tech-tag {
@@ -161,14 +163,8 @@
 		.contact-list a:hover { color: #0066cc; }
 
 		/* ── Language Toggle ── */
-		.lang-toggle {
-			position: fixed; top: 20px; right: 24px;
-			background: #fff; border: 1px solid #ddd; border-radius: 6px;
-			padding: 4px 12px; font-size: 0.82rem; color: #555;
-			cursor: pointer; z-index: 100; transition: all 0.2s;
-			box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-		}
-		.lang-toggle:hover { background: #f5f5f5; color: #333; }
+		
+		
 
 		/* ── Footer ── */
 		footer {
@@ -184,291 +180,164 @@
 			.header-text h1 { font-size: 1.6rem; }
 			.project-thumb { width: 80px; height: 80px; }
 		}
-	</style>
+
+/* standalone floating language toggle (file-based, github.io static) */
+.lang-toggle { position: fixed; top: 20px; right: 24px; background:#fff; border:1px solid #ddd; border-radius:6px; padding:4px 12px; font-size:.82rem; color:#555; cursor:pointer; z-index:100; transition:all .2s; box-shadow:0 1px 3px rgba(0,0,0,.08); text-decoration:none; }
+.lang-toggle:hover { background:#f5f5f5; color:#333; }
+</style>
 </head>
 <body>
-
-<a href="/index.html" class="lang-toggle">EN</a>
-
+<a class="lang-toggle" href="index.html">EN</a>
 <div class="container">
-
-	<!-- ── Header ── -->
-	<header class="header">
-		<div class="header-inner">
-			<img src="/images/avatar.jpg" alt="刘杰夫" class="avatar" />
-			<div class="header-text">
-				<h1>刘杰夫</h1>
-				<p class="tagline">计算机科学 & AI / 创造者 / 研究者</p>
-				<div class="social-links">
-					<a href="https://github.com/jeffliulab" target="_blank" title="GitHub"><i class="bi bi-github"></i></a>
-					<a href="https://huggingface.co/jeffliulab" target="_blank" title="Hugging Face"><i class="bi bi-robot"></i></a>
-					<a href="https://www.youtube.com/@jeffliulab" target="_blank" title="YouTube"><i class="bi bi-youtube"></i></a>
-					<a href="mailto:jeff@jeffliulab.com" title="Email"><i class="bi bi-envelope-fill"></i></a>
-				</div>
-			</div>
-		</div>
-	</header>
-
-	<!-- ── About ── -->
-	<section class="about">
-		<h2 class="section-title">关于我</h2>
-		<p>
-			计算机科学硕士（塔夫茨大学），同时拥有经济学背景。专注于 AI、机器人和构建连接技术与现实需求的实用工具。这个页面用来收集我的轻量级个人项目和研究演示——大多是我在 GitHub 和 Hugging Face 上折腾的小东西。
-		</p>
-	</section>
-
-	<!-- ── Featured Projects ── -->
-	<section>
-		<h2 class="section-title">精选项目</h2>
-
-		<!-- ANIMA Framework & Smart Robot Arm -->
-		<div class="project-card">
-			<a href="https://github.com/jeffliulab/ANIMA_O1" target="_blank"><img src="/images/thumb/smart-robot-arm.jpg" alt="ANIMA 框架与智能机械臂" class="project-thumb" /></a>
-			<div class="project-info">
-				<h3><a href="https://github.com/jeffliulab/ANIMA_O1" target="_blank">ANIMA 框架 &amp; 智能机械臂</a></h3>
-				<div class="project-meta">
-					<span class="badge badge-progress">进行中</span>
-					<span class="badge badge-opensource">开源</span>
-				</div>
-				<p>一个具身智能项目，将 ANIMA 认知框架与自研智能机械臂结合。ANIMA 探索面向物理操作的智能体推理与动作循环，智能机械臂则作为硬件平台——融合感知、规划与控制，完成真实世界中的具身任务。</p>
-				<div class="tech-tags">
-					<span class="tech-tag">具身智能</span>
-					<span class="tech-tag">机械臂</span>
-					<span class="tech-tag">智能体框架</span>
-					<span class="tech-tag">物体操作</span>
-				</div>
-				<div class="project-links">
-					<a href="https://github.com/jeffliulab/ANIMA_O1" target="_blank" class="proj-btn gh-btn"><i class="bi bi-github"></i> ANIMA_O1</a>
-					<a href="https://github.com/jeffliulab/SmartRobotArm" target="_blank" class="proj-btn gh-btn"><i class="bi bi-github"></i> SmartRobotArm</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- Smart Cleaning Robot -->
-		<div class="project-card">
-			<a href="https://github.com/jeffliulab/SmartCleaningRobot/tree/noetic" target="_blank"><img src="/images/thumb/smart-cleaning-robot-noetic-version.png" alt="智能清扫机器人" class="project-thumb" /></a>
-			<div class="project-info">
-				<h3><a href="https://github.com/jeffliulab/SmartCleaningRobot/tree/noetic" target="_blank">智能清扫机器人 (Noetic 版本)</a></h3>
-				<div class="project-meta">
-					<span class="badge badge-opensource">开源</span>
-				</div>
-				<p>基于 ROS 的自主清扫机器人，构建在 TurtleBot3 之上，集成 SLAM 建图、前沿探索和全覆盖清扫。自研清扫模块包含基于膨胀算法的路径规划器和贪心路径执行器，并配有自定义 GUI 控制面板和基于 Vosk 模型的实时语音控制。在 ROS Noetic + Ubuntu 20.04 上开发与测试。</p>
-				<div class="tech-tags">
-					<span class="tech-tag">ROS Noetic</span>
-					<span class="tech-tag">TurtleBot3</span>
-					<span class="tech-tag">SLAM</span>
-					<span class="tech-tag">Vosk</span>
-					<span class="tech-tag">Python</span>
-				</div>
-				<div class="project-links">
-					<a href="https://github.com/jeffliulab/SmartCleaningRobot/tree/noetic" target="_blank" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a>
-					<a href="https://youtu.be/zmo8CKolIh4" target="_blank" class="proj-btn video-btn">演示（实物）</a>
-					<a href="https://youtu.be/rqXiXsVubhQ" target="_blank" class="proj-btn video-btn">演示（仿真）</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- Smart Glove -->
-		<div class="project-card">
-			<a href="https://github.com/jeffliulab/SmartGlove" target="_blank"><img src="/images/thumb/smart-glove.png" alt="智能手套" class="project-thumb" /></a>
-			<div class="project-info">
-				<h3><a href="https://github.com/jeffliulab/SmartGlove" target="_blank">智能手套：手势驱动的机器人控制</a></h3>
-				<div class="project-meta">
-					<span class="badge badge-opensource">开源</span>
-				</div>
-				<p>基于 Raspberry Pi Pico 的智能手套，使用 MPU9250 IMU 和 FSR402 力传感器捕捉手部动作和手指按压。识别出的手势可驱动下游机器人——包括实时控制机械臂——并正在拓展到手语识别和 IoT 平台集成。运行于 Raspberry Pi 4B + Ubuntu 22.04 + ROS Humble。</p>
-				<div class="tech-tags">
-					<span class="tech-tag">RPi Pico</span>
-					<span class="tech-tag">MPU9250 IMU</span>
-					<span class="tech-tag">FSR402</span>
-					<span class="tech-tag">ROS Humble</span>
-					<span class="tech-tag">嵌入式</span>
-				</div>
-				<div class="project-links">
-					<a href="https://github.com/jeffliulab/SmartGlove" target="_blank" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- 智能翻译手套 · Figma 产品原型 -->
-		<div class="project-card">
-			<a href="https://jeffliulab.github.io/smart-translate-glove-figma/" target="_blank"><img src="/images/thumb/smart-translate-glove-figma.png" alt="智能翻译手套 Figma 产品原型" class="project-thumb" /></a>
-			<div class="project-info">
-				<h3><a href="https://jeffliulab.github.io/smart-translate-glove-figma/" target="_blank">智能翻译手套 &middot; Figma 产品原型</a></h3>
-				<div class="project-meta">
-					<span class="badge badge-live">在线演示</span>
-				</div>
-				<p>智能翻译手套概念的 Figma 产品设计作品集 —— 六页高分辨率原型，涵盖产品定位、使用场景与交互流程。部署在 GitHub Pages 上，使用 PhotoSwipe 实现交互式 lightbox 画廊，支持滚轮缩放、拖拽平移与键盘导航。与 <a href="https://www.qianliportfolio.com/" target="_blank">Qian Li</a> 合作完成可用性测试（Usability Test）。</p>
-				<div class="tech-tags">
-					<span class="tech-tag">Figma</span>
-					<span class="tech-tag">产品设计</span>
-					<span class="tech-tag">UI/UX</span>
-					<span class="tech-tag">原型</span>
-					<span class="tech-tag">PhotoSwipe</span>
-				</div>
-				<div class="project-links">
-					<a href="https://jeffliulab.github.io/smart-translate-glove-figma/" target="_blank" class="proj-btn video-btn">原型预览</a>
-					<a href="https://github.com/jeffliulab/smart-translate-glove-figma" target="_blank" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- Real-Time Weather Forecasting -->
-		<div class="project-card">
-			<a href="https://huggingface.co/spaces/jeffliulab/weather_predict" target="_blank"><img src="/images/thumb/real-time-weather-predict.png" alt="实时天气预测" class="project-thumb" /></a>
-			<div class="project-info">
-				<h3><a href="https://huggingface.co/spaces/jeffliulab/weather_predict" target="_blank">实时天气预测</a></h3>
-				<div class="project-meta">
-					<span class="badge badge-live">在线演示</span>
-				</div>
-				<p>基于 CNN 的短期、超本地化天气预测系统。已部署为 "Tufts Jumbo Weather Forecast" ——为塔夫茨大学校园生成 24 小时天气预报。</p>
-				<div class="tech-tags">
-					<span class="tech-tag">CNN</span>
-					<span class="tech-tag">PyTorch</span>
-					<span class="tech-tag">时序预测</span>
-					<span class="tech-tag">实时</span>
-				</div>
-				<div class="project-links">
-					<a href="https://github.com/jeffliulab/real_time_weather_forecasting" target="_blank" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a>
-					<a href="https://huggingface.co/spaces/jeffliulab/weather_predict" target="_blank" class="proj-btn hf-btn">Space</a>
-					<a href="https://huggingface.co/jeffliulab/weather-forecasting-v1" target="_blank" class="proj-btn hf-btn">Model</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- VisInject -->
-		<div class="project-card">
-			<a href="https://github.com/jeffliulab/vis-inject" target="_blank"><img src="/images/thumb/visinject.png" alt="VisInject" class="project-thumb" /></a>
-			<div class="project-info">
-				<h3><a href="https://github.com/jeffliulab/vis-inject" target="_blank">VisInject：将语言指令嵌入图像以劫持 MLLM</a></h3>
-				<div class="project-meta">
-					<span class="badge badge-opensource">开源</span>
-				</div>
-				<p>多模态大模型可能被隐藏在图像中的指令劫持。VisInject 研究针对开源 MLLM 的视觉提示注入攻击原理及防御策略。</p>
-				<div class="tech-tags">
-					<span class="tech-tag">MLLM</span>
-					<span class="tech-tag">AI 安全</span>
-					<span class="tech-tag">提示注入</span>
-					<span class="tech-tag">对抗攻击</span>
-				</div>
-				<div class="project-links">
-					<a href="https://github.com/jeffliulab/vis-inject" target="_blank" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a>
-					<a href="https://huggingface.co/spaces/jeffliulab/visinject" target="_blank" class="proj-btn hf-btn">Space</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- Color Calibration -->
-		<div class="project-card">
-			<a href="https://huggingface.co/spaces/jeffliulab/card-calibration-v1" target="_blank"><img src="/images/thumb/color-calibration-card.png" alt="颜色校准" class="project-thumb" /></a>
-			<div class="project-info">
-				<h3><a href="https://huggingface.co/spaces/jeffliulab/card-calibration-v1" target="_blank">颜色校准：光照自适应颜色识别</a></h3>
-				<div class="project-meta">
-					<span class="badge badge-live">在线演示</span>
-				</div>
-				<p>光照自适应的色彩校准流水线，通过校色卡从照片中预测真实颜色。Hugging Face 上提供完整全栈：在线 Space、训练好的 YOLOv8 模型与数据集。</p>
-				<div class="tech-tags">
-					<span class="tech-tag">PyTorch</span>
-					<span class="tech-tag">YOLOv8</span>
-					<span class="tech-tag">计算机视觉</span>
-					<span class="tech-tag">MLOps</span>
-				</div>
-				<div class="project-links">
-					<a href="https://github.com/jeffliulab/Color_Calibration" target="_blank" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a>
-					<a href="https://huggingface.co/spaces/jeffliulab/card-calibration-v1" target="_blank" class="proj-btn hf-btn">Space</a>
-					<a href="https://huggingface.co/jeffliulab/card-calibration-v1" target="_blank" class="proj-btn hf-btn">Model</a>
-					<a href="https://huggingface.co/datasets/jeffliulab/card-calibration-v1-data" target="_blank" class="proj-btn hf-btn">Dataset</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- Model Court -->
-		<div class="project-card">
-			<a href="https://github.com/LogicGate-AI-Lab/model-court" target="_blank"><img src="/images/thumb/model-court.png" alt="Model Court" class="project-thumb" /></a>
-			<div class="project-info">
-				<h3><a href="https://github.com/LogicGate-AI-Lab/model-court" target="_blank">Model Court：多模型交叉验证框架</a></h3>
-				<div class="project-meta">
-					<span class="badge badge-opensource">开源</span>
-				</div>
-				<p>多智能体共识框架，通过多模型交叉验证缓解 LLM 幻觉问题。适用于单一模型不可信的高风险场景。已发布至 PyPI。</p>
-				<div class="tech-tags">
-					<span class="tech-tag">多智能体</span>
-					<span class="tech-tag">交叉验证</span>
-					<span class="tech-tag">AI 合规</span>
-				</div>
-				<div class="project-links">
-					<a href="https://github.com/LogicGate-AI-Lab/model-court" target="_blank" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a>
-					<a href="https://pypi.org/project/model-court/" target="_blank" class="proj-btn pypi-btn"><i class="bi bi-box-seam"></i> PyPI</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- A.L.I.C.E. -->
-		<div class="project-card">
-			<a href="https://github.com/jeffliulab/ALICE_PROJECT" target="_blank"><img src="/images/thumb/alice.png" alt="A.L.I.C.E." class="project-thumb" /></a>
-			<div class="project-info">
-				<h3><a href="https://github.com/jeffliulab/ALICE_PROJECT" target="_blank">A.L.I.C.E. × 生成式智能体</a></h3>
-				<div class="project-meta">
-					<span class="badge badge-opensource">开源</span>
-				</div>
-				<p>2D 版西部世界——五位 AI 村民在模拟中世纪世界中生活、谋划、做梦。他们规划每一天，反思过去，每晚在梦境中整合记忆。基于 Stanford 生成式智能体架构。</p>
-				<div class="tech-tags">
-					<span class="tech-tag">Generative Agents</span>
-					<span class="tech-tag">FastAPI</span>
-					<span class="tech-tag">LLM</span>
-					<span class="tech-tag">WebSocket</span>
-				</div>
-				<div class="project-links">
-					<a href="https://github.com/jeffliulab/ALICE_PROJECT" target="_blank" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a>
-					<a href="https://github.com/jeffliulab/ALICE_Document" target="_blank" class="proj-btn gh-btn"><i class="bi bi-github"></i> 文档</a>
-				</div>
-			</div>
-		</div>
-
-	</section>
-
-	<!-- ── Education ── -->
-	<section>
-		<h2 class="section-title">教育背景</h2>
-
-		<div class="edu-item">
-			<div class="edu-logo"><img src="/assets/new_homepage/tufts_jumbo.svg" alt="Tufts University" /></div>
-			<div class="edu-info">
-				<h3>计算机科学硕士</h3>
-				<span class="school">塔夫茨大学 (Tufts University)</span>
-				<p>专注于人工智能、深度学习、强化学习和机器人方向。</p>
-			</div>
-		</div>
-
-		<div class="edu-item">
-			<div class="edu-logo"><img src="/assets/new_homepage/ucb_logo.svg" alt="UC Berkeley" /></div>
-			<div class="edu-info">
-				<h3>公开课学习</h3>
-				<span class="school">加州大学伯克利分校 (UC Berkeley)</span>
-				<p>通过公开课程在计算机科学和 AI 领域受益良多。</p>
-			</div>
-		</div>
-	</section>
-
-	<!-- ── Contact ── -->
-	<section>
-		<h2 class="section-title">联系方式</h2>
-		<ul class="contact-list">
-			<li><i class="bi bi-globe2"></i> <a href="https://jeffliulab.com" target="_blank">jeffliulab.com</a> &mdash; Lab Website</li>
-			<li><i class="bi bi-geo-alt-fill"></i> 美国马萨诸塞州波士顿地区</li>
-			<li><i class="bi bi-envelope-fill"></i> <a href="mailto:jeff@jeffliulab.com">jeff@jeffliulab.com</a></li>
-			<li><i class="bi bi-github"></i> <a href="https://github.com/jeffliulab" target="_blank">github.com/jeffliulab</a></li>
-			<li><i class="bi bi-robot"></i> <a href="https://huggingface.co/jeffliulab" target="_blank">huggingface.co/jeffliulab</a></li>
-		</ul>
-	</section>
-
+    <header class="header">
+        <div class="header-inner">
+            <img class="avatar" src="/images/avatar.jpg" alt="刘杰夫">
+            <div class="header-text">
+                <h1>刘杰夫</h1>
+                <p class="tagline">计算机科学 &amp; AI / 创造者 / 研究者</p>
+                <div class="social-links">
+                    <a href="https://github.com/jeffliulab" target="_blank" rel="noopener"><i class="bi bi-github"></i></a><a href="https://huggingface.co/jeffliulab" target="_blank" rel="noopener"><i class="bi bi-robot"></i></a><a href="https://www.youtube.com/@jeffliulab" target="_blank" rel="noopener"><i class="bi bi-youtube"></i></a><a href="mailto:jeff@jeffliulab.com" target="_blank" rel="noopener"><i class="bi bi-envelope-fill"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="about">
+        <h2 class="section-title">关于</h2>
+        <p>计算机科学硕士（塔夫茨大学），同时拥有经济学背景。专注于 AI、机器人和构建连接技术与现实需求的实用工具。这个页面用来收集我的轻量级个人项目和研究演示——大多是我在 GitHub 和 Hugging Face 上折腾的小东西。</p>
+    </section>
+    <section>
+        <h2 class="section-title">精选项目</h2>
+        
+        
+        <div class="project-card">
+            <a href="https://github.com/jeffliulab/ANIMA_O1" target="_blank" rel="noopener"><img src="/images/thumb/smart-robot-arm.jpg" alt="ANIMA 框架与智能机械臂" class="project-thumb"></a>
+            <div class="project-info">
+                <h3><a href="https://github.com/jeffliulab/ANIMA_O1" target="_blank" rel="noopener">ANIMA 框架 &amp; 智能机械臂</a></h3>
+                <div class="project-meta"><span class="badge badge-progress">进行中</span><span class="badge badge-opensource">开源</span></div>
+                <p>一个具身智能项目，将 ANIMA 认知框架与自研智能机械臂结合。ANIMA 探索面向物理操作的智能体推理与动作循环，智能机械臂则作为硬件平台——融合感知、规划与控制，完成真实世界中的具身任务。</p>
+                <div class="tech-tags"><span class="tech-tag">具身智能</span><span class="tech-tag">机械臂</span><span class="tech-tag">智能体框架</span><span class="tech-tag">物体操作</span></div>
+                <div class="project-links"><a href="https://github.com/jeffliulab/ANIMA_O1" target="_blank" rel="noopener" class="proj-btn gh-btn"><i class="bi bi-github"></i> ANIMA_O1</a><a href="https://github.com/jeffliulab/SmartRobotArm" target="_blank" rel="noopener" class="proj-btn gh-btn"><i class="bi bi-github"></i> SmartRobotArm</a></div>
+            </div>
+        </div>
+        
+        
+        <div class="project-card">
+            <a href="https://github.com/jeffliulab/SmartCleaningRobot/tree/noetic" target="_blank" rel="noopener"><img src="/images/thumb/smart-cleaning-robot-noetic-version.png" alt="智能清扫机器人" class="project-thumb"></a>
+            <div class="project-info">
+                <h3><a href="https://github.com/jeffliulab/SmartCleaningRobot/tree/noetic" target="_blank" rel="noopener">智能清扫机器人 (Noetic 版本)</a></h3>
+                <div class="project-meta"><span class="badge badge-opensource">开源</span></div>
+                <p>基于 ROS 的自主清扫机器人，构建在 TurtleBot3 之上，集成 SLAM 建图、前沿探索和全覆盖清扫。自研清扫模块包含基于膨胀算法的路径规划器和贪心路径执行器，并配有自定义 GUI 控制面板和基于 Vosk 模型的实时语音控制。在 ROS Noetic + Ubuntu 20.04 上开发与测试。</p>
+                <div class="tech-tags"><span class="tech-tag">ROS Noetic</span><span class="tech-tag">TurtleBot3</span><span class="tech-tag">SLAM</span><span class="tech-tag">Vosk</span><span class="tech-tag">Python</span></div>
+                <div class="project-links"><a href="https://github.com/jeffliulab/SmartCleaningRobot/tree/noetic" target="_blank" rel="noopener" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a><a href="https://youtu.be/zmo8CKolIh4" target="_blank" rel="noopener" class="proj-btn video-btn"><i class="bi bi-youtube"></i> 演示（实物）</a><a href="https://youtu.be/rqXiXsVubhQ" target="_blank" rel="noopener" class="proj-btn video-btn"><i class="bi bi-youtube"></i> 演示（仿真）</a></div>
+            </div>
+        </div>
+        
+        
+        <div class="project-card">
+            <a href="https://github.com/jeffliulab/SmartGlove" target="_blank" rel="noopener"><img src="/images/thumb/smart-glove.png" alt="智能手套" class="project-thumb"></a>
+            <div class="project-info">
+                <h3><a href="https://github.com/jeffliulab/SmartGlove" target="_blank" rel="noopener">智能手套：手势驱动的机器人控制</a></h3>
+                <div class="project-meta"><span class="badge badge-opensource">开源</span></div>
+                <p>基于 Raspberry Pi Pico 的智能手套，使用 MPU9250 IMU 和 FSR402 力传感器捕捉手部动作和手指按压。识别出的手势可驱动下游机器人——包括实时控制机械臂——并正在拓展到手语识别和 IoT 平台集成。运行于 Raspberry Pi 4B + Ubuntu 22.04 + ROS Humble。</p>
+                <div class="tech-tags"><span class="tech-tag">RPi Pico</span><span class="tech-tag">MPU9250 IMU</span><span class="tech-tag">FSR402</span><span class="tech-tag">ROS Humble</span><span class="tech-tag">嵌入式</span></div>
+                <div class="project-links"><a href="https://github.com/jeffliulab/SmartGlove" target="_blank" rel="noopener" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a></div>
+            </div>
+        </div>
+        
+        
+        <div class="project-card">
+            <a href="https://jeffliulab.github.io/smart-translate-glove-figma/" target="_blank" rel="noopener"><img src="/images/thumb/smart-translate-glove-figma.png" alt="智能翻译手套 Figma 产品原型" class="project-thumb"></a>
+            <div class="project-info">
+                <h3><a href="https://jeffliulab.github.io/smart-translate-glove-figma/" target="_blank" rel="noopener">智能翻译手套 · Figma 产品原型</a></h3>
+                <div class="project-meta"><span class="badge badge-live">在线演示</span></div>
+                <p>智能翻译手套概念的 Figma 产品设计作品集 —— 六页高分辨率原型，涵盖产品定位、使用场景与交互流程。部署在 GitHub Pages 上，使用 PhotoSwipe 实现交互式 lightbox 画廊，支持滚轮缩放、拖拽平移与键盘导航。与 Qian Li 合作完成可用性测试（Usability Test）。</p>
+                <div class="tech-tags"><span class="tech-tag">Figma</span><span class="tech-tag">产品设计</span><span class="tech-tag">UI/UX</span><span class="tech-tag">原型</span><span class="tech-tag">PhotoSwipe</span></div>
+                <div class="project-links"><a href="https://jeffliulab.github.io/smart-translate-glove-figma/" target="_blank" rel="noopener" class="proj-btn video-btn"><i class="bi bi-youtube"></i> 原型预览</a><a href="https://github.com/jeffliulab/smart-translate-glove-figma" target="_blank" rel="noopener" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a></div>
+            </div>
+        </div>
+        
+        
+        <div class="project-card">
+            <a href="https://github.com/jeffliulab/real_time_weather_forecasting" target="_blank" rel="noopener"><img src="/images/thumb/real-time-weather-predict.png" alt="实时天气预测" class="project-thumb"></a>
+            <div class="project-info">
+                <h3><a href="https://github.com/jeffliulab/real_time_weather_forecasting" target="_blank" rel="noopener">实时天气预测</a></h3>
+                <div class="project-meta"><span class="badge badge-live">在线演示</span></div>
+                <p>基于 CNN 的短期、超本地化天气预测系统。已部署为 &#34;Tufts Jumbo Weather Forecast&#34; ——为塔夫茨大学校园生成 24 小时天气预报。</p>
+                <div class="tech-tags"><span class="tech-tag">CNN</span><span class="tech-tag">PyTorch</span><span class="tech-tag">时序预测</span><span class="tech-tag">实时</span></div>
+                <div class="project-links"><a href="https://github.com/jeffliulab/real_time_weather_forecasting" target="_blank" rel="noopener" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a><a href="https://huggingface.co/spaces/jeffliulab/weather_predict" target="_blank" rel="noopener" class="proj-btn hf-btn"><i class="bi bi-robot"></i> Space</a><a href="https://huggingface.co/jeffliulab/weather-forecasting-v1" target="_blank" rel="noopener" class="proj-btn hf-btn"><i class="bi bi-robot"></i> Model</a></div>
+            </div>
+        </div>
+        
+        
+        <div class="project-card">
+            <a href="https://github.com/jeffliulab/vis-inject" target="_blank" rel="noopener"><img src="/images/thumb/visinject.png" alt="VisInject" class="project-thumb"></a>
+            <div class="project-info">
+                <h3><a href="https://github.com/jeffliulab/vis-inject" target="_blank" rel="noopener">VisInject：将语言指令嵌入图像以劫持 MLLM</a></h3>
+                <div class="project-meta"><span class="badge badge-opensource">开源</span></div>
+                <p>多模态大模型可能被隐藏在图像中的指令劫持。VisInject 研究针对开源 MLLM 的视觉提示注入攻击原理及防御策略。</p>
+                <div class="tech-tags"><span class="tech-tag">MLLM</span><span class="tech-tag">AI 安全</span><span class="tech-tag">提示注入</span><span class="tech-tag">对抗攻击</span></div>
+                <div class="project-links"><a href="https://github.com/jeffliulab/vis-inject" target="_blank" rel="noopener" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a><a href="https://huggingface.co/spaces/jeffliulab/visinject" target="_blank" rel="noopener" class="proj-btn hf-btn"><i class="bi bi-robot"></i> Space</a></div>
+            </div>
+        </div>
+        
+        
+        <div class="project-card">
+            <a href="https://github.com/jeffliulab/Color_Calibration" target="_blank" rel="noopener"><img src="/images/thumb/color-calibration-card.png" alt="颜色校准" class="project-thumb"></a>
+            <div class="project-info">
+                <h3><a href="https://github.com/jeffliulab/Color_Calibration" target="_blank" rel="noopener">颜色校准：光照自适应颜色识别</a></h3>
+                <div class="project-meta"><span class="badge badge-live">在线演示</span></div>
+                <p>光照自适应的色彩校准流水线，通过校色卡从照片中预测真实颜色。Hugging Face 上提供完整全栈：在线 Space、训练好的 YOLOv8 模型与数据集。</p>
+                <div class="tech-tags"><span class="tech-tag">PyTorch</span><span class="tech-tag">YOLOv8</span><span class="tech-tag">计算机视觉</span><span class="tech-tag">MLOps</span></div>
+                <div class="project-links"><a href="https://github.com/jeffliulab/Color_Calibration" target="_blank" rel="noopener" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a><a href="https://huggingface.co/spaces/jeffliulab/card-calibration-v1" target="_blank" rel="noopener" class="proj-btn hf-btn"><i class="bi bi-robot"></i> Space</a><a href="https://huggingface.co/jeffliulab/card-calibration-v1" target="_blank" rel="noopener" class="proj-btn hf-btn"><i class="bi bi-robot"></i> Model</a><a href="https://huggingface.co/datasets/jeffliulab/card-calibration-v1-data" target="_blank" rel="noopener" class="proj-btn hf-btn"><i class="bi bi-robot"></i> Dataset</a></div>
+            </div>
+        </div>
+        
+        
+        <div class="project-card">
+            <a href="https://github.com/LogicGate-AI-Lab/model-court" target="_blank" rel="noopener"><img src="/images/thumb/model-court.png" alt="Model Court" class="project-thumb"></a>
+            <div class="project-info">
+                <h3><a href="https://github.com/LogicGate-AI-Lab/model-court" target="_blank" rel="noopener">Model Court：多模型交叉验证框架</a></h3>
+                <div class="project-meta"><span class="badge badge-opensource">开源</span></div>
+                <p>多智能体共识框架，通过多模型交叉验证缓解 LLM 幻觉问题。适用于单一模型不可信的高风险场景。已发布至 PyPI。</p>
+                <div class="tech-tags"><span class="tech-tag">多智能体</span><span class="tech-tag">交叉验证</span><span class="tech-tag">AI 合规</span></div>
+                <div class="project-links"><a href="https://github.com/LogicGate-AI-Lab/model-court" target="_blank" rel="noopener" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a><a href="https://pypi.org/project/model-court/" target="_blank" rel="noopener" class="proj-btn pypi-btn"><i class="bi bi-box-seam"></i> PyPI</a></div>
+            </div>
+        </div>
+        
+        
+        <div class="project-card">
+            <a href="https://github.com/jeffliulab/ALICE_PROJECT" target="_blank" rel="noopener"><img src="/images/thumb/alice.png" alt="A.L.I.C.E." class="project-thumb"></a>
+            <div class="project-info">
+                <h3><a href="https://github.com/jeffliulab/ALICE_PROJECT" target="_blank" rel="noopener">A.L.I.C.E. × 生成式智能体</a></h3>
+                <div class="project-meta"><span class="badge badge-opensource">开源</span></div>
+                <p>2D 版西部世界——五位 AI 村民在模拟中世纪世界中生活、谋划、做梦。他们规划每一天，反思过去，每晚在梦境中整合记忆。基于 Stanford 生成式智能体架构。</p>
+                <div class="tech-tags"><span class="tech-tag">Generative Agents</span><span class="tech-tag">FastAPI</span><span class="tech-tag">LLM</span><span class="tech-tag">WebSocket</span></div>
+                <div class="project-links"><a href="https://github.com/jeffliulab/ALICE_PROJECT" target="_blank" rel="noopener" class="proj-btn gh-btn"><i class="bi bi-github"></i> GitHub</a><a href="https://github.com/jeffliulab/ALICE_Document" target="_blank" rel="noopener" class="proj-btn gh-btn"><i class="bi bi-github"></i> 文档</a></div>
+            </div>
+        </div>
+        
+    </section>
+    <section>
+        <h2 class="section-title">教育背景</h2>
+        
+        <div class="edu-item">
+            <div class="edu-logo"><img src="/assets/new_homepage/tufts_jumbo.svg" alt="塔夫茨大学 (Tufts University)"></div>
+            <div class="edu-info"><h3>计算机科学硕士</h3><span class="school">塔夫茨大学 (Tufts University)</span><p>专注于人工智能、深度学习、强化学习和机器人方向。</p></div>
+        </div>
+        
+        <div class="edu-item">
+            <div class="edu-logo"><img src="/assets/new_homepage/ucb_logo.svg" alt="加州大学伯克利分校 (UC Berkeley)"></div>
+            <div class="edu-info"><h3>公开课学习</h3><span class="school">加州大学伯克利分校 (UC Berkeley)</span><p>通过公开课程在计算机科学和 AI 领域受益良多。</p></div>
+        </div>
+        
+    </section>
+    <section>
+        <h2 class="section-title">联系方式</h2>
+        <ul class="contact-list">
+            <li><i class="bi bi-globe2"></i> <a href="https://jeffliulab.com" target="_blank" rel="noopener">jeffliulab.com — Lab Website</a></li><li><i class="bi bi-geo-alt-fill"></i> 美国马萨诸塞州波士顿地区</li><li><i class="bi bi-envelope-fill"></i> <a href="mailto:jeff@jeffliulab.com">jeff@jeffliulab.com</a></li><li><i class="bi bi-github"></i> <a href="https://github.com/jeffliulab" target="_blank" rel="noopener">github.com/jeffliulab</a></li><li><i class="bi bi-robot"></i> <a href="https://huggingface.co/jeffliulab" target="_blank" rel="noopener">huggingface.co/jeffliulab</a></li>
+        </ul>
+    </section>
+    <footer style="padding:30px 0;border-top:1px solid #e8e8e8;color:#999;font-size:.85rem;">&copy; 2026 刘杰夫</footer>
 </div>
-
-<footer>
-	<div class="container">
-		&copy; 2026 刘杰夫
-	</div>
-</footer>
-
 </body>
 </html>
