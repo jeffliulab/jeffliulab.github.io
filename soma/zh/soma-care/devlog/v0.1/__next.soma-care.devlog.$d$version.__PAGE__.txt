@@ -1,0 +1,41 @@
+1:"$Sreact.fragment"
+2:I[22016,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js","/soma/zh/_next/static/chunks/163jjkf6p9ltc.js","/soma/zh/_next/static/chunks/06r3ydq0dfy2u.js"],""]
+3:I[83424,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js","/soma/zh/_next/static/chunks/163jjkf6p9ltc.js","/soma/zh/_next/static/chunks/06r3ydq0dfy2u.js"],"TocSidebar"]
+5:I[97367,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+6:"$Sreact.suspense"
+4:Tc83,<h1 id="v01--anima-五层闭环在本地跑通mock-skills">V0.1 — ANIMA 五层闭环在本地跑通（mock skills）</h1>
+<p>这是研究原型时期的第一次发版，在 <code>human-brain-interface-demo</code> 仓里诞生。目标很直接：<strong>端到端证明 ANIMA 认知框架能驱动一个意图-行动闭环</strong>，但暂时不上物理引擎——机器人动作用 mock skill 替代，先把上层认知栈完整跑通。</p>
+<p>选的入场场景是「我想喝水」——足够日常、足够典型，覆盖感知 / 规划 / 执行 / 评估所有层。</p>
+<h2 id="核心事实l0-是语言不是神经解码">核心事实：L0 是语言，不是神经解码</h2>
+<p>这个决策在 v0.1 就锁定了：<strong>L0 Signal 层不伪装解码 BCI 神经信号</strong>。实际输入就是文本 / 语音，通过 LLM-as-Parser（强制 tool-calling）产出结构化 <code>IntentToken</code>。</p>
+<p>UI 里仍保留一条装饰性的 256 通道波形动画（text-hash 做种子），但界面上明确标注 "decorative only — intent derived from text via LLM parser"。这条诚信线从 v0.1 一直贯穿到今天的 v0.4。</p>
+<h2 id="五层栈全部落地">五层栈全部落地</h2>
+<ul>
+<li><strong>L0 Input</strong>：文本特征抽取 + 装饰性波形</li>
+<li><strong>L1 Intent Parser</strong>：LLM 强制 tool-call → <code>IntentToken</code>（35 词词表）</li>
+<li><strong>L2 Planner</strong>：<code>py_trees</code> Sequence 编排</li>
+<li><strong>L3 Skill</strong>：mock 技能节点占位</li>
+<li><strong>L4 Actuator</strong>：mock 执行（不挂物理引擎）</li>
+<li><strong>L5 Assessment</strong>：五因素（ITA / MQA / SQA / GOA / PEA）事件触发评估，PEA 写入 <code>pea_log.jsonl</code> 做长期学习</li>
+</ul>
+<p>整套认知栈通过单条 WebSocket 把所有层级事件推到前端，驱动动画。</p>
+<h2 id="技术骨架">技术骨架</h2>
+<p><strong>后端</strong>：FastAPI，<code>uv</code> + Python 3.12，<code>:8765</code>；DeepSeek 作默认 LLM 提供方（100% OpenAI SDK 兼容，为后续切换留口）；Pydantic 模型 <code>TaskSpec</code> / <code>IntentToken</code> / <code>FiveFactors</code> 固化结构。</p>
+<p><strong>前端</strong>：Next.js 16 + Tailwind + zustand + ReactFlow，<code>:3000</code>。7 个关键组件串起 L0–L5 可视化：</p>
+<ul>
+<li><code>LayerStack</code>（左栏层级指示）</li>
+<li><code>IntentInput</code> / <code>SignalWaveform</code> / <code>TaskSpecPanel</code> / <code>IntentTokenStream</code>（中栏意图链）</li>
+<li><code>BehaviorTreeFlow</code>（行为树可视化）</li>
+<li><code>FiveFactorPanel</code>（右栏评估仪表）</li>
+</ul>
+<h2 id="验收">验收</h2>
+<p>本地双进程（<code>uv run uvicorn</code> + <code>npm run dev</code>），输入"我想喝水"后：</p>
+<ul>
+<li>L0 → L5 依次高亮</li>
+<li>TaskSpec 产出 <code>DRINK_WATER</code>，置信度 > 0.8</li>
+<li>行为树五节点从 sky 状态转为 green</li>
+<li>五因素面板实时更新</li>
+<li>PEA 事件落盘</li>
+</ul>
+<p>这一步证明了 ANIMA 的认知栈在纯语言输入下能跑通完整闭环，为 v0.2 接入 MuJoCo 仿真打下基础。</p>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"page-shell","children":["$","section",null,{"className":"section-shell pt-8","children":[["$","div",null,{"className":"mb-6 lg:hidden","children":["$","$L2",null,{"href":"/soma-care/devlog","className":"text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← 返回版本列表"}]}],["$","div",null,{"className":"lg:grid lg:grid-cols-[14rem_1fr] lg:gap-8","children":[["$","aside",null,{"className":"hidden lg:block","children":["$","div",null,{"className":"fixed","style":{"width":"14rem"},"data-toc-sidebar":true,"children":[["$","$L2",null,{"href":"/soma-care/devlog","className":"mb-4 block text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← 返回版本列表"}],["$","$L3",null,{"toc":[{"id":"核心事实l0-是语言不是神经解码","text":"核心事实：L0 是语言，不是神经解码","level":2},{"id":"五层栈全部落地","text":"五层栈全部落地","level":2},{"id":"技术骨架","text":"技术骨架","level":2},{"id":"验收","text":"验收","level":2}],"label":"目录"}]]}]}],["$","article",null,{"className":"prose max-w-none min-w-0","dangerouslySetInnerHTML":{"__html":"$4"}}]]}]]}]}],[["$","script","script-0",{"src":"/soma/zh/_next/static/chunks/06r3ydq0dfy2u.js","async":true}]],["$","$L5",null,{"children":["$","$6",null,{"name":"Next.MetadataOutlet","children":"$@7"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"nBjxbCYAs46mbXbve6h6a"}
+7:null

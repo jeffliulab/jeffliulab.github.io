@@ -1,0 +1,98 @@
+1:"$Sreact.fragment"
+2:I[22016,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js","/soma/zh/_next/static/chunks/0whum9_c1x-7q.js","/soma/zh/_next/static/chunks/06r3ydq0dfy2u.js"],""]
+3:I[83424,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js","/soma/zh/_next/static/chunks/0whum9_c1x-7q.js","/soma/zh/_next/static/chunks/06r3ydq0dfy2u.js"],"TocSidebar"]
+7:I[97367,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+4:T274f,<h1 id="v100----四天从零到遥操控制">V1.00 -- 四天，从零到遥操控制</h1>
+<p>SOMA Arm 的第一个版本用了四天时间，从一台刚拆封的机械臂和一个空白的 WSL2 终端，走到了手柄遥操控制真机、相机实时回传画面的完整闭环。这不是按教程走一遍就能到的状态——中间踩了驱动不存在、相机画面撕裂、内核缺模块等一系列坑，每一步都是真机调试换来的。</p>
+<p>V1.00 的目标很明确：不追求智能，先把手和眼睛接上。如果机械臂不能稳定受控、相机不能可靠传图、手柄不能直接驱动关节，后面所有感知和认知层的工作都无从谈起。这个版本就是在打通这条最底层的控制链路。</p>
+<h2 id="为什么选-wsl2-而不是原生-linux">为什么选 WSL2 而不是原生 Linux</h2>
+<p>第一个需要做的决策就是开发环境。这台笔记本配了 RTX 4090 Laptop GPU（16GB 显存），后面 ACT 策略训练和视觉模型推理都需要满血的 CUDA 性能。最初考虑过双启动原生 Ubuntu，但在这台硬件上实测发现 GPU 驱动表现不稳定，性能损失明显。</p>
+<p>反而是 WSL2 + CUDA passthrough 这条路给出了意外的好结果：<code>nvidia-smi</code> 直接识别到完整的 RTX 4090，CUDA 性能 100% 无损，PyTorch 跑起来和原生 Linux 没有区别。代价是 USB 设备需要通过 <code>usbipd-win</code> 转发，图形界面走 WSLg 会稍慢——但对一个以终端和 ROS 2 节点为主的开发流程来说，这个代价完全可以接受。</p>
+<p>最终的开发栈是：Windows 11 宿主 + WSL2 Ubuntu 22.04 + ROS 2 Humble + CUDA 12.4 + Python 3.10 虚拟环境。整套环境在第一天搭完并验证通过。</p>
+<h2 id="从零写机械臂驱动">从零写机械臂驱动</h2>
+<p>Waveshare RoArm-M2-S 是一台 4 自由度桌面机械臂，板载 ESP32 通过串口接收 JSON 格式的控制命令。问题是：它没有官方的 ROS 2 驱动。Waveshare 提供了一套 MoveIt2 配置包，但那是建立在它自己的上游工作空间之上的，并不直接暴露我需要的 <code>/joint_command</code> 和 <code>/joint_states</code> 接口。</p>
+<p>所以我从头写了一个 Python 驱动，大约 200 行代码。它做的事情很直接：把 ROS 2 的关节命令翻译成 ESP32 能理解的 JSON 串口协议，同时把真机的关节状态反向发布回 ROS 话题。在这个基础上，又接了一个 MoveIt2 bridge 节点，可以在 RViz 里拖拽控制真实机械臂。</p>
+<p>写驱动时踩到一个很实际的硬件约束：ESP32 的串口同一时刻只能被一个进程占用。这意味着驱动节点、MoveIt2 bridge 和遥操节点不能同时直接访问串口，必须通过驱动节点做统一的转发。这个约束后来成了整个控制架构的基础设计原则。</p>
+<p>同时还有一个容易被忽略的工程细节：让 ROS 2 的 Python 虚拟环境和系统的 <code>rclpy</code> 和平共处。虚拟环境必须用 <code>--system-site-packages</code> 创建，这样才能同时 import 系统级的 ROS 2 绑定和 pip 安装的 ML 依赖。这件事听起来简单，但在 LeRobot + PyTorch + rclpy 三者混合的环境里调通它花了不少功夫。</p>
+<h2 id="手柄遥操的三次迭代">手柄遥操的三次迭代</h2>
+<p>手柄遥操这条线走了三个版本，每个版本的失败都推动了下一个版本的方向。</p>
+<p><strong>第一版：Windows TCP 桥接。</strong> 最初的想法是在 Windows 侧用 pygame 捕获手柄输入，通过 TCP 发到 WSL 里的 ROS 节点。这条路技术上能走通，但用起来很别扭——Windows 窗口必须保持焦点，否则就收不到手柄事件，操作时还得来回切窗口。</p>
+<p><strong>第二版：USB 直通。</strong> 自然的想法是把手柄通过 <code>usbipd-win</code> 直接转发到 WSL，让 Linux 原生读取输入。设备确实进了 WSL，<code>lsusb</code> 能看到 Xbox 手柄——但 <code>/dev/input/</code> 下什么都没有。原因是 WSL2 的默认内核没有编译 XPAD 和 JOYDEV 模块，内核根本不认识游戏手柄这种输入设备。</p>
+<p><strong>第三版：自定义 WSL 内核。</strong> 我下载了 WSL2 内核源码，开启了 <code>CONFIG_INPUT_JOYSTICK</code>、<code>CONFIG_JOYSTICK_XPAD</code> 和 <code>CONFIG_INPUT_JOYDEV</code>，重新编译部署。第一次编译还漏了一个选项，导致 XPAD 看起来配了但实际没生效。修正后重新编译，手柄终于在 <code>/dev/input/event*</code> 上出现了。</p>
+<p>最终的遥操方案用 evdev 后端直接读取 Linux 输入事件，四个摇杆轴一对一映射到 4 个关节，LB/RB 控制夹爪，Start 回初始位，Back 急停。整条链路从手柄到真机关节运动的延迟几乎感觉不到。</p>
+<p>遥操调好之后，还做了一些手感层面的打磨：摇杆的物理串轴问题（推一个方向会微微影响另一个轴）通过软件加了硬单轴锁定来缓解；夹爪动作也切到了独立的串口通道，避免开合夹爪时把整条手臂的命令一起重发。</p>
+<h2 id="相机桥接一场与画面撕裂的拉锯战">相机桥接：一场与画面撕裂的拉锯战</h2>
+<p>相机这条线是 V1.00 里花时间最多的部分。</p>
+<p>Logitech C922 Pro 是一台很成熟的 USB 摄像头。最直接的想法是像手柄一样，通过 <code>usbipd</code> 把它转发到 WSL 里直接用。转发本身没问题，OpenCV 能打开设备、能读到帧——但每一帧 MJPEG 图像都有明显的横向撕裂和帧损坏。</p>
+<p>为了排查，我跑了四种分辨率和编码的排列组合：720p60 MJPG、720p30 MJPG、1080p30 MJPG、720p30 YUYV。前三种都出现同样的横向破图；YUYV 不撕裂但帧率低到没法用。我又试了 GStreamer 管线，结果直接卡在打开阶段，连画面都出不来。</p>
+<p>关键的转折点是一个对照实验：我把 C922 从 WSL 里 detach 回 Windows，用 Windows 原生的相机应用打开——画面高清、流畅、没有任何破图。这直接证明了问题不在相机硬件，而在 <code>usbipd + WSL + UVC/MJPG</code> 这条转发链路。翻了一圈 OpenCV 和 usbipd 的 issue tracker，确实有人报过类似的高分辨率相机问题。</p>
+<p>既然 Windows 取图没问题，方案就变成了：<strong>让 Windows 负责取图，通过 TCP 把帧传到 WSL 的 ROS 节点。</strong> 我写了一个 Windows 端的 JPEG 发送脚本和一个 WSL 端的 ROS 接收节点，组成了一个轻量的 TCP 图像桥接。</p>
+<p>第一版桥接能跑，画面也干净了，但延迟有三四秒——明显是某处在堆缓冲。我在两端都做了 latest-only 策略：发送端用后台线程持续抓最新帧，只发当前画面；接收端也只取最新收到的帧解码发布，旧帧直接覆盖。两端都加了 <code>latest_frame_age_ms</code> 日志，方便后面定位延迟堆在哪一段。</p>
+<p>经过这轮优化，960x540 这档预设的延迟降到了可用水平，画面干净，视角正确。虽然帧率只有 4-5 FPS，但已经足够支撑后续的标定和感知开发。</p>
+<h2 id="系统架构">系统架构</h2>
+<p>V1.00 完成后的硬件拓扑：</p>
+<pre><code>PC (Windows 11 + WSL2 Ubuntu 22.04)
+ |
+ |-- USB (usbipd) --> RoArm-M2-S 4-DOF arm --> /dev/ttyUSB*
+ |                    ESP32 JSON serial protocol
+ |                    ~200 行 Python 驱动
+ |
+ |-- USB (usbipd) --> PDP Xbox Controller --> /dev/input/event*
+ |                    自定义 WSL 内核 (XPAD+JOYDEV)
+ |                    evdev 后端直读
+ |
+ |-- TCP bridge ----> Logitech C922 Pro (留在 Windows 侧)
+                      Windows JPEG 压缩 --> TCP --> WSL ROS 节点
+                      960x540, 4-5 FPS, 画面干净无撕裂
+</code></pre>
+<h2 id="关键数据">关键数据</h2>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>从零到完整遥操</td>
+<td>4 天</td>
+</tr>
+<tr>
+<td>驱动代码量</td>
+<td>~200 行 Python</td>
+</tr>
+<tr>
+<td>机械臂自由度</td>
+<td>4-DOF + 夹爪</td>
+</tr>
+<tr>
+<td>控制频率</td>
+<td>50 Hz</td>
+</tr>
+<tr>
+<td>相机桥接分辨率</td>
+<td>960 x 540</td>
+</tr>
+<tr>
+<td>GPU 性能损失</td>
+<td>0%（CUDA passthrough）</td>
+</tr>
+<tr>
+<td>遥操方案迭代次数</td>
+<td>3 次</td>
+</tr>
+</tbody>
+</table>
+<h2 id="真机验证棋子取放">真机验证：棋子取放</h2>
+<p>V1.00 的最后一天，我把所有链路串起来做了一次完整的真机验证：真实棋盘、标准国际象棋棋子、回收盒，所有东西都摆到了接近实际任务的位置。</p>
+<p>通过手柄遥操，机械臂成功完成了基本的棋子取放动作。和之前用海绵块测试时相比，标准棋子的底座更大、站立更稳，夹持的手感反而比预期要好。这次验证回答了一个关键问题：在当前机械臂的精度和夹爪条件下，棋子操作在物理层面是可行的——不需要换更精密的硬件。</p>
+<p>这轮测试也暴露了一些工程细节：USB 设备的 bus ID 在每次重新插拔后都可能变化，不能靠记忆或旧日志里的值；启动脚本需要能正确处理"设备已经连接"的情况，而不是把它误报成失败；遥操的完整启动路径需要等待关节状态发布后再按 Start 做一次同步，而不是接上设备就算完事。这些细节都在 V1.00 结束前一一收掉了。</p>
+<h2 id="下一步">下一步</h2>
+<p>V1.00 让机械臂有了手（遥操控制）和眼睛（相机画面），但它还是"盲"的——它能看到画面，却不知道画面里的东西在真实世界的什么位置。V1.01 的目标就是解决这个问题：通过相机标定和 eye-to-hand 标定，建立像素坐标到世界坐标的映射，让机械臂真正理解棋盘上每个位置的物理含义。</p>
+<h2 id="技术栈">技术栈</h2>
+<p>ROS 2 Humble / Python 3.10 / PyTorch + CUDA 12.4 / MoveIt2 / OpenCV / WSL2 + usbipd-win / evdev / Waveshare RoArm-M2-S / Logitech C922 Pro</p>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"page-shell","children":["$","section",null,{"className":"section-shell pt-8","children":[["$","div",null,{"className":"mb-6 lg:hidden","children":["$","$L2",null,{"href":"/soma-arm/devlog","className":"text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← 返回版本列表"}]}],["$","div",null,{"className":"lg:grid lg:grid-cols-[14rem_1fr] lg:gap-8","children":[["$","aside",null,{"className":"hidden lg:block","children":["$","div",null,{"className":"fixed","style":{"width":"14rem"},"data-toc-sidebar":true,"children":[["$","$L2",null,{"href":"/soma-arm/devlog","className":"mb-4 block text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← 返回版本列表"}],["$","$L3",null,{"toc":[{"id":"为什么选-wsl2-而不是原生-linux","text":"为什么选 WSL2 而不是原生 Linux","level":2},{"id":"从零写机械臂驱动","text":"从零写机械臂驱动","level":2},{"id":"手柄遥操的三次迭代","text":"手柄遥操的三次迭代","level":2},{"id":"相机桥接一场与画面撕裂的拉锯战","text":"相机桥接：一场与画面撕裂的拉锯战","level":2},{"id":"系统架构","text":"系统架构","level":2},{"id":"关键数据","text":"关键数据","level":2},{"id":"真机验证棋子取放","text":"真机验证：棋子取放","level":2},{"id":"下一步","text":"下一步","level":2},{"id":"技术栈","text":"技术栈","level":2}],"label":"目录"}]]}]}],["$","article",null,{"className":"prose max-w-none min-w-0","dangerouslySetInnerHTML":{"__html":"$4"}}]]}]]}]}],["$L5"],"$L6"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"nBjxbCYAs46mbXbve6h6a"}
+5:["$","script","script-0",{"src":"/soma/zh/_next/static/chunks/06r3ydq0dfy2u.js","async":true}]
+6:["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]
+9:null

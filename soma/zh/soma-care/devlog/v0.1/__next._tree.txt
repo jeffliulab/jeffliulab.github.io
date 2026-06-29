@@ -1,0 +1,2 @@
+:HL["/soma/zh/_next/static/chunks/02nndjnve7.td.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"soma-care","param":null,"prefetchHints":0,"slots":{"children":{"name":"devlog","param":null,"prefetchHints":0,"slots":{"children":{"name":"version","param":{"type":"d","key":"v0.1","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"nBjxbCYAs46mbXbve6h6a"}

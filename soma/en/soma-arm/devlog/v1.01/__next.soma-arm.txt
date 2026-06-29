@@ -1,0 +1,7 @@
+1:"$Sreact.fragment"
+2:I[92825,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"ClientSegmentRoot"]
+3:I[69649,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js","/soma/en/_next/static/chunks/0whum9_c1x-7q.js"],"default"]
+4:I[39756,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"default"]
+5:I[37457,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"default"]
+0:{"rsc":["$","$1","c",{"children":[[["$","script","script-0",{"src":"/soma/en/_next/static/chunks/0whum9_c1x-7q.js","async":true}]],["$","$L2",null,{"Component":"$3","slots":{"children":["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}]}]},"serverProvidedParams":{"params":{},"promises":["$@6"]}}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"4STO_BnvODuEdQJ4SKq95"}
+6:"$0:rsc:props:children:1:props:serverProvidedParams:params"

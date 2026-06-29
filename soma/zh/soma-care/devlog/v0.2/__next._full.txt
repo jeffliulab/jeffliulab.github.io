@@ -1,0 +1,81 @@
+1:"$Sreact.fragment"
+3:I[92825,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js"],"ClientSegmentRoot"]
+4:I[53098,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js","/soma/zh/_next/static/chunks/163jjkf6p9ltc.js"],"default"]
+5:I[39756,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js"],"default"]
+6:I[37457,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js"],"default"]
+9:I[97367,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+a:"$Sreact.suspense"
+d:I[97367,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js"],"ViewportBoundary"]
+f:I[97367,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js"],"MetadataBoundary"]
+11:I[68027,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js"],"default",1]
+:HL["/soma/zh/_next/static/chunks/02nndjnve7.td.css","style"]
+0:{"P":null,"c":["","soma-care","devlog","v0.2",""],"q":"","i":false,"f":[[["",{"children":["soma-care",{"children":["devlog",{"children":[["version","v0.2","d",null],{"children":["__PAGE__",{}]}]}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/soma/zh/_next/static/chunks/02nndjnve7.td.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js","async":true,"nonce":"$undefined"}]],"$L2"]}],{"children":[["$","$1","c",{"children":[[["$","script","script-0",{"src":"/soma/zh/_next/static/chunks/163jjkf6p9ltc.js","async":true,"nonce":"$undefined"}]],["$","$L3",null,{"Component":"$4","slots":{"children":["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]},"serverProvidedParams":{"params":{},"promises":["$@7"]}}]]}],{"children":[["$","$1","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":["$L8",[["$","script","script-0",{"src":"/soma/zh/_next/static/chunks/06r3ydq0dfy2u.js","async":true,"nonce":"$undefined"}]],["$","$L9",null,{"children":["$","$a",null,{"name":"Next.MetadataOutlet","children":"$@b"}]}]]}],{},null,false,null]},null,false,"$@c"]},null,false,"$@c"]},null,false,null]},null,false,null],["$","$1","h",{"children":[null,["$","$Ld",null,{"children":"$Le"}],["$","div",null,{"hidden":true,"children":["$","$Lf",null,{"children":["$","$a",null,{"name":"Next.Metadata","children":"$L10"}]}]}],null]}],false]],"m":"$undefined","G":["$11",[["$","link","0",{"rel":"stylesheet","href":"/soma/zh/_next/static/chunks/02nndjnve7.td.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"nBjxbCYAs46mbXbve6h6a"}
+12:[]
+c:"$W12"
+7:"$0:f:0:1:1:children:0:props:children:1:props:serverProvidedParams:params"
+13:I[27437,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js"],"LocaleProvider"]
+14:I[95032,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js"],"ThemeRuntime"]
+15:I[62319,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js"],"Navbar"]
+16:I[22016,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js","/soma/zh/_next/static/chunks/163jjkf6p9ltc.js","/soma/zh/_next/static/chunks/06r3ydq0dfy2u.js"],""]
+2:["$","html",null,{"lang":"zh","children":["$","body",null,{"data-theme":"hybrid","children":["$","$L13",null,{"locale":"zh","children":[["$","$L14",null,{}],["$","$L15",null,{"lang":"zh"}],["$","main",null,{"children":["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],["$","footer",null,{"className":"border-t border-[var(--border)]","children":["$","div",null,{"className":"mx-auto flex max-w-7xl flex-col gap-3 px-5 py-4 text-xs text-[var(--text-tertiary)] md:flex-row md:items-center md:justify-between","children":[["$","span",null,{"children":["© ",2026," SOMA, ANIMA, Jeff Liu Lab. ","保留所有权利"]}],["$","div",null,{"className":"flex flex-wrap items-center gap-4","children":[["$","a",null,{"href":"https://jeffliulab.com","className":"hover:text-[var(--foreground)]","children":"主站"}],["$","$L16",null,{"href":"/about","className":"hover:text-[var(--foreground)]","children":"关于"}],["$","$L16",null,{"href":"/about#contact","className":"hover:text-[var(--foreground)]","children":"联系"}]]}]]}]}]]}]}]}]
+17:I[83424,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js","/soma/zh/_next/static/chunks/163jjkf6p9ltc.js","/soma/zh/_next/static/chunks/06r3ydq0dfy2u.js"],"TocSidebar"]
+18:T136e,<h1 id="v02--把-mock-skills-换成真正自主的-stretch">V0.2 — 把 mock skills 换成真正自主的 Stretch</h1>
+<p>v0.1 证明了 ANIMA 认知栈在语言输入下能跑通；v0.2 要把底下的 mock skills 换成<strong>真自主执行</strong>的机器人——每次运行都从 MJCF 查物体位姿、算 IK、步进物理，不是脚本重放。</p>
+<p>选型上走了一次 pivot，值得记录。</p>
+<h2 id="pivot从-ros-2--gazebo-改到纯-python-mujoco">Pivot：从 ROS 2 + Gazebo 改到纯 Python MuJoCo</h2>
+<p><strong>原方案</strong>是 Docker + ROS 2 Humble + Gazebo Harmonic + MoveIt 2 + Nav2——标准"重型"机器人栈。</p>
+<p>执行时发现三个问题：</p>
+<ol>
+<li><code>hello-robot</code> 官方不提供 <code>stretch_moveit2</code> 的 apt 包或 GitHub 配置，要自己写 SRDF + kinematics config（3–5 小时工作量）</li>
+<li><code>stretch_mujoco</code> 的 Python API 本身已经够用：<code>sim.pull_camera_data()</code> → RGB 帧；<code>sim.move_to(Actuators.lift, pos)</code> + <code>wait_until_at_setpoint</code> → 关节位置控制；<code>sim.set_base_velocity(v, ω)</code> → 底盘速度。Stretch 手臂只有 5 DoF（lift Z + arm 伸缩 + wrist yaw/pitch/roll），分析 IK 10 行代码内能搞定</li>
+<li>Nav2 对封闭的单房间 + 走廊场景明显过重</li>
+</ol>
+<p><strong>新方案</strong>：纯 Python <code>stretch_mujoco</code> API + 分析 IK + unicycle PID。ANIMA 的 L3 skill 直接调 <code>stretch_mujoco</code>，不启动任何 ROS 节点。</p>
+<p>这个选择顺带给了几个好处：</p>
+<ul>
+<li>MuJoCo 原生支持 macOS，开发机也能跑，不再被 Linux 云主机的 VSCode Remote SSH 绑死</li>
+<li>部署简化到三个进程（FastAPI + Next.js + MuJoCo），不再需要 rosdep / colcon / DDS 调参</li>
+<li>真机迁移路径不被堵死：v1.x 想上 ROS 只需把 <code>SimSkillBehaviour</code> 换成 <code>Ros2SkillBehaviour</code>，上层 <code>py_trees</code> 编排零改</li>
+</ul>
+<p>原本的 ROS 2 Humble + stretch_ros2 workspace 保留不删，当作未来接真机的参考。</p>
+<h2 id="l3-技能层落地六个原语">L3 技能层落地六个原语</h2>
+<p>新增 <code>SimSkillBehaviour</code> 基类 + 六个具体 skill，共享一个 blackboard dict：</p>
+<ul>
+<li><code>locate</code> — 在仿真里查目标 body 位姿</li>
+<li><code>navigate</code> — unicycle PID，带 align / approach 两段 hysteresis 避震荡</li>
+<li><code>grasp</code> — 分析 IK + 闭合爪</li>
+<li><code>lift</code> — 抬起到安全高度</li>
+<li><code>deliver</code> — 导到床边位</li>
+<li><code>release</code> — 打开爪子</li>
+</ul>
+<p>同时在 L2 Planner 里加了"仿真不可用时自动回落到 v0.1 mock skill"的兜底，保证本地零配置也能跑。</p>
+<h2 id="仿真视图进前端">仿真视图进前端</h2>
+<p>后端新增 <code>sim/manager.py</code> 持有 <code>StretchMujocoSimulator</code>，并自己渲染 <code>demo_view</code> 第三人称相机。<code>stretch_mujoco</code> 的 camera pipeline 不暴露自定义 MJCF 相机，所以绕过它直接用 <code>mujoco.Renderer</code>。</p>
+<p>三条路由：</p>
+<ul>
+<li><code>/api/sim/mjpeg</code> — multipart MJPEG 流</li>
+<li><code>/api/sim/reset</code> — 场景归位</li>
+<li><code>/api/sim/status</code> — 状态探针</li>
+</ul>
+<p>前端加一个 <code>SimulationView.tsx</code>（<code>&#x3C;img></code> 接 MJPEG + Reset 按钮），整体布局从三列扩到四列（nav / sim live / intent+BT / factors）。</p>
+<h2 id="l5-数据开始驱动评估">L5 数据开始驱动评估</h2>
+<p><code>l5_assessment.py</code> 里，<code>p_skill</code> 从固定 0.91 改成"从 <code>pea_log.jsonl</code> 读滑窗真实成功率"——PEA 终于开始喂回 GOA 计算，不再是静态常数。</p>
+<h2 id="部署">部署</h2>
+<p>Hetzner（<code>89.167.35.145</code>），三个 systemd 单元 + nginx 反代：<code>/</code> 到 Next.js prod，<code>/api</code> 到 FastAPI，<code>/ws</code> 走 FastAPI WebSocket upgrade；<code>/api/sim/</code> 路径关 nginx buffering 让 MJPEG 实时传。</p>
+<h2 id="验收端到端脚本">验收（端到端脚本）</h2>
+<ul>
+<li>打开 <code>http://89.167.35.145</code>，看到病房场景（床、床头柜、水杯、Stretch 初始位）</li>
+<li>输入"我想喝水" → L0–L5 依次高亮 → TaskSpec 产出 <code>DRINK_WATER</code> → 行为树六节点转 green</li>
+<li>MJPEG 看到 Stretch <strong>自主</strong>导航 → 臂伸到杯 → 合爪 → 抬起 → 返回床边（每次重算 IK，<strong>不是重放</strong>）</li>
+<li>五因素随过程更新，PEA 新增 outcome=success 记录</li>
+<li>Reset Sim 按钮 → 2 秒内归位</li>
+</ul>
+<h2 id="推到后续版本">推到后续版本</h2>
+<ul>
+<li>6 个场景分支逻辑（CALL_HELP / ADJUST_TV 等）→ v0.3</li>
+<li>失败 fallback 叙事 → v0.3</li>
+<li>非 DRINK_WATER 场景视频 → v0.4</li>
+</ul>8:["$","div",null,{"className":"page-shell","children":["$","section",null,{"className":"section-shell pt-8","children":[["$","div",null,{"className":"mb-6 lg:hidden","children":["$","$L16",null,{"href":"/soma-care/devlog","className":"text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← 返回版本列表"}]}],["$","div",null,{"className":"lg:grid lg:grid-cols-[14rem_1fr] lg:gap-8","children":[["$","aside",null,{"className":"hidden lg:block","children":["$","div",null,{"className":"fixed","style":{"width":"14rem"},"data-toc-sidebar":true,"children":[["$","$L16",null,{"href":"/soma-care/devlog","className":"mb-4 block text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← 返回版本列表"}],["$","$L17",null,{"toc":[{"id":"pivot从-ros-2--gazebo-改到纯-python-mujoco","text":"Pivot：从 ROS 2 + Gazebo 改到纯 Python MuJoCo","level":2},{"id":"l3-技能层落地六个原语","text":"L3 技能层落地六个原语","level":2},{"id":"仿真视图进前端","text":"仿真视图进前端","level":2},{"id":"l5-数据开始驱动评估","text":"L5 数据开始驱动评估","level":2},{"id":"部署","text":"部署","level":2},{"id":"验收端到端脚本","text":"验收（端到端脚本）","level":2},{"id":"推到后续版本","text":"推到后续版本","level":2}],"label":"目录"}]]}]}],["$","article",null,{"className":"prose max-w-none min-w-0","dangerouslySetInnerHTML":{"__html":"$18"}}]]}]]}]}]
+e:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+b:null
+10:[["$","title","0",{"children":"SOMA | jeffliulab"}],["$","meta","1",{"name":"description","content":"SOMA robots powered by ANIMA - embodied AI by Jeff Liu Lab."}]]

@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fanima\u002F[slug]","\u002Fanima\u002Fdevlog\u002F[version]","\u002Fsoma-arm\u002Fdevlog\u002F[version]","\u002Fsoma-care\u002Fdevlog\u002F[version]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()

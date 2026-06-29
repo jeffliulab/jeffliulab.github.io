@@ -1,0 +1,43 @@
+1:"$Sreact.fragment"
+2:I[22016,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js","/soma/en/_next/static/chunks/163jjkf6p9ltc.js","/soma/en/_next/static/chunks/06r3ydq0dfy2u.js"],""]
+3:I[83424,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js","/soma/en/_next/static/chunks/163jjkf6p9ltc.js","/soma/en/_next/static/chunks/06r3ydq0dfy2u.js"],"TocSidebar"]
+7:I[97367,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+4:Te35,<h1 id="v01--anima-five-layer-loop-running-locally-mock-skills">V0.1 — ANIMA Five-Layer Loop Running Locally (mock skills)</h1>
+<p>The first milestone from the research-prototype era, which lived in the <code>human-brain-interface-demo</code> repo. The goal was straightforward: <strong>prove end-to-end that the ANIMA cognition framework can drive a full intent-to-action loop</strong>, but without a physics engine yet — robot actions are replaced by mock skills so the upper cognition stack can be validated first.</p>
+<p>The entry scenario was "I want water." Everyday, typical, and naturally exercises all layers — perception / planning / execution / assessment.</p>
+<h2 id="a-core-decision-l0-is-language-not-neural-decoding">A core decision: L0 is language, not neural decoding</h2>
+<p>This choice was locked in at v0.1: <strong>the L0 Signal layer does not pretend to decode BCI neural signals</strong>. The real input is text or voice, and it flows through an LLM-as-Parser (forced tool-calling) that emits a structured <code>IntentToken</code>.</p>
+<p>A decorative 256-channel waveform animation still appears in the UI (seeded from a text hash), but the interface explicitly labels it "decorative only — intent derived from text via LLM parser." This honesty line has held from v0.1 through today's v0.4.</p>
+<h2 id="all-five-layers-wired-up">All five layers wired up</h2>
+<ul>
+<li><strong>L0 Input</strong>: text feature extraction + decorative waveform</li>
+<li><strong>L1 Intent Parser</strong>: LLM forced tool-call → <code>IntentToken</code> (35-word vocabulary)</li>
+<li><strong>L2 Planner</strong>: <code>py_trees</code> Sequence orchestration</li>
+<li><strong>L3 Skill</strong>: mock skill nodes as placeholders</li>
+<li><strong>L4 Actuator</strong>: mock execution (no physics engine yet)</li>
+<li><strong>L5 Assessment</strong>: event-triggered five-factor assessment (ITA / MQA / SQA / GOA / PEA), with PEA entries persisted to <code>pea_log.jsonl</code> for long-term learning</li>
+</ul>
+<p>Every layer event is pushed to the frontend over a single WebSocket to drive the visualization.</p>
+<h2 id="technical-skeleton">Technical skeleton</h2>
+<p><strong>Backend</strong>: FastAPI, <code>uv</code> + Python 3.12, <code>:8765</code>; DeepSeek as the default LLM provider (fully OpenAI-SDK compatible, leaving room to swap); Pydantic models <code>TaskSpec</code> / <code>IntentToken</code> / <code>FiveFactors</code> fixing the schema.</p>
+<p><strong>Frontend</strong>: Next.js 16 + Tailwind + zustand + ReactFlow, <code>:3000</code>. Seven key components visualize the full L0–L5 chain:</p>
+<ul>
+<li><code>LayerStack</code> (layer indicator, left column)</li>
+<li><code>IntentInput</code> / <code>SignalWaveform</code> / <code>TaskSpecPanel</code> / <code>IntentTokenStream</code> (intent chain, center column)</li>
+<li><code>BehaviorTreeFlow</code> (behavior-tree visualization)</li>
+<li><code>FiveFactorPanel</code> (assessment dashboard, right column)</li>
+</ul>
+<h2 id="acceptance">Acceptance</h2>
+<p>Two local processes (<code>uv run uvicorn</code> + <code>npm run dev</code>). Input "I want water" →</p>
+<ul>
+<li>L0 through L5 light up in sequence</li>
+<li><code>TaskSpec</code> emits <code>DRINK_WATER</code> with confidence > 0.8</li>
+<li>Behavior-tree five nodes transition from sky → green</li>
+<li>Five-factor panel updates in real time</li>
+<li>A PEA event is persisted</li>
+</ul>
+<p>This milestone proves the ANIMA cognition stack can close the full intent-to-action loop under pure language input — the foundation on which v0.2 could bolt a MuJoCo simulation into the skill layer.</p>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"page-shell","children":["$","section",null,{"className":"section-shell pt-8","children":[["$","div",null,{"className":"mb-6 lg:hidden","children":["$","$L2",null,{"href":"/soma-care/devlog","className":"text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← Back to version list"}]}],["$","div",null,{"className":"lg:grid lg:grid-cols-[14rem_1fr] lg:gap-8","children":[["$","aside",null,{"className":"hidden lg:block","children":["$","div",null,{"className":"fixed","style":{"width":"14rem"},"data-toc-sidebar":true,"children":[["$","$L2",null,{"href":"/soma-care/devlog","className":"mb-4 block text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← Back to version list"}],["$","$L3",null,{"toc":[{"id":"a-core-decision-l0-is-language-not-neural-decoding","text":"A core decision: L0 is language, not neural decoding","level":2},{"id":"all-five-layers-wired-up","text":"All five layers wired up","level":2},{"id":"technical-skeleton","text":"Technical skeleton","level":2},{"id":"acceptance","text":"Acceptance","level":2}],"label":"Table of Contents"}]]}]}],["$","article",null,{"className":"prose max-w-none min-w-0","dangerouslySetInnerHTML":{"__html":"$4"}}]]}]]}]}],["$L5"],"$L6"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"4STO_BnvODuEdQJ4SKq95"}
+5:["$","script","script-0",{"src":"/soma/en/_next/static/chunks/06r3ydq0dfy2u.js","async":true}]
+6:["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]
+9:null

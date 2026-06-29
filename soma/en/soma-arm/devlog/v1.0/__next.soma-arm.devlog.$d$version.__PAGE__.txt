@@ -1,0 +1,98 @@
+1:"$Sreact.fragment"
+2:I[22016,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js","/soma/en/_next/static/chunks/0whum9_c1x-7q.js","/soma/en/_next/static/chunks/06r3ydq0dfy2u.js"],""]
+3:I[83424,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js","/soma/en/_next/static/chunks/0whum9_c1x-7q.js","/soma/en/_next/static/chunks/06r3ydq0dfy2u.js"],"TocSidebar"]
+7:I[97367,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+4:T2bb2,<h1 id="v100----four-days-from-zero-to-teleoperation">V1.00 -- Four Days from Zero to Teleoperation</h1>
+<p>The first version of SOMA Arm went from an unboxed robot arm and a blank WSL2 terminal to full gamepad teleoperation with live camera feedback in four days. This was not a follow-the-tutorial affair -- along the way I hit a missing ROS 2 driver, persistent camera frame tearing, and a WSL kernel that did not know what a gamepad was. Every step was earned through real-hardware debugging.</p>
+<p>The goal of V1.00 was deliberately narrow: do not aim for intelligence, just connect the hands and eyes. If the arm cannot be reliably controlled, the camera cannot deliver clean frames, and the gamepad cannot drive joints directly, then every perception and cognition layer built on top is doomed. This version is about proving that the lowest-level control chain works.</p>
+<h2 id="why-wsl2-instead-of-native-linux">Why WSL2 Instead of Native Linux</h2>
+<p>The first decision was the development environment. The laptop ships with an RTX 4090 Laptop GPU (16 GB VRAM), and downstream work -- ACT policy training and vision model inference -- needs every bit of that CUDA performance. Dual-booting native Ubuntu was the obvious choice, but on this particular hardware the GPU driver situation turned out to be unstable, with measurable performance loss.</p>
+<p>WSL2 with CUDA passthrough gave a surprisingly clean result: <code>nvidia-smi</code> reported the full RTX 4090, CUDA throughput measured at 100% of native, and PyTorch behaved identically. The trade-off is that USB devices must be forwarded through <code>usbipd-win</code> and the GUI path through WSLg is sluggish -- but for a workflow centered on terminals and ROS 2 nodes, that is an acceptable cost.</p>
+<p>The final stack: Windows 11 host, WSL2 Ubuntu 22.04, ROS 2 Humble, CUDA 12.4, Python 3.10 virtual environment. The entire environment was stood up and validated on day one.</p>
+<h2 id="writing-the-arm-driver-from-scratch">Writing the Arm Driver from Scratch</h2>
+<p>The Waveshare RoArm-M2-S is a 4-DOF tabletop robot arm with an onboard ESP32 that accepts JSON commands over serial. The catch: there is no official ROS 2 driver. Waveshare ships a MoveIt2 configuration package, but it lives inside their own upstream workspace and does not directly expose the <code>/joint_command</code> and <code>/joint_states</code> interfaces I needed.</p>
+<p>So I wrote a Python driver from scratch -- roughly 200 lines of code. It translates ROS 2 joint commands into the ESP32's JSON serial protocol and publishes real joint states back to ROS topics. On top of that, a MoveIt2 bridge node enables drag-to-control from RViz to the physical arm.</p>
+<p>One important hardware constraint surfaced during driver development: the ESP32's serial port can only be held by one process at a time. This means the driver node, MoveIt2 bridge, and teleop node cannot all talk to the serial port simultaneously -- everything must route through the driver as a single gateway. This constraint became a foundational design principle for the entire control architecture.</p>
+<p>There was also a subtler engineering challenge: making a Python virtual environment coexist peacefully with ROS 2's system-level <code>rclpy</code> bindings. The venv must be created with <code>--system-site-packages</code> so it can import both system ROS 2 packages and pip-installed ML dependencies. This sounds straightforward, but getting LeRobot, PyTorch, and rclpy to all resolve correctly in the same environment took real effort.</p>
+<h2 id="three-iterations-of-gamepad-teleoperation">Three Iterations of Gamepad Teleoperation</h2>
+<p>The gamepad teleop line went through three versions. Each failure pushed the next design decision.</p>
+<p><strong>Version 1: Windows TCP bridge.</strong> The first approach was to capture gamepad input on Windows using pygame and send it over TCP to a ROS node in WSL. It worked technically, but the ergonomics were painful -- the Windows window had to stay focused or the gamepad events would stop, requiring constant window switching during operation.</p>
+<p><strong>Version 2: USB passthrough.</strong> The natural next step was to forward the gamepad into WSL via <code>usbipd-win</code> and let Linux read the input natively. The device showed up in <code>lsusb</code> inside WSL -- but nothing appeared under <code>/dev/input/</code>. The reason: the default WSL2 kernel does not compile the XPAD and JOYDEV modules, so the kernel simply does not recognize gamepad-class input devices.</p>
+<p><strong>Version 3: Custom WSL kernel.</strong> I pulled the WSL2 kernel source, enabled <code>CONFIG_INPUT_JOYSTICK</code>, <code>CONFIG_JOYSTICK_XPAD</code>, and <code>CONFIG_INPUT_JOYDEV</code>, and rebuilt. The first build had a missing option that made XPAD appear configured but not actually functional. After fixing that and recompiling, the gamepad finally appeared at <code>/dev/input/event*</code>.</p>
+<p>The final teleop setup uses an evdev backend to read Linux input events directly. Four joystick axes map one-to-one to 4 joints; LB/RB control the gripper; Start returns to home position; Back triggers an emergency stop. The end-to-end latency from thumbstick to real joint motion is imperceptible.</p>
+<p>After the core mapping was working, I polished the feel: the joystick's physical cross-axis bleed (pushing one axis slightly affects the other) was mitigated with a software hard-axis lock, and gripper commands were routed through a separate serial channel so that opening and closing the gripper would not resend the entire arm's joint state.</p>
+<h2 id="the-camera-bridge-a-battle-against-frame-tearing">The Camera Bridge: A Battle Against Frame Tearing</h2>
+<p>The camera pipeline was the most time-consuming part of V1.00.</p>
+<p>The Logitech C922 Pro is a well-established USB webcam. The obvious approach was to forward it into WSL via <code>usbipd</code>, just like the gamepad. The forward itself worked -- OpenCV could open the device and read frames -- but every MJPEG frame showed visible horizontal tearing and corruption artifacts.</p>
+<p>To isolate the problem, I tested four resolution/codec combinations: 720p60 MJPG, 720p30 MJPG, 1080p30 MJPG, and 720p30 YUYV. The first three all produced the same horizontal tearing; YUYV avoided tearing but was too slow to be usable. I also tried a GStreamer pipeline, which hung during pipeline initialization and never produced a frame.</p>
+<p>The breakthrough came from a controlled comparison: I detached the C922 back to Windows and opened it in the native Windows Camera app. The image was sharp, smooth, high-framerate, and completely free of artifacts. This conclusively proved that the hardware was fine -- the problem lay in the <code>usbipd + WSL + UVC/MJPG</code> forwarding path. A search through the OpenCV and usbipd issue trackers confirmed that others had reported similar high-resolution camera issues.</p>
+<p>Since Windows captured frames cleanly, the solution became: <strong>let Windows handle image capture and stream JPEG frames over TCP to a ROS node in WSL.</strong> I wrote a Windows-side JPEG sender and a WSL-side ROS receiver node, forming a lightweight TCP image bridge.</p>
+<p>The first version of the bridge ran and produced clean frames, but latency was three to four seconds -- clearly, buffers were accumulating somewhere. I implemented a latest-only strategy on both ends: the sender uses a background thread to continuously grab the newest frame and only transmits the current one; the receiver only decodes and publishes the most recently received frame, overwriting anything older. Both sides log <code>latest_frame_age_ms</code> for latency diagnosis.</p>
+<p>After this optimization round, the 960x540 preset brought latency down to usable levels with clean, correctly-angled frames. The frame rate settled at 4-5 FPS -- not cinematic, but sufficient to support the calibration and perception work ahead.</p>
+<h2 id="system-architecture">System Architecture</h2>
+<p>Hardware topology after V1.00:</p>
+<pre><code>PC (Windows 11 + WSL2 Ubuntu 22.04)
+ |
+ |-- USB (usbipd) --> RoArm-M2-S 4-DOF arm --> /dev/ttyUSB*
+ |                    ESP32 JSON serial protocol
+ |                    ~200-line Python driver
+ |
+ |-- USB (usbipd) --> PDP Xbox Controller --> /dev/input/event*
+ |                    Custom WSL kernel (XPAD+JOYDEV)
+ |                    evdev backend, direct read
+ |
+ |-- TCP bridge ----> Logitech C922 Pro (stays on Windows side)
+                      Windows JPEG encode --> TCP --> WSL ROS node
+                      960x540, 4-5 FPS, clean frames
+</code></pre>
+<h2 id="key-numbers">Key Numbers</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zero to full teleop</td>
+<td>4 days</td>
+</tr>
+<tr>
+<td>Driver code</td>
+<td>~200 lines Python</td>
+</tr>
+<tr>
+<td>Arm DOF</td>
+<td>4-DOF + gripper</td>
+</tr>
+<tr>
+<td>Control loop rate</td>
+<td>50 Hz</td>
+</tr>
+<tr>
+<td>Camera bridge resolution</td>
+<td>960 x 540</td>
+</tr>
+<tr>
+<td>GPU performance loss</td>
+<td>0% (CUDA passthrough)</td>
+</tr>
+<tr>
+<td>Teleop design iterations</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="real-hardware-validation-chess-piece-pick-and-place">Real-Hardware Validation: Chess Piece Pick-and-Place</h2>
+<p>On the final day of V1.00, I assembled the full pipeline for an end-to-end hardware test: a real chessboard, standard chess pieces, and a collection box, all arranged in a layout close to the actual task scenario.</p>
+<p>Using gamepad teleoperation, the arm successfully completed basic chess piece pick-and-place operations. Compared to earlier tests using foam blocks, standard chess pieces actually performed better than expected -- their wider bases provided more stable standing and more predictable grasping. This test answered a critical question: chess piece manipulation is physically feasible with the current arm's precision and gripper -- no hardware upgrade is needed.</p>
+<p>The test also surfaced several practical engineering details: USB device bus IDs can change after every replug, so they must be re-checked each time rather than relying on old records; startup scripts need to handle the "device already attached" state gracefully instead of misreporting it as failure; and the full teleop startup sequence requires waiting for joint state publication and pressing Start to synchronize, not just connecting the devices. All of these were fixed before V1.00 was closed out.</p>
+<h2 id="what-comes-next">What Comes Next</h2>
+<p>V1.00 gave the arm hands (teleop control) and eyes (camera feed), but it is still blind -- it can see the image but has no idea where anything in that image sits in the physical world. V1.01 aims to fix that: camera intrinsic calibration and eye-to-hand calibration will establish the mapping from pixel coordinates to world coordinates, letting the arm understand the physical meaning of every position on the chessboard.</p>
+<h2 id="tech-stack">Tech Stack</h2>
+<p>ROS 2 Humble / Python 3.10 / PyTorch + CUDA 12.4 / MoveIt2 / OpenCV / WSL2 + usbipd-win / evdev / Waveshare RoArm-M2-S / Logitech C922 Pro</p>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"page-shell","children":["$","section",null,{"className":"section-shell pt-8","children":[["$","div",null,{"className":"mb-6 lg:hidden","children":["$","$L2",null,{"href":"/soma-arm/devlog","className":"text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← Back to version list"}]}],["$","div",null,{"className":"lg:grid lg:grid-cols-[14rem_1fr] lg:gap-8","children":[["$","aside",null,{"className":"hidden lg:block","children":["$","div",null,{"className":"fixed","style":{"width":"14rem"},"data-toc-sidebar":true,"children":[["$","$L2",null,{"href":"/soma-arm/devlog","className":"mb-4 block text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← Back to version list"}],["$","$L3",null,{"toc":[{"id":"why-wsl2-instead-of-native-linux","text":"Why WSL2 Instead of Native Linux","level":2},{"id":"writing-the-arm-driver-from-scratch","text":"Writing the Arm Driver from Scratch","level":2},{"id":"three-iterations-of-gamepad-teleoperation","text":"Three Iterations of Gamepad Teleoperation","level":2},{"id":"the-camera-bridge-a-battle-against-frame-tearing","text":"The Camera Bridge: A Battle Against Frame Tearing","level":2},{"id":"system-architecture","text":"System Architecture","level":2},{"id":"key-numbers","text":"Key Numbers","level":2},{"id":"real-hardware-validation-chess-piece-pick-and-place","text":"Real-Hardware Validation: Chess Piece Pick-and-Place","level":2},{"id":"what-comes-next","text":"What Comes Next","level":2},{"id":"tech-stack","text":"Tech Stack","level":2}],"label":"Table of Contents"}]]}]}],["$","article",null,{"className":"prose max-w-none min-w-0","dangerouslySetInnerHTML":{"__html":"$4"}}]]}]]}]}],["$L5"],"$L6"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"4STO_BnvODuEdQJ4SKq95"}
+5:["$","script","script-0",{"src":"/soma/en/_next/static/chunks/06r3ydq0dfy2u.js","async":true}]
+6:["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]
+9:null

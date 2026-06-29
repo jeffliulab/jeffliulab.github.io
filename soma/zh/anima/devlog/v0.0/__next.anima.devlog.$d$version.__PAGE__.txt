@@ -1,0 +1,41 @@
+1:"$Sreact.fragment"
+2:I[22016,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js","/soma/zh/_next/static/chunks/0-ahn2yrasfl1.js","/soma/zh/_next/static/chunks/06r3ydq0dfy2u.js"],""]
+3:I[83424,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js","/soma/zh/_next/static/chunks/0-ahn2yrasfl1.js","/soma/zh/_next/static/chunks/06r3ydq0dfy2u.js"],"TocSidebar"]
+7:I[97367,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+4:T1cb4,<h1 id="anima-v00--骨架期把认知层从机器人身上拆出来">ANIMA V0.0 — 骨架期：把认知层从机器人身上拆出来</h1>
+<blockquote>
+<p>这份日志记录的是 2026-04-21 吸收参考实现之前的<strong>骨架期</strong>状态：模块边界已画好、公开叙事已锁定，但仓库里真正可运行的代码还很少。当前版本（v0.1.0 首个参考实现）请看 <a href="../v0.1">v0.1 entry</a>。</p>
+</blockquote>
+<p>大多数机器人项目会把语言理解、任务规划和硬件控制写在同一个代码库里。一开始这样做很自然——毕竟所有东西都在一台机器上跑。但一旦你想把同样的认知能力迁移到另一台机器人上，就会发现语言解析的逻辑和某个特定机械臂的关节限制纠缠在一起，根本拆不开。</p>
+<p>ANIMA 从立项第一天就决定不走这条路。它是一个独立的认知框架，独立的代码仓库，独立的 Python 库——不住在任何机器人项目的子目录里。SOMA Arm 是它当前的参考实现载体，但 ANIMA 本身不依赖 SOMA 的任何硬件细节。如果明天换一台完全不同的机器人，ANIMA 的 parser、planner 和 validator 应该可以直接复用，只需要重新写一层 skill adapter。</p>
+<h2 id="四个核心模块">四个核心模块</h2>
+<p>ANIMA 的架构围绕四个模块展开，每个模块有明确的输入输出边界：</p>
+<p><strong>Parser</strong> 接受自然语言指令，输出结构化的 TaskSpec。关键设计选择是 LLM-as-Parser 而不是 LLM-as-Translator——LLM 不直接生成机器人命令，而是把开放语言压缩成一个可检查、可追踪的中间结构。这样做的好处是下游的每一步都可以被审计，而不是盲目信任 LLM 的输出。</p>
+<p><strong>Planner</strong> 接受 TaskSpec，通过行为树（py_trees）进行任务分解和执行编排。行为树的优势在于它天然支持条件分支、重试和回退，比线性的命令序列更适合应对真实世界的不确定性。</p>
+<p><strong>Skill Registry</strong> 是认知层和机器人本体之间的接口层。它定义了有哪些可调用的技能原语（比如 pick、place、push），以及每个技能的前置条件和预期效果。框架只通过注册表调用技能，不直接接触关节角度、串口协议这些硬件细节。</p>
+<p><strong>Validator</strong> 在每个技能执行完成后重新观察世界状态，验证结果是否符合预期。如果一个 pick 动作声称成功了，validator 会通过视觉检查确认目标物体是否真的离开了原来的位置。验证失败会触发重试、回退或自然语言反馈——系统不会默默地假装成功。</p>
+<h2 id="为什么不直接用-stockfish">为什么不直接用 Stockfish</h2>
+<p>ANIMA 的设计里包含了一个模块化的游戏引擎架构。当前第一个要实现的插件是棋规引擎，负责合法走法生成和吃子检测。一个自然的问题是：既然有 Stockfish 这样成熟的国际象棋引擎，为什么不直接调用它？</p>
+<p>答案在于目标的差异。ANIMA 的游戏引擎框架不是为了让机器人下出最优走法——那是一个已经被解决的问题。它是为了建立一个通用的棋盘游戏接口层：给定当前棋盘状态和一条自然语言指令，判断这个操作是否合法，生成需要移动的棋子列表，检测是否触发了吃子。这个接口要能适配国际象棋、中国象棋、围棋或任何其他棋盘游戏——只要换一个规则插件就行。</p>
+<p>Stockfish 只懂国际象棋的最优策略。ANIMA 需要的是一个能理解"用户想做什么"并判断"这样做合不合规则"的通用框架。</p>
+<p>在架构上，游戏引擎被设计成一个插件系统：核心框架定义了棋盘状态表示、走法生成接口和结果判定接口，每个具体游戏类型只需要实现这三个接口就可以接入。棋规引擎是第一个插件，但框架本身不假设只有国际象棋这一种游戏。</p>
+<h2 id="框架与机器人的边界">框架与机器人的边界</h2>
+<p>V1.0 花了大量精力在一件看起来不产出代码的事情上：划清 ANIMA 和 SOMA 的职责边界。</p>
+<p>哪些逻辑属于框架？语言解析、任务结构、执行验证、技能注册——这些和具体用的是什么机械臂无关。</p>
+<p>哪些逻辑属于机器人？关节参数、传感器标定、运动规划约束、夹爪物理特性——这些和认知层无关，每台机器人都不一样。</p>
+<p>在 SOMA Arm 的代码里，这个边界体现为一个薄薄的 ROS 2 wrapper 节点：它把 ANIMA 的 Python API 调用翻译成 ROS 话题和服务，但 ANIMA 本身不 import 任何 ROS 依赖。这样做的直接好处是 ANIMA 可以在纯 Python 环境里开发和测试，不需要每次都启动完整的 ROS 2 工作空间。</p>
+<h2 id="为什么不在同一个仓库里做">为什么不在同一个仓库里做</h2>
+<p>把认知框架拆成独立仓库不只是为了代码整洁。它解决的是一个更实际的问题：如何让两个节奏完全不同的工作流互不干扰。</p>
+<p>SOMA Arm 的开发节奏很密集——每天都在调驱动、修串口、debug 相机。它的代码变更频率很高，而且很多变更只和特定硬件有关。如果 ANIMA 住在 SOMA 的子目录里，每次 SOMA 做一次纯硬件的重构，ANIMA 的提交历史都会被污染；反过来，ANIMA 做一次认知层的接口调整，也会在机器人仓库里留下无关噪音。</p>
+<p>独立仓库意味着独立的版本历史、独立的发布节奏、独立的依赖管理。SOMA Arm 通过一个薄薄的 ROS 2 wrapper 节点来调用 ANIMA 的 Python API，两者之间的唯一契约就是 TaskSpec 的数据格式和 Skill Registry 的接口定义。这个边界足够窄，窄到换一台机器人时只需要重写 wrapper 和 skill adapter，不需要动框架本身一行代码。</p>
+<h2 id="当前状态">当前状态</h2>
+<p>V1.0 是 ANIMA 的骨架版本。四个核心模块的边界已经定义清楚，公开叙事口径已经锁定，游戏引擎的插件架构已经设计完成。但实话说，仓库里真正可运行的代码还很少——parser 的提示词工程、行为树的具体节点实现、validator 的视觉检查逻辑，这些都还没有真正落地。</p>
+<p>这是有意为之。在 SOMA Arm 的底层链路（驱动、遥操、相机、标定）还没有完全稳定之前，过早地铺开 ANIMA 的实现只会产出一堆两周后需要推倒重来的代码。当前的策略是让 SOMA 先把硬件和感知层做稳，ANIMA 同步维护好接口定义和架构边界，等集成窗口到来时再快速填充实现。</p>
+<h2 id="下一步">下一步</h2>
+<p>当 SOMA Arm 完成感知基础（V1.01）和棋子操作（V1.02）之后，ANIMA 将进入真正的实现期：parser 要能把"吃掉 e4 的兵"解析成 TaskSpec，棋规引擎要能判断这步棋是否合法，行为树要能编排完整的吃子流程，validator 要能通过视觉确认棋子是否被正确移除。那时候 ANIMA 才从骨架变成真正能驱动机器人的认知层。</p>
+<h2 id="技术栈">技术栈</h2>
+<p>Python 3.10 / Claude API (LLM-as-Parser) / py_trees / ROS 2 Humble (仅 wrapper 层) / 模块化游戏引擎架构</p>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"page-shell","children":["$","section",null,{"className":"section-shell pt-8","children":[["$","div",null,{"className":"mb-6 lg:hidden","children":["$","$L2",null,{"href":"/anima/devlog","className":"text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← 返回版本列表"}]}],["$","div",null,{"className":"lg:grid lg:grid-cols-[14rem_1fr] lg:gap-8","children":[["$","aside",null,{"className":"hidden lg:block","children":["$","div",null,{"className":"fixed","style":{"width":"14rem"},"data-toc-sidebar":true,"children":[["$","$L2",null,{"href":"/anima/devlog","className":"mb-4 block text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← 返回版本列表"}],["$","$L3",null,{"toc":[{"id":"四个核心模块","text":"四个核心模块","level":2},{"id":"为什么不直接用-stockfish","text":"为什么不直接用 Stockfish","level":2},{"id":"框架与机器人的边界","text":"框架与机器人的边界","level":2},{"id":"为什么不在同一个仓库里做","text":"为什么不在同一个仓库里做","level":2},{"id":"当前状态","text":"当前状态","level":2},{"id":"下一步","text":"下一步","level":2},{"id":"技术栈","text":"技术栈","level":2}],"label":"目录"}]]}]}],["$","article",null,{"className":"prose max-w-none min-w-0","dangerouslySetInnerHTML":{"__html":"$4"}}]]}]]}]}],["$L5"],"$L6"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"nBjxbCYAs46mbXbve6h6a"}
+5:["$","script","script-0",{"src":"/soma/zh/_next/static/chunks/06r3ydq0dfy2u.js","async":true}]
+6:["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]
+9:null

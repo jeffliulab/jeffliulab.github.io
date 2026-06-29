@@ -1,0 +1,62 @@
+1:"$Sreact.fragment"
+2:I[22016,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js","/soma/en/_next/static/chunks/163jjkf6p9ltc.js","/soma/en/_next/static/chunks/06r3ydq0dfy2u.js"],""]
+3:I[83424,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js","/soma/en/_next/static/chunks/163jjkf6p9ltc.js","/soma/en/_next/static/chunks/06r3ydq0dfy2u.js"],"TocSidebar"]
+7:I[97367,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+4:T1510,<h1 id="v04--telling-the-intent-to-care-loop-clearly-in-simulation">V0.4 — Telling the Intent-to-Care Loop Clearly, in Simulation</h1>
+<p>V0.4 is the first milestone for SOMA Care as a standalone product line. Before this, v0.1–v0.3 lived in a separate research-prototype repo: a FastAPI + Next.js scaffold, the six-intent loop, a MuJoCo Stretch simulation, L0–L5 UI panels, and multi-camera MJPEG streams — all end-to-end runnable, but at "prototype works" quality. The visuals were coarse, the intent library was small, failure narratives were incomplete, and the material wasn't presentation-ready.</p>
+<p>V0.4 isn't about adding new features. It's about making the existing loop <strong>clearer, finer, and richer</strong>, and then delivering it primarily as offline video. Four focus areas below.</p>
+<h2 id="1-clearer-simulation">1. Clearer simulation</h2>
+<p>The old stack rendered on Hetzner cloud without GPUs, topping out around 0.4 fps — just enough to stream MJPEG. V0.4 moves to local rendering on Mac Metal, targeting 30–60 fps during recording so video delivery has real headroom.</p>
+<p>Concrete work:</p>
+<ul>
+<li>Integrate PBR assets from <code>Hospital_assets</code> (walls, floor, trim, medical-equipment textures)</li>
+<li>Three-tier lighting: directional daylight through the window + fluorescent ceiling panels + bedside lamp</li>
+<li>New <code>first_person_nurse</code> camera (eye height ~1.65 m, slight head bob when walking)</li>
+<li>Stretch RE3 model refinements: textured gripper pads, panel labels, finer hand mesh</li>
+</ul>
+<h2 id="2-finer-operations">2. Finer operations</h2>
+<p>The six base intents (DRINK_WATER, CALL_HELP, etc.) stay. Add 4–6 contact-rich multi-joint skills:</p>
+<ul>
+<li><strong>TurnOver</strong> — rolling a patient onto their side: mocap-driven patient model + safety force envelope</li>
+<li><strong>Feed</strong> / <strong>HandMedicine</strong> — precise grasp of spoon or pill cup, alignment to mouth or hand</li>
+<li><strong>WipeMouth</strong> / <strong>StraightenBlanket</strong> — repeated-contact surface tasks</li>
+<li><strong>CompanionChat</strong> — LLM-generated natural-language response + TTS, with optional lip-sync on a simple face mesh as a stretch goal</li>
+</ul>
+<p>Add finer sub-indicators to MQA:</p>
+<ul>
+<li>Contact force vs. envelope (bounded against the spec declared in TaskSpec)</li>
+<li>Grasp margin (distance from closure point to object surface)</li>
+<li>Trajectory smoothness (jerk integral)</li>
+</ul>
+<h2 id="3-more-content">3. More content</h2>
+<p>Content splits into three tracks:</p>
+<p><strong>Success paths (8–10)</strong>: each one a full "utterance → L0–L5 readouts → robot action → post-assessment log" demo. Coverage spans simple loops like DRINK_WATER and CALL_HELP through contact-rich tasks like Feed and TurnOver.</p>
+<p><strong>Failure-negotiation narratives (3–5)</strong>: e.g. occluded target, grasp slippage, low-confidence ITA intent. Each one shows three stages:</p>
+<ul>
+<li>Detection (which factor flagged the problem first)</li>
+<li>Negotiation (system requests confirmation, or offers an alternate object)</li>
+<li>Graceful degradation (fall back to a safer skill, or hand off to a human)</li>
+</ul>
+<p><strong>Non-signal-path bypass channels</strong>:</p>
+<ul>
+<li>Physical E-stop button inside the scene (visible, clickable)</li>
+<li>Voice keyword "STOP" intercept at L0 (ASR pathway, independent from the LLM parser)</li>
+<li>Eye-closure / head-tilt visual cue (UI stubbed for now, wired in later)</li>
+</ul>
+<h2 id="4-video-delivery">4. Video delivery</h2>
+<p>V0.4 delivery leads with <strong>offline, locally-rendered video</strong> rather than a live demo:</p>
+<ul>
+<li>Record 5–8 thematic videos of 3–5 minutes each (grouped by success / failure / bypass content above)</li>
+<li>Render locally to MP4, publish to GitHub Releases, mirror to YouTube (unlisted) and soma.jeffliulab.com</li>
+<li>Cut a 1–2 minute highlight reel for the homepage hero</li>
+</ul>
+<p>The original Hetzner live demo (<code>89.167.35.145</code>) stays accessible but is no longer the primary showcase.</p>
+<h2 id="where-anima-fits">Where ANIMA fits</h2>
+<p>SOMA Care depends directly on <a href="https://github.com/jeffliulab/anima">ANIMA</a> v0.1.0 — the first reference implementation that takes anima from a skeleton to a usable framework. All six layers (L0 Signal / L1 Parser / L2 Planner / L3 Skill / L4 Adapter / L5 Assessment) now have working code; the five factors (ITA / MQA / SQA / GOA / PEA) have concrete formulas; LLM-as-Parser with forced tool-calling is wired up. soma-care consumes it as a pip dependency (<code>anima @ git+https://github.com/jeffliulab/anima.git@main</code>) rather than embedding a copy.</p>
+<p>This also means SOMA Care and SOMA Arm share the same cognition stack: Care runs nursing intents inside the simulated ward, Arm runs chess-board manipulation on real hardware — both on top of ANIMA.</p>
+<h2 id="v05-stays-uncommitted">V0.5+ stays uncommitted</h2>
+<p>V0.5 direction stays open until V0.4 videos ship and a round of feedback comes back. Candidate directions include non-invasive BCI (EEG / fNIRS) integration in simulation, real-hardware migration onto a physical Stretch RE3, and a clinical partner pilot — each requires external hardware, funding, or a compliance channel, and none are committed today.</p>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"page-shell","children":["$","section",null,{"className":"section-shell pt-8","children":[["$","div",null,{"className":"mb-6 lg:hidden","children":["$","$L2",null,{"href":"/soma-care/devlog","className":"text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← Back to version list"}]}],["$","div",null,{"className":"lg:grid lg:grid-cols-[14rem_1fr] lg:gap-8","children":[["$","aside",null,{"className":"hidden lg:block","children":["$","div",null,{"className":"fixed","style":{"width":"14rem"},"data-toc-sidebar":true,"children":[["$","$L2",null,{"href":"/soma-care/devlog","className":"mb-4 block text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← Back to version list"}],["$","$L3",null,{"toc":[{"id":"1-clearer-simulation","text":"1. Clearer simulation","level":2},{"id":"2-finer-operations","text":"2. Finer operations","level":2},{"id":"3-more-content","text":"3. More content","level":2},{"id":"4-video-delivery","text":"4. Video delivery","level":2},{"id":"where-anima-fits","text":"Where ANIMA fits","level":2},{"id":"v05-stays-uncommitted","text":"V0.5+ stays uncommitted","level":2}],"label":"Table of Contents"}]]}]}],["$","article",null,{"className":"prose max-w-none min-w-0","dangerouslySetInnerHTML":{"__html":"$4"}}]]}]]}]}],["$L5"],"$L6"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"4STO_BnvODuEdQJ4SKq95"}
+5:["$","script","script-0",{"src":"/soma/en/_next/static/chunks/06r3ydq0dfy2u.js","async":true}]
+6:["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]
+9:null

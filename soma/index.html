@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOMA | jeffliulab</title>
+<meta name="robots" content="noindex">
+<script>
+  // 按浏览器语言选择，默认中文；静态托管无法读 Accept-Language，故在客户端判断。
+  var lang = (navigator.language || navigator.userLanguage || "zh").toLowerCase();
+  var target = lang.indexOf("zh") === 0 ? "./zh/" : "./en/";
+  location.replace(target);
+</script>
+<meta http-equiv="refresh" content="0; url=./zh/">
+</head>
+<body>
+<p>Redirecting… / 正在跳转… <a href="./zh/">中文</a> · <a href="./en/">English</a></p>
+</body>
+</html>

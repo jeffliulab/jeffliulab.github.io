@@ -1,0 +1,81 @@
+1:"$Sreact.fragment"
+3:I[92825,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"ClientSegmentRoot"]
+4:I[53098,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js","/soma/en/_next/static/chunks/163jjkf6p9ltc.js"],"default"]
+5:I[39756,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"default"]
+6:I[37457,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"default"]
+9:I[97367,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+a:"$Sreact.suspense"
+d:I[97367,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"ViewportBoundary"]
+f:I[97367,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"MetadataBoundary"]
+11:I[68027,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"default",1]
+:HL["/soma/en/_next/static/chunks/02nndjnve7.td.css","style"]
+0:{"P":null,"c":["","soma-care","devlog","v0.2",""],"q":"","i":false,"f":[[["",{"children":["soma-care",{"children":["devlog",{"children":[["version","v0.2","d",null],{"children":["__PAGE__",{}]}]}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/soma/en/_next/static/chunks/02nndjnve7.td.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/soma/en/_next/static/chunks/03j2x-25jp8a2.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/soma/en/_next/static/chunks/0d3shmwh5_nmn.js","async":true,"nonce":"$undefined"}]],"$L2"]}],{"children":[["$","$1","c",{"children":[[["$","script","script-0",{"src":"/soma/en/_next/static/chunks/163jjkf6p9ltc.js","async":true,"nonce":"$undefined"}]],["$","$L3",null,{"Component":"$4","slots":{"children":["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]},"serverProvidedParams":{"params":{},"promises":["$@7"]}}]]}],{"children":[["$","$1","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":["$L8",[["$","script","script-0",{"src":"/soma/en/_next/static/chunks/06r3ydq0dfy2u.js","async":true,"nonce":"$undefined"}]],["$","$L9",null,{"children":["$","$a",null,{"name":"Next.MetadataOutlet","children":"$@b"}]}]]}],{},null,false,null]},null,false,"$@c"]},null,false,"$@c"]},null,false,null]},null,false,null],["$","$1","h",{"children":[null,["$","$Ld",null,{"children":"$Le"}],["$","div",null,{"hidden":true,"children":["$","$Lf",null,{"children":["$","$a",null,{"name":"Next.Metadata","children":"$L10"}]}]}],null]}],false]],"m":"$undefined","G":["$11",[["$","link","0",{"rel":"stylesheet","href":"/soma/en/_next/static/chunks/02nndjnve7.td.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"4STO_BnvODuEdQJ4SKq95"}
+12:[]
+c:"$W12"
+7:"$0:f:0:1:1:children:0:props:children:1:props:serverProvidedParams:params"
+13:I[27437,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"LocaleProvider"]
+14:I[95032,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"ThemeRuntime"]
+15:I[62319,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"Navbar"]
+16:I[22016,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js","/soma/en/_next/static/chunks/163jjkf6p9ltc.js","/soma/en/_next/static/chunks/06r3ydq0dfy2u.js"],""]
+2:["$","html",null,{"lang":"en","children":["$","body",null,{"data-theme":"hybrid","children":["$","$L13",null,{"locale":"en","children":[["$","$L14",null,{}],["$","$L15",null,{"lang":"en"}],["$","main",null,{"children":["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],["$","footer",null,{"className":"border-t border-[var(--border)]","children":["$","div",null,{"className":"mx-auto flex max-w-7xl flex-col gap-3 px-5 py-4 text-xs text-[var(--text-tertiary)] md:flex-row md:items-center md:justify-between","children":[["$","span",null,{"children":["© ",2026," SOMA, ANIMA, Jeff Liu Lab. ","All rights reserved"]}],["$","div",null,{"className":"flex flex-wrap items-center gap-4","children":[["$","a",null,{"href":"https://jeffliulab.com","className":"hover:text-[var(--foreground)]","children":"Main Site"}],["$","$L16",null,{"href":"/about","className":"hover:text-[var(--foreground)]","children":"About"}],["$","$L16",null,{"href":"/about#contact","className":"hover:text-[var(--foreground)]","children":"Contact"}]]}]]}]}]]}]}]}]
+17:I[83424,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js","/soma/en/_next/static/chunks/163jjkf6p9ltc.js","/soma/en/_next/static/chunks/06r3ydq0dfy2u.js"],"TocSidebar"]
+18:T153b,<h1 id="v02--replacing-mock-skills-with-a-truly-autonomous-stretch">V0.2 — Replacing mock skills with a truly autonomous Stretch</h1>
+<p>v0.1 proved the ANIMA cognition stack could close the loop under language input. v0.2 replaces the mock skills underneath with <strong>genuinely autonomous execution</strong> — every run queries object poses from the MJCF, solves IK, and steps physics. No script replay.</p>
+<p>A pivot happened during implementation, worth recording.</p>
+<h2 id="pivot-from-ros-2--gazebo-to-pure-python-mujoco">Pivot: from ROS 2 + Gazebo to pure-Python MuJoCo</h2>
+<p><strong>Original plan</strong>: Docker + ROS 2 Humble + Gazebo Harmonic + MoveIt 2 + Nav2 — the canonical "heavy" robot stack.</p>
+<p>Three problems surfaced during execution:</p>
+<ol>
+<li><code>hello-robot</code> does not ship a <code>stretch_moveit2</code> apt package or GitHub config. We would have had to write the SRDF + kinematics config ourselves (3–5 hours of work)</li>
+<li>The <code>stretch_mujoco</code> Python API was already sufficient: <code>sim.pull_camera_data()</code> → RGB frames; <code>sim.move_to(Actuators.lift, pos)</code> + <code>wait_until_at_setpoint</code> → joint position control; <code>sim.set_base_velocity(v, ω)</code> → base velocity. The Stretch arm only has 5 DoF (lift Z + arm extension + wrist yaw/pitch/roll) — analytical IK fits in 10 lines</li>
+<li>Nav2 is visibly overkill for a closed single-room + hallway scene</li>
+</ol>
+<p><strong>New plan</strong>: pure-Python <code>stretch_mujoco</code> API + analytical IK + unicycle PID. ANIMA's L3 skill calls <code>stretch_mujoco</code> directly, no ROS nodes.</p>
+<p>Side benefits that made this the right call:</p>
+<ul>
+<li>MuJoCo supports macOS natively, so the laptop can run the sim without VSCode Remote SSH</li>
+<li>Deployment collapses to three processes (FastAPI + Next.js + MuJoCo); no rosdep / colcon / DDS tuning</li>
+<li>The real-hardware path isn't closed: v1.x can swap <code>SimSkillBehaviour</code> for <code>Ros2SkillBehaviour</code> while leaving the <code>py_trees</code> orchestration untouched</li>
+</ul>
+<p>The ROS 2 Humble + stretch_ros2 workspace stays around as a reference for future hardware work.</p>
+<h2 id="six-l3-skill-primitives-wired-up">Six L3 skill primitives wired up</h2>
+<p>A new <code>SimSkillBehaviour</code> base class plus six concrete skills, all sharing one blackboard dict:</p>
+<ul>
+<li><code>locate</code> — query the target body's pose in simulation</li>
+<li><code>navigate</code> — unicycle PID with align / approach hysteresis to prevent oscillation</li>
+<li><code>grasp</code> — analytical IK + close gripper</li>
+<li><code>lift</code> — raise to a safe height</li>
+<li><code>deliver</code> — drive to the bedside pose</li>
+<li><code>release</code> — open gripper</li>
+</ul>
+<p>L2 Planner also gains a "fall back to v0.1 mock skills if simulation unavailable" branch — so local zero-config still runs end to end.</p>
+<h2 id="simulation-view-lands-in-the-frontend">Simulation view lands in the frontend</h2>
+<p>Backend <code>sim/manager.py</code> holds the <code>StretchMujocoSimulator</code> and renders a <code>demo_view</code> third-person camera itself. The <code>stretch_mujoco</code> camera pipeline doesn't expose custom MJCF cameras, so this path bypasses it via <code>mujoco.Renderer</code> directly.</p>
+<p>Three routes:</p>
+<ul>
+<li><code>/api/sim/mjpeg</code> — multipart MJPEG stream</li>
+<li><code>/api/sim/reset</code> — reset scene to initial state</li>
+<li><code>/api/sim/status</code> — health probe</li>
+</ul>
+<p>Frontend adds a <code>SimulationView.tsx</code> component (an <code>&#x3C;img></code> fed by the MJPEG stream plus a Reset button). Layout expands from three columns to four (nav / sim live / intent+BT / factors).</p>
+<h2 id="l5-starts-being-data-driven">L5 starts being data-driven</h2>
+<p>In <code>l5_assessment.py</code>, <code>p_skill</code> moves from a fixed 0.91 constant to a rolling success-rate read from <code>pea_log.jsonl</code>. PEA finally starts feeding back into GOA instead of being a static number.</p>
+<h2 id="deployment">Deployment</h2>
+<p>Hetzner (<code>89.167.35.145</code>), three systemd units + nginx reverse proxy: <code>/</code> → Next.js prod, <code>/api</code> → FastAPI, <code>/ws</code> → FastAPI WebSocket upgrade. Nginx buffering is disabled for <code>/api/sim/</code> so MJPEG streams in real time.</p>
+<h2 id="acceptance-end-to-end-script">Acceptance (end-to-end script)</h2>
+<ul>
+<li>Open <code>http://89.167.35.145</code>, see the ward scene (bed, nightstand, water cup, Stretch at starting pose)</li>
+<li>Type "I want water" → L0 through L5 light up sequentially → TaskSpec emits <code>DRINK_WATER</code> → behavior-tree six nodes turn green</li>
+<li>MJPEG shows Stretch <strong>autonomously</strong> navigating, arming toward the cup, closing the gripper, lifting, returning to bedside — each run recomputes IK, <strong>not replay</strong></li>
+<li>Five factors update as the task progresses; PEA logs a new <code>outcome=success</code> row</li>
+<li>The Reset Sim button returns the scene to initial state within 2 seconds</li>
+</ul>
+<h2 id="deferred-to-later-versions">Deferred to later versions</h2>
+<ul>
+<li>Six-scene branching logic (CALL_HELP / ADJUST_TV / …) → v0.3</li>
+<li>Failure-fallback narratives → v0.3</li>
+<li>Videos for non–DRINK_WATER scenes → v0.4</li>
+</ul>8:["$","div",null,{"className":"page-shell","children":["$","section",null,{"className":"section-shell pt-8","children":[["$","div",null,{"className":"mb-6 lg:hidden","children":["$","$L16",null,{"href":"/soma-care/devlog","className":"text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← Back to version list"}]}],["$","div",null,{"className":"lg:grid lg:grid-cols-[14rem_1fr] lg:gap-8","children":[["$","aside",null,{"className":"hidden lg:block","children":["$","div",null,{"className":"fixed","style":{"width":"14rem"},"data-toc-sidebar":true,"children":[["$","$L16",null,{"href":"/soma-care/devlog","className":"mb-4 block text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← Back to version list"}],["$","$L17",null,{"toc":[{"id":"pivot-from-ros-2--gazebo-to-pure-python-mujoco","text":"Pivot: from ROS 2 + Gazebo to pure-Python MuJoCo","level":2},{"id":"six-l3-skill-primitives-wired-up","text":"Six L3 skill primitives wired up","level":2},{"id":"simulation-view-lands-in-the-frontend","text":"Simulation view lands in the frontend","level":2},{"id":"l5-starts-being-data-driven","text":"L5 starts being data-driven","level":2},{"id":"deployment","text":"Deployment","level":2},{"id":"acceptance-end-to-end-script","text":"Acceptance (end-to-end script)","level":2},{"id":"deferred-to-later-versions","text":"Deferred to later versions","level":2}],"label":"Table of Contents"}]]}]}],["$","article",null,{"className":"prose max-w-none min-w-0","dangerouslySetInnerHTML":{"__html":"$18"}}]]}]]}]}]
+e:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+b:null
+10:[["$","title","0",{"children":"SOMA | jeffliulab"}],["$","meta","1",{"name":"description","content":"SOMA robots powered by ANIMA - embodied AI by Jeff Liu Lab."}]]

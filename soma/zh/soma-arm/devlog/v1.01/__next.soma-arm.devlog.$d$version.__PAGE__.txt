@@ -1,0 +1,37 @@
+1:"$Sreact.fragment"
+2:I[22016,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js","/soma/zh/_next/static/chunks/0whum9_c1x-7q.js","/soma/zh/_next/static/chunks/06r3ydq0dfy2u.js"],""]
+3:I[83424,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js","/soma/zh/_next/static/chunks/0whum9_c1x-7q.js","/soma/zh/_next/static/chunks/06r3ydq0dfy2u.js"],"TocSidebar"]
+7:I[97367,["/soma/zh/_next/static/chunks/03j2x-25jp8a2.js","/soma/zh/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+4:T1506,<h1 id="v101----给机械臂装上空间感知">V1.01 -- 给机械臂装上空间感知</h1>
+<p>V1.00 让机械臂能动、能看，但它仍然不知道自己看到的东西在哪里。相机画面里的一颗棋子，对机械臂来说只是一堆像素——它无法回答"这颗棋子在桌面上的真实位置是什么"这个问题。V1.01 要解决的就是这件事：建立从像素到物理世界的完整映射链路。</p>
+<p>这不是一个"调调参数就行"的步骤。它涉及三层环环相扣的标定：先把相机本身的光学畸变算清楚（内参标定），然后建立相机和机械臂之间的空间关系（eye-to-hand 标定），最后把棋盘的物理尺寸和工作区边界映射到统一的世界坐标系里（workspace grounding）。任何一层出了偏差，后面的棋子定位就会错位。</p>
+<h2 id="为什么相机参数必须先锁住">为什么相机参数必须先锁住</h2>
+<p>在开始任何标定之前，有一个更基础的前提：相机的曝光、白平衡和对焦必须是稳定的。如果每次开机这些参数都在自动漂移，那么同一颗棋子在不同时刻拍出来的颜色、亮度、清晰度都会不一样，标定的数据就不可信。</p>
+<p>V1.01 的第一步是在 Windows 端的 TCP 图像桥接发送器里加入了相机控制能力。现在可以通过命令行参数或预设 profile 把 C922 的自动曝光、自动白平衡和自动对焦全部关掉，锁定到手动值。发送器还支持启动时弹出 Windows 原生的 DirectShow 相机设置页，用来第一次找到合适的参数；调好后切换到锁定模式，确保跨 session 的一致性。</p>
+<p>在此基础上，还实现了一版自适应相机控制器作为实验性功能：它可以基于工作区 ROI 的亮度、过曝比例、对比度和清晰度做安全范围内的微调，带有冷却时间和迟滞保护，防止参数来回振荡。这条路线目前是可选的，默认还是手动锁定基线。</p>
+<h2 id="标定工具链从图像到世界坐标">标定工具链：从图像到世界坐标</h2>
+<p>标定工具链的设计分三步，每一步都有对应的脚本和固定的输出路径：</p>
+<p><strong>相机内参标定</strong> 使用 ChArUco 标定板。采集多张不同角度的标定图像后，脚本自动检测角点、求解相机矩阵和畸变系数，输出标准格式的内参文件。目标是重投影误差小于 1 个像素。</p>
+<p><strong>Eye-to-hand 标定</strong> 建立相机坐标系和机械臂基座坐标系之间的变换关系。用一张棋盘完整可见的参考图，结合已有的内参数据，求解 homography 矩阵和位姿变换。这一步完成后，任何像素坐标都可以被投影到机械臂的工作平面上。</p>
+<p><strong>工作区可达性验证</strong> 确认机械臂实际上能到达棋盘的各个关键位置。脚本自动生成一组测试点（棋盘四角、中心、棋子回收区），需要在真机上逐一验证，把结果回写到配置文件。无法到达的点会被标记为禁区，防止后面的感知系统给出无法执行的指令。</p>
+<p>所有标定产物统一存放在项目的 <code>config/calibration/</code> 目录下，感知节点和驱动节点都从同一个地方读取，不再各自维护独立的坐标系配置。</p>
+<h2 id="感知接口find_object">感知接口：/find_object</h2>
+<p>V1.01 还建立了感知系统的正式接口骨架。一个名为 <code>/find_object</code> 的 ROS 2 service 接受自然语言描述的查询（比如"棋盘"、"棋子"、"回收盒"），返回目标的像素坐标和世界坐标。</p>
+<p>当前版本使用几何优先的方法：棋盘查询走真实角点检测，容器查询走标定区域内的轮廓检测，通用物体查询走前景 blob 启发式。这些方法精度有限，但足以验证从查询到世界坐标的完整链路是否通顺。后续会接入开放词汇视觉模型（Grounding DINO + SAM2）来提升定位精度。</p>
+<p>感知节点同时提供一条反馈通道：它可以把图像质量评估（亮度、对比度、清晰度）通过 localhost JSON 回传给 Windows 端的相机发送器，让发送器在自适应模式下据此调整曝光和白平衡。这条通道目前更多是架构预留，但它为后面"感知驱动成像"的闭环做好了接口准备。</p>
+<h2 id="当前状态">当前状态</h2>
+<p>V1.01 的代码脚手架和工具链已经完成，但核心标定任务还在等待真机验证。具体来说：</p>
+<ul>
+<li>相机锁参的工具和入口已就位，等待在真实工作站上验收</li>
+<li>标定脚本已写好并通过语法检查，等待喂入真实标定图像</li>
+<li><code>/find_object</code> 节点可以正常启动，等待正式标定数据来驱动真实查询</li>
+<li>自适应相机控制器已有初版实现，等待多场景光照条件下的验证</li>
+</ul>
+<h2 id="下一步">下一步</h2>
+<p>真机标定验收完成后，V1.01 就算达到了它的核心目标：机械臂从"能动能看"进化到"知道东西在哪"。这为 V1.02 的棋子操作（MoveIt2 运动原语 + ACT 策略训练）提供了必要的空间基础。</p>
+<h2 id="技术栈">技术栈</h2>
+<p>ROS 2 Humble / Python 3.10 / OpenCV / NumPy / ChArUco 标定 / Homography 求解 / WSL2 + Windows TCP bridge / Waveshare RoArm-M2-S / Logitech C922 Pro</p>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"page-shell","children":["$","section",null,{"className":"section-shell pt-8","children":[["$","div",null,{"className":"mb-6 lg:hidden","children":["$","$L2",null,{"href":"/soma-arm/devlog","className":"text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← 返回版本列表"}]}],["$","div",null,{"className":"lg:grid lg:grid-cols-[14rem_1fr] lg:gap-8","children":[["$","aside",null,{"className":"hidden lg:block","children":["$","div",null,{"className":"fixed","style":{"width":"14rem"},"data-toc-sidebar":true,"children":[["$","$L2",null,{"href":"/soma-arm/devlog","className":"mb-4 block text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← 返回版本列表"}],["$","$L3",null,{"toc":[{"id":"为什么相机参数必须先锁住","text":"为什么相机参数必须先锁住","level":2},{"id":"标定工具链从图像到世界坐标","text":"标定工具链：从图像到世界坐标","level":2},{"id":"感知接口find_object","text":"感知接口：/find_object","level":2},{"id":"当前状态","text":"当前状态","level":2},{"id":"下一步","text":"下一步","level":2},{"id":"技术栈","text":"技术栈","level":2}],"label":"目录"}]]}]}],["$","article",null,{"className":"prose max-w-none min-w-0","dangerouslySetInnerHTML":{"__html":"$4"}}]]}]]}]}],["$L5"],"$L6"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"nBjxbCYAs46mbXbve6h6a"}
+5:["$","script","script-0",{"src":"/soma/zh/_next/static/chunks/06r3ydq0dfy2u.js","async":true}]
+6:["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]
+9:null

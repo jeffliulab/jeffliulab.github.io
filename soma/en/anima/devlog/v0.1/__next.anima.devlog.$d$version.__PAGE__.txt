@@ -1,0 +1,94 @@
+1:"$Sreact.fragment"
+2:I[22016,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js","/soma/en/_next/static/chunks/0-ahn2yrasfl1.js","/soma/en/_next/static/chunks/06r3ydq0dfy2u.js"],""]
+3:I[83424,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js","/soma/en/_next/static/chunks/0-ahn2yrasfl1.js","/soma/en/_next/static/chunks/06r3ydq0dfy2u.js"],"TocSidebar"]
+7:I[97367,["/soma/en/_next/static/chunks/03j2x-25jp8a2.js","/soma/en/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+4:T1d2a,<h1 id="anima-v010--first-reference-implementation-landed">ANIMA V0.1.0 — First Reference Implementation Landed</h1>
+<p>For the past two weeks, the standalone ANIMA repo was a skeleton: a 7-line Python file with <code>__version__ = "0.0.0"</code> — module boundaries were drawn but there was barely any runnable code. In parallel, inside a BCI medical-care research prototype (<code>human-brain-interface-demo</code>), a full L0–L5 stack + five-factor assessment + LLM-as-Parser reference implementation had grown — 11 files, 1,037 lines, pytest green, pip-installable.</p>
+<p><strong>2026-04-21 merged the two</strong>: the reference implementation migrated from the prototype repo into the main ANIMA repo, was generalized by stripping BCI-specific semantics, and the version jumped straight from 0.0.0 to <strong>v0.1.0</strong>.</p>
+<h2 id="all-six-layers-ship-with-code">All six layers ship with code</h2>
+<pre><code>   upstream signal (BCI / ASR / vision / text)
+                    ↓
+   ┌─────────────────────────────┐
+   │ L0 Signal                   │  signal → intent token + confidence + drift
+   ├─────────────────────────────┤
+   │ L1 Parser (LLM)             │  instruction → TaskSpec (forced tool-calling)
+   ├─────────────────────────────┤
+   │ Test-and-Check (six gates)  │  JSON / intent / skill / params / safety / preconds
+   ├─────────────────────────────┤
+   │ L2 Planner                  │  TaskSpec → py_trees behavior tree
+   ├─────────────────────────────┤
+   │ L3 Skill                    │  Function-Calling + Affordance Scoring
+   ├─────────────────────────────┤
+   │ L4 Adapter                  │  device-agnostic actuation (arm / base / ...)
+   ├─────────────────────────────┤
+   │ L5 Assessment               │  ITA · MQA · SQA · GOA · PEA (Pre / Runtime / Post)
+   └─────────────────────────────┘
+</code></pre>
+<p>Every layer now has a real source file (<code>src/anima/l0_signal.py</code> through <code>src/anima/l5_assessment.py</code>) — no more docstring placeholders.</p>
+<h2 id="five-factor-formulas-land">Five-factor formulas land</h2>
+<p>v0.0.0 only named the five factors; v0.1.0 gives them concrete formulas:</p>
+<ul>
+<li><strong>ITA</strong> intent alignment, absorbing upstream drift: <code>MQA_ita = 1 − drift_score</code></li>
+<li><strong>MQA</strong> motion quality: trajectory smoothness / contact force envelope / grasp margin</li>
+<li><strong>SQA</strong> skill competence: Beta prior updated from a rolling read of <code>pea_log.jsonl</code></li>
+<li><strong>GOA</strong> goal outcome: multiplicative composition <code>P(success) = ∏ Pᵢ</code> — <strong>never averaged</strong></li>
+<li><strong>PEA</strong> preference-experience retrieval: three-factor weighted <code>recency × 0.5 + relevance × 3.0 + importance × 2.0</code></li>
+</ul>
+<p>These aren't placeholders — they're the formulas the research prototype ran.</p>
+<h2 id="llm-as-parser-llm-agnostic">LLM-as-Parser, LLM-agnostic</h2>
+<p>L1 talks to the LLM through an <code>LLMToolCaller</code> protocol, not any specific vendor SDK. The current reference implementation supports both DeepSeek and OpenAI (100% OpenAI-SDK compatible). The core constraint is <strong>forced tool-calling</strong> — the LLM can only emit a structured TaskSpec JSON, never free-form low-level commands.</p>
+<h2 id="bci-specific-terminology-stripped">BCI-specific terminology stripped</h2>
+<p>The original reference implementation grew inside a BCI research prototype, so it carried quite a bit of BCI-specific semantics. During the merge into the main repo, those were generalized:</p>
+<ul>
+<li><code>drift_score</code> no longer specifically means neural-signal drift; the docstring now reads "upstream signal uncertainty, e.g. BCI drift or ASR confidence"</li>
+<li><code>IntentToken</code> keeps its 35-word vocabulary but labels it "example vocabulary; extend per application"</li>
+<li>"BCI" / "neural" / "patient" / "clinician" language in README and docstrings was rephrased generically</li>
+<li>The <code>EmbodiedAdapter</code> protocol was already generic; the README now makes explicit that it plugs into manipulators, mobile bases, wheelchairs, and future humanoids</li>
+</ul>
+<p>Keywords shifted from <code>bci</code> / <code>assistive-robotics</code> to <code>cognitive-architecture</code> / <code>embodied-ai</code> / <code>behavior-tree</code> / <code>llm-tool-use</code> / <code>intent-to-action</code> / <code>self-assessment</code>.</p>
+<h2 id="open-source-scaffolding-in-place">Open-source scaffolding in place</h2>
+<p>Previously there was just a LICENSE and a README. v0.1.0 brings:</p>
+<ul>
+<li><code>pyproject.toml</code> — <code>pip install -e .</code> works</li>
+<li><code>tests/test_pipeline.py</code> — 6/6 green</li>
+<li><code>CONTRIBUTING.md</code> / <code>SECURITY.md</code> / <code>CODE_OF_CONDUCT.md</code> / <code>CHANGELOG.md</code></li>
+<li>PR template</li>
+</ul>
+<p>Installation:</p>
+<pre><code class="language-bash">pip install git+https://github.com/jeffliulab/anima.git@main
+</code></pre>
+<p>Downstream applications (soma-care) depend on it this way — no more embedded copies.</p>
+<h2 id="two-application-branches-in-place-on-the-same-day">Two application branches in place on the same day</h2>
+<p>The same day, <strong>SOMA Care</strong> was spun out as a standalone repo (<code>jeffliulab/soma-care</code>), ported from <code>human-brain-interface-demo/demo/</code> as the v0.4 starting point. Its <code>core/pyproject.toml</code> already reads <code>anima @ git+https://github.com/jeffliulab/anima.git@main</code>; tests are 17/17 green; the import chain runs from the anima framework all the way through to soma-care's FastAPI <code>main.py</code>.</p>
+<p>With the existing <strong>SOMA Arm</strong> (chess manipulation), ANIMA now has two active application branches:</p>
+<table>
+<thead>
+<tr>
+<th>Branch</th>
+<th>Repo</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SOMA Care</td>
+<td><code>jeffliulab/soma-care</code></td>
+<td>Simulated-ward care intent-to-action loop</td>
+</tr>
+<tr>
+<td>SOMA Arm</td>
+<td><code>jeffliulab/soma-arm</code></td>
+<td>Tabletop chess manipulation (real hardware)</td>
+</tr>
+</tbody>
+</table>
+<p>Domain-specific skills (grasp a cup, move a chess piece, turn a patient) live in the L4 adapter layer of each application repo, not in the framework.</p>
+<h2 id="status-alpha">Status: Alpha</h2>
+<p>v0.1.0 is an alpha release. The API may still change before v1.0 — breaking changes will be prefixed with <code>!</code> in the commit message and called out explicitly in the CHANGELOG.</p>
+<p>The next anima roadmap node is <strong>expand the skill library + stabilize the v0.2 API</strong> (alongside the soma-care v0.4 contact-rich skills), followed by a <strong>v1.0 stable release</strong> (frozen API, complete docs, PyPI).</p>
+<h2 id="attribution">Attribution</h2>
+<p>ANIMA Framework © Jeff Liu Lab. Apache-2.0 licensed.</p>0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"page-shell","children":["$","section",null,{"className":"section-shell pt-8","children":[["$","div",null,{"className":"mb-6 lg:hidden","children":["$","$L2",null,{"href":"/anima/devlog","className":"text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← Back to version list"}]}],["$","div",null,{"className":"lg:grid lg:grid-cols-[14rem_1fr] lg:gap-8","children":[["$","aside",null,{"className":"hidden lg:block","children":["$","div",null,{"className":"fixed","style":{"width":"14rem"},"data-toc-sidebar":true,"children":[["$","$L2",null,{"href":"/anima/devlog","className":"mb-4 block text-sm text-[var(--accent)] transition-colors hover:text-[var(--foreground)]","children":"← Back to version list"}],["$","$L3",null,{"toc":[{"id":"all-six-layers-ship-with-code","text":"All six layers ship with code","level":2},{"id":"five-factor-formulas-land","text":"Five-factor formulas land","level":2},{"id":"llm-as-parser-llm-agnostic","text":"LLM-as-Parser, LLM-agnostic","level":2},{"id":"bci-specific-terminology-stripped","text":"BCI-specific terminology stripped","level":2},{"id":"open-source-scaffolding-in-place","text":"Open-source scaffolding in place","level":2},{"id":"two-application-branches-in-place-on-the-same-day","text":"Two application branches in place on the same day","level":2},{"id":"status-alpha","text":"Status: Alpha","level":2},{"id":"attribution","text":"Attribution","level":2}],"label":"Table of Contents"}]]}]}],["$","article",null,{"className":"prose max-w-none min-w-0","dangerouslySetInnerHTML":{"__html":"$4"}}]]}]]}]}],["$L5"],"$L6"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"4STO_BnvODuEdQJ4SKq95"}
+5:["$","script","script-0",{"src":"/soma/en/_next/static/chunks/06r3ydq0dfy2u.js","async":true}]
+6:["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]
+9:null
